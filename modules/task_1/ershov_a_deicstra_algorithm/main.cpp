@@ -28,7 +28,7 @@ TEST(Sequential_Deicstra, Test_Sequential_Deicstra_With_Static_Data_First_Top) {
       {0, 15, 11, 0, 6, 0}, {0, 0, 0, 6, 0, 9},   {14, 0, 2, 0, 9, 0}};
   const std::vector<int> trueResult = {0, 7, 9, 20, 20, 11};
   bool check = true;
-  const int count = graf.size();
+  const size_t count = graf.size();
 
   const std::vector<int> algorithmResult = getSequentialDeicstra(graf, 0);
   for (size_t i = 0; i < count; ++i) {
@@ -46,12 +46,35 @@ TEST(Sequential_Deicstra, Test_Sequential_Deicstra_With_Static_Data_Last_Top) {
       {0, 15, 11, 0, 6, 0}, {0, 0, 0, 6, 0, 9},   {14, 0, 2, 0, 9, 0}};
   const std::vector<int> trueResult = {11, 12, 2, 13, 9, 0};
   bool check = true;
-  const int count = graf.size();
+  const size_t count = graf.size();
 
   const std::vector<int> algorithmResult =
       getSequentialDeicstra(graf, count - 1);
   for (size_t i = 0; i < count; ++i) {
     if (trueResult[i] != algorithmResult[i]) {
+      check = false;
+    }
+  }
+
+  ASSERT_EQ(check, true);
+}
+
+TEST(Sequential_Deicstra,
+     Test_Sequential_Deicstra_With_Static_Data_Last_Top_Two_Times) {
+  const std::vector<std::vector<int>> graf = {
+      {0, 7, 9, 0, 0, 14},  {7, 0, 10, 15, 0, 0}, {9, 10, 0, 11, 0, 2},
+      {0, 15, 11, 0, 6, 0}, {0, 0, 0, 6, 0, 9},   {14, 0, 2, 0, 9, 0}};
+  bool check = true;
+  const size_t count = graf.size();
+
+  const std::vector<int> algorithmResultFirst =
+      getSequentialDeicstra(graf, count - 1);
+
+  const std::vector<int> algorithmResultSecond =
+      getSequentialDeicstra(graf, count - 1);
+
+  for (size_t i = 0; i < count; ++i) {
+    if (algorithmResultFirst[i] != algorithmResultSecond[i]) {
       check = false;
     }
   }
