@@ -4,7 +4,7 @@
 #include <string>
 #include <random>
 #include <iostream>
-#include "./matrix_mult.h"
+#include "../../../modules/task_1/novozhilov_a_matrix_multiplication/matrix_mult.h"
 
 SparseMatrix::SparseMatrix(int _m, int _n) {
     std::vector<std::vector<std::complex<int>>> matrix = getRandomMatrix(_m, _n);
