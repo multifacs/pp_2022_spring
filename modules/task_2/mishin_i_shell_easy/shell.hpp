@@ -56,7 +56,7 @@ void ShellSortOMP(RandomAccessIterator first,
         std::size_t input_siz = merge_step;
         merge_step = input_siz;
         #pragma omp parallel for
-        for (int i = 0; i < int(blocks); i+= merge_step * 2) {
+        for (int i = 0; i < static_cast<int>(blocks); i+= merge_step * 2) {
             auto borders1 = get_block_borders(i, blocks);
             auto borders2 = get_block_borders(i + merge_step , blocks);
             block_sizes[i] = block_sizes[i] + block_sizes[i+merge_step];
