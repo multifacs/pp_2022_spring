@@ -30,8 +30,7 @@ std::vector<int> merge_two_vector(std::vector<int> vctr_1, std::vector<int> vctr
             result[k] = vctr_1[i];
             i++;
             size_1--;
-        }
-        else {
+        } else {
             result[k] = vctr_2[j];
             j++;
             size_2--;
@@ -43,8 +42,7 @@ std::vector<int> merge_two_vector(std::vector<int> vctr_1, std::vector<int> vctr
             result[k] = vctr_2[l];
             k++;
         }
-    }
-    else if (size_2 == 0) {
+    } else if (size_2 == 0) {
         for (int m = i; m < i + size_1; m++) {
             result[k] = vctr_1[m];
             k++;
@@ -86,8 +84,7 @@ std::vector <int> shell_sort_with_merge(std::vector<int> vctr) {
     if (size % 2 == 0) {
         vctr_l.resize(size / 2);
         vctr_r.resize(size / 2);
-    }
-    else {
+    } else {
         vctr_l.resize(size / 2);
         vctr_r.resize(size / 2 + 1);
     }
