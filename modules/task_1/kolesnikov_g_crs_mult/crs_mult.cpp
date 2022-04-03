@@ -120,15 +120,15 @@ MatrixCRS MatrixCRS::dot(MatrixCRS mtx) {
 
 void MatrixCRS::printArrays() {
     std::cout << "values:\n";
-    for (int i = 0; i < values.size(); i++) {
+    for (size_t i = 0; i < values.size(); i++) {
         std::cout << values[i] << " ";
     }
     std::cout << "\ncolumns:\n";
-    for (int i = 0; i < columns.size(); i++) {
+    for (size_t i = 0; i < columns.size(); i++) {
         std::cout << columns[i] << " ";
     }
     std::cout << "\npointer:\n";
-    for (int i = 0; i < pointers.size(); i++) {
+    for (size_t i = 0; i < pointers.size(); i++) {
         std::cout << pointers[i] << " ";
     }
     std::cout << "\n";
@@ -168,7 +168,7 @@ std::vector<std::vector<double>> multMatrix(std::vector<std::vector<double>> A,
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
             C[i][j] = 0;
-            for (int k = 0; k < A[0].size(); k++) {
+            for (size_t k = 0; k < A[0].size(); k++) {
                 C[i][j] += A[i][k] * B[k][j];
             }
         }
