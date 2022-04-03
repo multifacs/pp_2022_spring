@@ -130,8 +130,8 @@ std::vector<std::vector<std::complex<int>>> SparseMatrix::getRandomMatrix(int m,
 
 void SparseMatrix::printFullMatrix(std::vector<std::vector<std::complex<int>>> matrix) const {
     std::cout << "____________________________" << std::endl;
-    for (int i = 0; i < matrix.size(); i++) {
-        for (int j = 0; j < matrix[i].size(); j++) {
+    for (int i = 0; i < static_cast<int>(matrix.size()); i++) {
+        for (int j = 0; j < static_cast<int>(matrix[i].size()); j++) {
             std::cout << matrix[i][j]<< " ";
         }
         std::cout << std::endl;
@@ -143,7 +143,7 @@ std::vector<std::vector<std::complex<int>>> SparseMatrix::getFullMatrix() {
     std::vector<std::vector<std::complex<int>>> result;
     for (int i = 0; i < m; i++) {
         std::vector <std::complex<int>> tmp;
-        for (size_t j = 0; j < n; j++) {
+        for (int j = 0; j < n; j++) {
             tmp.push_back(get(i, j));
         }
         result.push_back(tmp);
