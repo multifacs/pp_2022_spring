@@ -35,7 +35,7 @@ TEST(MatrixCRS, matrix_mult_2) {
 
 TEST(MatrixCRS, create_crs_matrix) {
     std::vector<std::vector<double>> v1 = { {0, 3}, {0, 7} };
-    EXPECT_NO_THROW(MatrixCRS(v1));
+    EXPECT_NO_THROW(MatrixCRS crs(v1));
 }
 
 TEST(MatrixCRS, transpose_crs) {
