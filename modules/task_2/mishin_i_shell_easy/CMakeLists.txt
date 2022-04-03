@@ -5,7 +5,6 @@ if ( USE_OMP )
     set(ProjectId "${ProjectId}_omp")
     project( ${ProjectId} )
     message( STATUS "-- " ${ProjectId} )
-    set(CMAKE_BUILD_TYPE Debug)
     file(GLOB_RECURSE ALL_SOURCE_FILES *.cpp *.h)
 
     set(PACK_LIB "${ProjectId}_lib")
