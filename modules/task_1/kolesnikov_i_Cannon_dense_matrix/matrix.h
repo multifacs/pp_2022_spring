@@ -26,6 +26,9 @@ public:
     }
     ~Matrix() {}
     void generateMatrix();
+        std::vector<std::vector<double>> get_matrix() {
+        return matrix;
+    }
     std::vector<std::vector<double>> multiplyByMatrix(Matrix matrix);
     std::vector<std::vector<double>> cannonAlgorithmSeq(Matrix matrix1, Matrix matrix2);
     void shiftLeft(std::vector<std::vector<double>> &mat, size_t pos, size_t skew);
