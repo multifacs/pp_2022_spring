@@ -6,7 +6,8 @@
 #include "../../../modules/task_1/kolesnikov_g_crs_mult/crs_mult.h"
 
 
-MatrixCRS::MatrixCRS(int nC, int nR, std::vector<double>& v, std::vector<int>& c, std::vector<int>& p) {
+MatrixCRS::MatrixCRS(int nC, int nR, const std::vector<double>& v,
+    const std::vector<int>& c, const std::vector<int>& p) {
     nColumns = nC;
     nRows = nR;
     values = v;
@@ -22,13 +23,11 @@ MatrixCRS::MatrixCRS(std::vector<std::vector<double>> mtx) {
     pointers.push_back(elemCounter);
     for (int i = 0; i < nRows; i++) {
         for (int j = 0; j < nColumns; j++) {
-
             if (mtx[i][j] != 0) {
                 elemCounter = elemCounter + 1;
                 values.push_back(mtx[i][j]);
 
                 columns.push_back(j);
-
             }
         }
         pointers.push_back(elemCounter);
@@ -53,8 +52,6 @@ MatrixCRS MatrixCRS::T() {
             int colInd = columns[k];
             intVectors[colInd].push_back(i);
             valueVectors[colInd].push_back(values[k]);
-
-
         }
     }
     mtxT.pointers.push_back(elemCounter);
@@ -70,7 +67,6 @@ MatrixCRS MatrixCRS::T() {
 }
 
 MatrixCRS MatrixCRS::dot(MatrixCRS mtx) {
-
     std::vector<int> resCol;
     std::vector<double> resValue;
     std::vector<int> resPointer;
@@ -84,9 +80,11 @@ MatrixCRS MatrixCRS::dot(MatrixCRS mtx) {
     resRows = nRows;
     resCols = mtx.nColumns;
     resPointer.push_back(nZRow);
-    for (int i = 0; i < nRows; i++) { // i - номер обрабатываемое строки левой матрицы
+    for (int i = 0; i < nRows; i++) {
+        // i - number of the processed row of the left matrix
         nZRow = 0;
-        for (int j = 0; j < mtx.nRows; j++) { // j - номер обрабатываемого столбца правой матрицы
+        for (int j = 0; j < mtx.nRows; j++) {
+            // j - number of the processed column of the right matrix
             double summ = 0;
             int ls = mtx.pointers[j];
             int lf = mtx.pointers[j + 1] - 1;
@@ -95,16 +93,15 @@ MatrixCRS MatrixCRS::dot(MatrixCRS mtx) {
             while ((lf >= ls) && (kf >= ks)) {
                 if (columns[ks] > mtx.columns[ls]) {
                     ls = ls + 1;
-                }
-                else
+                } else {
                     if (columns[ks] < mtx.columns[ls]) {
                         ks = ks + 1;
-                    }
-                    else {
+                    } else {
                         summ = summ + values[ks] * mtx.values[ls];
                         ls = ls + 1;
                         ks = ks + 1;
                     }
+                }
             }
 
 
@@ -112,7 +109,6 @@ MatrixCRS MatrixCRS::dot(MatrixCRS mtx) {
                 nZRow = nZRow + 1;
                 resValue.push_back(summ);
                 resCol.push_back(j);
-
             }
         }
         resPointer.push_back(nZRow + resPointer[i]);
@@ -148,7 +144,8 @@ std::vector<std::vector<double>> zerpMatrix(int cols, int rows) {
     return res;
 }
 
-std::vector<std::vector<double>> generateMatrix(int cols, int rows, double density) {
+std::vector<std::vector<double>> generateMatrix(int cols, int rows,
+    double density) {
     std::vector<std::vector<double>> res = zerpMatrix(cols, rows);
     std::random_device dev;
     std::mt19937 gen(dev());
@@ -157,13 +154,14 @@ std::vector<std::vector<double>> generateMatrix(int cols, int rows, double densi
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
             if (prob(gen) <= density) {
-                res[i][j] = int(value(gen));
+                res[i][j] = value(gen);
             }
         }
     }
     return res;
 }
-std::vector<std::vector<double>> multMatrix(std::vector<std::vector<double>> A, std::vector<std::vector<double>> B) {
+std::vector<std::vector<double>> multMatrix(std::vector<std::vector<double>> A,
+    std::vector<std::vector<double>> B) {
     int rows = A.size();
     int cols = B[0].size();
     std::vector<std::vector<double>> C = zerpMatrix(cols, rows);

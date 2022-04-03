@@ -40,40 +40,32 @@ TEST(Parallel_Operations_OpenMP, Test_Mult_2) {
 }
 */
 int main(int argc, char **argv) {
-    //::testing::InitGoogleTest(&argc, argv);
-    
+      //  ::testing::InitGoogleTest(&argc, argv);
     std::vector<double> v1 = { 0, 10, 0, 10, 0};
     std::vector<double> v2 = { 0, 0, 21, 0, 1 };
     std::vector<double> v3 = { 0, 0, 0, 0, 0 };
-    std::vector<double> v4 = { 3, 0, 0,0, 25 };
-
+    std::vector<double> v4 = { 3, 0, 0, 0, 25 };
     std::vector<double> v1T = { 0, 0, 0, 3 };
-    std::vector<double> v2T = { 10, 0 , 0, 0 };
-    std::vector<double> v3T = { 0, 21 ,0 ,0 };
+    std::vector<double> v2T = { 10, 0, 0, 0 };
+    std::vector<double> v3T = { 0, 21, 0, 0 };
     std::vector<double> v4T = { 10, 0, 0, 0 };
     std::vector<double> v5T = { 0, 1, 0, 25};
-    
     /*
     std::vector<double> v1 = { 0, 3, 0, 7 };
     std::vector<double> v2 = { 0, 0, 8, 0 };
     std::vector<double> v3 = { 0, 0, 0, 0};
     std::vector<double> v4 = { 9, 0, 15, 16 };
     */
-    
     std::vector<std::vector<double>> v = { v1, v2, v3, v4 };
     std::vector<std::vector<double>> vT = { v1T, v2T, v3T, v4T, v5T };
     std::vector<std::vector<double>>  c = multMatrix(v, vT);
 
     std::cout << "Helo Nesterov\n";
-
-    
     MatrixCRS crs(v);
     MatrixCRS crsT(v);
-    
     crs.printArrays();
     crsT.printArrays();
     crs.dot(crsT).printArrays();
     MatrixCRS(c).printArrays();
-    //return RUN_ALL_TESTS();
-    
+      //  return RUN_ALL_TESTS();
 }
