@@ -3,45 +3,43 @@
 #include <vector>
 #include "./crs_mult.h"
 
-/*
-TEST(Parallel_Operations_OpenMP, Test_Sum) {
-    std::vector<int> vec = getRandomVector(100);
-    int sequential_sum = getSequentialOperations(vec, "+");
-    int parallel_sum = getParallelOperations(vec, "+");
-    ASSERT_EQ(sequential_sum, parallel_sum);
+
+TEST(MatrixCRS, create_zero_matrix) {
+    EXPECT_NO_THROW(zerpMatrix(13, 13));
 }
 
-TEST(Parallel_Operations_OpenMP, Test_Diff) {
-    std::vector<int> vec = getRandomVector(100);
-    int sequential_diff = getSequentialOperations(vec, "-");
-    int parallel_diff = getParallelOperations(vec, "-");
-    ASSERT_EQ(sequential_diff, parallel_diff);
+TEST(MatrixCRS, create_random_matrix) {
+    EXPECT_NO_THROW(generateMatrix(13, 13, 0.5));
 }
 
-TEST(Parallel_Operations_OpenMP, Test_Diff_2) {
-    std::vector<int> vec = getRandomVector(10);
-    int sequential_diff = getSequentialOperations(vec, "-");
-    int parallel_diff = getParallelOperations(vec, "-");
-    ASSERT_EQ(sequential_diff, parallel_diff);
+TEST(MatrixCRS, create_random_matrix_density_not_correct_1) {
+    EXPECT_ANY_THROW(generateMatrix(13, 13, 2));
 }
 
-TEST(Parallel_Operations_OpenMP, Test_Mult) {
-    std::vector<int> vec = getRandomVector(10);
-    int sequential_mult = getSequentialOperations(vec, "*");
-    int parallel_mult = getParallelOperations(vec, "*");
-    ASSERT_EQ(sequential_mult, parallel_mult);
+TEST(MatrixCRS, create_random_matrix_density_not_correct_2) {
+    EXPECT_ANY_THROW(generateMatrix(13, 13, -1));
 }
 
-TEST(Parallel_Operations_OpenMP, Test_Mult_2) {
-    std::vector<int> vec = getRandomVector(5);
-    int sequential_mult = getSequentialOperations(vec, "*");
-    int parallel_mult = getParallelOperations(vec, "*");
-    ASSERT_EQ(sequential_mult, parallel_mult);
+TEST(MatrixCRS, matrix_mult_1) {
+    std::vector<std::vector<double>> v1 = { {0, 3}, {0, 7} };
+    std::vector<std::vector<double>> v2 = { {1, 0}, {0, 1} };
+    EXPECT_EQ(multMatrix(v1, v2), v1);
 }
-*/
-int main(int argc, char **argv) {
-      //  ::testing::InitGoogleTest(&argc, argv);
-    std::vector<double> v1 = { 0, 10, 0, 10, 0};
+
+TEST(MatrixCRS, matrix_mult_2) {
+    std::vector<std::vector<double>> v1 = { {0, 3}, {0, 7} };
+    std::vector<std::vector<double>> v2 = { {1, 1}, {0, 1} };
+    std::vector<std::vector<double>> v3 = { {0, 3}, {0, 7} };
+    EXPECT_EQ(multMatrix(v1, v2), v3);
+}
+
+TEST(MatrixCRS, create_crs_matrix) {
+    std::vector<std::vector<double>> v1 = { {0, 3}, {0, 7} };
+    EXPECT_NO_THROW(MatrixCRS(v1));
+}
+
+TEST(MatrixCRS, transpose_crs) {
+    std::vector<double> v1 = { 0, 10, 0, 10, 0 };
     std::vector<double> v2 = { 0, 0, 21, 0, 1 };
     std::vector<double> v3 = { 0, 0, 0, 0, 0 };
     std::vector<double> v4 = { 3, 0, 0, 0, 25 };
@@ -49,23 +47,23 @@ int main(int argc, char **argv) {
     std::vector<double> v2T = { 10, 0, 0, 0 };
     std::vector<double> v3T = { 0, 21, 0, 0 };
     std::vector<double> v4T = { 10, 0, 0, 0 };
-    std::vector<double> v5T = { 0, 1, 0, 25};
-    /*
-    std::vector<double> v1 = { 0, 3, 0, 7 };
-    std::vector<double> v2 = { 0, 0, 8, 0 };
-    std::vector<double> v3 = { 0, 0, 0, 0};
-    std::vector<double> v4 = { 9, 0, 15, 16 };
-    */
+    std::vector<double> v5T = { 0, 1, 0, 25 };
     std::vector<std::vector<double>> v = { v1, v2, v3, v4 };
     std::vector<std::vector<double>> vT = { v1T, v2T, v3T, v4T, v5T };
-    std::vector<std::vector<double>>  c = multMatrix(v, vT);
+    EXPECT_EQ(MatrixCRS(v), MatrixCRS(vT).T());
+}
 
-    std::cout << "Helo Nesterov\n";
-    MatrixCRS crs(v);
-    MatrixCRS crsT(v);
-    crs.printArrays();
-    crsT.printArrays();
-    crs.dot(crsT).printArrays();
-    MatrixCRS(c).printArrays();
-      //  return RUN_ALL_TESTS();
+TEST(MatrixCRS, mult_crs) {
+    std::vector<std::vector<double>> v1 = generateMatrix(3, 3, 0.5);
+    std::vector<std::vector<double>> v2 = generateMatrix(3, 3, 0.5);
+    MatrixCRS crs1(v1);
+    MatrixCRS crs2(v2);
+    //  crs1.dot(crs2.T()).printArrays();
+    //  MatrixCRS(multMatrix(v1, v2)).printArrays();
+    EXPECT_EQ(crs1.dot(crs2.T()), MatrixCRS(multMatrix(v1, v2)));
+}
+
+int main(int argc, char **argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
 }

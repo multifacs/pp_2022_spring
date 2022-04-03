@@ -138,9 +138,21 @@ std::vector<std::vector<double>> zerpMatrix(int cols, int rows) {
     }
     return res;
 }
+bool MatrixCRS::operator==(const MatrixCRS& mtx) const {
+    bool check = false;
+    if ((nColumns == mtx.nColumns) && (nRows == mtx.nRows)
+        && (values == mtx.values)
+        && (columns == mtx.columns)
+        && (pointers == mtx.pointers))
+        check = true;
+    return check;
+}
 
 std::vector<std::vector<double>> generateMatrix(int cols, int rows,
     double density) {
+    if (density > 1 || density < 0) {
+        throw std::runtime_error("Error! Incorrect percentage!\n");
+    }
     std::vector<std::vector<double>> res = zerpMatrix(cols, rows);
     std::random_device dev;
     std::mt19937 gen(dev());

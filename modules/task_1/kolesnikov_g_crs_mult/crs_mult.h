@@ -21,6 +21,7 @@ class MatrixCRS {
     MatrixCRS T();
     MatrixCRS dot(MatrixCRS mtx);
     MatrixCRS dot_omp(MatrixCRS mtx);
+    bool operator==(const MatrixCRS& mtx) const;
     void printArrays();
 };
 
