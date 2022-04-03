@@ -7,13 +7,8 @@
 
 
 MatrixCRS::MatrixCRS(int nC, int nR, const std::vector<double>& v,
-    const std::vector<int>& c, const std::vector<int>& p) {
-    nColumns = nC;
-    nRows = nR;
-    values = v;
-    columns = c;
-    pointers = p;
-}
+    const std::vector<int>& c, const std::vector<int>& p): nColumns(nC),
+    nRows(nR), values(v), columns(c), pointers(p) {}
 
 MatrixCRS::MatrixCRS(std::vector<std::vector<double>> mtx) {
     nColumns = mtx[0].size();
