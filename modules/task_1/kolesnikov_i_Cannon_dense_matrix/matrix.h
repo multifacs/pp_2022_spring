@@ -1,7 +1,6 @@
 // Copyright 2022 Kolesnikov Ilya
 #ifndef MODULES_TASK_1_KOLESNIKOV_I_CANNON_DENSE_MATRIX_MATRIX_H_
 #define MODULES_TASK_1_KOLESNIKOV_I_CANNON_DENSE_MATRIX_MATRIX_H_
-#pragma once
 #include <vector>
 #include <iostream>
 

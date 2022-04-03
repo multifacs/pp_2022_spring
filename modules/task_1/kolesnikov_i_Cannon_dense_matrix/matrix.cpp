@@ -1,5 +1,4 @@
 // Copyright 2022 Kolesnikov Ilya
-#pragma once
 #include "../../../modules/task_1/kolesnikov_i_Cannon_dense_matrix/matrix.h"
 
 void Matrix::generateMatrix() {
