@@ -4,7 +4,7 @@
 #include <string>
 #include <random>
 #include <iostream>
-#include "matrix_mult.h"
+#include "./matrix_mult.h"
 
 SparseMatrix::SparseMatrix(int _m, int _n) {
     std::vector<std::vector<std::complex<int>>> matrix = getRandomMatrix(_m, _n);
@@ -13,8 +13,8 @@ SparseMatrix::SparseMatrix(int _m, int _n) {
     std::complex<int> zero(0, 0);
     rowCounter.push_back(0);
     int counter = 0;
-    for (size_t i = 0; i < matrix.size(); i++) {
-        for (size_t j = 0; j < matrix[i].size(); j++) {
+    for (int i = 0; i < static_cast<int>(matrix.size()); i++) {
+        for (int j = 0; j < static_cast<int>(matrix[i].size()); j++) {
             if (matrix[i][j] != zero) {
                 values.push_back(matrix[i][j]);
                 columnIndexes.push_back(j);
@@ -31,8 +31,8 @@ SparseMatrix::SparseMatrix(std::vector<std::vector<std::complex<int>>> matrix) {
     std::complex<int> zero(0, 0);
     rowCounter.push_back(0);
     int counter = 0;
-    for (size_t i = 0; i < matrix.size(); i++) {
-        for (size_t j = 0; j < matrix[i].size(); j++) {
+    for (int i = 0; i < static_cast<int>(matrix.size()); i++) {
+        for (int j = 0; j < static_cast<int>(matrix[i].size()); j++) {
             if (matrix[i][j] != zero) {
                 values.push_back(matrix[i][j]);
                 columnIndexes.push_back(j);
@@ -49,8 +49,8 @@ SparseMatrix SparseMatrix::multiply_seq(const SparseMatrix& matrix) const {
     }
     std::complex<int> tmp;
     std::vector<std::vector<std::complex<int>>> resultMatrix = getEmptyMatrix(m, matrix.n);
-    for (size_t i = 0; i < m; i++) {
-        for (size_t j = 0; j < matrix.n; j++) {
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < matrix.n; j++) {
             tmp = std::complex<int>();
             for (int k = 0; k < n; k++) {
                 tmp += get(i, k) * matrix.get(k, j);
@@ -74,7 +74,7 @@ std::complex<int> SparseMatrix::get(int row, int col) const {
         throw std::invalid_argument("index out of matrix range");
     }
     int currCol;
-    for (size_t pos = rowCounter[row]; pos < rowCounter[row + 1]; pos++) {
+    for (int pos = rowCounter[row]; pos < rowCounter[row + 1]; pos++) {
         currCol = columnIndexes[pos];
         if (currCol == col) {
             return values[pos];
@@ -86,21 +86,21 @@ std::complex<int> SparseMatrix::get(int row, int col) const {
 void SparseMatrix::print() {
     printFullMatrix(getFullMatrix());
     std::cout << "values = ";
-    for (size_t i = 0; i < values.size(); i++) {
+    for (int i = 0; i < static_cast<int>(values.size()); i++) {
         std::cout << values[i];
         std::cout << " ";
     }
     std::cout << std::endl;
 
     std::cout << "rowCounter = ";
-    for (size_t i = 0; i < rowCounter.size(); i++) {
+    for (int i = 0; i < static_cast<int>(rowCounter.size()); i++) {
         std::cout << rowCounter[i];
         std::cout << " ";
     }
     std::cout << std::endl;
 
     std::cout << "columnIndexes = ";
-    for (size_t i = 0; i < columnIndexes.size(); i++) {
+    for (int i = 0; i < static_cast<int>(columnIndexes.size()); i++) {
         std::cout << columnIndexes[i];
         std::cout << " ";
     }
@@ -112,10 +112,9 @@ std::vector<std::vector<std::complex<int>>> SparseMatrix::getRandomMatrix(int m,
     std::random_device dev;
     std::mt19937 gen(dev());
     std::vector<std::vector<std::complex<int>>> result;
-    for (size_t i = 0; i < m; i++) {
+    for (int i = 0; i < m; i++) {
         std::vector<std::complex<int>> vec;
-        for (size_t j = 0; j < n; j++)
-        {
+        for (int j = 0; j < n; j++) {
             if (gen() % 100 <= 30) {
                 std::complex<int> complexNumber(gen() % 10, (gen() % 10));
                 vec.push_back(complexNumber);
@@ -131,8 +130,8 @@ std::vector<std::vector<std::complex<int>>> SparseMatrix::getRandomMatrix(int m,
 
 void SparseMatrix::printFullMatrix(std::vector<std::vector<std::complex<int>>> matrix) const {
     std::cout << "____________________________" << std::endl;
-    for (size_t i = 0; i < matrix.size(); i++) {
-        for (size_t j = 0; j < matrix[i].size(); j++) {
+    for (int i = 0; i < matrix.size(); i++) {
+        for (int j = 0; j < matrix[i].size(); j++) {
             std::cout << matrix[i][j]<< " ";
         }
         std::cout << std::endl;
@@ -142,7 +141,7 @@ void SparseMatrix::printFullMatrix(std::vector<std::vector<std::complex<int>>> m
 
 std::vector<std::vector<std::complex<int>>> SparseMatrix::getFullMatrix() {
     std::vector<std::vector<std::complex<int>>> result;
-    for (size_t i = 0; i < m; i++) {
+    for (int i = 0; i < m; i++) {
         std::vector <std::complex<int>> tmp;
         for (size_t j = 0; j < n; j++) {
             tmp.push_back(get(i, j));
@@ -154,7 +153,7 @@ std::vector<std::vector<std::complex<int>>> SparseMatrix::getFullMatrix() {
 
 std::vector<std::vector<std::complex<int>>> SparseMatrix::getEmptyMatrix(int m, int n) const {
     std::vector<std::vector<std::complex<int>>> matrix;
-    for (size_t i = 0; i < m; i++) {
+    for (int i = 0; i < m; i++) {
         matrix.push_back(std::vector<std::complex<int>>(n));
     }
     return matrix;

@@ -16,7 +16,7 @@ class SparseMatrix {
  public:
     SparseMatrix(int m, int n);
     explicit SparseMatrix(std::vector<std::vector<std::complex<int>>> matrix);
-    SparseMatrix multiply_seq(const SparseMatrix& matrix )const;
+    SparseMatrix multiply_seq(const SparseMatrix& matrix)const;
     int getM()const;
     int getN()const;
     std::complex<int> get(int row, int col)const;
