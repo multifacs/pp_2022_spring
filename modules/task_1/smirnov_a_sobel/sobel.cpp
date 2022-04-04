@@ -10,7 +10,7 @@
 matrix randomMatrix(size_t w, size_t h) {
     if (w <= 0 || h <= 0)
         throw std::invalid_argument("Error with size matrix");
-    
+
     matrix res(w, std::vector<int>(h));
 
     std::mt19937 gen;
@@ -32,7 +32,7 @@ matrix SobelSeq(const matrix& src) {
     matrix res = src;
     size_t width = src.size() - 1;
     size_t hight = src[0].size() - 1;
-    
+
     for (size_t i = 1; i < width; i++)
         for (size_t j = 1; j < hight; j++) {
             double x = 0;
@@ -44,7 +44,7 @@ matrix SobelSeq(const matrix& src) {
                 }
             }
             double c = sqrt(x * x + y * y);
-            res[i][j] = (int) (c > MAX_PIXEL ? MAX_PIXEL : c < MIN_PIXEL ? MIN_PIXEL : c);
+            res[i][j] = c > MAX_PIXEL ? MAX_PIXEL : c < MIN_PIXEL ? MIN_PIXEL : c;
         }
 
     return res;
@@ -53,7 +53,7 @@ matrix SobelSeq(const matrix& src) {
 matrix createMatrixWithConstant(size_t w, size_t h, int val) {
     if (w <= 0 || h <= 0)
         throw std::invalid_argument("Error with size matrix");
-    
+
     matrix res(w, std::vector<int>(h, val));
 
     return res;

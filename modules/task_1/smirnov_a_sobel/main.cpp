@@ -3,7 +3,7 @@
 #include <gtest/gtest.h>
 #include <vector>
 
-#include "../../../modules/task_1/smirnov_a_sobel/sobel.h"
+#include "./sobel.h"
 
 
 TEST(Sequential, Sobel_one_element) {

@@ -1,7 +1,7 @@
 // Copyright 2022 Smirnov Aleksandr
 
-#ifndef MODULES_TASK_1_SMIRNOV_A_SOBEL_H_
-#define MODULES_TASK_1_SMIRNOV_A_SOBEL_H_
+#ifndef MODULES_TASK_1_SMIRNOV_A_SOBEL_SOBEL_H_
+#define MODULES_TASK_1_SMIRNOV_A_SOBEL_SOBEL_H_
 
 #include <random>
 #include <vector>
@@ -19,4 +19,4 @@ matrix randomMatrix(size_t w, size_t h);
 matrix createMatrixWithConstant(size_t w, size_t h, int val);
 void printMatrix(const matrix& m);
 
-#endif  // MODULES_TASK_1_SMIRNOV_A_SOBEL_H_
+#endif  // MODULES_TASK_1_SMIRNOV_A_SOBEL_SOBEL_H_
