@@ -33,7 +33,7 @@ matrix SobelSeq(const matrix& src) {
     matrix res = src;
     size_t width = src.size() - 1;
     size_t hight = src[0].size() - 1;
-    
+
     for (size_t i = 1; i < width; i++)
         for (size_t j = 1; j < hight; j++) {
             double x = 0;
@@ -45,7 +45,7 @@ matrix SobelSeq(const matrix& src) {
                 }
             }
             double c = sqrt(x * x + y * y);
-            res[i][j] = (int) (c > MAX_PIXEL ? MAX_PIXEL : c < MIN_PIXEL ? MIN_PIXEL : c);
+            res[i][j] = c > MAX_PIXEL ? MAX_PIXEL : c < MIN_PIXEL ? MIN_PIXEL : c;
         }
 
     return res;
@@ -56,14 +56,14 @@ matrix SobelPar(const matrix& src) {
         throw std::invalid_argument("Error with size matrix");
 
     matrix res = src;
-    size_t width = src.size() - 1;
-    size_t hight = src[0].size() - 1;
+    int width = src.size() - 1;
+    int hight = src[0].size() - 1;
 
     #pragma omp parallel
     {
     #pragma omp parallel for
-    for (size_t i = 1; i < width; i++)
-        for (size_t j = 1; j < hight; j++) {
+    for (int i = 1; i < width; i++)
+        for (int j = 1; j < hight; j++) {
             double x = 0;
             double y = 0;
             for (size_t w = 0; w < 3; w++) {
@@ -73,7 +73,7 @@ matrix SobelPar(const matrix& src) {
                 }
             }
             double c = sqrt(x * x + y * y);
-            res[i][j] = (int) (c > MAX_PIXEL ? MAX_PIXEL : c < MIN_PIXEL ? MIN_PIXEL : c);
+            res[i][j] = c > MAX_PIXEL ? MAX_PIXEL : c < MIN_PIXEL ? MIN_PIXEL : c;
         }
     }
 
