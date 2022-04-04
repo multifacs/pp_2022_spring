@@ -7,16 +7,16 @@ TEST(CannonTest, test_1) {
     Matrix matrix1(size);
     Matrix matrix2(size);
 
-    matrix1.generateMatrix();
-    matrix2.generateMatrix();
+    double num1 = 1.076, num2 = 2.067;
+    matrix1.generateMatrix(num1);
+    matrix2.generateMatrix(num2);
 
     Matrix matrix3(matrix1.multiplyByMatrix(matrix2), size);
 
     Matrix matrix4(matrix1.cannonAlgorithmSeq(matrix1, matrix2), size);
 
     std::vector<std::vector<double>> matr1 = matrix4.get_matrix(), matr2 = matrix3.get_matrix();
-
-    ASSERT_EQ(matr1[0][0], matr2[0][0]);
+    ASSERT_DOUBLE_EQ(matr1[0][0], matr2[0][0]);
 }
 
 TEST(CannonTest, test_2) {
@@ -24,8 +24,9 @@ TEST(CannonTest, test_2) {
     Matrix matrix1(size);
     Matrix matrix2(size);
 
-    matrix1.generateMatrix();
-    matrix2.generateMatrix();
+    double num1 = 1.076, num2 = 2.067;
+    matrix1.generateMatrix(num1);
+    matrix2.generateMatrix(num2);
 
     Matrix matrix3(matrix1.multiplyByMatrix(matrix2), size);
 
@@ -33,7 +34,7 @@ TEST(CannonTest, test_2) {
 
     std::vector<std::vector<double>> matr1 = matrix4.get_matrix(), matr2 = matrix3.get_matrix();
 
-    ASSERT_EQ(matr1[1][1], matr2[1][1]);
+    ASSERT_DOUBLE_EQ(matr1[1][1], matr2[1][1]);
 }
 
 TEST(CannonTest, test_3) {
@@ -41,8 +42,9 @@ TEST(CannonTest, test_3) {
     Matrix matrix1(size);
     Matrix matrix2(size);
 
-    matrix1.generateMatrix();
-    matrix2.generateMatrix();
+    double num1 = 1.076, num2 = 2.067;
+    matrix1.generateMatrix(num1);
+    matrix2.generateMatrix(num2);
 
     Matrix matrix3(matrix1.multiplyByMatrix(matrix2), size);
 
@@ -50,7 +52,7 @@ TEST(CannonTest, test_3) {
 
     std::vector<std::vector<double>> matr1 = matrix4.get_matrix(), matr2 = matrix3.get_matrix();
 
-    ASSERT_EQ(matr1[size-1][size-1], matr2[size-1][size-1]);
+    ASSERT_DOUBLE_EQ(matr1[size - 1][size - 1], matr2[size - 1][size - 1]);
 }
 
 TEST(CannonTest, test_4) {
@@ -58,8 +60,9 @@ TEST(CannonTest, test_4) {
     Matrix matrix1(size);
     Matrix matrix2(size);
 
-    matrix1.generateMatrix();
-    matrix2.generateMatrix();
+    double num1 = 1.076, num2 = 2.067;
+    matrix1.generateMatrix(num1);
+    matrix2.generateMatrix(num2);
 
     Matrix matrix3(matrix1.multiplyByMatrix(matrix2), size);
 
@@ -67,7 +70,9 @@ TEST(CannonTest, test_4) {
 
     std::vector<std::vector<double>> matr1 = matrix4.get_matrix(), matr2 = matrix3.get_matrix();
 
-    ASSERT_EQ(matr1[0], matr2[0]);
+    for (size_t j(0); j < size; ++j) {
+        ASSERT_DOUBLE_EQ(matr1[0][j], matr2[0][j]);
+    }
 }
 
 TEST(CannonTest, test_5) {
@@ -75,8 +80,9 @@ TEST(CannonTest, test_5) {
     Matrix matrix1(size);
     Matrix matrix2(size);
 
-    matrix1.generateMatrix();
-    matrix2.generateMatrix();
+    double num1 = 1.076, num2 = 2.067;
+    matrix1.generateMatrix(num1);
+    matrix2.generateMatrix(num2);
 
     Matrix matrix3(matrix1.multiplyByMatrix(matrix2), size);
 
@@ -84,5 +90,9 @@ TEST(CannonTest, test_5) {
 
     std::vector<std::vector<double>> matr1 = matrix4.get_matrix(), matr2 = matrix3.get_matrix();
 
-    ASSERT_EQ(matr1, matr2);
+    for (size_t i(0); i < size; ++i) {
+        for (size_t j(0); j < size; ++j) {
+            ASSERT_DOUBLE_EQ(matr1[i][j], matr2[i][j]);
+        }
+    }
 }

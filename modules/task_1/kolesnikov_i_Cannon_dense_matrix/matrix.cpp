@@ -1,10 +1,10 @@
 // Copyright 2022 Kolesnikov Ilya
 #include "../../../modules/task_1/kolesnikov_i_Cannon_dense_matrix/matrix.h"
 
-void Matrix::generateMatrix() {
+void Matrix::generateMatrix(double num) {
     for (size_t i = 0; i < size; ++i) {
         for (size_t j = 0; j < size; ++j) {
-            matrix[i][j] = (double)(rand() % 10);
+            matrix[i][j] = i*num;
         }
     }
 }
@@ -21,34 +21,37 @@ std::vector< std::vector<double>> Matrix::multiplyByMatrix(Matrix matrix) {
     return res_matrix.matrix;
 }
 
-void Matrix::shiftLeft(std::vector< std::vector<double>> &mat, size_t pos, size_t skew) {
+std::vector< std::vector<double>> Matrix::shiftLeft(std::vector< std::vector<double>> *mat, size_t pos, size_t skew) {
     std::vector<double> tmp_matr(size);
+    std::vector< std::vector<double>> vec = *mat;
     for (size_t i = 0; i < size; ++i) {
-        tmp_matr[i] = mat[pos][ (i + skew) % size];
+        tmp_matr[i] = vec[pos][(i + skew) % size];
     }
-
     for (size_t i = 0; i < size; ++i) {
-        mat[pos][i] = tmp_matr[i];
+        vec[pos][i] = tmp_matr[i];
     }
+    return vec;
 }
 
-void Matrix::shiftUp(std::vector< std::vector<double>> &mat, size_t pos, size_t skew) {
+std::vector< std::vector<double>> Matrix::shiftUp(std::vector< std::vector<double>> *mat, size_t pos, size_t skew) {
     std::vector<double> tmp_matr(size);
+    std::vector< std::vector<double>> vec = *mat;
     for (size_t i = 0; i < size; ++i) {
-        tmp_matr[i] = mat[ (i + skew) % size][pos];
+        tmp_matr[i] = vec[(i + skew) % size][pos];
     }
     for (size_t i = 0; i < size; ++i) {
-        mat[i][pos] = tmp_matr[i];
+        vec[i][pos] = tmp_matr[i];
     }
+    return vec;
 }
 
 std::vector< std::vector<double>> Matrix::cannonAlgorithmSeq(Matrix matrix1, Matrix matrix2) {
     std::vector< std::vector<double>> res_matrix, matr1 = matrix1.matrix, matr2 = matrix2.matrix;
     for (size_t i = 0; i < size; ++i) {
-        shiftLeft(matr1, i, i);
+        matr1 = shiftLeft(&matr1, i, i);
     }
     for (size_t j = 0; j < size; ++j) {
-        shiftUp(matr2, j, j);
+        matr2 = shiftUp(&matr2, j, j);
     }
     for (size_t i = 0; i < size; ++i) {
         std::vector<double> vec(size);
@@ -64,10 +67,10 @@ std::vector< std::vector<double>> Matrix::cannonAlgorithmSeq(Matrix matrix1, Mat
             }
         }
         for (size_t l = 0; l < size; ++l) {
-            shiftLeft(matr1, l, 1);
+            matr1 = shiftLeft(&matr1, l, 1);
         }
         for (size_t l = 0; l < size; ++l) {
-            shiftUp(matr2, l, 1);
+            matr2 = shiftUp(&matr2, l, 1);
         }
     }
     return res_matrix;

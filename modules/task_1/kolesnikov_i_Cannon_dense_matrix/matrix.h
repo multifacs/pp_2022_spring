@@ -4,16 +4,17 @@
 #include <vector>
 #include <iostream>
 
+
 class Matrix {
 public:
-    Matrix(size_t size):size(size) {
+    Matrix(size_t size) :size(size) {
         matrix.reserve(size);
         for (size_t i(0); i < size; ++i) {
             std::vector<double> vec(size);
             matrix.push_back(vec);
         }
     }
-    Matrix(std::vector<std::vector<double>> matrix, size_t size):size(size) {
+    Matrix(std::vector<std::vector<double>> matrix, size_t size) :size(size) {
         this->matrix.reserve(size);
         for (size_t i(0); i < size; ++i) {
             std::vector<double> vec;
@@ -24,14 +25,14 @@ public:
         }
     }
     ~Matrix() {}
-    void generateMatrix();
-        std::vector<std::vector<double>> get_matrix() {
+    std::vector<std::vector<double>> get_matrix() {
         return matrix;
     }
+    void generateMatrix(double num);
     std::vector<std::vector<double>> multiplyByMatrix(Matrix matrix);
     std::vector<std::vector<double>> cannonAlgorithmSeq(Matrix matrix1, Matrix matrix2);
-    void shiftLeft(std::vector<std::vector<double>> &mat, size_t pos, size_t skew);
-    void shiftUp(std::vector<std::vector<double>> &mat, size_t pos, size_t skew);
+    std::vector< std::vector<double>> shiftLeft(std::vector<std::vector<double>> *mat, size_t pos, size_t skew);
+    std::vector< std::vector<double>> shiftUp(std::vector<std::vector<double>> *mat, size_t pos, size_t skew);
 private:
     size_t size;
     std::vector<std::vector<double>> matrix;
