@@ -4,10 +4,9 @@
 #include <vector>
 #include <iostream>
 
-
 class Matrix {
-public:
-    Matrix(size_t size) :size(size) {
+ public:
+    explicit Matrix(size_t size) :size(size) {
         matrix.reserve(size);
         for (size_t i(0); i < size; ++i) {
             std::vector<double> vec(size);
@@ -33,7 +32,8 @@ public:
     std::vector<std::vector<double>> cannonAlgorithmSeq(Matrix matrix1, Matrix matrix2);
     std::vector< std::vector<double>> shiftLeft(std::vector<std::vector<double>> *mat, size_t pos, size_t skew);
     std::vector< std::vector<double>> shiftUp(std::vector<std::vector<double>> *mat, size_t pos, size_t skew);
-private:
+
+ private:
     size_t size;
     std::vector<std::vector<double>> matrix;
 };
