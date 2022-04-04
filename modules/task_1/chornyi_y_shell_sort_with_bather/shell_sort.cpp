@@ -12,7 +12,7 @@ vector<int> getRandomVector(const vec_size_t size) {
     vector<int> resultVector(size);
 
     for (vec_size_t i = 0; i < size; ++i) {
-        resultVector[i] = gen() % 10000; 
+        resultVector[i] = gen() % 10000;
     }
 
     return resultVector;
@@ -51,7 +51,5 @@ void getShellSort(vector<int>* commonVector) {
         std::swap(commonVector->at(j), commonVector->at(j + currentGap));
       }
     }
-
   }
-
 }
