@@ -26,7 +26,8 @@ struct BinaryImageAreas {
 };
 
 
-
 BinaryImage GenerateBinrayImage(int size);
 
 BinaryImageAreas FindAreas(BinaryImage image);
+
+void show(BinaryImageAreas image);
