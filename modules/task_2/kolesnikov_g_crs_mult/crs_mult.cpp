@@ -122,7 +122,6 @@ MatrixCRS MatrixCRS::dot_omp(MatrixCRS mtx) {
     int resCols = mtx.nColumns;
     std::vector<std::vector<int>> locCol(nRows);
     std::vector<std::vector<double>> locVal(nRows);
-    double start = omp_get_wtime();
     if (nColumns != mtx.nColumns) {
         throw std::runtime_error("Error! Incorrect numbers of rows!\n");
     }
