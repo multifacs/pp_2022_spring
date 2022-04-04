@@ -4,20 +4,21 @@
 #include "../../../modules/test_tasks/test_tbb/ops_tbb.h"
 
 using std::vector;
+typedef vector<int>::size_type vec_size_t;
 
-vector<int> getRandomVector(const vector<int>::size_type size) {
+vector<int> getRandomVector(const vec_size_t size) {
     std::random_device dev;
     std::mt19937 gen(dev());
     vector<int> resultVector(size);
 
-    for (int i = 0; i < size; ++i) { 
+    for (vec_size_t i = 0; i < size; ++i) { 
         resultVector[i] = gen() % 10000; 
     }
 
     return resultVector;
 }
 
-vector<int> sedgwickOrder(const vector<int>::size_type sizeOfVector) {
+vector<int> sedgwickOrder(const vec_size_t sizeOfVector) {
   vector<int> result;
   int firstCommonMultiple = 1, secondEvenMultiple = 1, secondOddMultiple = 1;
   int counter = 0;
@@ -31,7 +32,8 @@ vector<int> sedgwickOrder(const vector<int>::size_type sizeOfVector) {
       result.push_back(8 * firstCommonMultiple - 6 * secondOddMultiple + 1);
     }
     firstCommonMultiple *= 2;
-  } while (3 * result[result.size() - 1] < sizeOfVector);
+  } while (static_cast<vec_size_t>(3 * result[result.size() - 1]) <
+           sizeOfVector);
 
   return result;
 }
@@ -42,7 +44,7 @@ void getShellSort(vector<int>* commonVector) {
   for (int counter = vectorOfGap.size() - 1; counter >= 0; --counter) {
     size_t currentGap = vectorOfGap[counter];
 
-    for (int i = currentGap; i < commonVector->size(); ++i) {
+    for (vec_size_t i = currentGap; i < commonVector->size(); ++i) {
       for (int j = i - currentGap;
            (j >= 0) && (commonVector->at(j) > commonVector->at(j + currentGap));
            j -= currentGap) {
