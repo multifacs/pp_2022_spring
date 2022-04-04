@@ -1,7 +1,7 @@
 // Copyright 2022 Chornyi Yura
 #include <vector>
 #include <random>
-#include "../../../modules/test_tasks/test_tbb/ops_tbb.h"
+#include "../../../modules/task_1/chornyi_y_shell_sort_with_bather/shell_sort.h"
 
 using std::vector;
 typedef vector<int>::size_type vec_size_t;
@@ -11,7 +11,7 @@ vector<int> getRandomVector(const vec_size_t size) {
     std::mt19937 gen(dev());
     vector<int> resultVector(size);
 
-    for (vec_size_t i = 0; i < size; ++i) { 
+    for (vec_size_t i = 0; i < size; ++i) {
         resultVector[i] = gen() % 10000; 
     }
 
