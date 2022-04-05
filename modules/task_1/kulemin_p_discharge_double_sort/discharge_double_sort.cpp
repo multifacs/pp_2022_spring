@@ -17,7 +17,7 @@ double* create_random_vector(int size_n) {
 }
 void union_from_lists(std::vector<std::list<double>> *lists, double* in) {
     int j = 0;
-    for (int i = 0; i < lists->size(); i++) {
+    for (size_t i = 0; i < (*lists).size(); i++) {
         while (!(*lists)[i].empty()) {
             in[j]=((*lists)[i].front());
             (*lists)[i].pop_front();
@@ -27,7 +27,7 @@ void union_from_lists(std::vector<std::list<double>> *lists, double* in) {
 }
 void discharge_sort(double* in, int size) {
     std::vector<std::list<double >> lists(256);
-    for (int j = 0; j < sizeof(double); j++) {
+    for (size_t j = 0; j < sizeof(double); j++) {
         for (int i = 0; i < size; i++) {
             unsigned char* pt = (unsigned char*)(in + i);
             lists[*(pt + j)].push_back(in[i]);
