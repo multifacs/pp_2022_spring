@@ -5,7 +5,8 @@
 #include "./sobel.h"
 
 TEST(Parallel_TBB, Sobel_100_constant) {
-    matrix mat = createMatrixWithConstant(1000, 1000, 1);
+    size_t size = 100;
+    matrix mat = createMatrixWithConstant(size, size, 1);
     double start, end;
 
     start = omp_get_wtime();
@@ -22,7 +23,8 @@ TEST(Parallel_TBB, Sobel_100_constant) {
 }
 
 TEST(Parallel_TBB, Sobel_1000_constant) {
-    matrix mat = createMatrixWithConstant(1000, 1000, 1);
+    size_t size = 1000;
+    matrix mat = createMatrixWithConstant(size, size, 1);
     double start, end;
 
     start = omp_get_wtime();
@@ -39,7 +41,8 @@ TEST(Parallel_TBB, Sobel_1000_constant) {
 }
 
 TEST(Parallel_TBB, Sobel_100_random) {
-    matrix mat = randomMatrix(100, 100);
+    size_t size = 100;
+    matrix mat = randomMatrix(size, size);
     double start, end;
 
     start = omp_get_wtime();
@@ -56,7 +59,8 @@ TEST(Parallel_TBB, Sobel_100_random) {
 }
 
 TEST(Parallel_TBB, Sobel_1000_random) {
-    matrix mat = randomMatrix(1000, 1000);
+    size_t size = 1000;
+    matrix mat = randomMatrix(size, size);
     double start, end;
 
     start = omp_get_wtime();
@@ -73,7 +77,8 @@ TEST(Parallel_TBB, Sobel_1000_random) {
 }
 
 TEST(Parallel_TBB, Sobel_5000_random) {
-    matrix mat = randomMatrix(5000, 5000);
+    size_t size = 5000 / 10;  // for simplify work
+    matrix mat = randomMatrix(size, size);
     double start, end;
 
     start = omp_get_wtime();
