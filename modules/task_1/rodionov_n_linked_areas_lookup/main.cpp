@@ -44,7 +44,14 @@ TEST(LinkedAreasLookup, FindAreasDestroyTest) {
 	BinaryImageAreas areas = FindAreas(image);
 	image.~BinaryImage();
 	areas.~BinaryImageAreas();
+}
 
+
+TEST(LinkedAreasLookup, FindAreasDestroyTest1) {
+	BinaryImage image = GenerateBinrayImage(IMAGE_SIZE);
+	BinaryImageAreas areas = FindAreas(image);
+	image.~BinaryImage();
+	areas.~BinaryImageAreas();
 }
 
 
