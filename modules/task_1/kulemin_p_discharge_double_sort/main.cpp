@@ -11,6 +11,7 @@ TEST(Sequential, Test_Arr_10) {
     discharge_sort(st, count);
     std::sort(sd, sd + count);
     bool res = check_vectors(st, sd, count);
+    delete[] st, sd;
     ASSERT_EQ(true, res);
 }
 
@@ -22,6 +23,7 @@ TEST(Sequential, Test_Arr_20) {
     discharge_sort(st, count);
     std::sort(sd, sd + count);
     bool res = check_vectors(st, sd, count);
+    delete[] st, sd;
     ASSERT_EQ(true, res);
 }
 
@@ -33,6 +35,7 @@ TEST(Sequential, Test_Arr_50) {
     discharge_sort(st, count);
     std::sort(sd, sd + count);
     bool res = check_vectors(st, sd, count);
+    delete[] st, sd;
     ASSERT_EQ(true, res);
 }
 
@@ -44,6 +47,7 @@ TEST(Sequential, Test_Arr_100) {
     discharge_sort(st, count);
     std::sort(sd, sd + count);
     bool res = check_vectors(st, sd, count);
+    delete[] st, sd;
     ASSERT_EQ(true, res);
 }
 
@@ -55,5 +59,6 @@ TEST(Sequential, Test_Arr_150) {
     discharge_sort(st, count);
     std::sort(sd, sd + count);
     bool res = check_vectors(st, sd, count);
+    delete[] st, sd;
     ASSERT_EQ(true, res);
 }
