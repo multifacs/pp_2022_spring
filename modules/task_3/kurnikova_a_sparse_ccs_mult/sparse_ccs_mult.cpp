@@ -91,10 +91,11 @@ struct help {
 
 mymat result(const mymat* a, const mymat* b) {
     mymat ready(a->countv, b->counth, 0);
+    mymat at = t(a);
     std::vector<int>* rows = new std::vector<int>[ready.counth];
     std::vector<double>* num = new std::vector<double>[ready.counth];
     tbb::parallel_for(tbb::blocked_range<int>(0, b->counth, 10),
-        help(&t(a), b, rows, &ready.cols, num));
+        help(&at, b, rows, &ready.cols, num));
     int pme = 0;
     for (int i = 0; i < ready.counth; i++) {
         int tmp = ready.cols[i];
