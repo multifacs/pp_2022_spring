@@ -41,7 +41,7 @@ TEST(sparse_ccs_mult, test6) {
 }
 
 TEST(sparse_ccs_mult, test7) {
-    double start, stop, start1, stop1;
+    double start, stop;
     mymat a = randmat(5000, 5000);
     mymat b = randmat(5000, 5000);
     omp_set_num_threads(4);
