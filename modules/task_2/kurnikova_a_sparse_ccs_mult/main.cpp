@@ -40,7 +40,43 @@ TEST(sparse_ccs_mult, test6) {
     EXPECT_EQ(ab, result(&a, &b));
 }
 
-TEST(sparse_ccs_mult, test7) {
+TEST(sparse_ccs_mult, test7_100_4) {
+    double start, stop;
+    mymat a = randmat(100, 100);
+    mymat b = randmat(100, 100);
+    omp_set_num_threads(4);
+    start = omp_get_wtime();
+    result(&a, &b);
+    stop = omp_get_wtime();
+    double omp = stop - start;
+    start = omp_get_wtime();
+    seqresult(&a, &b);
+    stop = omp_get_wtime();
+    double seq = stop - start;
+    std::cout << "\n         OpenMP: " << omp << "\n";
+    std::cout << "         Sequen: " << seq << "\n" << std::endl;
+    ASSERT_NO_THROW();
+}
+
+TEST(sparse_ccs_mult, test8_1000_4) {
+    double start, stop;
+    mymat a = randmat(1000, 1000);
+    mymat b = randmat(1000, 1000);
+    omp_set_num_threads(4);
+    start = omp_get_wtime();
+    result(&a, &b);
+    stop = omp_get_wtime();
+    double omp = stop - start;
+    start = omp_get_wtime();
+    seqresult(&a, &b);
+    stop = omp_get_wtime();
+    double seq = stop - start;
+    std::cout << "\n         OpenMP: " << omp << "\n";
+    std::cout << "         Sequen: " << seq << "\n" << std::endl;
+    ASSERT_NO_THROW();
+}
+
+TEST(sparse_ccs_mult, test9_5000_4) {
     double start, stop;
     mymat a = randmat(5000, 5000);
     mymat b = randmat(5000, 5000);
@@ -53,7 +89,43 @@ TEST(sparse_ccs_mult, test7) {
     seqresult(&a, &b);
     stop = omp_get_wtime();
     double seq = stop - start;
-    std::cout << "\n         OpenMP: " << omp << "\n" << std::endl;
+    std::cout << "\n         OpenMP: " << omp << "\n";
+    std::cout << "         Sequen: " << seq << "\n" << std::endl;
+    ASSERT_NO_THROW();
+}
+
+TEST(sparse_ccs_mult, test10_5000_2) {
+    double start, stop;
+    mymat a = randmat(5000, 5000);
+    mymat b = randmat(5000, 5000);
+    omp_set_num_threads(2);
+    start = omp_get_wtime();
+    result(&a, &b);
+    stop = omp_get_wtime();
+    double omp = stop - start;
+    start = omp_get_wtime();
+    seqresult(&a, &b);
+    stop = omp_get_wtime();
+    double seq = stop - start;
+    std::cout << "\n         OpenMP: " << omp << "\n";
+    std::cout << "         Sequen: " << seq << "\n" << std::endl;
+    ASSERT_NO_THROW();
+}
+
+TEST(sparse_ccs_mult, test11_5000_8) {
+    double start, stop;
+    mymat a = randmat(5000, 5000);
+    mymat b = randmat(5000, 5000);
+    omp_set_num_threads(8);
+    start = omp_get_wtime();
+    result(&a, &b);
+    stop = omp_get_wtime();
+    double omp = stop - start;
+    start = omp_get_wtime();
+    seqresult(&a, &b);
+    stop = omp_get_wtime();
+    double seq = stop - start;
+    std::cout << "\n         OpenMP: " << omp << "\n";
     std::cout << "         Sequen: " << seq << "\n" << std::endl;
     ASSERT_NO_THROW();
 }
