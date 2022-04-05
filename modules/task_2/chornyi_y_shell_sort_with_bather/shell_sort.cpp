@@ -87,7 +87,7 @@ std::vector<int> getParallelShellSort(const std::vector<int>& commonVector) {
 
   vector<vector<int>> vecOfVec(numberOfThread);
 
-  #pragma omp parallel
+  #pragma omp parallel num_threads(numberOfThread)
   {
     int currentThread = omp_get_thread_num();
     vector<int> local;
