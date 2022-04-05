@@ -5,7 +5,6 @@
 #include <random>
 #include <iostream>
 #include "../../../modules/task_2/novozhilov_a_matrix_multiplication/matrix_mult.h"
-#include "matrix_mult.h"
 
 SparseMatrix::SparseMatrix(int _m, int _n) {
     std::vector<std::vector<std::complex<int>>> matrix = getRandomMatrix(_m, _n);
@@ -127,6 +126,11 @@ void SparseMatrix::print() {
     }
     std::cout << std::endl;
     std::cout << "____________________________" << std::endl;
+}
+
+bool SparseMatrix::operator==(const SparseMatrix& matrix) const {
+    return n == matrix.n && m == matrix.m && values == matrix.values
+        && columnIndexes == matrix.columnIndexes && rowCounter == matrix.rowCounter;
 }
 
 std::vector<std::vector<std::complex<int>>> SparseMatrix::getRandomMatrix(int m, int n) {

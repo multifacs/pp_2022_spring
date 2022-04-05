@@ -1,8 +1,8 @@
 // Copyright 2022 Novozhilov Alexander
+#include <omp.h>
 #include <gtest/gtest.h>
 #include <vector>
 #include "./matrix_mult.h"
-#include <omp.h>
 
 TEST(Matrix_Multiplication_Seq, get_works) {
     SparseMatrix matrix(3, 3);
@@ -34,18 +34,26 @@ TEST(Matrix_Multiplication_Seq, result_matrix_has_correct_size) {
     EXPECT_EQ(result.getN(), matrix2.getN());
 }
 
-TEST(Matrix_Multiplication_Parallel, parallel_multiplication_works) {
-    SparseMatrix matrix1(100, 100);
-    SparseMatrix matrix2(100, 100);
-    double startSeq = omp_get_wtime();
-    SparseMatrix result1 = matrix1.multiply_seq(matrix2);
-    double finishSeq = omp_get_wtime();
-    double startParallel = omp_get_wtime();
-    SparseMatrix result2 = matrix1.multiply_parallel(matrix2);
-    double finishParallel = omp_get_wtime();
-    std::cout << "Sequential time: " << finishSeq - startSeq<< " ms." << std::endl;
-    std::cout << "Parallel time: " << finishParallel - startParallel << " ms." << std::endl;
+TEST(Matrix_Multiplication_Parallel, parallel_multiplication_returns_same_result) {
+    SparseMatrix matrix1(3, 6);
+    SparseMatrix matrix2(6, 10);
+    SparseMatrix result1 = matrix1.multiply_parallel(matrix2);
+    SparseMatrix result2 = matrix1.multiply_seq(matrix2);
+    ASSERT_TRUE(result1 == result2);
 }
+
+//TEST(Matrix_Multiplication_Parallel, parallel_multiplication_works) {
+//    SparseMatrix matrix1(100, 100);
+//    SparseMatrix matrix2(100, 100);
+//    double startSeq = omp_get_wtime();
+//    SparseMatrix result1 = matrix1.multiply_seq(matrix2);
+//    double finishSeq = omp_get_wtime();
+//    double startParallel = omp_get_wtime();
+//    SparseMatrix result2 = matrix1.multiply_parallel(matrix2);
+//    double finishParallel = omp_get_wtime();
+//    std::cout << "Sequential time: " << finishSeq - startSeq<< " ms." << std::endl;
+//    std::cout << "Parallel time: " << finishParallel - startParallel << " ms." << std::endl;
+//}
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);

@@ -22,6 +22,7 @@ class SparseMatrix {
     int getN()const;
     std::complex<int> get(int row, int col)const;
     void print();
+    bool operator==(const SparseMatrix& matrix)const;
  private:
     std::vector<std::vector<std::complex<int>>> getRandomMatrix(int m, int n);
     void printFullMatrix(std::vector<std::vector<std::complex<int>>>)const;
