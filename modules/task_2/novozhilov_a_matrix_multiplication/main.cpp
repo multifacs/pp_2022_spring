@@ -39,8 +39,6 @@ TEST(Matrix_Multiplication_Parallel, parallel_multiplication_returns_same_result
     SparseMatrix matrix2(6, 10);
     SparseMatrix result1 = matrix1.multiply_parallel(matrix2);
     SparseMatrix result2 = matrix1.multiply_seq(matrix2);
-    result1.print();
-    result2.print();
     ASSERT_TRUE(result1 == result2);
 }
 
