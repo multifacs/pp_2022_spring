@@ -57,14 +57,17 @@ void ShellSortOMP(RandomAccessIterator first,
         for (int i = 0; i < stop; i+= merge_step * 2) {
             auto borders1 = get_block_borders(i, blocks);
             auto borders2 = get_block_borders(i + merge_step , blocks);
-            block_sizes[i] = block_sizes[i] + block_sizes[i+merge_step];
-            block_sizes[i+merge_step] = 0;
             assert(borders1.second == borders2.first);
             std::size_t start = borders1.first;
             std::size_t mid = borders1.second;
             std::size_t finish = borders2.second;
             finish = std::min(finish, input_size);
             std::inplace_merge(first+start, first+mid, first+finish, comp);
+        }
+
+        for (int i = 0; i < stop; i+= merge_step * 2) {
+            block_sizes[i] = block_sizes[i] + block_sizes[i+merge_step];
+            block_sizes[i+merge_step] = 0;
         }
     }
 }
