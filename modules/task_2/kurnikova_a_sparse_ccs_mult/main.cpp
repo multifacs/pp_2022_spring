@@ -41,10 +41,20 @@ TEST(sparse_ccs_mult, test6) {
 }
 
 TEST(sparse_ccs_mult, test7) {
-    double seq = ex(1000, 1000, 1000, 1);
-    double omp = ex(1000, 1000, 1000, 4);
-    std::cout << "\n         Sequen: " << seq << "\n";
-    std::cout << "         OpenMP: " << omp << "\n" << std::endl;
+    double start, stop, start1, stop1;
+    mymat a = randmat(5000, 5000);
+    mymat b = randmat(5000, 5000);
+    omp_set_num_threads(4);
+    start = omp_get_wtime();
+    result(&a, &b);
+    stop = omp_get_wtime();
+    double omp = stop - start;
+    start = omp_get_wtime();
+    seqresult(&a, &b);
+    stop = omp_get_wtime();
+    double seq = stop - start;
+    std::cout << "\n         OpenMP: " << omp << "\n" << std::endl;
+    std::cout << "         Sequen: " << seq << "\n" << std::endl;
     ASSERT_NO_THROW();
 }
 

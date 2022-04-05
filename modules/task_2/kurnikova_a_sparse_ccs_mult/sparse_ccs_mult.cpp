@@ -138,13 +138,21 @@ mymat randmat(int countv, int counth) {
     return d;
 }
 
-double ex(int countvv, int counth1, int counth2, int nths) {
-    double start, stop;
-    mymat a = randmat(countvv, counth1);
-    mymat b = randmat(counth1, counth2);
-    omp_set_num_threads(nths);
-    start = omp_get_wtime();
-    result(&a, &b);
-    stop = omp_get_wtime();
-    return stop - start;
+mymat seqresult(const mymat* a, const mymat* b) {
+    mymat ready(a->countv, b->counth, 0);
+    mymat at(t(a));
+    double tmp;
+    for (int j = 0; j < b->counth; j++) {
+        int emp = 0;
+        for (int i = 0; i < at.counth; i++) {
+            tmp = vecmult(b, &at, i, j);
+            if (tmp != 0) {
+                ready.num.push_back(tmp);
+                ready.rows.push_back(i);
+                emp++;
+            }
+        }
+        ready.cols[j + 1] = emp + ready.cols[j];
+    }
+    return ready;
 }
