@@ -36,15 +36,19 @@ void discharge_sort(double* in, int size) {
     }
 }
 bool check_vectors(double* st, double* sd, int size) {
-	bool res = true;
-	for (int i = 0; i < size; i++) {
-		if (st[i] != sd[i]) {
-			res = false;
-			break;
-		}
-	}
-	return res;
+    bool res = true;
+    for (int i = 0; i < size; i++) {
+        if (st[i] != sd[i]) {
+            res = false;
+            break;
+        }
+    }
+    return res;
 }
-
+void copy_vectors(double* st, double* sd, int size) {
+    for (int i = 0; i < size; i++) {
+        sd[i] = st[i];
+    }
+}
 
 
