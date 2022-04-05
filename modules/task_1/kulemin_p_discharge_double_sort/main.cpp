@@ -10,7 +10,8 @@ TEST(Sequential, Test_Arr_10) {
     memcpy(sd, st, sizeof(double) * count);
     discharge_sort(st, count);
     std::sort(sd, sd + count);
-    ASSERT_EQ(0, std::memcmp(st, sd, sizeof(st)));
+	bool res = check_vectors(st, sd, count);
+	ASSERT_EQ(true, res);
 }
 
 TEST(Sequential, Test_Arr_20) {
@@ -20,7 +21,8 @@ TEST(Sequential, Test_Arr_20) {
     memcpy(sd, st, sizeof(double) * count);
     discharge_sort(st, count);
     std::sort(sd, sd + count);
-    ASSERT_EQ(0, std::memcmp(st, sd, sizeof(st)));
+	bool res = check_vectors(st, sd, count);
+	ASSERT_EQ(true, res);
 }
 
 TEST(Sequential, Test_Arr_50) {
@@ -30,7 +32,8 @@ TEST(Sequential, Test_Arr_50) {
     memcpy(sd, st, sizeof(double) * count);
     discharge_sort(st, count);
     std::sort(sd, sd + count);
-    ASSERT_EQ(0, std::memcmp(st, sd, sizeof(st)));
+	bool res = check_vectors(st, sd, count);
+	ASSERT_EQ(true, res);
 }
 
 TEST(Sequential, Test_Arr_100) {
@@ -40,15 +43,17 @@ TEST(Sequential, Test_Arr_100) {
     memcpy(sd, st, sizeof(double) * count);
     discharge_sort(st, count);
     std::sort(sd, sd + count);
-    ASSERT_EQ(0, std::memcmp(st, sd, sizeof(st)));
+	bool res = check_vectors(st, sd, count);
+	ASSERT_EQ(true, res);
 }
 
 TEST(Sequential, Test_Arr_150) {
-    const int count = 150;
-    double* st = create_random_vector(count);
-    double* sd = new double[count];
-    memcpy(sd, st, sizeof(double) * count);
-    discharge_sort(st, count);
-    std::sort(sd, sd + count);
-    ASSERT_EQ(0, std::memcmp(st, sd, sizeof(st)));
+	const int count = 150;
+	double* st = create_random_vector(count);
+	double* sd = new double[count];
+	memcpy(sd, st, sizeof(double) * count);
+	discharge_sort(st, count);
+	std::sort(sd, sd + count);
+	bool res = check_vectors(st, sd, count);
+	ASSERT_EQ(true, res);
 }

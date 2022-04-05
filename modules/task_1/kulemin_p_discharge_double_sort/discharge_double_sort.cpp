@@ -35,5 +35,16 @@ void discharge_sort(double* in, int size) {
         union_from_lists(&lists, in);
     }
 }
+bool check_vectors(double* st, double* sd, int size) {
+	bool res = true;
+	for (int i = 0; i < size; i++) {
+		if (st[i] != sd[i]) {
+			res = false;
+			break;
+		}
+	}
+	return res;
+}
+
 
 
