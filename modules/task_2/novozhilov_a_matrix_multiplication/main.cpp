@@ -39,10 +39,12 @@ TEST(Matrix_Multiplication_Parallel, parallel_multiplication_returns_same_result
     SparseMatrix matrix2(6, 10);
     SparseMatrix result1 = matrix1.multiply_parallel(matrix2);
     SparseMatrix result2 = matrix1.multiply_seq(matrix2);
+    result1.print();
+    result2.print();
     ASSERT_TRUE(result1 == result2);
 }
 
-//TEST(Matrix_Multiplication_Parallel, parallel_multiplication_works) {
+// TEST(Matrix_Multiplication_Parallel, parallel_multiplication_works) {
 //    SparseMatrix matrix1(100, 100);
 //    SparseMatrix matrix2(100, 100);
 //    double startSeq = omp_get_wtime();
@@ -53,7 +55,7 @@ TEST(Matrix_Multiplication_Parallel, parallel_multiplication_returns_same_result
 //    double finishParallel = omp_get_wtime();
 //    std::cout << "Sequential time: " << finishSeq - startSeq<< " ms." << std::endl;
 //    std::cout << "Parallel time: " << finishParallel - startParallel << " ms." << std::endl;
-//}
+// }
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);

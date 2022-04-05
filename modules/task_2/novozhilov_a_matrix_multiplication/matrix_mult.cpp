@@ -61,14 +61,13 @@ SparseMatrix SparseMatrix::multiply_seq(const SparseMatrix& matrix) const {
     return SparseMatrix(resultMatrix);
 }
 
-SparseMatrix SparseMatrix::multiply_parallel(const SparseMatrix& matrix) const
-{
+SparseMatrix SparseMatrix::multiply_parallel(const SparseMatrix& matrix) const {
     if (n != matrix.m) {
         throw std::invalid_argument("invalid matrix size");
     }
     std::complex<int> tmp;
     std::vector<std::vector<std::complex<int>>> resultMatrix = getEmptyMatrix(m, matrix.n);
-    #pragma omp parallel for shared(matrix, resultMatrix)
+    #pragma omp parallel for shared(matrix, resultMatrix) private(tmp)
     for (int i = 0; i < m; i++) {
         for (int j = 0; j < matrix.n; j++) {
             tmp = std::complex<int>();
