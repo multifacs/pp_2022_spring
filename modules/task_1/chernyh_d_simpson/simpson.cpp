@@ -3,7 +3,7 @@
 
 double SimpsonSeq(const std::vector<double>& a, const std::vector<double>& b, unsigned int n,
     double(*func)(const std::vector<double>&)) {
-    //CHEKS
+    // CHEKS
     if (a.size() != b.size())
         throw("Different dimesions of borders");
     if (a.empty())
@@ -26,7 +26,7 @@ double SimpsonSeq(const std::vector<double>& a, const std::vector<double>& b, un
         h *= b[j] - a[j];
     }
 
-    h *= 1 / double(6.0 * n);
+    h *= 1 / static_cast<double>(6.0 * n);
 
     for (size_t i = 0; i < n; i++) {
         for (size_t j = 0; j < dimension; j++) {
