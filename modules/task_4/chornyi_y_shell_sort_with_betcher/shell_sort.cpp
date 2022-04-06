@@ -113,7 +113,7 @@ vector<int> getParallelShellSort(const vector<int>& commonVector) {
 
     threads[i] = std::thread(threadShellSort, &local, std::move(promises[i]));
     threads[i].join();
-    vecOfVec[i] = std::move(futures[i].get());
+    vecOfVec[i] = futures[i].get();
   }
 
   vector<int> resultVector = vecOfVec[0];
