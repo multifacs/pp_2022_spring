@@ -116,8 +116,7 @@ std::vector <int> parallel_shell_sort(std::vector<int> vctr, std::size_t num_thr
         if (tid == 0) {
             tmp_res.resize(quotient + residue);
             std::copy(vctr.begin(), vctr.begin() + quotient + residue, tmp_res.begin());
-        }
-        else {
+        } else {
             tmp_res.resize(quotient);
         }
         for (std::size_t i = 1; i < num_threads; i++) {
