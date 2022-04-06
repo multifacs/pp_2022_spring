@@ -43,7 +43,7 @@ double calculateNewPixelColor(const vector<vector<double>>& colorMatrix,
       result +=
           colorMatrix[clamp<int>(coordinateX + j, 0, colorMatrix.size() - 1)]
                      [clamp<int>(coordinateY + i, 0, colorMatrix.size() - 1)] *
-          ((double)1 / 9);
+          (1.0 / 9.0);
     }
   }
 
