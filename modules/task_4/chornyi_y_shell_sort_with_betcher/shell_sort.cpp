@@ -1,9 +1,8 @@
 // Copyright 2022 Chornyi Yura
 #include "../../../modules/task_4/chornyi_y_shell_sort_with_betcher/shell_sort.h"
+#include "../../../3rdparty/unapproved/unapproved.h"
 
-#include <future>
 #include <random>
-#include <thread>
 #include <vector>
 
 using std::vector;
