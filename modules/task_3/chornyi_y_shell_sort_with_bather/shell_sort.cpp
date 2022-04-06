@@ -99,7 +99,7 @@ vector<int> getParallelShellSort(const vector<int>& commonVector) {
                     });
 
   vector<int> resultVector = vecOfVec[0];
-  for (int i = 1; i < vecOfVec.size(); ++i) {
+  for (vec_size_t i = 1; i < vecOfVec.size(); ++i) {
     resultVector = merge(resultVector, vecOfVec[i]);
   }
 
