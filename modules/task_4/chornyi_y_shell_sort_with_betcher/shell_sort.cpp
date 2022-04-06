@@ -1,9 +1,10 @@
 // Copyright 2022 Chornyi Yura
 #include "../../../modules/task_4/chornyi_y_shell_sort_with_betcher/shell_sort.h"
-#include "../../../3rdparty/unapproved/unapproved.h"
 
 #include <random>
 #include <vector>
+
+#include "../../../3rdparty/unapproved/unapproved.h"
 
 using std::vector;
 typedef vector<int>::size_type vec_size_t;
