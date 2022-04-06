@@ -1,9 +1,9 @@
 // Copyright 2022 Chernyh Daria
 #include"../../../modules/task_1/chernyh_d_simpson/simpson.h"
 
-double SimpsonSeq(const std::vector<double> a, const std::vector<double> b, unsigned int n,
-    double(*func)(const std::vector<double>)) {
-    //CHEKS таб
+double SimpsonSeq(const std::vector<double>& a, const std::vector<double>& b, unsigned int n,
+    double(*func)(const std::vector<double>&)) {
+    //CHEKS
     if (a.size() != b.size())
         throw("Different dimesions of borders");
     if (a.empty())

@@ -4,7 +4,7 @@
 
 #include <vector>
 
-double SimpsonSeq(const std::vector<double> a, const std::vector<double> b, unsigned int n,
-    double(*func)(const std::vector<double>));
+double SimpsonSeq(const std::vector<double>& a, const std::vector<double>& b, unsigned int n,
+    double(*func)(const std::vector<double>&));
 
 #endif  // MODULES_TASK_1_CHERNYH_D_SIMPSON_SIMPSON_H_

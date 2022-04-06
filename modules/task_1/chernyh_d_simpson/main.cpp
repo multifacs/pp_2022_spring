@@ -4,15 +4,15 @@
 #include <cmath>
 #include "./simpson.h"
 
-double func_1(const std::vector<double> x) {
+double func_1(const std::vector<double>& x) {
     return x[0];
 }
 
-double func_2(const std::vector<double> x) {
+double func_2(const std::vector<double>& x) {
     return sin(x[0]) + cos(x[1]);
 }
 
-double func_3(const std::vector<double> x) {
+double func_3(const std::vector<double>& x) {
     return x[0] * x[0] + x[1] * x[1] + x[2] * x[2];
 }
 
