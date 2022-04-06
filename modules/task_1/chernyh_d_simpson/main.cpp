@@ -1,6 +1,7 @@
 // Copyright 2022 Chernyh Daria
 #include <gtest/gtest.h>
-#include <vector>
+#include <iostream>
+#include <cmath>
 #include "./simpson.h"
 
 double func_1(const std::vector<double> x) {
