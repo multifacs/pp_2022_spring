@@ -14,7 +14,7 @@ TEST(Sequential_Histogram_Stretching, Image_5x5) {
     int* image = getRandomImage(height, width);
     int y_max = getYmax(image, height, width);
     int y_min = getYmin(image, height, width);
-    int* result_image;
+    int* result_image = nullptr;
     ASSERT_NO_THROW(result_image = getSequentialOperations(image, height, width,
         y_max, y_min));
     delete[] image;
@@ -27,7 +27,7 @@ TEST(Sequential_Histogram_Stretching, Image_7x10) {
     int* image = getRandomImage(height, width);
     int y_max = getYmax(image, height, width);
     int y_min = getYmin(image, height, width);
-    int* result_image;
+    int* result_image = nullptr;
     ASSERT_NO_THROW(result_image = getSequentialOperations(image, height, width,
         y_max, y_min));
     delete[] image;
@@ -40,7 +40,7 @@ TEST(Sequential_Histogram_Stretching, Image_10x15) {
     int* image = getRandomImage(height, width);
     int y_max = getYmax(image, height, width);
     int y_min = getYmin(image, height, width);
-    int* result_image;
+    int* result_image = nullptr;
     ASSERT_NO_THROW(result_image = getSequentialOperations(image, height, width,
         y_max, y_min));
     delete[] image;
@@ -53,7 +53,7 @@ TEST(Sequential_Histogram_Stretching, Image_40x20) {
     int* image = getRandomImage(height, width);
     int y_max = getYmax(image, height, width);
     int y_min = getYmin(image, height, width);
-    int* result_image;
+    int* result_image = nullptr;
     ASSERT_NO_THROW(result_image = getSequentialOperations(image, height, width,
         y_max, y_min));
     delete[] image;
@@ -66,7 +66,7 @@ TEST(Sequential_Histogram_Stretching, Image_50x50) {
     int* image = getRandomImage(height, width);
     int y_max = getYmax(image, height, width);
     int y_min = getYmin(image, height, width);
-    int* result_image;
+    int* result_image = nullptr;
     ASSERT_NO_THROW(result_image = getSequentialOperations(image, height, width,
         y_max, y_min));
     delete[] image;
