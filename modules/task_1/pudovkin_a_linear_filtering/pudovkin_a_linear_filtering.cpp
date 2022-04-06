@@ -5,7 +5,7 @@
 #include "../../../modules/task_1/pudovkin_a_linear_filtering/pudovkin_a_linear_filtering.h"
 
 using std::vector;
-using v_size = vector<std::vector<double>>::size_type;
+using v_size = vector<vector<double>>::size_type;
 
 vector<vector<double>> getRandomMatrix(const v_size rows, const v_size cols) {
   std::random_device dev;
@@ -54,8 +54,8 @@ vector<vector<double>> getSequentialFilter(
     const vector<vector<double>>& commonMatrixOfColor) {
   vector<vector<double>> result = commonMatrixOfColor;
 
-  for (int i = 0; i < commonMatrixOfColor.size(); ++i) {
-    for (int j = 0; j < commonMatrixOfColor[i].size(); ++j) {
+  for (v_size i = 0; i < commonMatrixOfColor.size(); ++i) {
+    for (v_size j = 0; j < commonMatrixOfColor[i].size(); ++j) {
       result[i][j] = calculateNewPixelColor(commonMatrixOfColor, i, j);
     }
   }

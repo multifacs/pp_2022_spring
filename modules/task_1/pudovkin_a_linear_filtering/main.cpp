@@ -4,9 +4,11 @@
 
 #include "./pudovkin_a_linear_filtering.h"
 
+using v_size = std::vector<std::vector<double>>::size_type;
+
 bool isRightValues(const std::vector<std::vector<double>>& matrix) {
-  for (int i = 0; i < matrix.size(); ++i) {
-    for (int j = 0; j < matrix[i].size(); ++j) {
+  for (v_size i = 0; i < matrix.size(); ++i) {
+    for (v_size j = 0; j < matrix[i].size(); ++j) {
       if (matrix[i][j] > 1 || matrix[i][j] < 0)
         return false;
     }
