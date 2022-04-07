@@ -1,5 +1,6 @@
 // Copyright 2022 Ermakov Pavel
-#include "grackham.h"
+#include "gtest/gtest.h"
+#include "../../../modules/task_1/ermakov_p_grackham/grackham.h"
 
 TEST(grackham_seq, test_size_100) {
     std::vector<std::pair<int, int>> dots;
@@ -35,8 +36,6 @@ TEST(grackham_seq, test_size_8) {
         { 0, 0 }, { 1, 2 },
         { 3, 1 }, { 3, 3 }
     };
-    //int size = 25;
-    //dots = gen_dots(size);
     std::vector<std::pair<int, int>> seq_res;
     std::vector<std::pair<int, int>> expected = {
         { 0, 0 }, { 3, 1 }, { 4, 4 }, { 0, 3 }

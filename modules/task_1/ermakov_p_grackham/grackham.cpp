@@ -1,6 +1,5 @@
 // Copyright 2022 Ermakov Pavel
-#include "grackham.h"
-
+#include "../../../modules/task_1/ermakov_p_grackham/grackham.h"
 std::pair<int, int> p0;
 
 std::vector<std::pair<int, int>> gen_dots(int vectorSize) {
@@ -16,20 +15,18 @@ std::vector<std::pair<int, int>> gen_dots(int vectorSize) {
 int rotation(const std::pair<int, int>& dot1, const std::pair<int, int>& dot2,
     const std::pair<int, int>& dot3) {
     int val = (dot2.second - dot1.second) * (dot3.first - dot2.first) - 
-        (dot2.first - dot1.first) * (dot3.second - dot2.second);
-
+(dot2.first - dot1.first) * (dot3.second - dot2.second);
     if (val == 0)
         return 0;
     return (val > 0) ? 1 : 2;
 }
 
-int distance(std::pair<int, int>& dot1, std::pair<int, int>& dot2) {
-    return (dot1.first - dot2.first) * (dot1.first - dot2.first) + 
-        (dot1.second - dot2.second) * (dot1.second - dot2.second);
+int distance(const std::pair<int, int>& dot1, const std::pair<int, int>& dot2) {
+    return (dot1.first - dot2.first) * (dot1.first - dot2.first)+
+(dot1.second - dot2.second) * (dot1.second - dot2.second);
 }
 
-int compare(const void* vp1, const void* vp2)
-{
+int compare(const void* vp1, const void* vp2) {
     std::pair<int, int>* p1 = (std::pair<int, int>*)vp1;
     std::pair<int, int>* p2 = (std::pair<int, int>*)vp2;
 
@@ -45,6 +42,9 @@ std::vector<std::pair<int, int>> greckham_seq(std::vector<std::pair<int, int>> v
         std::vector<std::pair<int, int>> zero = { { 0, 0 } };
         return zero;
     }
+    if (vec.size() == 3) {
+        return vec;
+    }
     int min = 0;
     int ymin = vec[0].second;
     int size = vec.size();
@@ -56,12 +56,9 @@ std::vector<std::pair<int, int>> greckham_seq(std::vector<std::pair<int, int>> v
             min = i;
         }
     }
-
     std::swap(vec[0], vec[min]);
     p0 = vec[0];
-
     qsort(&vec[1], size - 1, sizeof(std::pair<int, int>), compare);
-
     std::vector<std::pair<int, int>> res;
     res.push_back(vec[0]);
     res.push_back(vec[1]);
