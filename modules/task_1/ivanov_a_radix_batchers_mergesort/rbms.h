@@ -1,24 +1,21 @@
 // Copyright 2022 Ivanov Arkady
-#ifndef MODULES_TASK_1_IVANOV_A_RADIX_BATCHERS_MERGESTORT_RBMS_H_
-#define MODULES_TASK_1_IVANOV_A_RADIX_BATCHERS_MERGESTORT_RBMS_H_
+#ifndef MODULES_TASK_1_IVANOV_A_RADIX_BATCHERS_MERGESORT_RBMS_H_
+#define MODULES_TASK_1_IVANOV_A_RADIX_BATCHERS_MERGESORT_RBMS_H_
 
 #include <vector>
 #include <random>
 #include <algorithm>
-
-typedef unsigned int uint32;
-typedef unsigned short int uint16;
-typedef unsigned char uint8;
+#include <stdint.h>
 
 // <RadixSortPart>
 template <class T>
-std::vector<int> createAndPrepareCounters(std::vector<T>& data, int offset, int count) {
+std::vector<int> createAndPrepareCounters(std::vector<T>* data, int offset, int count) {
     std::vector<int> counters(256 * sizeof(T));
     std::fill_n(counters.data(), counters.size(), 0);
     unsigned char* start = reinterpret_cast<unsigned char*>(
-        data.data() + offset);
+        data->data() + offset);
     unsigned char* stop = reinterpret_cast<unsigned char*>(
-        data.data() + offset + count);
+        data->data() + offset + count);
 
     while (start != stop) {
         for (int i = 0; i < sizeof(T); i++) {
@@ -41,7 +38,7 @@ std::vector<int> createAndPrepareCounters(std::vector<T>& data, int offset, int 
 }
 
 template<class T>
-void radixSort(std::vector<T>& data, int offset, int count) {
+void radixSort(std::vector<T>* data, int offset, int count) {
     std::vector<int> counters =
         createAndPrepareCounters(data, offset, count);
 
@@ -55,15 +52,14 @@ void radixSort(std::vector<T>& data, int offset, int count) {
         T* dPtr, * rPtr;
         unsigned char* dataPtr;
         if (j % 2 == 0) {
-            dPtr = data.data() + offset;
+            dPtr = data->data() + offset;
             dataPtr = reinterpret_cast<unsigned char*>(
-                data.data() + offset);
+                data->data() + offset);
             rPtr = res.data();
-        }
-        else {
+        } else {
             dPtr = res.data();
             dataPtr = reinterpret_cast<unsigned char*>(res.data());
-            rPtr = data.data() + offset;
+            rPtr = data->data() + offset;
         }
         dataPtr += j;
 
@@ -76,46 +72,42 @@ void radixSort(std::vector<T>& data, int offset, int count) {
 
     if (j % 2 == 1)
         for (int i = 0; i < count; i++)
-            data[i + offset] = res[i];
+            data->operator[](i + offset) = res[i];
 }
 // </RadixSortPart>
 
 // <BatchersMergePart>
 template<class T>
-void mergeFragments(std::vector<T>& data, std::vector<T>& result,
+void mergeFragments(std::vector<T>* data, std::vector<T>* result,
     int offset1, int size1, int offset2, int size2, bool isLeft) {
 
     if (isLeft) {
-        T* firstPtr = data.data() + offset1;
+        T* firstPtr = data->data() + offset1;
         int usedFirst = 0;
 
-        T* secondPtr = data.data() + offset2;
+        T* secondPtr = data->data() + offset2;
         int usedSecond = 0;
 
         for (int i = 0; i < size1; i++) {
             if (usedFirst < size1 && usedSecond < size2) {
                 if (*firstPtr < *secondPtr) {
-                    result[i] = *firstPtr;
+                    result->operator[](i) = *firstPtr;
                     firstPtr++;
                     usedFirst++;
-                }
-                else {
-                    result[i] = *secondPtr;
+                } else {
+                    result->operator[](i) = *secondPtr;
                     secondPtr++;
                     usedSecond++;
                 }
-            }
-            else if (usedFirst < size1 && usedSecond >= size2) {
-                result[i] = *firstPtr;
+            } else if (usedFirst < size1 && usedSecond >= size2) {
+                result->operator[](i) = *firstPtr;
                 firstPtr++;
                 usedFirst++;
-            }
-            else if (usedFirst >= size1 && usedSecond < size2) {
-                result[i] = *secondPtr;
+            } else if (usedFirst >= size1 && usedSecond < size2) {
+                result->operator[](i) = *secondPtr;
                 secondPtr++;
                 usedSecond++;
-            }
-            else {
+            } else {
                 throw "Impossible exception";
             }
         }
@@ -123,59 +115,38 @@ void mergeFragments(std::vector<T>& data, std::vector<T>& result,
     }
 
     // if isLeft = false
-    T* firstPtr = data.data() + offset1 + size1 - 1;
+    T* firstPtr = data->data() + offset1 + size1 - 1;
     int usedFirst = 0;
 
-    T* secondPtr = data.data() + offset2 + size2 - 1;
+    T* secondPtr = data->data() + offset2 + size2 - 1;
     int usedSecond = 0;
 
     for (int i = size2 - 1; i >= 0; i--) {
         if (usedFirst < size1 && usedSecond < size2) {
             if (*firstPtr > *secondPtr) {
-                result[i] = *firstPtr;
+                result->operator[](i) = *firstPtr;
                 firstPtr--;
                 usedFirst++;
-            }
-            else {
-                result[i] = *secondPtr;
+            } else {
+                result->operator[](i) = *secondPtr;
                 secondPtr--;
                 usedSecond++;
             }
-        }
-        else if (usedFirst < size1 && usedSecond >= size2) {
-            result[i] = *firstPtr;
+        } else if (usedFirst < size1 && usedSecond >= size2) {
+            result->operator[](i) = *firstPtr;
             firstPtr--;
             usedFirst++;
-        }
-        else if (usedFirst >= size1 && usedSecond < size2) {
-            result[i] = *secondPtr;
+        } else if (usedFirst >= size1 && usedSecond < size2) {
+            result->operator[](i) = *secondPtr;
             secondPtr--;
             usedSecond++;
-        }
-        else {
+        } else {
             throw "Impossible exception";
         }
     }
 }
 
-int partner(int nodeIndex, int mergeStage, int mergeStageStep) {
-    if (mergeStageStep > mergeStage)
-        throw "ERROR";
-
-    if (mergeStageStep == 1)
-        return nodeIndex ^ (1 << (mergeStage - 1));
-    else {
-        int scale = 1 << (mergeStage - mergeStageStep); // difference between nodes for stage n stageStep n.s
-        int box = 1 << mergeStageStep;
-        int sn = nodeIndex / scale - (nodeIndex / scale / box) * box;
-        if (sn == 0 || sn == box - 1)
-            return nodeIndex;
-        else if (sn % 2 == 0)
-            return nodeIndex - scale;
-        else
-            return nodeIndex + scale;
-    }
-}
+int partner(int nodeIndex, int mergeStage, int mergeStageStep);
 // </BatchersMergePart>
 
 // <ServiceFunctions>
@@ -226,7 +197,7 @@ void fillStrictDescending(T* data, int size, T startValue) {
 }
 
 template<class T>
-void printVector(std::vector<T> vec) {
+void printVector(const std::vector<T>& vec) {
     for (int i = 0; i < vec.size(); i++)
         std::cout << vec[i] << " ";
     std::cout << std::endl;
@@ -242,7 +213,7 @@ bool isAscending(T* data, int size) {
 }
 
 template<class T>
-bool isVecSame(std::vector<T>& v1, std::vector<T>& v2) {
+bool isVecSame(const std::vector<T>& v1, const std::vector<T>& v2) {
     if (v1.size() != v2.size())
         return false;
     for (size_t i = 0; i < v1.size(); i++)
@@ -252,4 +223,4 @@ bool isVecSame(std::vector<T>& v1, std::vector<T>& v2) {
 }
 // </ServiceFunctions>
 
-#endif // MODULES_TASK_1_IVANOV_A_RADIX_BATCHERS_MERGESTORT_RBMS_H_
+#endif // MODULES_TASK_1_IVANOV_A_RADIX_BATCHERS_MERGESORT_RBMS_H_

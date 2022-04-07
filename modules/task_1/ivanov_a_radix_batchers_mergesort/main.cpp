@@ -1,16 +1,16 @@
 // Copyright 2022 Ivanov Arkady
 #include <gtest/gtest.h>
-#include "rbms.h"
+#include "./rbms.h"
 
 // ----------------<radix sort>------------------------
 // test for [100, 99, 98, ..., 2, 1] -> [1, 2, ..., 99, 100]
 TEST(radixSortCheck, isCorrectOnStrictAscending) {
     const int size = 100;
     const int startValue = 100;
-    std::vector<uint32> data(size);
-    fillStrictDescending<uint32>(data.data(), size, startValue);
-    radixSort<uint32>(data, 0, size);
-    ASSERT_TRUE(isStrictAscending<uint32>(data.data(), size, 1));
+    std::vector<uint32_t> data(size);
+    fillStrictDescending<uint32_t>(data.data(), size, startValue);
+    radixSort<uint32_t>(&data, 0, size);
+    ASSERT_TRUE(isStrictAscending<uint32_t>(data.data(), size, 1));
 }
 
 // test for [100, 99, 98, ..., 2, 1] -> [51, 52, ..., 99, 100] + [1, 2, ..., 49, 50]
@@ -18,12 +18,12 @@ TEST(radixSortCheck, canSortBlock_size_even_blockSize_half) {
     const int size = 100;
     const int halfSize = size / 2;
     const int startValue = 100;
-    std::vector<uint32> data(size);
-    fillStrictDescending<uint32>(data.data(), size, startValue);
-    radixSort<uint32>(data, 0, halfSize);
-    radixSort<uint32>(data, halfSize, halfSize);
-    ASSERT_TRUE(isStrictAscending<uint32>(data.data(), halfSize, 51));
-    ASSERT_TRUE(isStrictAscending<uint32>(data.data() + halfSize, halfSize, 1));
+    std::vector<uint32_t> data(size);
+    fillStrictDescending<uint32_t>(data.data(), size, startValue);
+    radixSort<uint32_t>(&data, 0, halfSize);
+    radixSort<uint32_t>(&data, halfSize, halfSize);
+    ASSERT_TRUE(isStrictAscending<uint32_t>(data.data(), halfSize, 51));
+    ASSERT_TRUE(isStrictAscending<uint32_t>(data.data() + halfSize, halfSize, 1));
 }
 
 // test for [100, 99, 98, ..., 2, 1] -> [100] + [1, 2, ..., 98, 99]
@@ -31,10 +31,10 @@ TEST(radixSortCheck, canSortBlock_size_even_blockSize_n_minus_one_1) {
     const int size = 100;
     const int halfSize = size / 2;
     const int startValue = 100;
-    std::vector<uint32> data(size);
-    fillStrictDescending<uint32>(data.data(), size, startValue);
-    radixSort<uint32>(data, 1, size - 1);
-    ASSERT_TRUE(isStrictAscending<uint32>(data.data() + 1, size - 1, 1));
+    std::vector<uint32_t> data(size);
+    fillStrictDescending<uint32_t>(data.data(), size, startValue);
+    radixSort<uint32_t>(&data, 1, size - 1);
+    ASSERT_TRUE(isStrictAscending<uint32_t>(data.data() + 1, size - 1, 1));
 }
 
 // test for [100, 99, 98, ..., 2, 1] -> [2, 3, ..., 99, 100] + [1]
@@ -42,37 +42,37 @@ TEST(radixSortCheck, canSortBlock_size_even_blockSize_n_minus_one_2) {
     const int size = 100;
     const int halfSize = size / 2;
     const int startValue = 100;
-    std::vector<uint32> data(size);
-    fillStrictDescending<uint32>(data.data(), size, startValue);
-    radixSort<uint32>(data, 0, size - 1);
-    ASSERT_TRUE(isStrictAscending<uint32>(data.data(), size - 1, 2));
+    std::vector<uint32_t> data(size);
+    fillStrictDescending<uint32_t>(data.data(), size, startValue);
+    radixSort<uint32_t>(&data, 0, size - 1);
+    ASSERT_TRUE(isStrictAscending<uint32_t>(data.data(), size - 1, 2));
 }
 
 // test for [99] -> [99]
 TEST(radixSortCheck, canSortLengthOne) {
     const int size = 1;
-    std::vector<uint32> data(size);
+    std::vector<uint32_t> data(size);
     data[0] = 99;
-    ASSERT_NO_THROW(radixSort<uint32>(data, 0, 1));
+    ASSERT_NO_THROW(radixSort<uint32_t>(&data, 0, 1));
     ASSERT_EQ(data[0], 99);
 }
 
 // can sort rand values
 TEST(radixSortCheck, canSortRandValuesRandSize) {
-    const uint32 size = getRandValue<uint32>(101, 404);
-    std::vector<uint32> data(size);
-    fillVecWithRandValues<uint32>(data.data(), size, 0, 4512);
-    radixSort<uint32>(data, 0, size);
-    ASSERT_TRUE(isAscending<uint32>(data.data(), size));
+    const uint32_t size = getRandValue<uint32_t>(101, 404);
+    std::vector<uint32_t> data(size);
+    fillVecWithRandValues<uint32_t>(data.data(), size, 0, 4512);
+    radixSort<uint32_t>(&data, 0, size);
+    ASSERT_TRUE(isAscending<uint32_t>(data.data(), size));
 }
 
 // can sort ushort
 TEST(radixSortCheck, canSortUSHORT) {
     const int size = 100;
-    std::vector<uint16> data(size);
-    fillVecWithRandValues<uint16>(data.data(), size, 0, 65535);
-    radixSort<uint16>(data, 0, size);
-    ASSERT_TRUE(isAscending<uint16>(data.data(), size));
+    std::vector<uint16_t> data(size);
+    fillVecWithRandValues<uint16_t>(data.data(), size, 0, 65535);
+    radixSort<uint16_t>(&data, 0, size);
+    ASSERT_TRUE(isAscending<uint16_t>(data.data(), size));
 }
 // ----------------</radix sort>------------------------
 
@@ -84,15 +84,15 @@ TEST(radixSortCheck, canSortUSHORT) {
 TEST(mergeCheck, sameBlockSize) {
     const int size = 100;
     const int blockSize = size / 2;
-    std::vector<uint32> data(size);
-    fillStrictAscending<uint32>(data.data(), blockSize, 51);
-    fillStrictAscending<uint32>(data.data() + blockSize, blockSize, 1);
-    std::vector<uint32> resFragment1(blockSize);
-    std::vector<uint32> resFragment2(blockSize);
-    mergeFragments<uint32>(data, resFragment1, 0, blockSize, blockSize, blockSize, true);
-    mergeFragments<uint32>(data, resFragment2, 0, blockSize, blockSize, blockSize, false);
-    ASSERT_TRUE(isStrictAscending<uint32>(resFragment1.data(), blockSize, 1));
-    ASSERT_TRUE(isStrictAscending<uint32>(resFragment2.data(), blockSize, 51));
+    std::vector<uint32_t> data(size);
+    fillStrictAscending<uint32_t>(data.data(), blockSize, 51);
+    fillStrictAscending<uint32_t>(data.data() + blockSize, blockSize, 1);
+    std::vector<uint32_t> resFragment1(blockSize);
+    std::vector<uint32_t> resFragment2(blockSize);
+    mergeFragments<uint32_t>(&data, &resFragment1, 0, blockSize, blockSize, blockSize, true);
+    mergeFragments<uint32_t>(&data, &resFragment2, 0, blockSize, blockSize, blockSize, false);
+    ASSERT_TRUE(isStrictAscending<uint32_t>(resFragment1.data(), blockSize, 1));
+    ASSERT_TRUE(isStrictAscending<uint32_t>(resFragment2.data(), blockSize, 51));
 }
 
 // test for [52, 53, ..., 100, 101, 1, 2, ..., 49, 51] -> [1, 2, ..., 99, 100]
@@ -101,15 +101,15 @@ TEST(mergeCheck, diffBlockSize) {
     const int size = 101;
     const int blockSize1 = size / 2;
     const int blockSize2 = size / 2 + size % 2;
-    std::vector<uint32> data(size);
-    fillStrictAscending<uint32>(data.data(), blockSize1, 52);
-    fillStrictAscending<uint32>(data.data() + blockSize1, blockSize2, 1);
-    std::vector<uint32> resFragment1(blockSize1);
-    std::vector<uint32> resFragment2(blockSize2);
-    mergeFragments<uint32>(data, resFragment1, 0, blockSize1, blockSize1, blockSize2, true);
-    mergeFragments<uint32>(data, resFragment2, 0, blockSize1, blockSize1, blockSize2, false);
-    ASSERT_TRUE(isStrictAscending<uint32>(resFragment1.data(), blockSize1, 1));
-    ASSERT_TRUE(isStrictAscending<uint32>(resFragment2.data(), blockSize2, 51));
+    std::vector<uint32_t> data(size);
+    fillStrictAscending<uint32_t>(data.data(), blockSize1, 52);
+    fillStrictAscending<uint32_t>(data.data() + blockSize1, blockSize2, 1);
+    std::vector<uint32_t> resFragment1(blockSize1);
+    std::vector<uint32_t> resFragment2(blockSize2);
+    mergeFragments<uint32_t>(&data, &resFragment1, 0, blockSize1, blockSize1, blockSize2, true);
+    mergeFragments<uint32_t>(&data, &resFragment2, 0, blockSize1, blockSize1, blockSize2, false);
+    ASSERT_TRUE(isStrictAscending<uint32_t>(resFragment1.data(), blockSize1, 1));
+    ASSERT_TRUE(isStrictAscending<uint32_t>(resFragment2.data(), blockSize2, 51));
 }
 // ----------------</merge check>------------------------
 
@@ -127,18 +127,18 @@ TEST(radix_batchers_mergesort, test1_blocksCount_2) {
     const int blockSize1 = size / 2;
     const int blockSize2 = size / 2 + size % 2;
 
-    std::vector<uint32> data(size);
-    fillVecWithRandValues<uint32>(data.data(), size, 0, 142124);
-    std::vector<uint32> checkVector(data);
+    std::vector<uint32_t> data(size);
+    fillVecWithRandValues<uint32_t>(data.data(), size, 0, 142124);
+    std::vector<uint32_t> checkVector(data);
 
-    std::vector<uint32> fragment1(blockSize1);
-    std::vector<uint32> fragment2(blockSize2);
+    std::vector<uint32_t> fragment1(blockSize1);
+    std::vector<uint32_t> fragment2(blockSize2);
 
-    radixSort<uint32>(data, 0, blockSize1);
-    radixSort<uint32>(data, blockSize1, blockSize2);
+    radixSort<uint32_t>(&data, 0, blockSize1);
+    radixSort<uint32_t>(&data, blockSize1, blockSize2);
 
-    mergeFragments<uint32>(data, fragment1, 0, blockSize1, blockSize1, blockSize2, true);
-    mergeFragments<uint32>(data, fragment2, 0, blockSize1, blockSize1, blockSize2, false);
+    mergeFragments<uint32_t>(&data, &fragment1, 0, blockSize1, blockSize1, blockSize2, true);
+    mergeFragments<uint32_t>(&data, &fragment2, 0, blockSize1, blockSize1, blockSize2, false);
 
     for (int i = 0; i < blockSize1; i++)
         data[i] = fragment1[i];
@@ -146,9 +146,9 @@ TEST(radix_batchers_mergesort, test1_blocksCount_2) {
         data[i + blockSize1] = fragment2[i];
 
     // check if correct
-    radixSort<uint32>(checkVector, 0, size);
+    radixSort<uint32_t>(&checkVector, 0, size);
 
-    ASSERT_TRUE(isVecSame<uint32>(data, checkVector));
+    ASSERT_TRUE(isVecSame<uint32_t>(data, checkVector));
 }
 
 /*
@@ -167,24 +167,24 @@ TEST(radix_batchers_mergesort, test1_blocksCount_3) {
     const int blockSize2 = size / blockCount;
     const int blockSize3 = size / blockCount + size % blockCount;
 
-    std::vector<uint32> data(size);
-    fillVecWithRandValues<uint32>(data.data(), size, 0, 142124);
-    std::vector<uint32> checkVector(data);
+    std::vector<uint32_t> data(size);
+    fillVecWithRandValues<uint32_t>(data.data(), size, 0, 142124);
+    std::vector<uint32_t> checkVector(data);
 
-    std::vector<uint32> fragment1(blockSize1);
-    std::vector<uint32> fragment2(blockSize2);
-    std::vector<uint32> fragment3(blockSize3);
+    std::vector<uint32_t> fragment1(blockSize1);
+    std::vector<uint32_t> fragment2(blockSize2);
+    std::vector<uint32_t> fragment3(blockSize3);
 
-    radixSort<uint32>(data, 0, blockSize1);
-    radixSort<uint32>(data, blockSize1, blockSize2);
-    radixSort<uint32>(data, blockSize1 + blockSize2, blockSize3);
+    radixSort<uint32_t>(&data, 0, blockSize1);
+    radixSort<uint32_t>(&data, blockSize1, blockSize2);
+    radixSort<uint32_t>(&data, blockSize1 + blockSize2, blockSize3);
 
 
     // Batcher's merge network routine
 
     // stage 1 step 1: merging (2, 3)
-    mergeFragments<uint32>(data, fragment2, blockSize1, blockSize2, blockSize1 + blockSize2, blockSize3, true);
-    mergeFragments<uint32>(data, fragment3, blockSize1, blockSize2, blockSize1 + blockSize2, blockSize3, false);
+    mergeFragments<uint32_t>(&data, &fragment2, blockSize1, blockSize2, blockSize1 + blockSize2, blockSize3, true);
+    mergeFragments<uint32_t>(&data, &fragment3, blockSize1, blockSize2, blockSize1 + blockSize2, blockSize3, false);
 
     for (int i = 0; i < blockSize2; i++)
         data[i + blockSize1] = fragment2[i];
@@ -192,8 +192,8 @@ TEST(radix_batchers_mergesort, test1_blocksCount_3) {
         data[i + blockSize1 + blockSize2] = fragment3[i];
 
     // stage 2 step 1: merging (1, 2)
-    mergeFragments<uint32>(data, fragment1, 0, blockSize1, blockSize1, blockSize2, true);
-    mergeFragments<uint32>(data, fragment2, 0, blockSize1, blockSize1, blockSize2, false);
+    mergeFragments<uint32_t>(&data, &fragment1, 0, blockSize1, blockSize1, blockSize2, true);
+    mergeFragments<uint32_t>(&data, &fragment2, 0, blockSize1, blockSize1, blockSize2, false);
 
     for (int i = 0; i < blockSize1; i++)
         data[i] = fragment1[i];
@@ -201,8 +201,8 @@ TEST(radix_batchers_mergesort, test1_blocksCount_3) {
         data[i + blockSize1] = fragment2[i];
 
     // stage 2 step 2: merging (2,3)
-    mergeFragments<uint32>(data, fragment2, blockSize1, blockSize2, blockSize1 + blockSize2, blockSize3, true);
-    mergeFragments<uint32>(data, fragment3, blockSize1, blockSize2, blockSize1 + blockSize2, blockSize3, false);
+    mergeFragments<uint32_t>(&data, &fragment2, blockSize1, blockSize2, blockSize1 + blockSize2, blockSize3, true);
+    mergeFragments<uint32_t>(&data, &fragment3, blockSize1, blockSize2, blockSize1 + blockSize2, blockSize3, false);
 
     for (int i = 0; i < blockSize2; i++)
         data[i + blockSize1] = fragment2[i];
@@ -210,13 +210,13 @@ TEST(radix_batchers_mergesort, test1_blocksCount_3) {
         data[i + blockSize1 + blockSize2] = fragment3[i];
 
     // check if correct
-    radixSort<uint32>(checkVector, 0, size);
+    radixSort<uint32_t>(&checkVector, 0, size);
 
-    ASSERT_TRUE(isVecSame<uint32>(data, checkVector));
+    ASSERT_TRUE(isVecSame<uint32_t>(data, checkVector));
 }
 // ----------------</algorithm check>------------------------
 
-int main(int argc, char** argv) { // trigger workflow
+int main(int argc, char** argv) {  // trigger workflow
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 }
