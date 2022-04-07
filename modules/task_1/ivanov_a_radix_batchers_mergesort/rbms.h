@@ -1,0 +1,255 @@
+// Copyright 2022 Ivanov Arkady
+#ifndef MODULES_TASK_1_IVANOV_A_RADIX_BATCHERS_MERGESTORT_RBMS_H_
+#define MODULES_TASK_1_IVANOV_A_RADIX_BATCHERS_MERGESTORT_RBMS_H_
+
+#include <vector>
+#include <random>
+#include <algorithm>
+
+typedef unsigned int uint32;
+typedef unsigned short int uint16;
+typedef unsigned char uint8;
+
+// <RadixSortPart>
+template <class T>
+std::vector<int> createAndPrepareCounters(std::vector<T>& data, int offset, int count) {
+    std::vector<int> counters(256 * sizeof(T));
+    std::fill_n(counters.data(), counters.size(), 0);
+    unsigned char* start = reinterpret_cast<unsigned char*>(
+        data.data() + offset);
+    unsigned char* stop = reinterpret_cast<unsigned char*>(
+        data.data() + offset + count);
+
+    while (start != stop) {
+        for (int i = 0; i < sizeof(T); i++) {
+            counters[*start + 256 * i]++;
+            start++;
+        }
+    }
+
+    for (int i = 0; i < sizeof(T); i++) {
+        int sum = 0;
+        if (counters[256 * i] == count)
+            continue;
+        for (int j = 0; j < 256; j++) {
+            int tmp = counters[256 * i + j];
+            counters[256 * i + j] = sum;
+            sum += tmp;
+        }
+    }
+    return counters;
+}
+
+template<class T>
+void radixSort(std::vector<T>& data, int offset, int count) {
+    std::vector<int> counters =
+        createAndPrepareCounters(data, offset, count);
+
+    std::vector<T> res(count);
+    int j;
+    for (j = 0; j < sizeof(T); j++) {
+        int* countersPtr = counters.data() + 256 * j;
+        if (*countersPtr == count)
+            break;
+
+        T* dPtr, * rPtr;
+        unsigned char* dataPtr;
+        if (j % 2 == 0) {
+            dPtr = data.data() + offset;
+            dataPtr = reinterpret_cast<unsigned char*>(
+                data.data() + offset);
+            rPtr = res.data();
+        }
+        else {
+            dPtr = res.data();
+            dataPtr = reinterpret_cast<unsigned char*>(res.data());
+            rPtr = data.data() + offset;
+        }
+        dataPtr += j;
+
+        for (int i = 0; i < count; i++) {
+            rPtr[*(countersPtr + *dataPtr)] = dPtr[i];
+            *(countersPtr + *dataPtr) = *(countersPtr + *dataPtr) + 1;
+            dataPtr += sizeof(T);
+        }
+    }
+
+    if (j % 2 == 1)
+        for (int i = 0; i < count; i++)
+            data[i + offset] = res[i];
+}
+// </RadixSortPart>
+
+// <BatchersMergePart>
+template<class T>
+void mergeFragments(std::vector<T>& data, std::vector<T>& result,
+    int offset1, int size1, int offset2, int size2, bool isLeft) {
+
+    if (isLeft) {
+        T* firstPtr = data.data() + offset1;
+        int usedFirst = 0;
+
+        T* secondPtr = data.data() + offset2;
+        int usedSecond = 0;
+
+        for (int i = 0; i < size1; i++) {
+            if (usedFirst < size1 && usedSecond < size2) {
+                if (*firstPtr < *secondPtr) {
+                    result[i] = *firstPtr;
+                    firstPtr++;
+                    usedFirst++;
+                }
+                else {
+                    result[i] = *secondPtr;
+                    secondPtr++;
+                    usedSecond++;
+                }
+            }
+            else if (usedFirst < size1 && usedSecond >= size2) {
+                result[i] = *firstPtr;
+                firstPtr++;
+                usedFirst++;
+            }
+            else if (usedFirst >= size1 && usedSecond < size2) {
+                result[i] = *secondPtr;
+                secondPtr++;
+                usedSecond++;
+            }
+            else {
+                throw "Impossible exception";
+            }
+        }
+        return;
+    }
+
+    // if isLeft = false
+    T* firstPtr = data.data() + offset1 + size1 - 1;
+    int usedFirst = 0;
+
+    T* secondPtr = data.data() + offset2 + size2 - 1;
+    int usedSecond = 0;
+
+    for (int i = size2 - 1; i >= 0; i--) {
+        if (usedFirst < size1 && usedSecond < size2) {
+            if (*firstPtr > *secondPtr) {
+                result[i] = *firstPtr;
+                firstPtr--;
+                usedFirst++;
+            }
+            else {
+                result[i] = *secondPtr;
+                secondPtr--;
+                usedSecond++;
+            }
+        }
+        else if (usedFirst < size1 && usedSecond >= size2) {
+            result[i] = *firstPtr;
+            firstPtr--;
+            usedFirst++;
+        }
+        else if (usedFirst >= size1 && usedSecond < size2) {
+            result[i] = *secondPtr;
+            secondPtr--;
+            usedSecond++;
+        }
+        else {
+            throw "Impossible exception";
+        }
+    }
+}
+
+int partner(int nodeIndex, int mergeStage, int mergeStageStep) {
+    if (mergeStageStep > mergeStage)
+        throw "ERROR";
+
+    if (mergeStageStep == 1)
+        return nodeIndex ^ (1 << (mergeStage - 1));
+    else {
+        int scale = 1 << (mergeStage - mergeStageStep); // difference between nodes for stage n stageStep n.s
+        int box = 1 << mergeStageStep;
+        int sn = nodeIndex / scale - (nodeIndex / scale / box) * box;
+        if (sn == 0 || sn == box - 1)
+            return nodeIndex;
+        else if (sn % 2 == 0)
+            return nodeIndex - scale;
+        else
+            return nodeIndex + scale;
+    }
+}
+// </BatchersMergePart>
+
+// <ServiceFunctions>
+template<class T>
+T getRandValue(T from, T to) {
+    static std::random_device rd;
+    static std::mt19937 gen(rd());
+    std::uniform_int_distribution<T> dist(from, to);
+    return dist(gen);
+}
+
+template<class T>
+void fillVecWithRandValues(T* data, int size, T from, T to) {
+    static std::random_device rd;
+    static std::mt19937 gen(rd());
+    std::uniform_int_distribution<T> dist(from, to);
+    for (int i = 0; i < size; i++) {
+        data[i] = dist(gen);
+    }
+}
+
+template<class T>
+bool isStrictAscending(T* data, int size, T startValue) {
+    for (int i = 0; i < size; i++)
+        if (data[i] != startValue++)
+            return false;
+    return true;
+}
+
+template<class T>
+bool isStrictDescending(T* data, int size, T startValue) {
+    for (int i = 0; i < size; i++)
+        if (data[i] != startValue--)
+            return false;
+    return true;
+}
+
+template<class T>
+void fillStrictAscending(T* data, int size, T startValue) {
+    for (int i = 0; i < size; i++)
+        data[i] = startValue++;
+}
+
+template<class T>
+void fillStrictDescending(T* data, int size, T startValue) {
+    for (int i = 0; i < size; i++)
+        data[i] = startValue--;
+}
+
+template<class T>
+void printVector(std::vector<T> vec) {
+    for (int i = 0; i < vec.size(); i++)
+        std::cout << vec[i] << " ";
+    std::cout << std::endl;
+}
+
+template<class T>
+bool isAscending(T* data, int size) {
+    for (int i = 1; i < size; i++) {
+        if (data[i - 1] > data[i])
+            return false;
+    }
+    return true;
+}
+
+template<class T>
+bool isVecSame(std::vector<T>& v1, std::vector<T>& v2) {
+    if (v1.size() != v2.size())
+        return false;
+    for (size_t i = 0; i < v1.size(); i++)
+        if (v1[i] != v2[i])
+            return false;
+    return true;
+}
+// </ServiceFunctions>
+
+#endif // MODULES_TASK_1_IVANOV_A_RADIX_BATCHERS_MERGESTORT_RBMS_H_
