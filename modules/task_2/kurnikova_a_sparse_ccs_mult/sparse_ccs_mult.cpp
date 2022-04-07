@@ -97,36 +97,6 @@ bool operator==(const mymat& a, const mymat& b) {
         a.cols == b.cols && a.countv == b.countv;
 }
 
-mymat randmat(int countv, int counth) {
-    std::vector<int> r;
-    std::mt19937 gen;
-    gen.seed(static_cast<unsigned int>(time(0)));
-    mymat d(countv, counth, 0);
-    d.countnz = (((gen() % static_cast<int>(sqrt(countv * counth)))
-        / counth == 0) ?
-        1 : (gen() % static_cast<int>(sqrt(countv * counth)))
-        / counth) * counth;
-    for (int i = 0; i < counth; i++) {
-        for (int j = 0; j < (((gen() % static_cast<int>(sqrt(countv
-            * counth))) / counth == 0) ?
-            1 : (gen() % static_cast<int>(sqrt(countv * counth))) /
-            counth); j++) {
-            d.num.push_back(gen() % static_cast<int>(countv *
-                counth));
-            d.rows.push_back(gen() % static_cast<int>(countv));
-        }
-        d.cols[i] = i * (((gen() % static_cast<int>(sqrt(countv
-            * counth))) / counth == 0) ?
-            1 : (gen() % static_cast<int>(sqrt(countv * counth))) /
-            counth);
-    }
-    d.cols[counth] = counth * (((gen() % static_cast<int>(sqrt
-    (countv * counth))) / counth == 0) ?
-        1 : (gen() % static_cast<int>(sqrt(countv * counth))) /
-        counth);
-    return d;
-}
-
 mymat seqresult(const mymat* a, const mymat* b) {
     mymat ready(a->countv, b->counth, 0);
     mymat at(t(a));

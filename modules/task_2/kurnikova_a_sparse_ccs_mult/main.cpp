@@ -29,10 +29,6 @@ TEST(sparse_ccs_mult, test4) {
     EXPECT_EQ(false, q);
 }
 
-TEST(sparse_ccs_mult, test5) {
-    ASSERT_NO_THROW(randmat(100, 100));
-}
-
 int main(int argc, char** argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

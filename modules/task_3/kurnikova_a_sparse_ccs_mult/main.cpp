@@ -29,10 +29,6 @@ TEST(sparse_ccs_mult, test4) {
     EXPECT_EQ(false, q);
 }
 
-TEST(sparse_ccs_mult, test5) {
-    ASSERT_NO_THROW(randmat(100, 100));
-}
-
 int main(int argc, char** argv) {
     tbb::task_scheduler_init init(tbb::task_scheduler_init::automatic);
     ::testing::InitGoogleTest(&argc, argv);
