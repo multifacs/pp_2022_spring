@@ -216,7 +216,7 @@ TEST(radix_batchers_mergesort, test1_blocksCount_3) {
 }
 // ----------------</algorithm check>------------------------
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv) { // trigger workflow
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 }
