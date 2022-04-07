@@ -52,12 +52,14 @@ SparseMatrix Multiplication(SparseMatrix A, SparseMatrix B) {
   int non_zero = 0;
   std::vector<int> tmp(A.rows, 0);
   result.col_idx.push_back(0);
-  for (int j = 0; j < B.cols; j++) { 
-    for (int k = B.col_idx[j]; k < B.col_idx[j + 1]; k++) {          //получаем столбец из матрицы b
+  for (int j = 0; j < B.cols; j++) {
+    for (int k = B.col_idx[j]; k < B.col_idx[j + 1];
+         k++) {  // get column from matrix B
       non_zero = B.row[k];
-      for (int i = A.col_idx[non_zero]; i < A.col_idx[non_zero + 1]; // получаем столбец из матьрицы а
+      for (int i = A.col_idx[non_zero];
+           i < A.col_idx[non_zero + 1];  // get column from matrix A
            i++) {
-        tmp[A.row[i]] += B.value[k] * A.value[i]; //перемножаем
+        tmp[A.row[i]] += B.value[k] * A.value[i];  // multiply
       }
     }
     for (int c = 0; c < A.rows; c++) {

@@ -13,7 +13,7 @@ struct SparseMatrix {
   std::vector<int> row;
   std::vector<int> value;
 
-  SparseMatrix() : rows(0), cols(0){};
+  SparseMatrix() : rows(0), cols(0) {}
   SparseMatrix(int _rows, int _cols) : rows(_rows), cols(_cols) {}
   SparseMatrix(int _rows, int _cols, const std::vector<int>& _col_idx,
                const std::vector<int>& _row, const std::vector<int>& _value)
