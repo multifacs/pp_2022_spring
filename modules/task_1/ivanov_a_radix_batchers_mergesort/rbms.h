@@ -18,13 +18,13 @@ std::vector<int> createAndPrepareCounters(std::vector<T>* data, int offset, int 
         data->data() + offset + count);
 
     while (start != stop) {
-        for (int i = 0; i < sizeof(T); i++) {
+        for (int i = 0; i < static_cast<int>(sizeof(T)); i++) {
             counters[*start + 256 * i]++;
             start++;
         }
     }
 
-    for (int i = 0; i < sizeof(T); i++) {
+    for (int i = 0; i < static_cast<int>(sizeof(T)); i++) {
         int sum = 0;
         if (counters[256 * i] == count)
             continue;
@@ -44,7 +44,7 @@ void radixSort(std::vector<T>* data, int offset, int count) {
 
     std::vector<T> res(count);
     int j;
-    for (j = 0; j < sizeof(T); j++) {
+    for (j = 0; j < static_cast<int>(sizeof(T)); j++) {
         int* countersPtr = counters.data() + 256 * j;
         if (*countersPtr == count)
             break;

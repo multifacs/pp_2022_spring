@@ -29,7 +29,6 @@ TEST(radixSortCheck, canSortBlock_size_even_blockSize_half) {
 // test for [100, 99, 98, ..., 2, 1] -> [100] + [1, 2, ..., 98, 99]
 TEST(radixSortCheck, canSortBlock_size_even_blockSize_n_minus_one_1) {
     const int size = 100;
-    const int halfSize = size / 2;
     const int startValue = 100;
     std::vector<uint32_t> data(size);
     fillStrictDescending<uint32_t>(data.data(), size, startValue);
@@ -40,7 +39,6 @@ TEST(radixSortCheck, canSortBlock_size_even_blockSize_n_minus_one_1) {
 // test for [100, 99, 98, ..., 2, 1] -> [2, 3, ..., 99, 100] + [1]
 TEST(radixSortCheck, canSortBlock_size_even_blockSize_n_minus_one_2) {
     const int size = 100;
-    const int halfSize = size / 2;
     const int startValue = 100;
     std::vector<uint32_t> data(size);
     fillStrictDescending<uint32_t>(data.data(), size, startValue);
