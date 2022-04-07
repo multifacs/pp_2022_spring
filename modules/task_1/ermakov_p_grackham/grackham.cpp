@@ -14,8 +14,8 @@ std::vector<std::pair<int, int>> gen_dots(int vectorSize) {
 
 int rotation(const std::pair<int, int>& dot1, const std::pair<int, int>& dot2,
     const std::pair<int, int>& dot3) {
-    int val = (dot2.second - dot1.second) * (dot3.first - dot2.first) - 
-(dot2.first - dot1.first) * (dot3.second - dot2.second);
+    int val = (dot2.second - dot1.second) * (dot3.first - dot2.first) -
+        (dot2.first - dot1.first) * (dot3.second - dot2.second);
     if (val == 0)
         return 0;
     return (val > 0) ? 1 : 2;
