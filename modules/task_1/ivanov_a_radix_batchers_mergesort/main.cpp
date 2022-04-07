@@ -52,7 +52,7 @@ TEST(radixSortCheck, canSortLengthOne) {
     std::vector<uint32_t> data(size);
     data[0] = 99;
     ASSERT_NO_THROW(radixSort<uint32_t>(&data, 0, 1));
-    ASSERT_EQ(data[0], 99);
+    ASSERT_EQ(data[0], 99U);
 }
 
 // can sort rand values

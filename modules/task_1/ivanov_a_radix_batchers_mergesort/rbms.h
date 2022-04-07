@@ -2,10 +2,11 @@
 #ifndef MODULES_TASK_1_IVANOV_A_RADIX_BATCHERS_MERGESORT_RBMS_H_
 #define MODULES_TASK_1_IVANOV_A_RADIX_BATCHERS_MERGESORT_RBMS_H_
 
+#include <stdint.h>
 #include <vector>
 #include <random>
 #include <algorithm>
-#include <stdint.h>
+#include <iostream>
 
 // <RadixSortPart>
 template <class T>
@@ -70,9 +71,10 @@ void radixSort(std::vector<T>* data, int offset, int count) {
         }
     }
 
-    if (j % 2 == 1)
+    if (j % 2 == 1) {
         for (int i = 0; i < count; i++)
             data->operator[](i + offset) = res[i];
+    }
 }
 // </RadixSortPart>
 
@@ -223,4 +225,4 @@ bool isVecSame(const std::vector<T>& v1, const std::vector<T>& v2) {
 }
 // </ServiceFunctions>
 
-#endif // MODULES_TASK_1_IVANOV_A_RADIX_BATCHERS_MERGESORT_RBMS_H_
+#endif  // MODULES_TASK_1_IVANOV_A_RADIX_BATCHERS_MERGESORT_RBMS_H_
