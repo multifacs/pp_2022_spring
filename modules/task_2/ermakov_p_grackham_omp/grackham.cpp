@@ -9,8 +9,6 @@ std::vector<std::pair<double, double>> gen_dots(int vectorSize) {
     double upper_bound = 10000;
     std::uniform_real_distribution<double> unif(lower_bound, upper_bound);
     std::default_random_engine re;
-    //double a_random_double = unif(re);
-
     for (int i = 0; i < vectorSize; i++) {
         vec[i] = std::make_pair(unif(re), unif(re));
     }

@@ -24,4 +24,4 @@ std::vector<std::pair<double, double>> grackham_omp(
     std::vector<std::pair<double, double>>::iterator end,
     std::size_t n_threads);
 
-#endif // MODULES_TASK_2_ERMAKOV_P_GRACKHAM_OMP_GRACKHAM_H_
+#endif  // MODULES_TASK_2_ERMAKOV_P_GRACKHAM_OMP_GRACKHAM_H_
