@@ -1,6 +1,6 @@
 // Copyright 2022 Ivanov Arkady
-#ifndef MODULES_TASK_1_IVANOV_A_RADIX_BATCHERS_MERGESORT_RBMS_H_
-#define MODULES_TASK_1_IVANOV_A_RADIX_BATCHERS_MERGESORT_RBMS_H_
+#ifndef MODULES_TASK_2_IVANOV_A_RADIX_BATCHERS_MERGESORT_OMP_RBMS_H_
+#define MODULES_TASK_2_IVANOV_A_RADIX_BATCHERS_MERGESORT_OMP_RBMS_H_
 
 #include <stdint.h>
 #include <omp.h>
@@ -589,7 +589,6 @@ void radixBatchersMergeSort_v3(std::vector<T>* data, int degree) {
                 partnerID = partner(selfID, stage, step);
 
                 _parallelMerge_v3(from[selfID], to[selfID], from[partnerID], blockSize, selfID, partnerID);
-                
                 #pragma omp barrier
 
                 if (selfID != partnerID)
@@ -610,4 +609,4 @@ void radixBatchersMergeSort_v3(std::vector<T>* data, int degree) {
 }
 // </OMP REALISATION>
 
-#endif  // MODULES_TASK_1_IVANOV_A_RADIX_BATCHERS_MERGESORT_RBMS_H_
+#endif  // MODULES_TASK_2_IVANOV_A_RADIX_BATCHERS_MERGESORT_OMP_RBMS_H_
