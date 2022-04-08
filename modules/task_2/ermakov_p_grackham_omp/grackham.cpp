@@ -54,8 +54,8 @@ std::vector<std::pair<double, double>> grackham_seq(
     if (vec.size() == 3) {
         return vec;
     }
-    int min = 0;
     double ymin = vec[0].second;
+    int min = 0;
     int size = vec.size();
     for (int i = 1; i < size; i++) {
         double y = vec[i].second;
