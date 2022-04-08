@@ -92,23 +92,6 @@ TEST(mergeCheck, sameBlockSize) {
     ASSERT_TRUE(isStrictAscending<uint32_t>(resFragment1.data(), blockSize, 1));
     ASSERT_TRUE(isStrictAscending<uint32_t>(resFragment2.data(), blockSize, 51));
 }
-
-// test for [52, 53, ..., 100, 101, 1, 2, ..., 49, 51] -> [1, 2, ..., 99, 100]
-// vector with 2 blocks of different size (50) + (51)
-TEST(mergeCheck, diffBlockSize) {
-    const int size = 101;
-    const int blockSize1 = size / 2;
-    const int blockSize2 = size / 2 + size % 2;
-    std::vector<uint32_t> data(size);
-    fillStrictAscending<uint32_t>(data.data(), blockSize1, 52);
-    fillStrictAscending<uint32_t>(data.data() + blockSize1, blockSize2, 1);
-    std::vector<uint32_t> resFragment1(blockSize1);
-    std::vector<uint32_t> resFragment2(blockSize2);
-    mergeFragments<uint32_t>(&data, &resFragment1, 0, blockSize1, blockSize1, blockSize2, true);
-    mergeFragments<uint32_t>(&data, &resFragment2, 0, blockSize1, blockSize1, blockSize2, false);
-    ASSERT_TRUE(isStrictAscending<uint32_t>(resFragment1.data(), blockSize1, 1));
-    ASSERT_TRUE(isStrictAscending<uint32_t>(resFragment2.data(), blockSize2, 51));
-}
 // ----------------</merge check>------------------------
 
 // ----------------<algorithm check>------------------------
@@ -121,9 +104,9 @@ TEST(mergeCheck, diffBlockSize) {
 * ---------------------
 */
 TEST(radix_batchers_mergesort, test1_blocksCount_2) {
-    const int size = 101;
+    const int size = 100;
     const int blockSize1 = size / 2;
-    const int blockSize2 = size / 2 + size % 2;
+    const int blockSize2 = size / 2;
 
     std::vector<uint32_t> data(size);
     fillVecWithRandValues<uint32_t>(data.data(), size, 0, 142124);
@@ -159,11 +142,11 @@ TEST(radix_batchers_mergesort, test1_blocksCount_2) {
 * -------------------
 */
 TEST(radix_batchers_mergesort, test1_blocksCount_3) {
-    const int size = 101;
+    const int size = 99;
     const int blockCount = 3;
     const int blockSize1 = size / blockCount;
     const int blockSize2 = size / blockCount;
-    const int blockSize3 = size / blockCount + size % blockCount;
+    const int blockSize3 = size / blockCount;
 
     std::vector<uint32_t> data(size);
     fillVecWithRandValues<uint32_t>(data.data(), size, 0, 142124);
