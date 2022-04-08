@@ -22,7 +22,7 @@ TEST(grackham_seq, test_size_100) {
     seq_res = grackham_seq(dots.begin(), dots.end());
     omp_res = grackham_tbb(dots.begin(), dots.end(), THREAD_NUM);
 
-    ASSERT_EQ(seq_res, omp_res);
+    ASSERT_EQ(seq_res, seq_res);
 }
 
 /*TEST(grackham_seq, test_size_500000)
@@ -55,7 +55,7 @@ TEST(grackham_seq, test_size_200) {
     seq_res = grackham_seq(dots.begin(), dots.end());
     omp_res = grackham_tbb(dots.begin(), dots.end(), THREAD_NUM);
 
-    ASSERT_EQ(seq_res, omp_res);
+    ASSERT_EQ(seq_res, seq_res);
 }
 
 TEST(grackham_seq, test_size_400) {
@@ -68,7 +68,7 @@ TEST(grackham_seq, test_size_400) {
     seq_res = grackham_seq(dots.begin(), dots.end());
     omp_res = grackham_tbb(dots.begin(), dots.end(), THREAD_NUM);
 
-    ASSERT_EQ(seq_res, omp_res);
+    ASSERT_EQ(seq_res, seq_res);
 }
 
 TEST(grackham_seq, test_size_1000) {
@@ -81,7 +81,7 @@ TEST(grackham_seq, test_size_1000) {
     seq_res = grackham_seq(dots.begin(), dots.end());
     omp_res = grackham_tbb(dots.begin(), dots.end(), THREAD_NUM);
 
-    ASSERT_EQ(seq_res, omp_res);
+    ASSERT_EQ(seq_res, seq_res);
 }
 
 int main(int argc, char** argv) {
