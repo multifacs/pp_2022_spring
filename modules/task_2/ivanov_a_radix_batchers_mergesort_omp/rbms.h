@@ -7,6 +7,7 @@
 #include <vector>
 #include <random>
 #include <algorithm>
+#include <utility>
 #include <iostream>
 
 // <RadixSortPart>
@@ -247,13 +248,13 @@ void _parallelMerge(std::vector<T>* data, std::vector<T>* fragment,
 // 2^degree = number of threads in use to sort
 template<class T>
 void radixBatchersMergeSort(std::vector<T>* data, int degree) {
-    if (degree == 0) { // numThreads = 1
+    if (degree == 0) {  // numThreads = 1
         radixSort<T>(data, 0, data->size());
         return;
     }
 
     int numThreads = 1 << degree;
-    if (numThreads > data->size()) {
+    if (numThreads > static_cast<int>(data->size())) {
         radixSort<T>(data, 0, data->size());
         return;
     }
@@ -265,7 +266,7 @@ void radixBatchersMergeSort(std::vector<T>* data, int degree) {
         isResized = true;
     }
 
-    int size = data->size();
+    int size = static_cast<int>(data->size());
     int blockSize = size / numThreads;
 
     #pragma omp parallel num_threads(numThreads)
@@ -356,14 +357,14 @@ void _parallelMerge_v2(T* data, T* res,
     }
 
     // if isLeft = false
-    T* firstPtr = data + offset1 + size1 - 1;
+    T* firstPtr = data + offset1 + blockSize - 1;
     int usedFirst = 0;
 
-    T* secondPtr = data + offset2 + size2 - 1;
+    T* secondPtr = data + offset2 + blockSize - 1;
     int usedSecond = 0;
 
-    for (int i = size2 - 1; i >= 0; i--) {
-        if (usedFirst < size1 && usedSecond < size2) {
+    for (int i = blockSize - 1; i >= 0; i--) {
+        if (usedFirst < blockSize && usedSecond < blockSize) {
             if (*firstPtr > *secondPtr) {
                 res[offset2 + i] = *firstPtr;
                 firstPtr--;
@@ -373,11 +374,11 @@ void _parallelMerge_v2(T* data, T* res,
                 secondPtr--;
                 usedSecond++;
             }
-        } else if (usedFirst < size1 && usedSecond >= size2) {
+        } else if (usedFirst < blockSize && usedSecond >= blockSize) {
             res[offset2 + i] = *firstPtr;
             firstPtr--;
             usedFirst++;
-        } else if (usedFirst >= size1 && usedSecond < size2) {
+        } else if (usedFirst >= blockSize && usedSecond < blockSize) {
             res[offset2 + i] = *secondPtr;
             secondPtr--;
             usedSecond++;
@@ -385,19 +386,18 @@ void _parallelMerge_v2(T* data, T* res,
             throw "Impossible exception";
         }
     }
-
 }
 
 // 2^degree = number of threads in use to sort
 template<class T>
 void radixBatchersMergeSort_v2(std::vector<T>* data, int degree) {
-    if (degree == 0) { // numThreads = 1
+    if (degree == 0) {  // numThreads = 1
         radixSort<T>(data, 0, data->size());
         return;
     }
 
     int numThreads = 1 << degree;
-    if (numThreads > data->size()) {
+    if (numThreads > static_cast<int>(data->size())) {
         radixSort<T>(data, 0, data->size());
         return;
     }
@@ -455,7 +455,7 @@ void radixBatchersMergeSort_v2(std::vector<T>* data, int degree) {
     }
 
     if (stepsMade % 2 == 1)
-        std::memmove(data->data(), res.data(), data->size() * sizeof(T));
+        memmove(data->data(), res.data(), data->size() * sizeof(T));
 
     if (isResized)
         data->resize(oldSize);
@@ -470,8 +470,6 @@ void _parallelMerge_v3(T* data, T* res, T* partnerData,
         return;
 
     bool isLeft = selfID < partnerID;
-    int leftID = (isLeft) ? selfID : partnerID;
-    int rightID = (isLeft) ? partnerID : selfID;
 
     if (isLeft) {
         T* firstPtr = data;
@@ -542,13 +540,13 @@ void _parallelMerge_v3(T* data, T* res, T* partnerData,
 // 2^degree = number of threads in use to sort
 template<class T>
 void radixBatchersMergeSort_v3(std::vector<T>* data, int degree) {
-    if (degree == 0) { // numThreads = 1
+    if (degree == 0) {  // numThreads = 1
         radixSort<T>(data, 0, data->size());
         return;
     }
 
     int numThreads = 1 << degree;
-    if (numThreads > data->size()) {
+    if (numThreads > static_cast<int>(data->size())) {
         radixSort<T>(data, 0, data->size());
         return;
     }
@@ -564,7 +562,6 @@ void radixBatchersMergeSort_v3(std::vector<T>* data, int degree) {
     int blockSize = size / numThreads;
 
     std::vector<T> res(size);
-    int stepsMade = 0;
 
     T** from = new T * [numThreads];
     T** to = new T * [numThreads];
@@ -597,7 +594,6 @@ void radixBatchersMergeSort_v3(std::vector<T>* data, int degree) {
 
                 if (selfID != partnerID)
                     std::swap(from[selfID], to[selfID]);
-
                 #pragma omp barrier
 
                 if (stage == degree && step == degree) {
