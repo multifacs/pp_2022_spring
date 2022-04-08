@@ -4,7 +4,8 @@
 #include <random>
 #include <vector>
 
-std::vector<std::vector<double>> random(int rows, int columns, int value) {
+std::vector<std::vector<double>> random_matrix(int rows, int columns,
+                                               double value) {
   std::vector<std::vector<double>> random(rows, std::vector<double>(columns));
   for (int i = 0; i < rows; i++) {
     for (int j = 0; j < columns; j++) {
@@ -44,7 +45,7 @@ std::vector<std::vector<double>> shift_to_up(
 
 std::vector<std::vector<double>> Cannon_block_matrix_mult(
     const std::vector<std::vector<double>>& first_multiplier,
-    const std::vector<std::vector<double>>& second_multiplier, int size) {
+    const std::vector<std::vector<double>>& second_multiplier, size_t size) {
   std::vector<std::vector<double>> result(size, std::vector<double>(size));
   std::vector<std::vector<double>> first = first_multiplier;
   std::vector<std::vector<double>> second = second_multiplier;
@@ -94,9 +95,9 @@ std::vector<std::vector<double>> matrix_mult(
 }
 
 TEST(Sequential, Test_1) {
-  int size = 4;
-  std::vector<std::vector<double>> A = random(size, size, 2.6);
-  std::vector<std::vector<double>> B = random(size, size, 7.8);
+  size_t size = 4;
+  std::vector<std::vector<double>> A = random_matrix(size, size, 2.6);
+  std::vector<std::vector<double>> B = random_matrix(size, size, 7.8);
   std::vector<std::vector<double>> C, D;
   D = matrix_mult(A, B, size);
   C = Cannon_block_matrix_mult(A, B, size);
@@ -108,9 +109,9 @@ TEST(Sequential, Test_1) {
 }
 
 TEST(Sequential, Test_2) {
-  int size = 14;
-  std::vector<std::vector<double>> A = random(size, size, 2.6);
-  std::vector<std::vector<double>> B = random(size, size, 2.3);
+  size_t size = 14;
+  std::vector<std::vector<double>> A = random_matrix(size, size, 2.6);
+  std::vector<std::vector<double>> B = random_matrix(size, size, 2.3);
   std::vector<std::vector<double>> C, D;
   D = matrix_mult(A, B, size);
   C = Cannon_block_matrix_mult(A, B, size);
@@ -122,9 +123,9 @@ TEST(Sequential, Test_2) {
 }
 
 TEST(Sequential, Test_3) {
-  int size = 24;
-  std::vector<std::vector<double>> A = random(size, size, 4.8);
-  std::vector<std::vector<double>> B = random(size, size, 2.6);
+  size_t size = 20;
+  std::vector<std::vector<double>> A = random_matrix(size, size, 4.8);
+  std::vector<std::vector<double>> B = random_matrix(size, size, 2.6);
   std::vector<std::vector<double>> C, D;
   D = matrix_mult(A, B, size);
   C = Cannon_block_matrix_mult(A, B, size);
@@ -136,9 +137,9 @@ TEST(Sequential, Test_3) {
 }
 
 TEST(Sequential, Test_4) {
-  int size = 48;
-  std::vector<std::vector<double>> A = random(size, size, 4.8);
-  std::vector<std::vector<double>> B = random(size, size, 2.6);
+  size_t size = 24;
+  std::vector<std::vector<double>> A = random_matrix(size, size, 4.8);
+  std::vector<std::vector<double>> B = random_matrix(size, size, 2.6);
   std::vector<std::vector<double>> C, D;
   D = matrix_mult(A, B, size);
   C = Cannon_block_matrix_mult(A, B, size);
@@ -150,9 +151,9 @@ TEST(Sequential, Test_4) {
 }
 
 TEST(Sequential, Test_5) {
-  int size = 96;
-  std::vector<std::vector<double>> A = random(size, size, 4.8);
-  std::vector<std::vector<double>> B = random(size, size, 2.6);
+  size_t size = 26;
+  std::vector<std::vector<double>> A = random_matrix(size, size, 4.8);
+  std::vector<std::vector<double>> B = random_matrix(size, size, 2.6);
   std::vector<std::vector<double>> C, D;
   D = matrix_mult(A, B, size);
   C = Cannon_block_matrix_mult(A, B, size);
