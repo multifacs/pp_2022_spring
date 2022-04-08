@@ -15,6 +15,12 @@ std::vector<std::pair<double, double>> gen_dots(int vectorSize) {
     return vec;
 }
 
+double distance(const std::pair<double, double>& dot1,
+    const std::pair<double, double>& dot2) {
+    return (dot1.first - dot2.first) * (dot1.first - dot2.first) +
+        (dot1.second - dot2.second) * (dot1.second - dot2.second);
+}
+
 int rotation(const std::pair<double, double>& dot1,
     const std::pair<double, double>& dot2,
     const std::pair<double, double>& dot3) {
@@ -23,12 +29,6 @@ int rotation(const std::pair<double, double>& dot1,
     if (val == 0)
         return 0;
     return (val > 0) ? 1 : 2;
-}
-
-double distance(const std::pair<double, double>& dot1,
-    const std::pair<double, double>& dot2) {
-    return (dot1.first - dot2.first) * (dot1.first - dot2.first) +
-        (dot1.second - dot2.second) * (dot1.second - dot2.second);
 }
 
 int compare(const void* vp1, const void* vp2) {
