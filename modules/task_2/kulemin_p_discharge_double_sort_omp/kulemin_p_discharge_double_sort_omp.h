@@ -20,10 +20,6 @@ struct vector {
     ~vector() {
         delete[] ptr;
     }
-    vector& operator= (const vector& in) {
-        this->ptr = in.ptr;
-        this->size = in.size;
-    }
 };
 vector* create_random_vector(int size_n);
 void union_from_lists(std::list<double>* lists, vector* v);
