@@ -4,6 +4,10 @@
 #include "../../../modules/task_1/sablin_a_gaussian_vert/gaussian_vert.h"
 # define M_PI 3.14159265358979323846
 
+bool operator==(const rgb_coub& a, const rgb_coub& b) {
+    return (a.red == b.red) && (a.green == b.green) && (a.blue == b.blue);
+}
+
 std::vector<rgb_coub> getRandomImage(int rows, int columns) {
     if (columns <= 0 || rows <= 0) {
         throw "-1";
