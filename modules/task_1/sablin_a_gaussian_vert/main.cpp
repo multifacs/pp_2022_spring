@@ -16,7 +16,7 @@ TEST(Gaussian_Filter_vertical, Test_Different_Rows_and_Columns) {
     int rows = 120, columns = 2;
     const double sigma = 2.0;
     std::vector<rgb_coub> image = getRandomImage(rows, columns);
-    std::vector<rgb_coub> res = Gaussian_Filter_Seq(image, rows, columns);
+    std::vector<rgb_coub> res = Gaussian_Filter_Seq(image, rows, columns, sigma);
     ASSERT_NE(image, res);
 }
 
@@ -24,7 +24,7 @@ TEST(Gaussian_Filter_vertical, Test_Big_Image) {
     int rows = 300, columns = 300;
     const double sigma = 2.0;
     std::vector<rgb_coub> image = getRandomImage(rows, columns);
-    std::vector<rgb_coub> res = Gaussian_Filter_Seq(image, rows, columns);
+    std::vector<rgb_coub> res = Gaussian_Filter_Seq(image, rows, columns, sigma);
     ASSERT_NE(res, image);
 }
 
@@ -33,7 +33,7 @@ TEST(Gaussian_Filter_vertical, Test_One_Pixel) {
     const double sigma = 2.0;
     std::vector<rgb_coub> image = getRandomImage(rows, columns);
     std::vector<rgb_coub> copy(image);
-    image = Gaussian_Filter_Seq(image, rows, columns);
+    image = Gaussian_Filter_Seq(image, rows, columns, sigma);
     ASSERT_EQ(image, copy);
 }
 

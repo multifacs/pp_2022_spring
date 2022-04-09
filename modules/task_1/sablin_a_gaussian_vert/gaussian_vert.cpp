@@ -26,7 +26,7 @@ std::vector<rgb_coub> Gaussian_Filter_Seq(const std::vector<rgb_coub>& img,
     }
     double norm = 0.0;
     double r, g, b;
-    double Gaussian_Kernel [3][3];
+    double Gaussian_Kernel[3][3];
     for (int x = -1; x < 2; x++) {
         for (int y = -1; y < 2; y++) {
             Gaussian_Kernel[x + 1][y + 1] = std::exp(-(x * x + y * y) / (2 * pow(sigma, 2)));
