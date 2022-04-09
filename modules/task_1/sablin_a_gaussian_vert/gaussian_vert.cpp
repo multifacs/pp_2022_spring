@@ -4,7 +4,7 @@
 #include "../../../modules/task_1/sablin_a_gaussian_vert/gaussian_vert.h"
 # define M_PI 3.14159265358979323846
 
-std::vector<rgb_coub> getRandomImage(size_t rows, size_t columns) {
+std::vector<rgb_coub> getRandomImage(int rows, int columns) {
     if (columns <= 0 || rows <= 0) {
         throw "-1";
     }

@@ -9,7 +9,7 @@
 struct rgb_coub {
     int red, green, blue;
 };
-std::vector<rgb_coub> getRandomImage(size_t rows, size_t columns);
+std::vector<rgb_coub> getRandomImage(int rows, int columns);
 std::vector<rgb_coub> Gaussian_Filter_Seq(const std::vector<rgb_coub>& img,
     int rows, int columns, const double sigma);
 
