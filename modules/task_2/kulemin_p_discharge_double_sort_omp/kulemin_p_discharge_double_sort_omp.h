@@ -27,12 +27,12 @@ struct vector {
         delete[] ptr;
     }
     vector& operator= (const vector& in) {
-		if (this != &in) {
-			this->ptr = new double[in.size];
-			this->size = in.size;
-			this->last_el = in.last_el;
-			for (int i = 0; i < in.size; i++)this->ptr[i] = in.ptr[i];
-		}
+        if (this != &in) {
+            this->ptr = new double[in.size];
+            this->size = in.size;
+            this->last_el = in.last_el;
+            for (int i = 0; i < in.size; i++)this->ptr[i] = in.ptr[i];
+        }
         return (*this);
     }
 };
