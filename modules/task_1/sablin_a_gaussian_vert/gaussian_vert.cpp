@@ -19,28 +19,26 @@ std::vector<rgb_coub> getRandomImage(size_t rows, size_t columns) {
     return data;
 }
 
-std::vector<rgb_coub> Gaussian_Filter_Seq(const std::vector<rgb_coub>& img, size_t rows, size_t columns, const double sigma) {
+std::vector<rgb_coub> Gaussian_Filter_Seq(const std::vector<rgb_coub>& img,
+    int rows, int columns, const double sigma) {
     if (columns <= 0 || rows <= 0 || img.size() == 0 || sigma == 0.0) {
         throw "-1";
     }
     double norm = 0.0;
     double r, g, b;
     double Gaussian_Kernel [3][3];
-    // Вычисление ядра Гаусса
     for (int x = -1; x < 2; x++) {
         for (int y = -1; y < 2; y++) {
             Gaussian_Kernel[x + 1][y + 1] = std::exp(-(x * x + y * y) / (2 * pow(sigma, 2)));
             norm += Gaussian_Kernel[x + 1][y + 1];
         }
     }
-    // Нормализация ядра Гаусса
     for (int x = -1; x < 2; x++) {
         for (int y = -1; y < 2; y++) {
             Gaussian_Kernel[x + 1][y + 1] /= norm;
         }
     }
     std::vector<rgb_coub> result(rows * columns);
-    // Работа с пикселями
     int x, y;
     for (int i = 0; i < columns; i++) {
         for (int j = 0; j < rows; j++) {
