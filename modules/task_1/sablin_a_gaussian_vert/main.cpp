@@ -44,12 +44,12 @@ TEST(Gaussian_Filter_vertical, Test_Const_Image) {
     true_result[0].red = true_result[0].green = true_result[0].blue = 85;
     true_result[1].red = true_result[1].green = true_result[1].blue = 99;
     true_result[2].red = true_result[2].green = true_result[2].blue = 112;
-    true_result[2].red = true_result[2].green = true_result[3].blue = 126;
-    true_result[2].red = true_result[2].green = true_result[4].blue = 140;
-    true_result[2].red = true_result[2].green = true_result[5].blue = 153;
-    true_result[2].red = true_result[2].green = true_result[6].blue = 167;
-    true_result[2].red = true_result[2].green = true_result[7].blue = 180;
-    true_result[2].red = true_result[2].green = true_result[8].blue = 194;
+    true_result[3].red = true_result[3].green = true_result[3].blue = 126;
+    true_result[4].red = true_result[4].green = true_result[4].blue = 140;
+    true_result[5].red = true_result[5].green = true_result[5].blue = 153;
+    true_result[6].red = true_result[6].green = true_result[6].blue = 167;
+    true_result[7].red = true_result[7].green = true_result[7].blue = 180;
+    true_result[8].red = true_result[8].green = true_result[8].blue = 194;
     std::vector<rgb_coub> image(rows * columns);
     for (int i = 0; i < rows * columns; i++) {
         image[i].red = 60 + i * 20;
