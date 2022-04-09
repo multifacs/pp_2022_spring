@@ -1,3 +1,4 @@
+// Copyright 2022 Sablin Alexandr
 #include <vector>
 #include <random>
 #include "../../../modules/task_1/sablin_a_gaussian_vert/gaussian_vert.h"
@@ -18,7 +19,7 @@ std::vector<rgb_coub> getRandomImage(size_t rows, size_t columns) {
     return data;
 }
 
-std::vector<rgb_coub> Gaussian_Filter_Seq(std::vector<rgb_coub>& img, size_t rows, size_t columns, const double sigma) {
+std::vector<rgb_coub> Gaussian_Filter_Seq(const std::vector<rgb_coub>& img, size_t rows, size_t columns, const double sigma) {
     if (columns <= 0 || rows <= 0 || img.size() == 0 || sigma == 0.0) {
         throw "-1";
     }

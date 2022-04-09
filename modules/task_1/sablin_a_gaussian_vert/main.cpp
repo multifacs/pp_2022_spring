@@ -5,10 +5,10 @@
 
 TEST(Gaussian_Filter_vertical, Test_Zero_Pixels_and_Sigma) {
     std::vector<rgb_coub> img = getRandomImage(1, 1);
-    EXPECT_ANY_THROW(Gaussian_Filter_Seq(img, 0, 0, 1))
-    EXPECT_ANY_THROW(Gaussian_Filter_Seq(img, 0, 1, 1))
-    EXPECT_ANY_THROW(Gaussian_Filter_Seq(img, 1, 0, 1))
-    EXPECT_ANY_THROW(Gaussian_Filter_Seq(img, 1, 1, 0))
+    EXPECT_ANY_THROW(Gaussian_Filter_Seq(img, 0, 0, 1));
+    EXPECT_ANY_THROW(Gaussian_Filter_Seq(img, 0, 1, 1));
+    EXPECT_ANY_THROW(Gaussian_Filter_Seq(img, 1, 0, 1));
+    EXPECT_ANY_THROW(Gaussian_Filter_Seq(img, 1, 1, 0));
     EXPECT_ANY_THROW(getRandomImage(0, 0));
 }
 
@@ -17,7 +17,6 @@ TEST(Gaussian_Filter_vertical, Test_Different_Rows_and_Columns) {
     const double sigma = 2.0;
     std::vector<rgb_coub> image = getRandomImage(rows, columns);
     std::vector<rgb_coub> res = Gaussian_Filter_Seq(image, rows, columns);
-
     ASSERT_NE(image, res);
 }
 
@@ -25,9 +24,7 @@ TEST(Gaussian_Filter_vertical, Test_Big_Image) {
     int rows = 300, columns = 300;
     const double sigma = 2.0;
     std::vector<rgb_coub> image = getRandomImage(rows, columns);
-
     std::vector<rgb_coub> res = Gaussian_Filter_Seq(image, rows, columns);
-
     ASSERT_NE(res, image);
 }
 
@@ -36,9 +33,7 @@ TEST(Gaussian_Filter_vertical, Test_One_Pixel) {
     const double sigma = 2.0;
     std::vector<rgb_coub> image = getRandomImage(rows, columns);
     std::vector<rgb_coub> copy(image);
-
     image = Gaussian_Filter_Seq(image, rows, columns);
-
     ASSERT_EQ(image, copy);
 }
 
@@ -55,7 +50,6 @@ TEST(Gaussian_Filter_vertical, Test_Const_Image) {
     true_result[2].red = true_result[2].green = true_result[6].blue = 167;
     true_result[2].red = true_result[2].green = true_result[7].blue = 180;
     true_result[2].red = true_result[2].green = true_result[8].blue = 194;
-
     std::vector<rgb_coub> image(rows * columns);
     for (int i = 0; i < rows * columns; i++) {
         image[i].red = 60 + i * 20;
@@ -63,7 +57,6 @@ TEST(Gaussian_Filter_vertical, Test_Const_Image) {
         image[i].blue = 60 + i * 20;
     }
     image = Gaussian_Filter_Seq(image, rows, columns, sigma);
-
     ASSERT_EQ(image, true_result);
 }
 
