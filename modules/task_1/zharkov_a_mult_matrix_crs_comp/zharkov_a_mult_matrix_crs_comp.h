@@ -1,6 +1,6 @@
 // Copyright 2022 Zharkov Andrey
-#ifndef MODULES_TASK_1_ZHARKOV_A_MULT_MATRIX_CRS_COMP_MULT_MATRIX_CRS_COMP_H_
-#define MODULES_TASK_1_ZHARKOV_A_MULT_MATRIX_CRS_COMP_MULT_MATRIX_CRS_COMP_H_
+#ifndef MODULES_TASK_1_ZHARKOV_A_MULT_MATRIX_CRS_COMP_ZHARKOV_A_MULT_MATRIX_CRS_COMP_H_
+#define MODULES_TASK_1_ZHARKOV_A_MULT_MATRIX_CRS_COMP_ZHARKOV_A_MULT_MATRIX_CRS_COMP_H_
 
 #include <cmath>
 #include <complex>
@@ -46,4 +46,4 @@ std::vector<std::vector<cpx>> naiveMultiplication(
     const std::vector<std::vector<cpx>>& matrix1,
     const std::vector<std::vector<cpx>>& matrix2);
 
-#endif  // MODULES_TASK_1_ZHARKOV_A_MULT_MATRIX_CRS_COMP_MULT_MATRIX_CRS_COMP_H_
+#endif  // MODULES_TASK_1_ZHARKOV_A_MULT_MATRIX_CRS_COMP_ZHARKOV_A_MULT_MATRIX_CRS_COMP_H_
