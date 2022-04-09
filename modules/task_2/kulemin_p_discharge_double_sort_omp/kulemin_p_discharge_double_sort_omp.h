@@ -17,8 +17,21 @@ struct vector {
         size = _size;
         last_el = 0;
     }
+    vector(const vector& in) {
+        this->ptr = new double[in.size];
+        this->size = in.size;
+        this->last_el = in.last_el;
+        for (int i = 0; i < in.size; i++)this->ptr[i] = in.ptr[i];
+    }
     ~vector() {
         delete[] ptr;
+    }
+    vector& operator= (const vector& in) {
+        this->ptr = new double[in.size];
+        this->size = in.size;
+        this->last_el = in.last_el;
+        for (int i = 0; i < in.size; i++)this->ptr[i] = in.ptr[i];
+        return (*this);
     }
 };
 vector* create_random_vector(int size_n);
