@@ -1,6 +1,6 @@
 // Copyright 2022 Ershov Aleksey
-#ifndef MODULES_TASK_1_ERSHOV_A_DEICSTRA_ALGORITHM_DEICSTRA_SEQ_H_
-#define MODULES_TASK_1_ERSHOV_A_DEICSTRA_ALGORITHM_DEICSTRA_SEQ_H_
+#ifndef MODULES_TASK_2_ERSHOV_A_DEICSTRA_ALGORITHM_OMP_DEICSTRA_OMP_H_
+#define MODULES_TASK_2_ERSHOV_A_DEICSTRA_ALGORITHM_OMP_DEICSTRA_OMP_H_
 
 #include <string>
 #include <vector>
@@ -15,4 +15,4 @@ std::vector<int> getSequentialDeicstra(
 
 std::vector<int> getParallelDeicstra(const std::vector<std::vector<int>>& graf);
 
-#endif  // MODULES_TASK_1_ERSHOV_A_DEICSTRA_ALGORITHM_DEICSTRA_SEQ_H_
+#endif  // MODULES_TASK_2_ERSHOV_A_DEICSTRA_ALGORITHM_OMP_DEICSTRA_OMP_H_

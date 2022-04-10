@@ -1,7 +1,7 @@
 // Copyright 2022 Ershov Aleksey
 #include <gtest/gtest.h>
 #include <omp.h>
-//#include <iostream>
+// #include <iostream>
 
 #include <vector>
 
@@ -19,7 +19,6 @@ TEST(Sequential_Deicstra, Test_Sequential_Deicstra_With_Static_Data_No_Throw) {
   const std::vector<std::vector<int>> graf = {
       {0, 7, 9, 0, 0, 14},  {7, 0, 10, 15, 0, 0}, {9, 10, 0, 11, 0, 2},
       {0, 15, 11, 0, 6, 0}, {0, 0, 0, 6, 0, 9},   {14, 0, 2, 0, 9, 0}};
-  const int count = graf.size();
 
   ASSERT_NO_THROW(getSequentialDeicstra(graf));
 }
@@ -28,7 +27,6 @@ TEST(Parallel_Deicstra, Test_Parallel_Deicstra_With_Static_Data_No_Throw) {
   const std::vector<std::vector<int>> graf = {
       {0, 7, 9, 0, 0, 14},  {7, 0, 10, 15, 0, 0}, {9, 10, 0, 11, 0, 2},
       {0, 15, 11, 0, 6, 0}, {0, 0, 0, 6, 0, 9},   {14, 0, 2, 0, 9, 0}};
-  const int count = graf.size();
 
   ASSERT_NO_THROW(getParallelDeicstra(graf));
 }
@@ -115,7 +113,7 @@ TEST(Parallel_Deicstra, Test_Parallel_Deicstra_With_Seq_Random) {
   const std::vector<std::vector<int>> graf = getRandomVector(250);
   bool check = true;
   const int count = graf.size();
-  double t1, t2, dt;
+  // double t1, t2, dt;
 
   // t1 = omp_get_wtime();
   const std::vector<int> algorithmResultSeq = getSequentialDeicstra(graf);
