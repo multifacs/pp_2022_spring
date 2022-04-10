@@ -45,7 +45,6 @@ TEST(OpenMP_Histogram_Stretching, Image_7x10) {
     int y_max = getYmax(image, height, width);
     int y_min = getYmin(image, height, width);
     int* result_image_seq = nullptr;
-    int* result_image_omp = nullptr;
     int* result_image_tbb = nullptr;
     tbb::tick_count start_seq = tbb::tick_count::now();
     result_image_seq = getSequentialOperations(image, height, width,
@@ -75,7 +74,6 @@ TEST(OpenMP_Histogram_Stretching, Image_10x15) {
     int y_max = getYmax(image, height, width);
     int y_min = getYmin(image, height, width);
     int* result_image_seq = nullptr;
-    int* result_image_omp = nullptr;
     int* result_image_tbb = nullptr;
     tbb::tick_count start_seq = tbb::tick_count::now();
     result_image_seq = getSequentialOperations(image, height, width,
@@ -105,7 +103,6 @@ TEST(OpenMP_Histogram_Stretching, Image_40x20) {
     int y_max = getYmax(image, height, width);
     int y_min = getYmin(image, height, width);
     int* result_image_seq = nullptr;
-    int* result_image_omp = nullptr;
     int* result_image_tbb = nullptr;
     tbb::tick_count start_seq = tbb::tick_count::now();
     result_image_seq = getSequentialOperations(image, height, width,
@@ -135,7 +132,6 @@ TEST(OpenMP_Histogram_Stretching, Image_50x50) {
     int y_max = getYmax(image, height, width);
     int y_min = getYmin(image, height, width);
     int* result_image_seq = nullptr;
-    int* result_image_omp = nullptr;
     int* result_image_tbb = nullptr;
     tbb::tick_count start_seq = tbb::tick_count::now();
     result_image_seq = getSequentialOperations(image, height, width,
