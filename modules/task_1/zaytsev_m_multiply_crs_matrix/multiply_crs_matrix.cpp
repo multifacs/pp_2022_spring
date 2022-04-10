@@ -1,6 +1,7 @@
 // Copyright 2022 Zaytsev Mikhail
 #include "../../../modules/task_1/zaytsev_m_multiply_crs_matrix/multiply_crs_matrix.h"
 #include <cassert>
+#include <algorithm>
 #include <vector>
 
 using std::complex;
