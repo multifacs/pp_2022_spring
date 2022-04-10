@@ -3,13 +3,13 @@
 #include <gtest/gtest.h>
 #include "./histogram_stretching.h"
 
-TEST(OpenMP_Histogram_Stretching, Image_is_empty) {
+TEST(TBB_Histogram_Stretching, Image_is_empty) {
     int height = 0;
     int width = 0;
     ASSERT_ANY_THROW(getRandomImage(height, width));
 }
 
-TEST(OpenMP_Histogram_Stretching, Image_5x5) {
+TEST(TBB_Histogram_Stretching, Image_5x5) {
     int height = 5;
     int width = 5;
     int* image = getRandomImage(height, width);
@@ -26,9 +26,9 @@ TEST(OpenMP_Histogram_Stretching, Image_5x5) {
     result_image_tbb = getParallelOperationsTBB(image, height, width,
         y_max, y_min);
     tbb::tick_count end_tbb = tbb::tick_count::now();
-    double parallel_omp_runtime = (end_tbb - start_tbb).seconds();
+    double parallel_tbb_runtime = (end_tbb - start_tbb).seconds();
     std::cout << "sequential_runtime = " << sequential_runtime << std::endl;
-    std::cout << "parallel_tbb_runtime = " << parallel_omp_runtime
+    std::cout << "parallel_tbb_runtime = " << parallel_tbb_runtime
         << std::endl;
     for (int i = 0; i < height * width; i++) {
         ASSERT_EQ(result_image_seq[i], result_image_tbb[i]);
@@ -38,7 +38,7 @@ TEST(OpenMP_Histogram_Stretching, Image_5x5) {
     delete[] result_image_tbb;
 }
 
-TEST(OpenMP_Histogram_Stretching, Image_7x10) {
+TEST(TBB_Histogram_Stretching, Image_7x10) {
     int height = 7;
     int width = 10;
     int* image = getRandomImage(height, width);
@@ -55,9 +55,9 @@ TEST(OpenMP_Histogram_Stretching, Image_7x10) {
     result_image_tbb = getParallelOperationsTBB(image, height, width,
         y_max, y_min);
     tbb::tick_count end_tbb = tbb::tick_count::now();
-    double parallel_omp_runtime = (end_tbb - start_tbb).seconds();
+    double parallel_tbb_runtime = (end_tbb - start_tbb).seconds();
     std::cout << "sequential_runtime = " << sequential_runtime << std::endl;
-    std::cout << "parallel_tbb_runtime = " << parallel_omp_runtime
+    std::cout << "parallel_tbb_runtime = " << parallel_tbb_runtime
         << std::endl;
     for (int i = 0; i < height * width; i++) {
         ASSERT_EQ(result_image_seq[i], result_image_tbb[i]);
@@ -67,7 +67,7 @@ TEST(OpenMP_Histogram_Stretching, Image_7x10) {
     delete[] result_image_tbb;
 }
 
-TEST(OpenMP_Histogram_Stretching, Image_10x15) {
+TEST(TBB_Histogram_Stretching, Image_10x15) {
     int height = 10;
     int width = 15;
     int* image = getRandomImage(height, width);
@@ -84,9 +84,9 @@ TEST(OpenMP_Histogram_Stretching, Image_10x15) {
     result_image_tbb = getParallelOperationsTBB(image, height, width,
         y_max, y_min);
     tbb::tick_count end_tbb = tbb::tick_count::now();
-    double parallel_omp_runtime = (end_tbb - start_tbb).seconds();
+    double parallel_tbb_runtime = (end_tbb - start_tbb).seconds();
     std::cout << "sequential_runtime = " << sequential_runtime << std::endl;
-    std::cout << "parallel_tbb_runtime = " << parallel_omp_runtime
+    std::cout << "parallel_tbb_runtime = " << parallel_tbb_runtime
         << std::endl;
     for (int i = 0; i < height * width; i++) {
         ASSERT_EQ(result_image_seq[i], result_image_tbb[i]);
@@ -96,7 +96,7 @@ TEST(OpenMP_Histogram_Stretching, Image_10x15) {
     delete[] result_image_tbb;
 }
 
-TEST(OpenMP_Histogram_Stretching, Image_40x20) {
+TEST(TBB_Histogram_Stretching, Image_40x20) {
     int height = 40;
     int width = 20;
     int* image = getRandomImage(height, width);
@@ -113,9 +113,9 @@ TEST(OpenMP_Histogram_Stretching, Image_40x20) {
     result_image_tbb = getParallelOperationsTBB(image, height, width,
         y_max, y_min);
     tbb::tick_count end_tbb = tbb::tick_count::now();
-    double parallel_omp_runtime = (end_tbb - start_tbb).seconds();
+    double parallel_tbb_runtime = (end_tbb - start_tbb).seconds();
     std::cout << "sequential_runtime = " << sequential_runtime << std::endl;
-    std::cout << "parallel_tbb_runtime = " << parallel_omp_runtime
+    std::cout << "parallel_tbb_runtime = " << parallel_tbb_runtime
         << std::endl;
     for (int i = 0; i < height * width; i++) {
         ASSERT_EQ(result_image_seq[i], result_image_tbb[i]);
@@ -125,7 +125,7 @@ TEST(OpenMP_Histogram_Stretching, Image_40x20) {
     delete[] result_image_tbb;
 }
 
-TEST(OpenMP_Histogram_Stretching, Image_50x50) {
+TEST(TBB_Histogram_Stretching, Image_50x50) {
     int height = 50;
     int width = 50;
     int* image = getRandomImage(height, width);
@@ -142,9 +142,9 @@ TEST(OpenMP_Histogram_Stretching, Image_50x50) {
     result_image_tbb = getParallelOperationsTBB(image, height, width,
         y_max, y_min);
     tbb::tick_count end_tbb = tbb::tick_count::now();
-    double parallel_omp_runtime = (end_tbb - start_tbb).seconds();
+    double parallel_tbb_runtime = (end_tbb - start_tbb).seconds();
     std::cout << "sequential_runtime = " << sequential_runtime << std::endl;
-    std::cout << "parallel_tbb_runtime = " << parallel_omp_runtime
+    std::cout << "parallel_tbb_runtime = " << parallel_tbb_runtime
         << std::endl;
     for (int i = 0; i < height * width; i++) {
         ASSERT_EQ(result_image_seq[i], result_image_tbb[i]);
