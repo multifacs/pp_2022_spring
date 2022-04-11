@@ -13,8 +13,7 @@ TEST(rec_seq, test_one_integral_another) {
     ASSERT_EQ(res, re);
 }
 
-TEST(rec_seq, test_one_integral)
-{
+TEST(rec_seq, test_one_integral) {
     std::vector<std::vector<int>> inter = { { 2, 5 } };
     int step = 5;
     double res = rec_seq(inter, step, f1);
