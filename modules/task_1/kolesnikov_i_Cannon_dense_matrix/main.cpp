@@ -22,19 +22,8 @@ TEST(CannonTest, test_1) {
     matrix1.generateMatrix(num1);
     matrix2.generateMatrix(num2);
 
-    double start, end;
-    start = clock();
-    Matrix matrix3(matrix1.cannonAlgorithmSeq(matrix1, matrix2), size);
-    end = clock();
-    std::cout.precision(3);
-    double time_seq = (end - start) / CLOCKS_PER_SEC;
-    std::cout << "\nSequence Time: " << time_seq << "\n";
-
-    start = clock();
+    Matrix matrix3(matrix1.multiplyByMatrix(matrix2), size);
     Matrix matrix4(matrix1.cannonAlgorithmSeq(matrix2, res_matrix, block_size, block_count), size);
-    end = clock();
-    double time_seq = (end - start) / CLOCKS_PER_SEC;
-    std::cout << "\nParallel Time:" << time_seq << "\n\n";
 
     std::vector<std::vector<double>> matr1 = matrix3.get_matrix(), matr2 = matrix4.get_matrix();
 
@@ -62,7 +51,7 @@ TEST(CannonTest, test_2) {
     matrix1.generateMatrix(num1);
     matrix2.generateMatrix(num2);
 
-    Matrix matrix3(matrix1.cannonAlgorithmSeq(matrix1, matrix2), size);
+    Matrix matrix3(matrix1.multiplyByMatrix(matrix2), size);
     Matrix matrix4(matrix1.cannonAlgorithmSeq(matrix2, res_matrix, block_size, block_count), size);
 
     std::vector<std::vector<double>> matr1 = matrix3.get_matrix(), matr2 = matrix4.get_matrix();
@@ -89,7 +78,7 @@ TEST(CannonTest, test_3) {
     matrix1.generateMatrix(num1);
     matrix2.generateMatrix(num2);
 
-    Matrix matrix3(matrix1.cannonAlgorithmSeq(matrix1, matrix2), size);
+    Matrix matrix3(matrix1.multiplyByMatrix(matrix2), size);
     Matrix matrix4(matrix1.cannonAlgorithmSeq(matrix2, res_matrix, block_size, block_count), size);
 
     std::vector<std::vector<double>> matr1 = matrix3.get_matrix(), matr2 = matrix4.get_matrix();
@@ -116,7 +105,7 @@ TEST(CannonTest, test_4) {
     matrix1.generateMatrix(num1);
     matrix2.generateMatrix(num2);
 
-    Matrix matrix3(matrix1.cannonAlgorithmSeq(matrix1, matrix2), size);
+    Matrix matrix3(matrix1.multiplyByMatrix(matrix2), size);
     Matrix matrix4(matrix1.cannonAlgorithmSeq(matrix2, res_matrix, block_size, block_count), size);
 
     std::vector<std::vector<double>> matr1 = matrix3.get_matrix(), matr2 = matrix4.get_matrix();
@@ -146,7 +135,7 @@ TEST(CannonTest, test_5) {
     matrix1.generateMatrix(num1);
     matrix2.generateMatrix(num2);
 
-    Matrix matrix3(matrix1.cannonAlgorithmSeq(matrix1, matrix2), size);
+    Matrix matrix3(matrix1.multiplyByMatrix(matrix2), size);
     Matrix matrix4(matrix1.cannonAlgorithmSeq(matrix2, res_matrix, block_size, block_count), size);
 
     std::vector<std::vector<double>> matr1 = matrix3.get_matrix(), matr2 = matrix4.get_matrix();
