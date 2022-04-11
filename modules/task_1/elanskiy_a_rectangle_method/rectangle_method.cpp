@@ -3,7 +3,8 @@
 
 double rec_seq(std::vector<std::vector<int>> integrals, int step, const std::function<double(const double&)>& f){
     std::vector<double> h;
-    for (int i = 0; i < size(integrals); i++) { 
+    int size_vec = size(integrals);
+    for (int i = 0; i < size_vec; i++) { 
         float tmp = integrals[i][1] - integrals[i][0];
         tmp = tmp / step;
         h.push_back(tmp);
@@ -13,7 +14,7 @@ double rec_seq(std::vector<std::vector<int>> integrals, int step, const std::fun
         count.push_back(i);
     }
     std::vector<std::vector<double>> Xi;
-    for (int i = 0; i < size(integrals); i++) { 
+    for (int i = 0; i < size_vec; i++) { 
         std::vector<double> tmp;
         double tmp1 = integrals[i][0];
         tmp.push_back(tmp1);
@@ -24,7 +25,7 @@ double rec_seq(std::vector<std::vector<int>> integrals, int step, const std::fun
         Xi.push_back(tmp);
     }
     std::vector<std::vector<double>> Fx;
-    for (int i = 0; i < size(integrals); i++) { 
+    for (int i = 0; i < size_vec; i++) { 
         std::vector<double> tmp;
         for (int j = 0; j <= step; j++) { 
             double t = f(Xi[i][j]);
@@ -33,7 +34,7 @@ double rec_seq(std::vector<std::vector<int>> integrals, int step, const std::fun
         Fx.push_back(tmp);
     }
     std::vector<double> res;
-    for (int i = 0; i < size(integrals); i++) { 
+    for (int i = 0; i < size_vec; i++) { 
         double half_res = 0;
         for (int j = 0; j < step; j++) { 
             half_res += Fx[i][j];
@@ -41,7 +42,7 @@ double rec_seq(std::vector<std::vector<int>> integrals, int step, const std::fun
         res.push_back(half_res * h[i]);
     }
     double result = 1;
-    for (int i = 0; i < size(integrals); i++) { 
+    for (int i = 0; i < size_vec; i++) { 
         result *= res[i];
     }
     result = round(result * 10000) / 10000;
