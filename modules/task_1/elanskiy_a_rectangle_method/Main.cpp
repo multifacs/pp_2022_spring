@@ -6,7 +6,7 @@ double f1(double x) { return 1 / log(x); }
 double f2(double x) { return x * x / 2; }
 
 TEST(rec_seq, test_one_integral) {
-    std::vector<std::vector<int>> inter = { { 2, 5 } };                                  
+    std::vector<std::vector<int>> inter = { { 2, 5 } };
     int step = 5;
     double res = rec_seq(inter, step, f1);
     double re = 2.8638;
@@ -23,7 +23,7 @@ TEST(rec_seq, test_one_integral_another) {
 
 TEST(rec_seq, test_two_integrals_another) {
     std::vector<std::vector<int>> inter = { { 2, 5 },
-        { 3, 6 } };
+                                            { 3, 6 } };
     int step = 5;
     double res = rec_seq(inter, step, f2);
     double re = 452.7576;
