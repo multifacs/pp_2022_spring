@@ -7,8 +7,8 @@
 std::vector<std::vector<double>> random_matrix(size_t rows, size_t columns,
                                                double value) {
   std::vector<std::vector<double>> random(rows, std::vector<double>(columns));
-  for (int i = 0; i < rows; i++) {
-    for (int j = 0; j < columns; j++) {
+  for (size_t i = 0; i < rows; i++) {
+    for (size_t j = 0; j < columns; j++) {
       random[i][j] = j * value + 1.434;
     }
   }
@@ -20,10 +20,10 @@ std::vector<std::vector<double>> shift_to_left(
     size_t size) {
   std::vector<double> array(size);
   std::vector<std::vector<double>> shift_to_left = matrix;
-  for (int y = 0; y < size; y++) {
+  for (size_t y = 0; y < size; y++) {
     array[y] = shift_to_left[position][(y + shift) % size];
   }
-  for (int z = 0; z < size; z++) {
+  for (size_t z = 0; z < size; z++) {
     shift_to_left[position][z] = array[z];
   }
   return shift_to_left;
@@ -34,10 +34,10 @@ std::vector<std::vector<double>> shift_to_up(
     size_t size) {
   std::vector<double> array(size);
   std::vector<std::vector<double>> shift_to_up = matrix;
-  for (int y = 0; y < size; y++) {
+  for (size_t y = 0; y < size; y++) {
     array[y] = shift_to_up[(y + shift) % size][position];
   }
-  for (int z = 0; z < size; z++) {
+  for (size_t z = 0; z < size; z++) {
     shift_to_up[z][position] = array[z];
   }
   return shift_to_up;
