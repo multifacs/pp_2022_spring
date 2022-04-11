@@ -17,20 +17,18 @@ TEST(CannonTest, test_1) {
             res_matrix[i][j] = 0;
         }
     }
-
     double num1 = 1.076, num2 = 2.067;
     matrix1.generateMatrix(num1);
     matrix2.generateMatrix(num2);
 
     Matrix matrix3(matrix1.multiplyByMatrix(matrix2), size);
+
     Matrix matrix4(matrix1.cannonAlgorithmSeq(matrix2, res_matrix, block_size, block_count), size);
 
     std::vector<std::vector<double>> matr1 = matrix3.get_matrix(), matr2 = matrix4.get_matrix();
 
     ASSERT_DOUBLE_EQ(matr1[1][1], matr2[1][1]);
 }
-
-
 TEST(CannonTest, test_2) {
     size_t size = 4;
     Matrix matrix1(size);
@@ -82,6 +80,7 @@ TEST(CannonTest, test_3) {
     Matrix matrix4(matrix1.cannonAlgorithmSeq(matrix2, res_matrix, block_size, block_count), size);
 
     std::vector<std::vector<double>> matr1 = matrix3.get_matrix(), matr2 = matrix4.get_matrix();
+
     ASSERT_DOUBLE_EQ(matr1[size - 1][size - 1], matr2[size - 1][size - 1]);
 }
 
