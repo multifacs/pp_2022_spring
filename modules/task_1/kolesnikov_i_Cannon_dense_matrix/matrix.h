@@ -37,7 +37,8 @@ class Matrix {
     void shiftUp(std::vector< std::vector<double>> *matr, size_t pos, size_t block_count,
     size_t skew);
     void mutiplyByBlock(std::vector< std::vector<double>> block1,
-    std::vector< std::vector<double>> block2, std::vector< std::vector<double>>& res_block,
+    std::vector< std::vector<double>> block2,
+    std::vector< std::vector<double>>* res_block,
     size_t shift_l, size_t shift_r, size_t skew);
 
  private:

@@ -70,12 +70,14 @@ void Matrix::shiftUp(std::vector< std::vector<double>> *matr, size_t pos, size_t
 }
 
 void Matrix::mutiplyByBlock(std::vector< std::vector<double>> block1,
-std::vector< std::vector<double>> block2, std::vector< std::vector<double>> &res_block,
+std::vector< std::vector<double>> block2, std::vector< std::vector<double>> *res_block,
 size_t shift_l, size_t shift_r, size_t skew) {
     for (size_t i = 0; i < skew; i++)
         for (size_t j = 0; j < skew; j++)
             for (size_t k = 0; k < skew; k++)
-                res_block[i + skew * shift_l][j + skew * shift_r] += block1[i + skew * shift_l][skew * shift_r + k] * block2[k + skew * shift_l][j + skew * shift_r];
+                res_block->at(i + skew * shift_l).at(j + skew * shift_r) +=
+                block1[i + skew * shift_l][skew * shift_r + k] *
+                block2[k + skew * shift_l][j + skew * shift_r];
 }
 
 std::vector< std::vector<double>> Matrix::cannonAlgorithmSeq(Matrix matrix2,
@@ -88,10 +90,9 @@ size_t block_count) {
         }
     }
     for (size_t i = 0; i < block_count; ++i) {
-
         for (size_t j = 0; j < block_count; ++j) {
             for (size_t k = 0; k < block_count; ++k) {
-                mutiplyByBlock(this->matrix, matrix2.matrix, res_matrix, j, k, block_size);
+                mutiplyByBlock(this->matrix, matrix2.matrix, &res_matrix, j, k, block_size);
             }
         }
         for (size_t l = 0; l < block_count; ++l) {
