@@ -3,7 +3,7 @@
 
 #include <algorithm>
 
-#include "../../../modules/task_2/sablin_a_gaussian_vert/gaussian_vert.h"
+#include "../../../modules/task_3/sablin_a_gaussian_vert/gaussian_vert.h"
 
 TEST(Gaussian_Filter_vertical, Test_Zero_Pixels_and_Sigma) {
   std::vector<rgb_coub> img = getRandomImage(1, 1);

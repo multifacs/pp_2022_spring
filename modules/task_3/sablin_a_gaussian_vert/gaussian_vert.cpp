@@ -81,7 +81,6 @@ std::vector<rgb_coub> Gaussian_Filter_Tbb(const std::vector<rgb_coub>& img,
     throw "-1";
   }
   double norm = 0.0;
-  double r, g, b;
   double Gaussian_Kernel[3][3];
   for (int x = -1; x < 2; x++) {
     for (int y = -1; y < 2; y++) {
@@ -96,7 +95,6 @@ std::vector<rgb_coub> Gaussian_Filter_Tbb(const std::vector<rgb_coub>& img,
     }
   }
   std::vector<rgb_coub> result(rows * columns);
-  int x, y;
   tbb::parallel_for(
       tbb::blocked_range<int>(0, columns),
       [&](const tbb::blocked_range<int>& range) {
