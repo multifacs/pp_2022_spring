@@ -29,7 +29,6 @@ double simpson(double (*func)(const std::vector<double>&),
       parameters[dim][5] = parameters[dim][0] + h[dim];
       x /= steps[dim];
     }
-
     for (int i = 0, x = i; i < a; i++, x = i) {
       for (int dim = 0; dim < dimensions; dim++) {
         argument[dim] = parameters[dim][x % 6];
