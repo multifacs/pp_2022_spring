@@ -23,7 +23,6 @@ std::vector<rgb_coub> getRandomImage(int rows, int columns) {
   }
   return data;
 }
-
 std::vector<rgb_coub> Gaussian_Filter_Seq(const std::vector<rgb_coub>& img,
                                           int rows, int columns,
                                           const double sigma) {
