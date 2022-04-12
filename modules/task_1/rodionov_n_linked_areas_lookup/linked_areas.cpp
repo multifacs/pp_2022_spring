@@ -3,9 +3,9 @@
 #include <random>
 #include <map>
 #include <vector>
-#include <opencv2/core.hpp>
-#include <opencv2/imgcodecs.hpp>
-#include <opencv2/highgui.hpp>
+// #include <opencv2/core.hpp>
+// #include <opencv2/imgcodecs.hpp>
+// #include <opencv2/highgui.hpp>
 
 
 BinaryImage GenerateBinrayImage(int size) {
@@ -20,10 +20,10 @@ BinaryImage GenerateBinrayImage(int size) {
             image[x][y] = dist(rng);
         }
     }
-    return BinaryImage{image, size};
+    return BinaryImage(image, size);
 }
 
-
+/*
 void show(BinaryImageAreas image) {
     cv::Mat img = cv::Mat(image.size, image.size, CV_8U);
 
@@ -43,17 +43,17 @@ void show(BinaryImageAreas image) {
 
     cv::waitKey();
 }
+*/
 
 
-
-BinaryImageAreas FindAreas(BinaryImage image) {
-    BinaryImageAreas areas{};
-    areas.size = image.size;
-    areas.image = new int*[image.size];
+BinaryImageAreas* FindAreas(BinaryImage image) {
+    BinaryImageAreas* areas = new BinaryImageAreas();
+    areas->size = image.size;
+    areas->image = new int*[image.size];
     for (int x = 0; x < image.size; x++) {
-        areas.image[x] = new int[image.size];
+        areas->image[x] = new int[image.size];
         for (int y = 0; y < image.size; y++) {
-            areas.image[x][y] = -1;
+            areas->image[x][y] = -1;
         }
     }
 
@@ -68,12 +68,12 @@ BinaryImageAreas FindAreas(BinaryImage image) {
             if (!image.Get(x, y))
                 continue;
 
-                int _00 = areas.Get(x, y);
+                int _00 = areas->Get(x, y);
 
-                      int _1 = areas.Get(x, y+1);
-                      int _2 = areas.Get(x+1, y);
-                      int _3 = areas.Get(x, y-1);
-                      int _4 = areas.Get(x-1, y);
+                      int _1 = areas->Get(x, y+1);
+                      int _2 = areas->Get(x+1, y);
+                      int _3 = areas->Get(x, y-1);
+                      int _4 = areas->Get(x-1, y);
 
                       int total_non_bg =
                           static_cast<int>(_1 != -1) +
@@ -81,20 +81,20 @@ BinaryImageAreas FindAreas(BinaryImage image) {
                           static_cast<int>(_3 != -1) +
                           static_cast<int>(_4 != -1);
                 if (total_non_bg == 0) {
-                    areas.image[x][y] = label;
+                    areas->image[x][y] = label;
                     label++;
                 } else if (total_non_bg == 1) {
                     if (_1 != -1) {
-                        areas.image[x][y] = _1;
+                        areas->image[x][y] = _1;
                     }
                     if (_2 != -1) {
-                        areas.image[x][y] = _2;
+                        areas->image[x][y] = _2;
                     }
                     if (_3 != -1) {
-                        areas.image[x][y] = _3;
+                        areas->image[x][y] = _3;
                     }
                     if (_4 != -1) {
-                        areas.image[x][y] = _4;
+                        areas->image[x][y] = _4;
                     }
                 } else {
                     int nonzero[4];
@@ -115,7 +115,7 @@ BinaryImageAreas FindAreas(BinaryImage image) {
                         nonzero[sz] = _4;
                         sz++;
                     }
-                    areas.image[x][y] = nonzero[0];
+                    areas->image[x][y] = nonzero[0];
 
                     for (int i = 0; i < sz; i++) {
                         if (nonzero[i] != nonzero[0]) {
@@ -151,12 +151,12 @@ nonzero[i]) == equivalents.at(nonzero[0]).end()) {
     // Second pass
     for (int x = 1; x < image.size; x++)
         for (int y = 1; y < image.size; y++) {
-            int _00 = areas.Get(x, y);
+            int _00 = areas->Get(x, y);
             if (equivalents.find(_00) != equivalents.end()) {
                 auto& vector = equivalents.at(_00);
                 _00 = vector.at(0);
             }
         }
-    areas.components = label;
+    areas->components = label;
     return areas;
 }
