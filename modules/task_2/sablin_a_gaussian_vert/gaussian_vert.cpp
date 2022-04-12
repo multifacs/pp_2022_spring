@@ -98,8 +98,6 @@ std::vector<rgb_coub> Gaussian_Filter_Omp(const std::vector<rgb_coub>& img,
   int x, y;
 #pragma omp parallel for private(r, g, b, x, y)
   for (int i = 0; i < columns; i++) {
-    int th_num = omp_get_thread_num();
-    std::cout << th_num << std::endl;
     for (int j = 0; j < rows; j++) {
       r = g = b = 0.0;
       for (int k = -1; k < 2; k++) {
