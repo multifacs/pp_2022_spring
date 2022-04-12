@@ -1,5 +1,5 @@
 // Copyright 2022 Elanskiy Alexander
-#include "./rectangle_method.h"
+#include "../../modules/task_2/elanskiy_a_rectangle_method/rectangle_method.h"
 
 double rec_seq(std::vector<std::vector<int>> integrals, int step, const std::function<double(const double&)>& f) {
     int size_integ = integrals.size();

@@ -1,5 +1,5 @@
 // Copyright 2022 Elanskiy Alexander
-#include "./rectangle_method.h"
+#include "../../modules/task_2/elanskiy_a_rectangle_method/rectangle_method.h"
 #include "gtest/gtest.h"
 
 double f1(double x) { return 1 / log(x); }
