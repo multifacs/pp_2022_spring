@@ -23,7 +23,7 @@ TEST(CannonTest, test_1) {
     matrix2.generateMatrix(num2);
     Matrix matrix1_copy2(matrix1.get_matrix(), size);
 
-    Matrix matrix3(matrix1.cannonAlgorithmOMP(matrix2, 4, res_matrix, block_size, block_count), size);
+    Matrix matrix3(matrix1.cannonAlgorithmSeq(matrix2, res_matrix, block_size, block_count), size);
     Matrix matrix4(matrix1_copy2.cannonAlgorithmTBB(matrix2, res_matrix, block_size, block_count), size);
 
     std::vector<std::vector<double>> matr1 = matrix3.get_matrix(), matr2 = matrix4.get_matrix();
@@ -53,7 +53,7 @@ TEST(CannonTest, test_2) {
     matrix2.generateMatrix(num2);
     Matrix matrix1_copy2(matrix1.get_matrix(), size);
 
-    Matrix matrix3(matrix1.cannonAlgorithmOMP(matrix2, 2, res_matrix, block_size, block_count), size);
+    Matrix matrix3(matrix1.cannonAlgorithmSeq(matrix2, res_matrix, block_size, block_count), size);
     Matrix matrix4(matrix1_copy2.cannonAlgorithmTBB(matrix2, res_matrix, block_size, block_count), size);
 
     std::vector<std::vector<double>> matr1 = matrix3.get_matrix(), matr2 = matrix4.get_matrix();
@@ -81,7 +81,7 @@ TEST(CannonTest, test_3) {
     matrix2.generateMatrix(num2);
     Matrix matrix1_copy2(matrix1.get_matrix(), size);
 
-    Matrix matrix3(matrix1.cannonAlgorithmOMP(matrix2, 2, res_matrix, block_size, block_count), size);
+    Matrix matrix3(matrix1.cannonAlgorithmSeq(matrix2, res_matrix, block_size, block_count), size);
     Matrix matrix4(matrix1_copy2.cannonAlgorithmTBB(matrix2, res_matrix, block_size, block_count), size);
 
     std::vector<std::vector<double>> matr1 = matrix3.get_matrix(), matr2 = matrix4.get_matrix();
@@ -109,7 +109,7 @@ TEST(CannonTest, test_4) {
     matrix2.generateMatrix(num2);
     Matrix matrix1_copy2(matrix1.get_matrix(), size);
 
-    Matrix matrix3(matrix1.cannonAlgorithmOMP(matrix2, 2, res_matrix, block_size, block_count), size);
+    Matrix matrix3(matrix1.cannonAlgorithmSeq(matrix2, res_matrix, block_size, block_count), size);
     Matrix matrix4(matrix1_copy2.cannonAlgorithmTBB(matrix2, res_matrix, block_size, block_count), size);
 
     std::vector<std::vector<double>> matr1 = matrix3.get_matrix(), matr2 = matrix4.get_matrix();
@@ -140,7 +140,7 @@ TEST(CannonTest, test_5) {
     matrix2.generateMatrix(num2);
     Matrix matrix1_copy2(matrix1.get_matrix(), size);
 
-    Matrix matrix3(matrix1.cannonAlgorithmOMP(matrix2, 4, res_matrix, block_size, block_count), size);
+    Matrix matrix3(matrix1.cannonAlgorithmSeq(matrix2, res_matrix, block_size, block_count), size);
     Matrix matrix4(matrix1_copy2.cannonAlgorithmTBB(matrix2, res_matrix, block_size, block_count), size);
 
     std::vector<std::vector<double>> matr1 = matrix3.get_matrix(), matr2 = matrix4.get_matrix();
