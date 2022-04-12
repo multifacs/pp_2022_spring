@@ -2,6 +2,8 @@
 #ifndef MODULES_TASK_3_NAZAROV_N_SIMPSON_SIMPSON_H_
 #define MODULES_TASK_3_NAZAROV_N_SIMPSON_SIMPSON_H_
 
+#include <cmath>
+#include <functional>
 #include <vector>
 #include <algorithm>
 #include <utility>

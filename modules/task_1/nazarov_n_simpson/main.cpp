@@ -55,9 +55,3 @@ TEST(Simpson, Dimension_6) {
     ASSERT_NEAR(simpson(function5, borders, steps), -523260, 0.0001);
 
 }
-
-int main(int argc, char** argv) {
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
-    return 0;
-}

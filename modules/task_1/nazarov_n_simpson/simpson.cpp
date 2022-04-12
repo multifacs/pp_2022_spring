@@ -7,7 +7,7 @@ double simpson(double (*func)(const std::vector<double>&), const std::vector<std
     int dimensions = steps.size();
     double integral_simpson = 0;
     std::vector<double> h(dimensions);
-    int a = pow(6, dimensions);
+    int a = std::pow(6, dimensions);
     std::vector<std::vector<double>> parameters(dimensions, std::vector<double>(6));
     std::vector<double> argument(dimensions);
 
