@@ -25,7 +25,7 @@ double rec_seq(std::vector<std::vector<int>> integrals, int step, const std::fun
 
 double rec_par(std::vector<std::vector<int>> integrals, int step, const std::function<double(const double&)>& f) {
     int size_integ = integrals.size();
-    //omp_set_num_threads(1);
+    //  omp_set_num_threads(1);
     std::vector<double> h;
     std::vector<double> res;
     for (int i = 0; i < size_integ; i++) {
