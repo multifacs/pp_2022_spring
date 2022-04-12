@@ -7,7 +7,6 @@
 #include <functional>
 #include <utility>
 #include <vector>
-
 #include "omp.h"
 
 double simpson(double (*func)(const std::vector<double>&),

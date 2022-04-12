@@ -24,7 +24,8 @@ double simpson(double (*func)(const std::vector<double>&),
   std::vector<double> argument(dimensions);
   // omp_set_num_threads(12);
 
-#pragma omp parallel shared(dimensions, iteration, h, borders, steps, a) private(i, j) firstprivate(parameters, argument) reduction(+ : integral_simpson) //num_threads(12)
+#pragma omp parallel shared(dimensions, iteration, h, borders, steps, a) private(i, j) \
+  firstprivate(parameters, argument) reduction(+ : integral_simpson) // num_threads(12)
   {
 #pragma omp for schedule(dynamic)
     for (i = 0; i < iteration; i++) {
