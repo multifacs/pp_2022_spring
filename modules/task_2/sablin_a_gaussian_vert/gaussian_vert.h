@@ -2,6 +2,7 @@
 #ifndef MODULES_TASK_2_SABLIN_A_GAUSSIAN_VERT_GAUSSIAN_VERT_H_
 #define MODULES_TASK_2_SABLIN_A_GAUSSIAN_VERT_GAUSSIAN_VERT_H_
 
+#include <omp.h>
 #include <iostream>
 #include <random>
 #include <vector>

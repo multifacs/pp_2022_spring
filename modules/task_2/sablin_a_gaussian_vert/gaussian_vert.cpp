@@ -1,5 +1,4 @@
-#include <omp.h>
-
+// Copyright 2022 Sablin Alexandr
 #include "../../../modules/task_2/sablin_a_gaussian_vert/gaussian_vert.h"
 
 bool operator==(const rgb_coub& a, const rgb_coub& b) {
