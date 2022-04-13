@@ -29,8 +29,8 @@ struct DischargeSort {
         lists.resize(256);
     }
     void operator()(const tbb::blocked_range<int>& r) {
-        int begin = r.begin();
         int end = r.end();
+        int begin = r.begin();
         for (int i = begin; i < end; i++) {
             unsigned char* pt = (unsigned char*)(arr->ptr + i);
             lists[*(pt + byte)].push_back(arr->ptr[i]);
