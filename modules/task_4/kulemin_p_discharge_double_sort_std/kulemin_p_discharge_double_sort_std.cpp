@@ -35,6 +35,7 @@ void union_from_lists(std::list<double> *lists, vector* v) {
 }
 void discharge_sort(vector* v) {
     const int nthreads = std::thread::hardware_concurrency();
+    std::thread* threads = new std::thread[nthreads];
     const int delta = (v->size / nthreads) + 1;
     std::vector<std::list<double>>* lists =
     new std::vector<std::list<double>>[nthreads];
@@ -42,8 +43,9 @@ void discharge_sort(vector* v) {
     for (size_t j = 0; j < sizeof(double); j++) {
         v->last_el = 0;
         for (int i = 0; i < nthreads; i++) {
-            std::thread(discharge, v, &(lists[i]),
-            i*delta, std::min((i + 1)*delta, v->size), j).join();
+            threads[i] = std::thread(discharge, v, &(lists[i]),
+            i*delta, std::min((i + 1)*delta, v->size), j);
+            threads[i].join();
         }
         for (int t = 0; t < 256; t++) {
             for (int k = 0; k < nthreads; k++) {
@@ -53,6 +55,7 @@ void discharge_sort(vector* v) {
         v->last_el = 0;
     }
     delete[] lists;
+    delete[] threads;
 }
 bool check_vectors(double* st, double* sd, int size) {
     bool res = true;
