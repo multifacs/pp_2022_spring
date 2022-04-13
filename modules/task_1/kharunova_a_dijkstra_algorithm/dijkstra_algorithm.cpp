@@ -54,7 +54,7 @@ void start_algorithm(int start_vertex, int num_of_vertex, int max_destination) {
     min_destinations[i] = 1000;
     passed_vertexes[i] = 1;
   }
-  min_destinations[0] = 0;
+  min_destinations[start_vertex] = 0;
 
   do {
     min_index = 10000;
@@ -91,7 +91,7 @@ void start_algorithm(int start_vertex, int num_of_vertex, int max_destination) {
       if (matrix_of_connections[i][end_vertex] != 0) {
         int weight_of_last_vertex =
             weight_of_end_vertex - matrix_of_connections[i][end_vertex];
-
+   
         if (weight_of_last_vertex == min_destinations[i]) {
           weight_of_end_vertex = weight_of_last_vertex;
           end_vertex = i;
@@ -101,4 +101,12 @@ void start_algorithm(int start_vertex, int num_of_vertex, int max_destination) {
       }
     }
   }
+
+  delete[] shortest_path;
+  delete[] min_destinations;
+  delete[] passed_vertexes;
+  for (int i = 0; i < num_of_vertex; i++) {
+    delete[] matrix_of_connections[i];
+  }
+  delete[] matrix_of_connections;
 }
