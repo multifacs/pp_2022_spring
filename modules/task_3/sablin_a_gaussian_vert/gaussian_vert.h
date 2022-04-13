@@ -2,12 +2,11 @@
 #ifndef MODULES_TASK_3_SABLIN_A_GAUSSIAN_VERT_GAUSSIAN_VERT_H_
 #define MODULES_TASK_3_SABLIN_A_GAUSSIAN_VERT_GAUSSIAN_VERT_H_
 
-#include <omp.h>
-
 #include <tbb/tbb.h>
 #include <tbb/parallel_for.h>
 #include <tbb/blocked_range.h>
 
+#include <ctime>
 #include <iostream>
 #include <random>
 #include <vector>

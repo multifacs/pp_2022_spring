@@ -18,14 +18,19 @@ TEST(Gaussian_Filter_vertical, Test_Different_Rows_and_Columns) {
   int rows = 120, columns = 8;
   const double sigma = 2.0;
   std::vector<rgb_coub> image = getRandomImage(rows, columns);
-  double t1 = omp_get_wtime();
+  auto t1 = clock();
   std::vector<rgb_coub> res1 = Gaussian_Filter_Seq(image, rows, columns, sigma);
-  double t2 = omp_get_wtime();
+  auto t2 = clock();
   std::vector<rgb_coub> res2 = Gaussian_Filter_Tbb(image, rows, columns, sigma);
-  double t3 = omp_get_wtime();
-  printf("Time Seq: %lf\n", t2 - t1);
-  printf("Time Tbb: %lf\n", t3 - t2);
-  printf("Efficiency: %lf\n", (t2 - t1) / (t3 - t2));
+  auto t3 = clock();
+  std::cout << "Time Seq: " << static_cast<float>(t2 - t1) / CLOCKS_PER_SEC
+            << std::endl;
+  std::cout << "Time Tbb: " << static_cast<float>(t3 - t2) / CLOCKS_PER_SEC
+            << std::endl;
+  std::cout << "Efficiency: " << static_cast<float>(t2 - t1) / CLOCKS_PER_SEC
+            << std::endl;
+  printf("Efficiency: %lf\n", (static_cast<float>(t2 - t1) / CLOCKS_PER_SEC) /
+                                  (static_cast<float>(t3 - t2) / CLOCKS_PER_SEC);
   ASSERT_EQ(res1, res2);
 }
 
@@ -38,9 +43,14 @@ TEST(Gaussian_Filter_vertical, Test_Big_Image) {
   double t2 = omp_get_wtime();
   std::vector<rgb_coub> res2 = Gaussian_Filter_Tbb(image, rows, columns, sigma);
   double t3 = omp_get_wtime();
-  printf("Time Seq: %lf\n", t2 - t1);
-  printf("Time Tbb: %lf\n", t3 - t2);
-  printf("Efficiency: %lf\n", (t2 - t1) / (t3 - t2));
+  std::cout << "Time Seq: " << static_cast<float>(t2 - t1) / CLOCKS_PER_SEC
+            << std::endl;
+  std::cout << "Time Tbb: " << static_cast<float>(t3 - t2) / CLOCKS_PER_SEC
+            << std::endl;
+  std::cout << "Efficiency: " << static_cast<float>(t2 - t1) / CLOCKS_PER_SEC
+            << std::endl;
+  printf("Efficiency: %lf\n", (static_cast<float>(t2 - t1) / CLOCKS_PER_SEC) /
+                                  (static_cast<float>(t3 - t2) / CLOCKS_PER_SEC);
   ASSERT_EQ(res1, res2);
 }
 
