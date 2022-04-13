@@ -39,7 +39,7 @@ void discharge_sort(vector* v) {
     std::vector<std::list<double>>* lists =
     new std::vector<std::list<double>>[nthreads];
     for (int i = 0; i < nthreads; i++)lists[i].resize(256);
-    for (int j = 0; j < sizeof(double); j++) {
+    for (size_t j = 0; j < sizeof(double); j++) {
         v->last_el = 0;
         for (int i = 0; i < nthreads; i++) {
             std::thread(discharge, v, &(lists[i]),
