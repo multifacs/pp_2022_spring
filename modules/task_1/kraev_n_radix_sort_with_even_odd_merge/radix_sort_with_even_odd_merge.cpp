@@ -4,8 +4,8 @@
 std::vector<double> getRandomVector(int size) {
     std::vector<double> random_vec(size);
 
-    std::default_random_engine generator(
-        std::chrono::steady_clock::now().time_since_epoch().count());
+    std::random_device rd;
+    std::default_random_engine generator(rd());
     double a = -5000.0, b = 5000.0;
     std::uniform_real_distribution<double> dis(a, b);
 
