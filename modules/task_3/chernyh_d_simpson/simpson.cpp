@@ -34,7 +34,6 @@ double SimpsonTbb(const std::vector<double>& a, const std::vector<double>& b,
         throw("The number of partitions must be even");
 
     size_t dimension = a.size();
-    double res = 0.0;
     std::vector<double> weight(dimension);
     double h = 1.0;
     std::vector<double> x_left(dimension);
