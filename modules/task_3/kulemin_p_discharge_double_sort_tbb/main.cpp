@@ -9,8 +9,8 @@ TEST(Parallel_Operations_OpenMP, Test_No_Throw) {
     ASSERT_NO_THROW(discharge_sort(vb));
 }
 
-TEST(Parallel_Operations_OpenMP, Test_10000) {
-    int count = 10000;
+TEST(Parallel_Operations_OpenMP, Test_100000) {
+    int count = 100000;
     vector* vb = create_random_vector(count);
     vector* sd = new vector(count);
     copy_vectors(vb->ptr, sd->ptr, count);
@@ -25,13 +25,14 @@ TEST(Parallel_Operations_OpenMP, Test_10000) {
 	std::cout << "sequential_runtime = " << sequential_runtime << std::endl;
 	std::cout << "parallel_tbb_runtime = " << parallel_tbb_runtime
 		<< std::endl;
+	std::cout << "a = " << sequential_runtime / parallel_tbb_runtime << "\n";
     bool res = check_vectors(vb->ptr, sd->ptr, count);
     ASSERT_EQ(true, res);
 }
 
 
-TEST(Parallel_Operations_OpenMP, Test_15000) {
-	int count = 15000;
+TEST(Parallel_Operations_OpenMP, Test_150000) {
+	int count = 150000;
 	vector* vb = create_random_vector(count);
 	vector* sd = new vector(count);
 	copy_vectors(vb->ptr, sd->ptr, count);
@@ -46,11 +47,12 @@ TEST(Parallel_Operations_OpenMP, Test_15000) {
 	std::cout << "sequential_runtime = " << sequential_runtime << std::endl;
 	std::cout << "parallel_tbb_runtime = " << parallel_tbb_runtime
 		<< std::endl;
+	std::cout << "a = " << sequential_runtime / parallel_tbb_runtime << "\n";
 	bool res = check_vectors(vb->ptr, sd->ptr, count);
 	ASSERT_EQ(true, res);
 }
-TEST(Parallel_Operations_OpenMP, Test_20000) {
-	int count = 20000;
+TEST(Parallel_Operations_OpenMP, Test_200000) {
+	int count = 200000;
 	vector* vb = create_random_vector(count);
 	vector* sd = new vector(count);
 	copy_vectors(vb->ptr, sd->ptr, count);
@@ -65,11 +67,12 @@ TEST(Parallel_Operations_OpenMP, Test_20000) {
 	std::cout << "sequential_runtime = " << sequential_runtime << std::endl;
 	std::cout << "parallel_tbb_runtime = " << parallel_tbb_runtime
 		<< std::endl;
+	std::cout << "a = " << sequential_runtime / parallel_tbb_runtime << "\n";
 	bool res = check_vectors(vb->ptr, sd->ptr, count);
 	ASSERT_EQ(true, res);
 }
-TEST(Parallel_Operations_OpenMP, Test_40000) {
-	int count = 40000;
+TEST(Parallel_Operations_OpenMP, Test_400000) {
+	int count = 400000;
 	vector* vb = create_random_vector(count);
 	vector* sd = new vector(count);
 	copy_vectors(vb->ptr, sd->ptr, count);
@@ -84,11 +87,11 @@ TEST(Parallel_Operations_OpenMP, Test_40000) {
 	std::cout << "sequential_runtime = " << sequential_runtime << std::endl;
 	std::cout << "parallel_tbb_runtime = " << parallel_tbb_runtime
 		<< std::endl;
+	std::cout << "a = " << sequential_runtime / parallel_tbb_runtime << "\n";
 	bool res = check_vectors(vb->ptr, sd->ptr, count);
 	ASSERT_EQ(true, res);
 }
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
-	tbb::task_scheduler_init init(4);
     return RUN_ALL_TESTS();
 }
