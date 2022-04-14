@@ -66,7 +66,6 @@ SparseMatrix SparseMatrix::multiply_parallel(const SparseMatrix& matrix) const {
     if (n != matrix.m) {
         throw std::invalid_argument("invalid matrix size");
     }
-    std::complex<int> tmp;
     std::vector<std::vector<std::complex<int>>> resultMatrix = getEmptyMatrix(m, matrix.n);
     tbb::parallel_for(tbb::blocked_range<int>(0, m),
         [this, &matrix, &resultMatrix](tbb::blocked_range<int>& r) {
