@@ -15,9 +15,9 @@ std::vector<rgb_coub> getRandomImage(int rows, int columns) {
     std::mt19937 gen(dev());
     std::vector<rgb_coub> data(rows * columns);
     for (int i = 0; i < rows * columns; i++) {
-        data[i].red = gen() % 256;
-        data[i].green = gen() % 256;
-        data[i].blue = gen() % 256;
+      data[i].red = static_cast<unsigned char>(gen() % 256);
+      data[i].green = static_cast<unsigned char>(gen() % 256);
+      data[i].blue = static_cast<unsigned char>(gen() % 256);
     }
     return data;
 }
@@ -57,14 +57,17 @@ std::vector<rgb_coub> Gaussian_Filter_Seq(const std::vector<rgb_coub>& img,
                     if (y > columns - 1 || y < 0) {
                         y = i;
                     }
-                    r += img[x * columns + y].red * Gaussian_Kernel[k + 1][n + 1];
-                    g += img[x * columns + y].green * Gaussian_Kernel[k + 1][n + 1];
-                    b += img[x * columns + y].blue * Gaussian_Kernel[k + 1][n + 1];
+                    r += static_cast<double>(img[x * columns + y].red) *
+                         Gaussian_Kernel[k + 1][n + 1];
+                    g += static_cast<double>(img[x * columns + y].green) *
+                         Gaussian_Kernel[k + 1][n + 1];
+                    b += static_cast<double>(img[x * columns + y].blue) *
+                         Gaussian_Kernel[k + 1][n + 1];
                 }
             }
-            result[j * columns + i].red = static_cast<int>(r);
-            result[j * columns + i].green = static_cast<int>(g);
-            result[j * columns + i].blue = static_cast<int>(b);
+            result[j * columns + i].red = static_cast<unsigned char>(r);
+            result[j * columns + i].green = static_cast<unsigned char>(g);
+            result[j * columns + i].blue = static_cast<unsigned char>(b);
         }
     }
     return result;
