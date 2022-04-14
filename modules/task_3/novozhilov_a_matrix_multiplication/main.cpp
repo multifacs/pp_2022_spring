@@ -42,7 +42,7 @@ TEST(Matrix_Multiplication_TBB, parallel_multiplication_returns_same_result) {
     ASSERT_TRUE(result1 == result2);
 }
 
-//TEST(Matrix_Multiplication_TBB, parallel_multiplication_works) {
+// TEST(Matrix_Multiplication_TBB, parallel_multiplication_works) {
 //  SparseMatrix matrix1(100, 100);
 //  SparseMatrix matrix2(100, 100);
 //  double startSeq = omp_get_wtime();
@@ -53,7 +53,7 @@ TEST(Matrix_Multiplication_TBB, parallel_multiplication_returns_same_result) {
 //  double finishParallel = omp_get_wtime();
 //  std::cout << "Sequential time: " << finishSeq - startSeq<< " s." << std::endl;
 //  std::cout << "Parallel time: " << finishParallel - startParallel << " s." << std::endl;
-//}
+// }
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
