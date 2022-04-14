@@ -3,7 +3,7 @@
 #include "./dijkstra_algorithm.h"
 
 TEST(search_shortest_path_algorithm, 1_size_graph_1) {
-    ASSERT_NO_THROW(start_algorithm(0, 1, 1));
+  ASSERT_NO_THROW(start_algorithm(0, 1, 1));
 }
 
 TEST(search_shortest_path_algorithm, 15_size_graph_10) {
