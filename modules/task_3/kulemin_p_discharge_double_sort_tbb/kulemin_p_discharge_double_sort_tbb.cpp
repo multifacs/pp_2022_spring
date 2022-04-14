@@ -1,5 +1,4 @@
 // Copyright 2018 Nesterov Alexander
-#include <tbb/tbb.h>
 #include <vector>
 #include <string>
 #include <random>
@@ -57,6 +56,26 @@ void discharge_sort(vector* v) {
             }
         }
     }
+}
+void union_from_lists_seq(std::vector<std::list<double>> *lists, double* in) {
+	int j = 0;
+	for (size_t i = 0; i < (*lists).size(); i++) {
+		while (!(*lists)[i].empty()) {
+			in[j] = ((*lists)[i].front());
+			(*lists)[i].pop_front();
+			j++;
+		}
+	}
+}
+void discharge_sort_seq(vector* in) {
+	std::vector<std::list<double >> lists(256);
+	for (size_t j = 0; j < sizeof(double); j++) {
+		for (int i = 0; i < in->size; i++) {
+			unsigned char* pt = (unsigned char*)(in->ptr + i);
+			lists[*(pt + j)].push_back(in->ptr[i]);
+		}
+		union_from_lists_seq(&lists, in->ptr);
+	}
 }
 
 bool check_vectors(double* st, double* sd, int size) {
