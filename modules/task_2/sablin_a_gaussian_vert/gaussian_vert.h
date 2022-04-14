@@ -8,7 +8,7 @@
 #include <vector>
 
 struct rgb_coub {
-  int red, green, blue;
+  unsigned char red, green, blue;
 };
 bool operator==(const rgb_coub& a, const rgb_coub& b);
 bool operator!=(const rgb_coub& a, const rgb_coub& b);

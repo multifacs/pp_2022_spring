@@ -7,10 +7,10 @@
 
 TEST(Gaussian_Filter_vertical, Test_Zero_Pixels_and_Sigma) {
   std::vector<rgb_coub> img = getRandomImage(1, 1);
-  EXPECT_ANY_THROW(Gaussian_Filter_Seq(img, 0, 0, 1));
-  EXPECT_ANY_THROW(Gaussian_Filter_Seq(img, 0, 1, 1));
-  EXPECT_ANY_THROW(Gaussian_Filter_Seq(img, 1, 0, 1));
-  EXPECT_ANY_THROW(Gaussian_Filter_Seq(img, 1, 1, 0));
+  EXPECT_ANY_THROW(Gaussian_Filter_Omp(img, 0, 0, 1));
+  EXPECT_ANY_THROW(Gaussian_Filter_Omp(img, 0, 1, 1));
+  EXPECT_ANY_THROW(Gaussian_Filter_Omp(img, 1, 0, 1));
+  EXPECT_ANY_THROW(Gaussian_Filter_Omp(img, 1, 1, 0));
   EXPECT_ANY_THROW(getRandomImage(0, 0));
 }
 
