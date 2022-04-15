@@ -17,21 +17,21 @@ std::vector<double> getRandomVector(int size) {
 }
 
 void radixSort(std::vector<double>* vec) {
-    int size = vec->size();
+    size_t size = vec->size();
+    size_t local_size;
     int tmp;
-    int local_size;
     int j = 0;
     std::vector<std::vector<double>> counters(256);
     for (int index = 0; index < 7; index++) {
-        for (int i = 0; i < size; i++) {
+        for (size_t i = 0; i < size; i++) {
             tmp = static_cast<int>(*((unsigned char*)&(*vec)[i] + index));
-            counters[tmp].push_back(vec->at(i));
+            counters[tmp].push_back((*vec)[i]);
         }
 
         for (int i = 0; i < 256; i++) {
             if (!counters[i].empty()) {
                 local_size = counters[i].size();
-                for (int k = 0; k < local_size; k++) {
+                for (size_t k = 0; k < local_size; k++) {
                     (*vec)[j] = counters[i][k];
                     ++j;
                 }
@@ -41,25 +41,27 @@ void radixSort(std::vector<double>* vec) {
         j = 0;
     }
 
-    for (int i = 0; i < size; i++) {
+    for (size_t i = 0; i < size; i++) {
         tmp = static_cast<int>(*((unsigned char*)&(*vec)[i] + 7));
-        counters[tmp].push_back(vec->at(i));
+        counters[tmp].push_back((*vec)[i]);
     }
 
     for (int i = 255; i >= 128; i--) {
         if (!counters[i].empty()) {
             local_size = counters[i].size();
-            for (int k = local_size - 1; k >= 0; k--) {
+            for (size_t k = local_size - 1; k >= 1; k--) {
                 (*vec)[j] = counters[i][k];
                 j++;
             }
+            (*vec)[j] = counters[i][0];
+            j++;
         }
     }
 
     for (int i = 0; i < 128; i++) {
         if (!counters[i].empty()) {
             local_size = counters[i].size();
-            for (int k = 0; k < local_size; k++) {
+            for (size_t k = 0; k < local_size; k++) {
                 (*vec)[j] = counters[i][k];
                 j++;
             }
