@@ -2,6 +2,7 @@
 #ifndef MODULES_TASK_3_NAZAROV_N_SIMPSON_SIMPSON_H_
 #define MODULES_TASK_3_NAZAROV_N_SIMPSON_SIMPSON_H_
 
+#include <omp.h>
 #include <stdio.h>
 #include <tbb/blocked_range.h>
 #include <tbb/parallel_reduce.h>
@@ -9,7 +10,6 @@
 #include <tbb/tbb.h>
 
 #include <algorithm>
-#include <omp.h>
 #include <cmath>
 #include <functional>
 #include <utility>

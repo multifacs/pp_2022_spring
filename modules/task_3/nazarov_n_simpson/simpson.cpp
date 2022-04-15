@@ -5,11 +5,11 @@ class SimpsonFunc {
   double (*func)(const std::vector<double>&);
   const std::vector<std::pair<double, double>>& borders;
   const std::vector<int>& steps;
-  const std::vector<double>& h;
-  double integral_simpson;
   int const dimensions;
+  const std::vector<double>& h;
   int const a;
   double k;
+  double integral_simpson;
   std::vector<std::vector<double>> parameters;
   std::vector<double> argument;
 
@@ -24,8 +24,8 @@ class SimpsonFunc {
         dimensions(_dimensions),
         h(_h),
         a(_a),
-        integral_simpson(0.0),
         k(_k),
+        integral_simpson(0.0),
         parameters(std::vector<std::vector<double>>(dimensions,
                                                     std::vector<double>(6))),
         argument(std::vector<double>(dimensions)) {}
@@ -55,20 +55,20 @@ class SimpsonFunc {
     }*/
   }
 
-  SimpsonFunc(SimpsonFunc& simpson, tbb::split)
+  SimpsonFunc(const SimpsonFunc& simpson, tbb::split)
       : func(simpson.func),
         borders(simpson.borders),
         steps(simpson.steps),
         dimensions(simpson.dimensions),
         h(simpson.h),
         a(simpson.a),
-        integral_simpson(0.0),
         k(simpson.k),
+        integral_simpson(0.0),
         parameters(std::vector<std::vector<double>>(dimensions,
                                                     std::vector<double>(6))),
         argument(std::vector<double>(dimensions)) {}
 
-  void join(SimpsonFunc& simpson) {
+  void join(const SimpsonFunc& simpson) {
     integral_simpson += simpson.integral_simpson;
     // printf("%lf\n", integral_simpson);
   }
