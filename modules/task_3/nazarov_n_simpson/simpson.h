@@ -9,7 +9,7 @@
 #include <tbb/tbb.h>
 
 #include <algorithm>
-#include <chrono>
+#include <omp.h>
 #include <cmath>
 #include <functional>
 #include <utility>

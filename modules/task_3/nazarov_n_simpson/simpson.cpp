@@ -80,7 +80,6 @@ double simpson(double (*func)(const std::vector<double>&),
                const std::vector<int>& steps, int process) {
   int iteration = 1;
   int dimensions = steps.size();
-  double integral_simpson = 0;
   int a = std::pow(6, dimensions);
   double k = 1;
   std::vector<double> h(dimensions);

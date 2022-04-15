@@ -59,18 +59,15 @@ TEST(Simpson, Dimension_6) {
                                                  {7, 11}, {0.1, 0.9}, {2, 3}};
   std::vector<int> steps(dimension, 1);
 
-  auto t1 = std::chrono::high_resolution_clock::now();
+  double t1 = omp_get_wtime();
   ASSERT_NEAR(simpson(function5, borders, steps, 1), -523260, 0.0001);
-  auto t2 = std::chrono::high_resolution_clock::now();
+  double t2 = omp_get_wtime();
 
-  auto t3 = std::chrono::high_resolution_clock::now();
+  double t3 = omp_get_wtime();
   ASSERT_NEAR(simpson(function5, borders, steps, 12), -523260, 0.0001);
-  auto t4 = std::chrono::high_resolution_clock::now();
+  double t4 = omp_get_wtime();
 
-  std::chrono::duration<double> seq = t2 - t1;
-  std::chrono::duration<double> tbb = t4 - t3;
-
-  printf("seq : %lf\n", seq);
-  printf("parallel : %lf\n", tbb);
-  printf("%lf\n", seq / tbb);
+  printf("seq : %lf\n", t2 - t1);
+  printf("parallel : %lf\n", t4 - t3);
+  printf("%lf\n", (t2 - t1) / (t4 - t3));
 }
