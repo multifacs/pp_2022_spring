@@ -70,7 +70,7 @@ TEST(Simpson, Dimension_6) {
   std::chrono::duration<double> seq = t2 - t1;
   std::chrono::duration<double> tbb = t4 - t3;
 
-  printf("seq : %f\n", seq);
-  printf("parallel : %f\n", tbb);
-  printf("%f\n", seq / tbb);
+  printf("seq : %lf\n", seq);
+  printf("parallel : %lf\n", tbb);
+  printf("%lf\n", seq / tbb);
 }
