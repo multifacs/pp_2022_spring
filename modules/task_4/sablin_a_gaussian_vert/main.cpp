@@ -1,8 +1,5 @@
 // Copyright 2022 Sablin Alexandr
 #include <gtest/gtest.h>
-
-#include <algorithm>
-
 #include "../../../modules/task_4/sablin_a_gaussian_vert/gaussian_vert.h"
 
 TEST(Gaussian_Filter_vertical, Test_Zero_Pixels_and_Sigma) {
