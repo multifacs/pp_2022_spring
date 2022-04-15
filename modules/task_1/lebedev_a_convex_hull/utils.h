@@ -22,7 +22,7 @@ namespace lab1 {
         };
 
         struct Size2d {
-            size_t height, width;
+            size_t width, height;
             Size2d() = default;
             Size2d(size_t _width, size_t _height) : width(_width), height(_height) {}
         };
