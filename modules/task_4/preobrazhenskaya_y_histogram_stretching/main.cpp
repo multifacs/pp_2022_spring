@@ -1,5 +1,4 @@
 // Copyright 2022 Preobrazhenskaya Yuliya
-#include <omp.h>
 #include <gtest/gtest.h>
 #include "./histogram_stretching.h"
 
@@ -17,19 +16,10 @@ TEST(STD_Histogram_Stretching, Image_5x5) {
     int y_min = getYmin(image, height, width);
     std::vector<int> result_image_seq(height, width);
     std::vector<int> result_image_std(height, width);
-    double start_seq = omp_get_wtime();
     result_image_seq = getSequentialOperations(image, height, width,
         y_max, y_min);
-    double end_seq = omp_get_wtime();
-    double sequential_runtime = end_seq - start_seq;
-    double start_std = omp_get_wtime();
     result_image_std = getParallelOperationsSTD(image, height, width,
         y_max, y_min);
-    double end_std = omp_get_wtime();
-    double parallel_std_runtime = end_std - start_std;
-    std::cout << "sequential_runtime = " << sequential_runtime << std::endl;
-    std::cout << "parallel_std_runtime = " << parallel_std_runtime
-        << std::endl;
     for (int i = 0; i < height * width; i++) {
         ASSERT_EQ(result_image_seq[i], result_image_std[i]);
     }
@@ -43,19 +33,10 @@ TEST(STD_Histogram_Stretching, Image_7x10) {
     int y_min = getYmin(image, height, width);
     std::vector<int> result_image_seq(height, width);
     std::vector<int> result_image_std(height, width);
-    double start_seq = omp_get_wtime();
     result_image_seq = getSequentialOperations(image, height, width,
         y_max, y_min);
-    double end_seq = omp_get_wtime();
-    double sequential_runtime = end_seq - start_seq;
-    double start_std = omp_get_wtime();
     result_image_std = getParallelOperationsSTD(image, height, width,
         y_max, y_min);
-    double end_std = omp_get_wtime();
-    double parallel_std_runtime = end_std - start_std;
-    std::cout << "sequential_runtime = " << sequential_runtime << std::endl;
-    std::cout << "parallel_std_runtime = " << parallel_std_runtime
-        << std::endl;
     for (int i = 0; i < height * width; i++) {
         ASSERT_EQ(result_image_seq[i], result_image_std[i]);
     }
@@ -69,19 +50,10 @@ TEST(STD_Histogram_Stretching, Image_10x15) {
     int y_min = getYmin(image, height, width);
     std::vector<int> result_image_seq(height, width);
     std::vector<int> result_image_std(height, width);
-    double start_seq = omp_get_wtime();
     result_image_seq = getSequentialOperations(image, height, width,
         y_max, y_min);
-    double end_seq = omp_get_wtime();
-    double sequential_runtime = end_seq - start_seq;
-    double start_std = omp_get_wtime();
     result_image_std = getParallelOperationsSTD(image, height, width,
         y_max, y_min);
-    double end_std = omp_get_wtime();
-    double parallel_std_runtime = end_std - start_std;
-    std::cout << "sequential_runtime = " << sequential_runtime << std::endl;
-    std::cout << "parallel_std_runtime = " << parallel_std_runtime
-        << std::endl;
     for (int i = 0; i < height * width; i++) {
         ASSERT_EQ(result_image_seq[i], result_image_std[i]);
     }
@@ -95,19 +67,10 @@ TEST(STD_Histogram_Stretching, Image_40x20) {
     int y_min = getYmin(image, height, width);
     std::vector<int> result_image_seq(height, width);
     std::vector<int> result_image_std(height, width);
-    double start_seq = omp_get_wtime();
     result_image_seq = getSequentialOperations(image, height, width,
         y_max, y_min);
-    double end_seq = omp_get_wtime();
-    double sequential_runtime = end_seq - start_seq;
-    double start_std = omp_get_wtime();
     result_image_std = getParallelOperationsSTD(image, height, width,
         y_max, y_min);
-    double end_std = omp_get_wtime();
-    double parallel_std_runtime = end_std - start_std;
-    std::cout << "sequential_runtime = " << sequential_runtime << std::endl;
-    std::cout << "parallel_std_runtime = " << parallel_std_runtime
-        << std::endl;
     for (int i = 0; i < height * width; i++) {
         ASSERT_EQ(result_image_seq[i], result_image_std[i]);
     }
@@ -121,19 +84,10 @@ TEST(STD_Histogram_Stretching, Image_50x50) {
     int y_min = getYmin(image, height, width);
     std::vector<int> result_image_seq(height, width);
     std::vector<int> result_image_std(height, width);
-    double start_seq = omp_get_wtime();
     result_image_seq = getSequentialOperations(image, height, width,
         y_max, y_min);
-    double end_seq = omp_get_wtime();
-    double sequential_runtime = end_seq - start_seq;
-    double start_std = omp_get_wtime();
     result_image_std = getParallelOperationsSTD(image, height, width,
         y_max, y_min);
-    double end_std = omp_get_wtime();
-    double parallel_std_runtime = end_std - start_std;
-    std::cout << "sequential_runtime = " << sequential_runtime << std::endl;
-    std::cout << "parallel_std_runtime = " << parallel_std_runtime
-        << std::endl;
     for (int i = 0; i < height * width; i++) {
         ASSERT_EQ(result_image_seq[i], result_image_std[i]);
     }
