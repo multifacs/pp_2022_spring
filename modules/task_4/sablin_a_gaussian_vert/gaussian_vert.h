@@ -3,7 +3,7 @@
 #define MODULES_TASK_4_SABLIN_A_GAUSSIAN_VERT_GAUSSIAN_VERT_H_
 
 #include <ctime>
-#include <thread>
+#include "thread"
 #include <iostream>
 #include <random>
 #include <vector>
