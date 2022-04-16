@@ -1,7 +1,7 @@
 // Copyright 2022 Nazarov Nikita
 #include <gtest/gtest.h>
 
-#include "../../../modules/task_1/nazarov_n_simpson/simpson.h"
+#include "../../../modules/task_2/nazarov_n_simpson/simpson.h"
 
 double function1(const std::vector<double>& x) { return (x[0] * x[1]); }
 
@@ -58,6 +58,16 @@ TEST(Simpson, Dimension_6) {
   std::vector<std::pair<double, double>> borders{{1, 18}, {-7, 2},    {1, 3},
                                                  {7, 11}, {0.1, 0.9}, {2, 3}};
   std::vector<int> steps(dimension, 1);
-
+  double t1, t2, t3, t4;
+  omp_set_num_threads(1);
+  t1 = omp_get_wtime();
+  simpson(function5, borders, steps);
+  t2 = omp_get_wtime();
+  omp_set_num_threads(12);
+  t3 = omp_get_wtime();
   ASSERT_NEAR(simpson(function5, borders, steps), -523260, 0.0001);
+  t4 = omp_get_wtime();
+  printf("seq : %lf\n", t2 - t1);
+  printf("parallel : %lf\n", t4 - t3);
+  printf("%lf\n", (t2 - t1) / (t4 - t3));
 }
