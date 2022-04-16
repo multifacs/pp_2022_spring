@@ -10,7 +10,7 @@ std::vector<int> getRandomVector(int size) {
   std::vector<int> res(size);
   int sign;
   for (int i = 0; i < size; i++) {
-    sign = 1 + gen() % 2 * -2; 
+    sign = 1 + gen() % 2 * -2;
     res[i] = gen() % 100 * sign;
   }
   return res;
