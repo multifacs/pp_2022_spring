@@ -8,7 +8,7 @@
 
 std::vector<int> getRandomImg(int rows, int cols) {
     if ((rows <= 0) || (cols <= 0))
-        throw std::exception("Wrong input data");
+        throw std::invalid_argument("Matrix can't be created");
     std::mt19937 gen;
     gen.seed(static_cast<unsigned int>(time(0)));
     std::vector<int> array(rows * cols);
@@ -65,7 +65,7 @@ std::pair<std::vector<int>, std::vector<int> >
                 }
                 img[i * cols + j] = tmp;
                 equiv_table[tmpch] = tmp;
-                for (int k = 0; k < equiv_table.size(); k++)
+                for (std::size_t k = 0; k < equiv_table.size(); k++)
                     if (equiv_table[k] == tmpch)
                         equiv_table[k] = tmp;
             }
