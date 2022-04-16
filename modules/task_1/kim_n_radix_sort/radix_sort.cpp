@@ -24,7 +24,7 @@ int getMax(std::vector<int> input_vec, int size) {
   return max;
 }
 
-void countSort(std::vector<int>& input_vec, int size, int place) {
+std::vector<int> countSort(const std::vector<int>& input_vec, int size, int place) {
   int dig, sign;
   std::vector<int> ans(size);
 
@@ -48,13 +48,14 @@ void countSort(std::vector<int>& input_vec, int size, int place) {
     ans[digits[dig] - 1] = input_vec[i];
     digits[dig]--;
   }
-  for (int i = 0; i < size; i++)
-    input_vec[i] = ans[i];
+  return ans;
 }
 
-void radixSort(std::vector<int>& input_vec, int size) {
+std::vector<int> radixSort(const std::vector<int>& input_vec, int size) {
   int max_value = getMax(input_vec, size);
+  std::vector<int> res(input_vec);
 
   for (int place = 1; max_value / place > 0; place *= 10)
-    countSort(input_vec, size, place);
+    res = countSort(res, size, place);
+  return res;
 }
