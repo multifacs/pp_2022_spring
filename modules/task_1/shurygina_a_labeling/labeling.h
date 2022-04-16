@@ -7,9 +7,9 @@
 #include <utility>
 
 std::vector<int> getRandomImg(int rows, int cols);
-std::pair<std::vector<int>, std::vector<int> > 
+std::pair<std::vector<int>, std::vector<int> >
          firstPass(std::vector<int>, int, int);
-std::vector<int> 
+std::vector<int>
          secondPass(std::vector<int>, int, int, std::vector<int>);
 std::vector<int> labeling(const std::vector<int>&, int, int);
 
