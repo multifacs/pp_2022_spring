@@ -10,18 +10,21 @@ TEST(Parallel_Operations_OpenMP, Test_No_Throw) {
 }
 
 TEST(Parallel_Operations_OpenMP, Test_100000) {
-    int count = 100000;
+    int count = 1000;
     vector* vb = create_random_vector(count);
     vector* sd = new vector(count);
     copy_vectors(vb->ptr, sd->ptr, count);
+
 	tbb::tick_count start_seq = tbb::tick_count::now();
 	discharge_sort_seq(vb);
 	tbb::tick_count end_seq = tbb::tick_count::now();
 	double sequential_runtime = (end_seq - start_seq).seconds();
+
 	tbb::tick_count start_tbb = tbb::tick_count::now();
     discharge_sort(sd);
 	tbb::tick_count end_tbb = tbb::tick_count::now();
 	double parallel_tbb_runtime = (end_tbb - start_tbb).seconds();
+
 	std::cout << "sequential_runtime = " << sequential_runtime << std::endl;
 	std::cout << "parallel_tbb_runtime = " << parallel_tbb_runtime
 		<< std::endl;

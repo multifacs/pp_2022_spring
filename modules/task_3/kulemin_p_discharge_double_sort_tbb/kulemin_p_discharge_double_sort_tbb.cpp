@@ -37,9 +37,11 @@ struct DischargeSort {
     }
     void join(const DischargeSort& s) {
         for (int i = 0; i < 256; i++) {
-            for (auto j = s.lists[i].begin(); j != s.lists[i].end(); j++) {
-                lists[i].push_back(*j);
-            }
+			if (!s.lists[i].empty()) {
+				for (std::list<double>::const_iterator it = s.lists[i].begin(); it != s.lists[i].end(); it++) {
+					lists[i].push_back(*it);
+				}
+			}
         }
     }
 };
@@ -47,14 +49,8 @@ void discharge_sort(vector* v) {
     for (size_t j = 0; j < sizeof(double); j++) {
         v->last_el = 0;
         DischargeSort s(v, j);
-        tbb::parallel_reduce(tbb::blocked_range<int>(0, v->size, v->size / 5), s);
-        for (auto i : s.lists) {
-            while (!i.empty()) {
-                v->ptr[v->last_el] = i.front();
-                i.pop_front();
-                v->last_el++;
-            }
-        }
+        tbb::parallel_reduce(tbb::blocked_range<int>(0, v->size, v->size / 4), s);
+		union_from_lists_seq(&s.lists, v->ptr);
     }
 }
 void union_from_lists_seq(std::vector<std::list<double>> *lists, double* in) {
