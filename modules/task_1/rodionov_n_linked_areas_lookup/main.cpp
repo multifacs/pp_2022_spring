@@ -16,7 +16,7 @@ TEST(LinkedAreasLookup, GenerateBinaryImageTest1) {
 }
 TEST(LinkedAreasLookup, FindAreasTest1) {
     BinaryImage image = GenerateBinrayImage(IMAGE_SIZE1);
-    BinaryImageAreas* areas = FindAreas(image);
+    FindAreas(image);
 }
 
 TEST(LinkedAreasLookup, GenerateBinaryImageTest2) {
@@ -26,7 +26,7 @@ TEST(LinkedAreasLookup, GenerateBinaryImageTest2) {
 }
 TEST(LinkedAreasLookup, FindAreasTest2) {
     BinaryImage image = GenerateBinrayImage(IMAGE_SIZE2);
-    BinaryImageAreas* areas = FindAreas(image);
+    FindAreas(image);
 }
 
 TEST(LinkedAreasLookup, GenerateBinaryImageTest3) {
@@ -35,7 +35,7 @@ TEST(LinkedAreasLookup, GenerateBinaryImageTest3) {
 }
 TEST(LinkedAreasLookup, FindAreasTest3) {
     BinaryImage image = GenerateBinrayImage(IMAGE_SIZE3);
-    BinaryImageAreas* areas = FindAreas(image);
+    FindAreas(image);
 }
 
 int main(int argc, char** argv) {
