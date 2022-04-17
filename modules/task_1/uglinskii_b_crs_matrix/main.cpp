@@ -33,7 +33,7 @@ TEST(Secondary_functions, Transpose)
   ConvertToCRS(A, &crs_A);
 
   MatrixCRS crs_expected_A_T;
-  ConvertToCRS(expected_A_T, crs_expected_A_T);
+  ConvertToCRS(expected_A_T, &crs_expected_A_T);
 
   MatrixCRS crs_A_T = Transpose(crs_A);
 
