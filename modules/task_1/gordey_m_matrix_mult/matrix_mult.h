@@ -56,11 +56,11 @@ class SparseM {
   friend std::ostream& operator <<(std::ostream& out, const SparseM& m) {
       out << "rows: " << m.rows << "\n";
       out << "cols: " << m.cols << "\ncol_idx: ";
-      for (int i = 0; i < m.col_idx.size(); i++)out << m.col_idx[i] << " ";
+      for (size_t i = 0; i < m.col_idx.size(); i++)out << m.col_idx[i] << " ";
       out << "\nrows: ";
       for (int i = 0; i < m.row.size(); i++)out << m.row[i] << " ";
       out << "\nvalues: ";
-      for (int i = 0; i < m.value.size(); i++)out << m.value[i] << " ";
+      for (size_t i = 0; i < m.value.size(); i++)out << m.value[i] << " ";
       out << "\n";
       return out;
   }
