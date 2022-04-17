@@ -1,6 +1,6 @@
 // Copyright 2022 Ershov Aleksey
-#ifndef MODULES_TASK_2_ERSHOV_A_DEICSTRA_ALGORITHM_TBB_DEICSTRA_TBB_H_
-#define MODULES_TASK_2_ERSHOV_A_DEICSTRA_ALGORITHM_TBB_DEICSTRA_TBB_H_
+#ifndef MODULES_TASK_3_ERSHOV_A_DEICSTRA_ALGORITHM_TBB_DEICSTRA_TBB_H_
+#define MODULES_TASK_3_ERSHOV_A_DEICSTRA_ALGORITHM_TBB_DEICSTRA_TBB_H_
 
 #include <tbb/tbb.h>
 
@@ -30,4 +30,4 @@ std::vector<int> getSequentialDeicstra(
 
 std::vector<int> getParallelDeicstra(const std::vector<std::vector<int>>& graf);
 
-#endif  // MODULES_TASK_2_ERSHOV_A_DEICSTRA_ALGORITHM_TBB_DEICSTRA_TBB_H_
+#endif  // MODULES_TASK_3_ERSHOV_A_DEICSTRA_ALGORITHM_TBB_DEICSTRA_TBB_H_
