@@ -3,7 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <gtest/gtest.h>
-
+#include <omp.h>
 TEST(Secondary_functions, Convert_Expend)
 {
   std::vector<std::vector<double>> A{{0, 3, 1},
