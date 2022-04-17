@@ -18,6 +18,7 @@ void FreeMatrix(MatrixCRS *M)
 	M->col.clear();
 	M->row_index.clear();
 	M->value.clear();
+	
 }
 
 double GenerateValue(double min, double max)
