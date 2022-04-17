@@ -1,5 +1,5 @@
 // Copyright 2022 Gordey Maria
-
+#include "../../../modules/task_2/gordey_m_matrix_mult/matrix_mult.h"
 #include <omp.h>
 double* create_random_matrix(int size_n) {
 	std::random_device dev;
