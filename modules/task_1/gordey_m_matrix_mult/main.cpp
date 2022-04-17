@@ -7,6 +7,7 @@ TEST(SPARSE_MATRIX_MULT_SEQ, CREATE_MATRIX) {
     double* arr = create_random_matrix(4);
     SparseM A(arr, 2, 2);
     SparseM B(arr, 2, 2);
+    delete[] arr;
     ASSERT_NO_THROW(A*B);
 }
 
@@ -35,6 +36,8 @@ TEST(SPARSE_MATRIX_MULT_SEQ, MULT_2) {
     double* arr1 = create_random_matrix(count*count);
     SparseM A(arr, count, count);
     SparseM B(arr1, count, count);
+    delete[] arr;
+    delete[] arr1;
     ASSERT_NO_THROW(A*B);
 }
 
@@ -44,6 +47,8 @@ TEST(SPARSE_MATRIX_MULT_SEQ, MULT_3) {
     double* arr1 = create_random_matrix(count*count);
     SparseM A(arr, count, count);
     SparseM B(arr1, count, count);
+    delete[] arr;
+    delete[] arr1;
     ASSERT_NO_THROW(A*B);
 }
 
@@ -53,6 +58,8 @@ TEST(SPARSE_MATRIX_MULT_SEQ, MULT_4) {
     double* arr1 = create_random_matrix(count*count);
     SparseM A(arr, count, count);
     SparseM B(arr1, count, count);
+    delete[] arr;
+    delete[] arr1;
     ASSERT_NO_THROW(A*B);
 }
 
