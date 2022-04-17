@@ -14,7 +14,6 @@ struct BinaryImage {
         }
         this->size = size;
     }
-
     bool Get(int a, int b) {
         if (a < 0 || b < 0 || a >= size || b >= size) {
             return false;
@@ -37,6 +36,17 @@ struct BinaryImage {
         }
       }
       this->size = image.size;
+    }
+    BinaryImage operator= (const BinaryImage& image) {
+      this->image = new bool*[image.size];
+      for (int i = 0; i < image.size; i++) {
+        this->image[i] = new bool[image.size];
+        for (int j = 0; j < image.size; j++) {
+          this->image[i][j] = image.image[i][j];
+        }
+      }
+      this->size = image.size;
+      return *this;
     }
 };
 
