@@ -14,14 +14,14 @@ BinaryImage GenerateBinrayImage(int size) {
   std::mt19937 rng(dev());
   std::uniform_int_distribution<std::mt19937::result_type> dist(0, 1);
 
-  bool** image = new bool*[size];
+  auto image = BinaryImage(size);
   for (int x = 0; x < size; x++) {
-    image[x] = new bool[size];
+    image.image[x] = new bool[size];
     for (int y = 0; y < size; y++) {
-      image[x][y] = dist(rng);
+      image.image[x][y] = dist(rng);
     }
   }
-  return BinaryImage(image, size);
+  return image;
 }
 
 /*

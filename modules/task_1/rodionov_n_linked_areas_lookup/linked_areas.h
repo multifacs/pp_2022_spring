@@ -3,13 +3,16 @@
 #define MODULES_TASK_1_RODIONOV_N_LINKED_AREAS_LOOKUP_LINKED_AREAS_H_
 
 #include <cstdlib>
-
+#include <memory>
 struct BinaryImage {
     bool** image;
     int size;
 
-    BinaryImage(bool** image, int size) {
-        this->image = image;
+    BinaryImage(int size) {
+        this->image = new bool*[size];
+        for (int i = 0; i < size; i++) {
+            this->image[i] = new bool[size];
+        }
         this->size = size;
     }
 
@@ -21,9 +24,20 @@ struct BinaryImage {
     }
     ~BinaryImage() { 
         for (int i = 0; i < this->size; i++) {
-            delete[] this->image[i];
+          delete[] this->image[i];
         }
         delete[] this->image;
+    }
+    BinaryImage(const BinaryImage& image) {
+      this->image = new bool*[image.size];
+      for (int i = 0; i < image.size; i++) {
+        this->image[i] = new bool[image.size];
+        for (int j = 0; j < image.size; j++) {
+          this->image[i][j] = image.image[i][j];
+        }
+        
+      }
+      this->size = image.size;
     }
 };
 
