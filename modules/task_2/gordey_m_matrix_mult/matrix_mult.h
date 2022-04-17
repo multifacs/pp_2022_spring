@@ -47,6 +47,7 @@ class SparseM {
 	  col_idx = lhs.col_idx;
 	  row = lhs.row;
 	  value = lhs.value;
+    return (*this);
   }
   friend SparseM operator *(const SparseM& A, const SparseM& B);
   friend bool operator == (const SparseM& A, const SparseM& B) {
