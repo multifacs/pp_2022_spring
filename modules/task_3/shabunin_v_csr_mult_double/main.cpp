@@ -70,7 +70,7 @@ TEST(TBB, TestMultSimpleToDiag) {
 }
 
 TEST(TBB, TestMultDense) {
-  size_t same = 64;
+  size_t same = 32;
   size_t a = same, b = same, c = same;
   std::vector<double> l_init_mat(a * b), r_init_mat(b * c);
   for (size_t i = 0; i < a; ++i) {
