@@ -37,7 +37,7 @@ TEST(SimpsonMethod, simpos_method_works_correctly_with_two_variable) {
     std::function<double(std::vector<double>)> funcTwoVariable =
         [](std::vector<double> args) { return args[0] * args[1]; };
     sizeType dimension = 2;
-    std::vector<sizeType> countParts = { 10, 10 };
+    std::vector<sizeType> countParts = { 5, 5 };
 
     double expectedResult = 72.0;
     double result = simpsonMethod(dimension, leftsBorders, rightBorders,
@@ -52,7 +52,7 @@ TEST(SimpsonMethod, simpos_method_works_correctly_with_three_variable) {
     std::function<double(std::vector<double>)> funcThreeVariable =
         [](std::vector<double> args) { return args[0] * args[1] * args[2]; };
     sizeType dimension = 3;
-    std::vector<sizeType> countParts = { 5, 5, 5 };
+    std::vector<sizeType> countParts = { 4, 4, 4 };
 
     double expectedResult = 324.0;
     double result = simpsonMethod(dimension, leftsBorders, rightBorders,
