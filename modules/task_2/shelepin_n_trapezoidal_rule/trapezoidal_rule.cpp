@@ -7,7 +7,7 @@ double getParallelTrapezoidal(
     const int n, const std::vector<std::pair<double, double>>& limits,
     const std::function<double(std::vector<double>)>& f) {
   int dimension = static_cast<int>(limits.size());
-  size_t count = 1;
+  int count = 1;
   std::vector<double> h(dimension);
   for (int i = 0; i < dimension; i++) {
     h[i] = (limits[i].second - limits[i].first) / n;
