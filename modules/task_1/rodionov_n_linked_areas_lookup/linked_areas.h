@@ -7,7 +7,7 @@ struct BinaryImage {
     bool** image;
     int size;
 
-    BinaryImage(int size) {
+    explicit BinaryImage(int size) {
         this->image = new bool*[size];
         for (int i = 0; i < size; i++) {
             this->image[i] = new bool[size];
@@ -21,7 +21,8 @@ struct BinaryImage {
         }
         return image[a][b];
     }
-    ~BinaryImage() { 
+
+    ~BinaryImage() {
         for (int i = 0; i < this->size; i++) {
           delete[] this->image[i];
         }
@@ -34,7 +35,6 @@ struct BinaryImage {
         for (int j = 0; j < image.size; j++) {
           this->image[i][j] = image.image[i][j];
         }
-        
       }
       this->size = image.size;
     }

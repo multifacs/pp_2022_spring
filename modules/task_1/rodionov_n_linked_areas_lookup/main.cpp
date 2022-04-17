@@ -3,7 +3,8 @@
 #include <cstdio>
 #include <iostream>
 #include <gtest-mpi-listener.hpp>
-#include "./linked_areas.h"
+#include "../../../modules/task_1/rodionov_n_linked_areas_lookup/linked_areas.h"
+
 
 const int IMAGE_SIZE1 = 10;
 const int IMAGE_SIZE2 = 50;
