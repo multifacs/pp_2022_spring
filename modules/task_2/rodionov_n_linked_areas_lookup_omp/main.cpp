@@ -20,7 +20,7 @@ bool CompareAreas(BinaryImageAreas* area1, BinaryImageAreas* area2) {
     for (int y = 0; y < area1->size; y++) {
       int a = area1->Get(x, y);
       int b = area2->Get(x, y);
-      if (a == -1 != b == -1) {
+      if ((a == -1) != (b == -1)) {
         return false;
       }
     }

@@ -34,7 +34,6 @@ BinaryImageAreas* FindAreas(BinaryImage image) {
   }
 
   Equivalents equivalents;
-  int a = 0;
   int label = 0;
   // First pass
   for (int x = 1; x < image.size; x++)
@@ -122,7 +121,6 @@ BinaryImageAreas* FindAreasOmp(BinaryImage image) {
 
   Equivalents equivalents;
 
-  int a = 0;
   int label = 0;
   // First pass
   #pragma omp parallel for
