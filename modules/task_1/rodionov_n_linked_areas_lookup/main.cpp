@@ -5,9 +5,9 @@
 #include <gtest-mpi-listener.hpp>
 #include "./linked_areas.h"
 
-const int IMAGE_SIZE1 = 50;
-const int IMAGE_SIZE2 = 100;
-const int IMAGE_SIZE3 = 200;
+const int IMAGE_SIZE1 = 10;
+const int IMAGE_SIZE2 = 50;
+const int IMAGE_SIZE3 = 100;
 
 TEST(LinkedAreasLookup, GenerateBinaryImageTest1) {
     BinaryImage image = GenerateBinrayImage(IMAGE_SIZE1);
