@@ -31,7 +31,7 @@ TEST(LinkedAreasLookup, FindAreasTest2) {
 
 TEST(LinkedAreasLookup, GenerateBinaryImageTest3) {
     BinaryImage image = GenerateBinrayImage(IMAGE_SIZE3);
-    ASSERT_EQ(image.size, IMAGE_SIZE1);
+    ASSERT_EQ(image.size, IMAGE_SIZE3);
 }
 TEST(LinkedAreasLookup, FindAreasTest3) {
     BinaryImage image = GenerateBinrayImage(IMAGE_SIZE3);
