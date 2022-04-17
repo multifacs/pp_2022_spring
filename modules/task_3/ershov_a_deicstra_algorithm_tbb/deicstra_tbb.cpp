@@ -70,7 +70,7 @@ std::vector<int> getParallelDeicstra(
   tbb::task_scheduler_init init(numThreads);
 
   tbb::parallel_for(tbb::blocked_range<int>(0, count, grainSize),
-                    Deicstor(graf, result));
+                    Deicstor(graf, &result));
 
   return result;
 }
@@ -82,7 +82,7 @@ void Deicstor::operator()(const tbb::blocked_range<int>& r) const {
   for (int top = begin; top < end; ++top) {
     auto tmp = getDeicstra(graf, top);
     for (int i = 0; i < count; ++i) {
-      result[top * count + i] = tmp[i];
+      (*result)[top * count + i] = tmp[i];
     }
   }
 }
