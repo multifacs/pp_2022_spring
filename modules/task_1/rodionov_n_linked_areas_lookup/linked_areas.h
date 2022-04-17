@@ -3,7 +3,6 @@
 #define MODULES_TASK_1_RODIONOV_N_LINKED_AREAS_LOOKUP_LINKED_AREAS_H_
 
 #include <cstdlib>
-#include <memory>
 struct BinaryImage {
     bool** image;
     int size;
