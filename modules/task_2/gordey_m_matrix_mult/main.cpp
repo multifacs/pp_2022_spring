@@ -31,7 +31,7 @@ TEST(SPARSE_MATRIX_MULT_SEQ, MULT_1) {
 }
 
 TEST(SPARSE_MATRIX_MULT_SEQ, MULT_2) {
-    int count = 1000;
+    int count = 100;
     double* arr = create_random_matrix(count*count);
     double* arr1 = create_random_matrix(count*count);
     SparseM A(arr, count, count);
@@ -47,14 +47,14 @@ TEST(SPARSE_MATRIX_MULT_SEQ, MULT_2) {
     SparseM D = Mult_parallel(A, B);
     double end_omp = omp_get_wtime();
     double omp_time = end_omp - start_omp;
-    std::cout << "seq time: " << seq_time << "\n";
-    std::cout << "omp time: " << omp_time << "\n";
-    std::cout << "a: " << seq_time / omp_time << "\n";
+    //std::cout << "seq time: " << seq_time << "\n";
+    //std::cout << "omp time: " << omp_time << "\n";
+    //std::cout << "a: " << seq_time / omp_time << "\n";
     ASSERT_EQ(D, C);
 }
 
 TEST(SPARSE_MATRIX_MULT_SEQ, MULT_3) {
-    int count = 1200;
+    int count = 120;
     double* arr = create_random_matrix(count*count);
     double* arr1 = create_random_matrix(count*count);
     SparseM A(arr, count, count);
@@ -70,13 +70,13 @@ TEST(SPARSE_MATRIX_MULT_SEQ, MULT_3) {
     SparseM D = Mult_parallel(A, B);
     double end_omp = omp_get_wtime();
     double omp_time = end_omp - start_omp;
-    std::cout << "seq time: " << seq_time << "\n";
-    std::cout << "omp time: " << omp_time << "\n";
-    std::cout << "a: " << seq_time / omp_time << "\n";
+    //std::cout << "seq time: " << seq_time << "\n";
+    //std::cout << "omp time: " << omp_time << "\n";
+    //std::cout << "a: " << seq_time / omp_time << "\n";
     ASSERT_EQ(D, C);
 }
 TEST(SPARSE_MATRIX_MULT_SEQ, MULT_4) {
-    int count = 1500;
+    int count = 150;
     double* arr = create_random_matrix(count*count);
     double* arr1 = create_random_matrix(count*count);
     SparseM A(arr, count, count);
@@ -92,9 +92,9 @@ TEST(SPARSE_MATRIX_MULT_SEQ, MULT_4) {
     SparseM D = Mult_parallel(A, B);
     double end_omp = omp_get_wtime();
     double omp_time = end_omp - start_omp;
-    std::cout << "seq time: " << seq_time << "\n";
-    std::cout << "omp time: " << omp_time << "\n";
-    std::cout << "a: " << seq_time / omp_time << "\n";
+    //std::cout << "seq time: " << seq_time << "\n";
+    //std::cout << "omp time: " << omp_time << "\n";
+    //std::cout << "a: " << seq_time / omp_time << "\n";
     ASSERT_EQ(D, C);
 }
 
