@@ -1,5 +1,8 @@
 // Copyright 2022 Uglinskii Bogdan
 #include "../../../modules/task_1/uglinskii_b_crs_matrix/crs_multiplication.h"
+#include <vector>
+#include <random>
+#include <iostream>
 
 void InitializeMatrix(int rows, int col, int NZ, MatrixCRS *M)
 {

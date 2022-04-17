@@ -1,6 +1,7 @@
 // Copyright 2022 Uglinskii Bogdan
 #include "./crs_multiplication.h"
 #include <iostream>
+#include <vector>
 #include <gtest/gtest.h>
 
 TEST(Secondary_functions, Convert_Expend)

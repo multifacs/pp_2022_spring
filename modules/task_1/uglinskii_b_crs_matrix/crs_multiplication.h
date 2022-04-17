@@ -3,8 +3,6 @@
 #define MODULES_TASK_1_UGLINSKII_B_CRS_MATRIX_CRS_MULTIPLICATION_H_
 
 #include <vector>
-#include <random>
-#include <iostream>
 
 struct MatrixCRS 
 {
