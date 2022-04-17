@@ -19,6 +19,12 @@ struct BinaryImage {
         }
         return image[a][b];
     }
+    ~BinaryImage() { 
+        for (int i = 0; i < this->size; i++) {
+            delete[] this->image[i];
+        }
+        delete[] this->image;
+    }
 };
 
 struct BinaryImageAreas {
@@ -30,6 +36,12 @@ struct BinaryImageAreas {
             return -1;
         }
         return image[a][b];
+    }
+    ~BinaryImageAreas() {
+      for (int i = 0; i < this->size; i++) {
+        delete[] this->image[i];
+      }
+      delete[] this->image;
     }
 };
 
