@@ -1,6 +1,6 @@
 // Copyright 2022 Gordey Maria
 #include <gtest/gtest.h>
-"../../../modules/task_2/gordey_m_matrix_mult/matrix_mult.h"
+#include "../../../modules/task_2/gordey_m_matrix_mult/matrix_mult.h"
 #include <omp.h>
 
 TEST(SPARSE_MATRIX_MULT_SEQ, CREATE_MATRIX) {
