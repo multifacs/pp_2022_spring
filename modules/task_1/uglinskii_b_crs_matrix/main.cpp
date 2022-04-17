@@ -2,8 +2,9 @@
 #include <gtest/gtest.h>
 #include <iostream>
 #include <vector>
-#include <omp.h>
+
 #include "./crs_multiplication.h"
+
 TEST(Secondary_functions, Convert_Expend)
 {
   std::vector<std::vector<double>> A{{0, 3, 1},
@@ -61,77 +62,62 @@ TEST(Multiplication, normal_3x3)
 
 TEST(Multiplication, crs_3x3_4)
 {
-  double t1, t2, t1_, t2_;
-
   MatrixCRS matrix_A = GenerateRandomMatrixCRS(3, 3, 4);
   MatrixCRS matrix_B = GenerateRandomMatrixCRS(3, 3, 4);
 
   MatrixCRS matrix_C;
-  t1 = omp_get_wtime();
   CRSMultiply(matrix_A, matrix_B, matrix_C);
-  t2 = omp_get_wtime();
   std::vector<std::vector<double>> C;
 
   std::vector<std::vector<double>> exp_A = ExpandMatrix(matrix_A), exp_B = ExpandMatrix(matrix_B);
-  t1_ = omp_get_wtime();
+
   NormalMulty(exp_A, exp_B, C);
-  t2_ = omp_get_wtime();
+
 
   MatrixCRS crs_C;
   ConvertToCRS(C, &crs_C);
 
   ASSERT_TRUE(CompareMatrixCRS(matrix_C, crs_C));
-  std::cout << "Normal multiply time = " << t2 - t1 << "\nCRS multiply time = " << t2_ - t1_ << "\nAcceleration = " << (t2_ - t1_) / (t2 - t1);
 }
 
 TEST(Multiplication, crs_200x200_500)
 {
-  double t1, t2, t1_, t2_;
-
   MatrixCRS matrix_A = GenerateRandomMatrixCRS(200, 200, 500);
   MatrixCRS matrix_B = GenerateRandomMatrixCRS(200, 200, 500);
 
   MatrixCRS matrix_C;
-  t1 = omp_get_wtime();
   CRSMultiply(matrix_A, matrix_B, matrix_C);
-  t2 = omp_get_wtime();
   std::vector<std::vector<double>> C;
 
   std::vector<std::vector<double>> exp_A = ExpandMatrix(matrix_A), exp_B = ExpandMatrix(matrix_B);
-  t1_ = omp_get_wtime();
+
   NormalMulty(exp_A, exp_B, C);
-  t2_ = omp_get_wtime();
+
 
   MatrixCRS crs_C;
   ConvertToCRS(C, &crs_C);
 
   ASSERT_TRUE(CompareMatrixCRS(matrix_C, crs_C));
-  std::cout << "Normal multiply time = " << t2 - t1 << "\nCRS multiply time = " << t2_ - t1_ << "\nAcceleration = " << (t2_ - t1_) / (t2 - t1);
 }
 
 TEST(Multiplication, crs_200x200_25000)
 {
-  double t1, t2, t1_, t2_;
-
   MatrixCRS matrix_A = GenerateRandomMatrixCRS(200, 200, 25000);
   MatrixCRS matrix_B = GenerateRandomMatrixCRS(200, 200, 25000);
 
   MatrixCRS matrix_C;
-  t1 = omp_get_wtime();
   CRSMultiply(matrix_A, matrix_B, matrix_C);
-  t2 = omp_get_wtime();
   std::vector<std::vector<double>> C;
 
   std::vector<std::vector<double>> exp_A = ExpandMatrix(matrix_A), exp_B = ExpandMatrix(matrix_B);
-  t1_ = omp_get_wtime();
+
   NormalMulty(exp_A, exp_B, C);
-  t2_ = omp_get_wtime();
+
 
   MatrixCRS crs_C;
   ConvertToCRS(C, &crs_C);
 
   ASSERT_TRUE(CompareMatrixCRS(matrix_C, crs_C));
-  std::cout << "Normal multiply time = " << t2 - t1 << "\nCRS multiply time = " << t2_ - t1_ << "\nAcceleration = " << (t2_ - t1_) / (t2 - t1);
 }
 
 int main(int argc, char **argv)

@@ -186,7 +186,7 @@ bool CompareMatrixCRS(MatrixCRS A, MatrixCRS B)
 	if (A.N != B.N || A.NZ != B.NZ)
 		return false;
 
-	//
+	
 	double precision = 0.000001;
 	for (int i = 0; i < A.NZ; i++)
 	{
@@ -194,14 +194,14 @@ bool CompareMatrixCRS(MatrixCRS A, MatrixCRS B)
 			return false;
 	}
 
-	//
+	
 	for (int i = 0; i < A.NZ; i++)
 	{
 		if (A.col[i] != B.col[i])
 			return false;
 	}
 
-	//
+	
 	int row_size = A.row_index.size();
 	for (int i = 0; i < row_size; i++)
 	{
