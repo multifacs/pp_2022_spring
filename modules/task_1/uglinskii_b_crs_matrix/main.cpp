@@ -1,9 +1,9 @@
 // Copyright 2022 Uglinskii Bogdan
-#include "./crs_multiplication.h"
+#include <gtest/gtest.h>
 #include <iostream>
 #include <vector>
-#include <gtest/gtest.h>
 #include <omp.h>
+#include "./crs_multiplication.h"
 TEST(Secondary_functions, Convert_Expend)
 {
   std::vector<std::vector<double>> A{{0, 3, 1},
@@ -133,7 +133,6 @@ TEST(Multiplication, crs_200x200_25000)
   ASSERT_TRUE(CompareMatrixCRS(matrix_C, crs_C));
   std::cout << "Normal multiply time = " << t2 - t1 << "\nCRS multiply time = " << t2_ - t1_ << "\nAcceleration = " << (t2_ - t1_) / (t2 - t1);
 }
-
 
 int main(int argc, char **argv)
 {

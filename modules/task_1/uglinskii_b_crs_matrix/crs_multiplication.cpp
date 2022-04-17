@@ -1,8 +1,8 @@
 // Copyright 2022 Uglinskii Bogdan
-#include "../../../modules/task_1/uglinskii_b_crs_matrix/crs_multiplication.h"
 #include <vector>
 #include <random>
 #include <iostream>
+#include "../../../modules/task_1/uglinskii_b_crs_matrix/crs_multiplication.h"
 
 void InitializeMatrix(int rows, int col, int NZ, MatrixCRS *M)
 {
@@ -18,7 +18,6 @@ void FreeMatrix(MatrixCRS *M)
 	M->col.clear();
 	M->row_index.clear();
 	M->value.clear();
-	
 }
 
 double GenerateValue(double min, double max)
@@ -34,11 +33,9 @@ MatrixCRS GenerateRandomMatrixCRS(int N, int M, int NZ)
 	MatrixCRS result;
 	InitializeMatrix(N, M, 0, &result);
 
-	//���������� �������� ��������� � �������
-
 	if (N * M != 0)
 	{
-		double mean_nz_in_row = static_cast<double>(NZ) / (N * M); // �����������, ��� ������� �� ����� 0
+		double mean_nz_in_row = static_cast<double>(NZ) / (N * M);
 
 		double prob = 0;
 		double total_elements = 0;
@@ -50,10 +47,10 @@ MatrixCRS GenerateRandomMatrixCRS(int N, int M, int NZ)
 			for (int j = 0; j < M; j++)
 			{
 				prob = GenerateValue(0, 1);
-				if (prob <= mean_nz_in_row) //���� ������� �� ����� ����
+				if (prob <= mean_nz_in_row)
 				{
-					result.value.push_back(GenerateValue(-100, 101)); //��������� ��� � ������ ��������
-					result.col.push_back(j);						  //��������� ������ ��� ������� � ������ ��������
+					result.value.push_back(GenerateValue(-100, 101));
+					result.col.push_back(j);
 					total_elements++;
 					k++;
 				}
@@ -107,7 +104,7 @@ std::vector<std::vector<double>> ExpandMatrix(MatrixCRS M)
 	int elements_in_row = 0;
 	for (int i = 0; i < M.N; i++)
 	{
-		elements_in_row = M.row_index[i + 1] - M.row_index[i]; // row_index.size() = N+1
+		elements_in_row = M.row_index[i + 1] - M.row_index[i];
 		for (int j = 0; j < M.M; j++)
 		{
 			if (k < M.NZ && M.col[k] == j && elements_in_row > 0)
@@ -186,10 +183,10 @@ void PrintNormalMatrix(std::vector<std::vector<double>> matrix)
 
 bool CompareMatrixCRS(MatrixCRS A, MatrixCRS B)
 {
-	if (A.N != B.N || A.NZ != B.NZ) //������� �������
+	if (A.N != B.N || A.NZ != B.NZ)
 		return false;
 
-	//������� ��������
+	//
 	double precision = 0.000001;
 	for (int i = 0; i < A.NZ; i++)
 	{
@@ -197,14 +194,14 @@ bool CompareMatrixCRS(MatrixCRS A, MatrixCRS B)
 			return false;
 	}
 
-	//���������� ������� �� ������� ��������� ��������
+	//
 	for (int i = 0; i < A.NZ; i++)
 	{
 		if (A.col[i] != B.col[i])
 			return false;
 	}
 
-	//���������� ���������� ��������� � ������ ������
+	//
 	int row_size = A.row_index.size();
 	for (int i = 0; i < row_size; i++)
 	{
@@ -212,7 +209,7 @@ bool CompareMatrixCRS(MatrixCRS A, MatrixCRS B)
 			return false;
 	}
 
-	return true; //���� ��� �������� ������ �������, �� ������� ����������
+	return true;
 }
 
 MatrixCRS Transpose(MatrixCRS matrix)
@@ -297,7 +294,7 @@ int CRSMultiply(MatrixCRS A, MatrixCRS B, MatrixCRS &C)
 		row_idx.push_back(row_NZ + row_idx[i]);
 	}
 
-	InitializeMatrix(A.N, B.N, col.size(), &C); //  B �����������������, ������� ���� N, ������ �� ����� ��� M
+	InitializeMatrix(A.N, B.N, col.size(), &C);
 
 	int col_size = col.size();
 	for (int i = 0; i < col_size; i++)
