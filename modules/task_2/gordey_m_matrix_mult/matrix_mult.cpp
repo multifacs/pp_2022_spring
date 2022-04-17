@@ -1,5 +1,5 @@
 // Copyright 2022 Gordey Maria
-#include "../../../modules/task_2/gordey_m_matrix_mult/matrix_mult.h"
+
 #include <omp.h>
 double* create_random_matrix(int size_n) {
 	std::random_device dev;
@@ -146,7 +146,7 @@ SparseM Mult_parallel(const SparseM& A, const SparseM& B) {
 				}
 			}
 			int sum = 0;
-			for (int i = 0; i < col_idx.size(); i++) {
+			for (size_t i = 0; i < col_idx.size(); i++) {
 				int tmp = col_idx[i];
 				col_idx[i] = sum;
 				sum = tmp + sum;
