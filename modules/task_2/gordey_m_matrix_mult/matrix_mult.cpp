@@ -140,7 +140,7 @@ SparseM Mult_parallel(const SparseM& A, const SparseM& B) {
 #pragma omp single
 		{
 			for (int i = 0; i < omp_get_num_threads(); i++) {
-				for (int j = 0; j < value[i].size(); j++) {
+				for (size_t j = 0; j < value[i].size(); j++) {
 					vals.push_back(value[i][j]);
 					rows.push_back(row[i][j]);
 				}
