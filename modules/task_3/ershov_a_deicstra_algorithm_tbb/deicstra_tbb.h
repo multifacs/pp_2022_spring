@@ -9,13 +9,13 @@
 
 class Deicstor {
  private:
-  const std::vector<std::vector<int>> graf;
-  int* const result;
+  const std::vector<std::vector<int>>& graf;
+  std::vector<int>& result;
 
  public:
   Deicstor(const std::vector<std::vector<int>>& _graf,
            std::vector<int>& _result)
-      : graf(_graf), result(_result.data()){};
+      : graf(_graf), result(_result) {}
 
   void operator()(const tbb::blocked_range<int>& r) const;
 };
