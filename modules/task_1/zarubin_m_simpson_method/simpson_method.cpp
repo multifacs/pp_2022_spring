@@ -51,7 +51,7 @@ double simpsonMethod(sizeType dimension,
                 switch (temp % 6) {
                 case 1:
                     args[j] = partitions[j].right; break;
-                case 5: 
+                case 5:
                     args[j] = partitions[j].left; break;
                 default:
                     args[j] = partitions[j].center; break;
