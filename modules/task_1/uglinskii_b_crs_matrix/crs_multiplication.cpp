@@ -262,11 +262,15 @@ int NormalMulty(std::vector<std::vector<double>> A,
                 std::vector<std::vector<double>> B,
                 std::vector<std::vector<double>> *C) {
   *C = std::vector<std::vector<double>>(A.size());
-  if (A.size() != 0 && (A[0].size() != B.size())) {
-    std::cout << "Incorrect sizes of matrix\n";
-    return 1;
+  int row1 = A.size(), row2 = B.size(), col1 = 0, col2 = 0;
+
+  if (row1 != 0) {
+    col1 = A[0].size(), col2 = B[0].size();
+    if (col1 != row2) {
+      std::cout << "Incorrect sizes of matrix\n";
+      return 1;
+    }
   }
-  int row1 = A.size(), col1 = A[0].size(), col2 = B[0].size();
 
   for (int i = 0; i < row1; i++) {
     (*C)[i] = std::vector<double>(col2);
@@ -280,6 +284,18 @@ int NormalMulty(std::vector<std::vector<double>> A,
 
 bool CompareMatrixNormal(std::vector<std::vector<double>> A,
                          std::vector<std::vector<double>> B) {
+  int A_N = A.size(), B_N = B.size();
+
+  int A_M = 0, B_M = 0;
+
+  if (A_N != 0 && B_N != 0) {
+    A_M = A[0].size(), B_M = B[0].size();
+    if (A_N != B_N || A_M != B_M) {
+      std::cout << "Incorrect sizes of matrix\n";
+      return false;
+    }
+  }
+
   if (A.size() != 0 && B.size() != 0) {
     if (A.size() != B.size() || A[0].size() != B[0].size()) {
       std::cout << "Incorrect sizes of matrix\n";
@@ -287,8 +303,8 @@ bool CompareMatrixNormal(std::vector<std::vector<double>> A,
     }
   }
   int N = A.size(), M = A[0].size();
-  for (int i = 0; i < N; i++) {
-    for (int j = 0; j < M; j++) {
+  for (int i = 0; i < A_N; i++) {
+    for (int j = 0; j < A_M; j++) {
       if (std::fabs(A[i][j] - B[i][j]) > 0.000001) {
         std::cout << "A != B \n";
         return false;

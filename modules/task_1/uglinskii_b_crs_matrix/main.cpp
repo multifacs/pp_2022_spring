@@ -43,7 +43,6 @@ TEST(Multiplication, normal_3x3) {
 
   std::vector<std::vector<double>> C;
   NormalMulty(A, B, &C);
-  PrintNormalMatrix(C);
   ASSERT_TRUE(CompareMatrixNormal(C, expected_C));
 }
 
