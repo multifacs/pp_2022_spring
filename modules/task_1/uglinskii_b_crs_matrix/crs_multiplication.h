@@ -30,10 +30,10 @@ void PrintNormalMatrix(std::vector<std::vector<double>> M);
 bool CompareMatrixCRS(MatrixCRS A, MatrixCRS B);
 
 MatrixCRS Transpose(MatrixCRS M);
-int CRSMultiply(MatrixCRS A, MatrixCRS B, MatrixCRS &C);
+int CRSMultiply(MatrixCRS A, MatrixCRS B, MatrixCRS *C);
 int NormalMulty(std::vector<std::vector<double>> A,
                 std::vector<std::vector<double>> B,
-                std::vector<std::vector<double>> &C);
+                std::vector<std::vector<double>> *C);
 
 bool CompareMatrixNormal(std::vector<std::vector<double>> A,
                          std::vector<std::vector<double>> B);

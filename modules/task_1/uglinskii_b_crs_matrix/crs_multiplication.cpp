@@ -210,7 +210,7 @@ MatrixCRS Transpose(MatrixCRS matrix) {
 
   return MT;
 }
-int CRSMultiply(MatrixCRS A, MatrixCRS B, MatrixCRS &C) {
+int CRSMultiply(MatrixCRS A, MatrixCRS B, MatrixCRS *C) {
   if (A.M != B.N) {
     std::cout << "Incorrect sizes of matrix\n";
     return 1;
@@ -245,24 +245,23 @@ int CRSMultiply(MatrixCRS A, MatrixCRS B, MatrixCRS &C) {
     row_idx.push_back(row_NZ + row_idx[i]);
   }
 
-  InitializeMatrix(A.N, B.N, col.size(), &C);
+  InitializeMatrix(A.N, B.N, col.size(), C);
 
   int col_size = col.size();
   for (int i = 0; i < col_size; i++) {
-    C.col[i] = col[i];
-    C.value[i] = vals[i];
+    C->col[i] = col[i];
+    C->value[i] = vals[i];
   }
   for (int i = 0; i <= A.N; i++) {
-    C.row_index[i] = row_idx[i];
+    C->row_index[i] = row_idx[i];
   }
 
   return 0;
 }
 int NormalMulty(std::vector<std::vector<double>> A,
                 std::vector<std::vector<double>> B,
-                std::vector<std::vector<double>> &C) {
-  std::vector<std::vector<double>> result =
-      std::vector<std::vector<double>>(A.size());
+                std::vector<std::vector<double>> *C) {
+  *C = std::vector<std::vector<double>>(A.size());
   if (A.size() != 0 && (A[0].size() != B.size())) {
     std::cout << "Incorrect sizes of matrix\n";
     return 1;
@@ -270,13 +269,12 @@ int NormalMulty(std::vector<std::vector<double>> A,
   int row1 = A.size(), col1 = A[0].size(), col2 = B[0].size();
 
   for (int i = 0; i < row1; i++) {
-    result[i] = std::vector<double>(col2);
+    (*C)[i] = std::vector<double>(col2);
     for (int j = 0; j < col2; j++) {
-      result[i][j] = 0;
-      for (int k = 0; k < col1; k++) result[i][j] += A[i][k] * B[k][j];
+      (*C)[i][j] = 0;
+      for (int k = 0; k < col1; k++) (*C)[i][j] += A[i][k] * B[k][j];
     }
   }
-  C = result;
   return 0;
 }
 

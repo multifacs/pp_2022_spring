@@ -42,8 +42,8 @@ TEST(Multiplication, normal_3x3) {
       {120.2, 9.5, 2.2}, {908.8, 86, 27.2}, {287.9, 13., 5.6}};
 
   std::vector<std::vector<double>> C;
-  NormalMulty(A, B, C);
-
+  NormalMulty(A, B, &C);
+  PrintNormalMatrix(C);
   ASSERT_TRUE(CompareMatrixNormal(C, expected_C));
 }
 
@@ -55,14 +55,14 @@ TEST(Multiplication, crs_3x3_4) {
 
   MatrixCRS matrix_C;
   t1 = omp_get_wtime();
-  CRSMultiply(matrix_A, matrix_B, matrix_C);
+  CRSMultiply(matrix_A, matrix_B, &matrix_C);
   t2 = omp_get_wtime();
   std::vector<std::vector<double>> C;
 
   std::vector<std::vector<double>> exp_A = ExpandMatrix(matrix_A),
                                    exp_B = ExpandMatrix(matrix_B);
   t1_ = omp_get_wtime();
-  NormalMulty(exp_A, exp_B, C);
+  NormalMulty(exp_A, exp_B, &C);
   t2_ = omp_get_wtime();
 
   MatrixCRS crs_C;
@@ -82,14 +82,14 @@ TEST(Multiplication, crs_200x200_500) {
 
   MatrixCRS matrix_C;
   t1 = omp_get_wtime();
-  CRSMultiply(matrix_A, matrix_B, matrix_C);
+  CRSMultiply(matrix_A, matrix_B, &matrix_C);
   t2 = omp_get_wtime();
   std::vector<std::vector<double>> C;
 
   std::vector<std::vector<double>> exp_A = ExpandMatrix(matrix_A),
                                    exp_B = ExpandMatrix(matrix_B);
   t1_ = omp_get_wtime();
-  NormalMulty(exp_A, exp_B, C);
+  NormalMulty(exp_A, exp_B, &C);
   t2_ = omp_get_wtime();
 
   MatrixCRS crs_C;
@@ -109,14 +109,14 @@ TEST(Multiplication, crs_200x200_1000) {
 
   MatrixCRS matrix_C;
   t1 = omp_get_wtime();
-  CRSMultiply(matrix_A, matrix_B, matrix_C);
+  CRSMultiply(matrix_A, matrix_B, &matrix_C);
   t2 = omp_get_wtime();
   std::vector<std::vector<double>> C;
 
   std::vector<std::vector<double>> exp_A = ExpandMatrix(matrix_A),
                                    exp_B = ExpandMatrix(matrix_B);
   t1_ = omp_get_wtime();
-  NormalMulty(exp_A, exp_B, C);
+  NormalMulty(exp_A, exp_B, &C);
   t2_ = omp_get_wtime();
 
   MatrixCRS crs_C;
@@ -136,14 +136,14 @@ TEST(Multiplication, crs_200x200_25000) {
 
   MatrixCRS matrix_C;
   t1 = omp_get_wtime();
-  CRSMultiply(matrix_A, matrix_B, matrix_C);
+  CRSMultiply(matrix_A, matrix_B, &matrix_C);
   t2 = omp_get_wtime();
   std::vector<std::vector<double>> C;
 
   std::vector<std::vector<double>> exp_A = ExpandMatrix(matrix_A),
                                    exp_B = ExpandMatrix(matrix_B);
   t1_ = omp_get_wtime();
-  NormalMulty(exp_A, exp_B, C);
+  NormalMulty(exp_A, exp_B, &C);
   t2_ = omp_get_wtime();
 
   MatrixCRS crs_C;
