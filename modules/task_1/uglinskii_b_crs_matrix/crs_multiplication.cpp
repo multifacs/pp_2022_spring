@@ -1,358 +1,301 @@
 // Copyright 2022 Uglinskii Bogdan
-#include <vector>
-#include <random>
-#include <iostream>
 #include "../../../modules/task_1/uglinskii_b_crs_matrix/crs_multiplication.h"
 
-// void InitializeMatrix(int rows, int col, int NZ, MatrixCRS *M)
-// {
-// 	M->N = rows;
-// 	M->M = col;
-// 	M->NZ = NZ;
-// 	M->value = std::vector<double>(NZ);
-// 	M->col = std::vector<int>(NZ);
-// 	M->row_index = std::vector<int>(rows + 1);
-// }
-// void FreeMatrix(MatrixCRS *M)
-// {
-// 	M->col.clear();
-// 	M->row_index.clear();
-// 	M->value.clear();
-// }
+#include <iostream>
+#include <random>
 
-// double GenerateValue(double min, double max)
-// {
-// 	std::random_device dev;
-// 	std::mt19937 gen(dev());
-// 	std::uniform_real_distribution<double> uni(min, max);
+void InitializeMatrix(int rows, int col, int NZ, MatrixCRS *M) {
+  M->N = rows;
+  M->M = col;
+  M->NZ = NZ;
+  M->value = std::vector<double>(NZ);
+  M->col = std::vector<int>(NZ);
+  M->row_index = std::vector<int>(rows + 1);
+}
+void FreeMatrix(MatrixCRS *M) {
+  M->col.clear();
+  M->row_index.clear();
+  M->value.clear();
+}
 
-// 	return uni(gen);
-// }
-// MatrixCRS GenerateRandomMatrixCRS(int N, int M, int NZ)
-// {
-// 	MatrixCRS result;
-// 	InitializeMatrix(N, M, 0, &result);
+double GenerateValue(double min, double max) {
+  std::random_device dev;
+  std::mt19937 gen(dev());
+  std::uniform_real_distribution<double> uni(min, max);
 
-// 	if (N * M != 0)
-// 	{
-// 		double mean_nz_in_row = static_cast<double>(NZ) / (N * M);
+  return uni(gen);
+}
+MatrixCRS GenerateRandomMatrixCRS(int N, int M, int NZ) {
+  MatrixCRS result;
+  InitializeMatrix(N, M, 0, &result);
 
-// 		double prob = 0;
-// 		double total_elements = 0;
-// 		result.row_index[0] = (0);
+  if (N * M != 0) {
+    double mean_nz_in_row = static_cast<double>(NZ) / (N * M);
 
-// 		int k = 0;
-// 		for (int i = 0; i < N; i++)
-// 		{
-// 			for (int j = 0; j < M; j++)
-// 			{
-// 				prob = GenerateValue(0, 1);
-// 				if (prob <= mean_nz_in_row)
-// 				{
-// 					result.value.push_back(GenerateValue(-100, 101));
-// 					result.col.push_back(j);
-// 					total_elements++;
-// 					k++;
-// 				}
-// 			}
-// 			result.row_index[i + 1] = total_elements;
-// 		}
+    double prob = 0;
+    double total_elements = 0;
+    result.row_index[0] = (0);
 
-// 		result.NZ = result.col.size();
-// 	}
-// 	return result;
-// }
+    int k = 0;
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < M; j++) {
+        prob = GenerateValue(0, 1);
+        if (prob <= mean_nz_in_row) {
+          result.value.push_back(GenerateValue(-100, 101));
+          result.col.push_back(j);
+          total_elements++;
+          k++;
+        }
+      }
+      result.row_index[i + 1] = total_elements;
+    }
 
-// int ConvertToCRS(std::vector<std::vector<double>> input_matrix, MatrixCRS *output_matrix)
-// {
-// 	int N, M;
-// 	N = input_matrix.size();
-// 	InitializeMatrix(0, 0, 0, output_matrix);
-// 	if (N != 0)
-// 	{
-// 		M = input_matrix[0].size();
-// 		output_matrix->N = N;
-// 		output_matrix->M = M;
+    result.NZ = result.col.size();
+  }
+  return result;
+}
 
-// 		int elements_count = 0;
+int ConvertToCRS(std::vector<std::vector<double>> input_matrix,
+                 MatrixCRS *output_matrix) {
+  int N, M;
+  N = input_matrix.size();
+  InitializeMatrix(0, 0, 0, output_matrix);
+  if (N != 0) {
+    M = input_matrix[0].size();
+    output_matrix->N = N;
+    output_matrix->M = M;
 
-// 		for (int i = 0; i < N; i++)
-// 		{
-// 			for (int j = 0; j < M; j++)
-// 			{
-// 				if (std::fabs(input_matrix[i][j]) > 0.000001)
-// 				{
-// 					output_matrix->value.push_back(input_matrix[i][j]);
-// 					output_matrix->col.push_back(j);
-// 					elements_count++;
-// 				}
-// 			}
-// 			output_matrix->row_index.push_back(elements_count);
-// 		}
-// 		output_matrix->NZ = output_matrix->value.size();
-// 		return 0;
-// 	}
-// 	else
-// 	{
-// 		return 1;
-// 	}
-// }
-// std::vector<std::vector<double>> ExpandMatrix(MatrixCRS M)
-// {
-// 	int k = 0;
-// 	std::vector<std::vector<double>> result = std::vector<std::vector<double>>(M.N);
-// 	int elements_in_row = 0;
-// 	for (int i = 0; i < M.N; i++)
-// 	{
-// 		elements_in_row = M.row_index[i + 1] - M.row_index[i];
-// 		for (int j = 0; j < M.M; j++)
-// 		{
-// 			if (k < M.NZ && M.col[k] == j && elements_in_row > 0)
-// 			{
-// 				result[i].push_back(M.value[k]);
-// 				elements_in_row--;
-// 				k++;
-// 			}
-// 			else
-// 			{
-// 				result[i].push_back(0);
-// 			}
-// 		}
-// 	}
+    int elements_count = 0;
 
-// 	return result;
-// }
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < M; j++) {
+        if (std::fabs(input_matrix[i][j]) > 0.000001) {
+          output_matrix->value.push_back(input_matrix[i][j]);
+          output_matrix->col.push_back(j);
+          elements_count++;
+        }
+      }
+      output_matrix->row_index.push_back(elements_count);
+    }
+    output_matrix->NZ = output_matrix->value.size();
+    return 0;
+  } else {
+    return 1;
+  }
+}
+std::vector<std::vector<double>> ExpandMatrix(MatrixCRS M) {
+  int k = 0;
+  std::vector<std::vector<double>> result =
+      std::vector<std::vector<double>>(M.N);
+  int elements_in_row = 0;
+  for (int i = 0; i < M.N; i++) {
+    elements_in_row = M.row_index[i + 1] - M.row_index[i];
+    for (int j = 0; j < M.M; j++) {
+      if (k < M.NZ && M.col[k] == j && elements_in_row > 0) {
+        result[i].push_back(M.value[k]);
+        elements_in_row--;
+        k++;
+      } else {
+        result[i].push_back(0);
+      }
+    }
+  }
 
-// void PrintMatrixInfo(MatrixCRS M)
-// {
-// 	std::cout << "\n------------------------------------------------" << std::endl;
-// 	std::cout << "N = " << M.N << "; M = " << M.M << "; NZ = " << M.NZ << std::endl;
-// 	if (M.N * M.M != 0)
-// 	{
-// 		std::cout << "mean nz in row = " << static_cast<double>(M.NZ) / (M.N * M.M) << std::endl;
-// 	}
+  return result;
+}
 
-// 	std::cout << "Values: ";
-// 	int val_size = M.value.size();
-// 	for (int i = 0; i < val_size; i++)
-// 	{
-// 		std::cout << M.value[i];
-// 		if (i < val_size - 1)
-// 			std::cout << ", ";
-// 	}
-// 	std::cout << ";\n";
+void PrintMatrixInfo(MatrixCRS M) {
+  std::cout << "\n------------------------------------------------"
+            << std::endl;
+  std::cout << "N = " << M.N << "; M = " << M.M << "; NZ = " << M.NZ
+            << std::endl;
+  if (M.N * M.M != 0) {
+    std::cout << "mean nz in row = " << static_cast<double>(M.NZ) / (M.N * M.M)
+              << std::endl;
+  }
 
-// 	std::cout << "Columns: ";
-// 	int col_size = M.col.size();
-// 	for (int i = 0; i < col_size; i++)
-// 	{
-// 		std::cout << M.col[i];
-// 		if (i < col_size - 1)
-// 			std::cout << ", ";
-// 	}
-// 	std::cout << ";\n";
+  std::cout << "Values: ";
+  int val_size = M.value.size();
+  for (int i = 0; i < val_size; i++) {
+    std::cout << M.value[i];
+    if (i < val_size - 1) std::cout << ", ";
+  }
+  std::cout << ";\n";
 
-// 	std::cout << "Row Index: ";
-// 	int row_size = M.row_index.size();
-// 	for (int i = 0; i < row_size; i++)
-// 	{
-// 		std::cout << M.row_index[i];
-// 		if (i < row_size - 1)
-// 			std::cout << ", ";
-// 	}
+  std::cout << "Columns: ";
+  int col_size = M.col.size();
+  for (int i = 0; i < col_size; i++) {
+    std::cout << M.col[i];
+    if (i < col_size - 1) std::cout << ", ";
+  }
+  std::cout << ";\n";
 
-// 	std::cout << ";\n";
-// 	std::cout << "------------------------------------------------\n"
-// 			  << std::endl;
-// }
-// void PrintNormalMatrix(std::vector<std::vector<double>> matrix)
-// {
-// 	std::cout << "====================================================" << std::endl;
-// 	int N = matrix.size();
-// 	for (int i = 0; i < N; i++)
-// 	{
-// 		int M = matrix[i].size();
-// 		for (int j = 0; j < M; j++)
-// 		{
-// 			std::cout << matrix[i][j] << "    ";
-// 		}
-// 		std::cout << std::endl;
-// 	}
-// 	std::cout << "====================================================" << std::endl;
-// }
+  std::cout << "Row Index: ";
+  int row_size = M.row_index.size();
+  for (int i = 0; i < row_size; i++) {
+    std::cout << M.row_index[i];
+    if (i < row_size - 1) std::cout << ", ";
+  }
 
-// bool CompareMatrixCRS(MatrixCRS A, MatrixCRS B)
-// {
-// 	if (A.N != B.N || A.NZ != B.NZ)
-// 		return false;
+  std::cout << ";\n";
+  std::cout << "------------------------------------------------\n"
+            << std::endl;
+}
+void PrintNormalMatrix(std::vector<std::vector<double>> matrix) {
+  std::cout << "===================================================="
+            << std::endl;
+  int N = matrix.size();
+  for (int i = 0; i < N; i++) {
+    int M = matrix[i].size();
+    for (int j = 0; j < M; j++) {
+      std::cout << matrix[i][j] << "    ";
+    }
+    std::cout << std::endl;
+  }
+  std::cout << "===================================================="
+            << std::endl;
+}
 
-	
-// 	double precision = 0.000001;
-// 	for (int i = 0; i < A.NZ; i++)
-// 	{
-// 		if (std::fabs(A.value[i] - B.value[i]) > precision)
-// 			return false;
-// 	}
+bool CompareMatrixCRS(MatrixCRS A, MatrixCRS B) {
+  if (A.N != B.N || A.NZ != B.NZ) return false;
 
-	
-// 	for (int i = 0; i < A.NZ; i++)
-// 	{
-// 		if (A.col[i] != B.col[i])
-// 			return false;
-// 	}
+  double precision = 0.000001;
+  for (int i = 0; i < A.NZ; i++) {
+    if (std::fabs(A.value[i] - B.value[i]) > precision) return false;
+  }
 
-	
-// 	int row_size = A.row_index.size();
-// 	for (int i = 0; i < row_size; i++)
-// 	{
-// 		if (A.row_index[i] != B.row_index[i])
-// 			return false;
-// 	}
+  for (int i = 0; i < A.NZ; i++) {
+    if (A.col[i] != B.col[i]) return false;
+  }
 
-// 	return true;
-// }
+  int row_size = A.row_index.size();
+  for (int i = 0; i < row_size; i++) {
+    if (A.row_index[i] != B.row_index[i]) return false;
+  }
 
-// MatrixCRS Transpose(MatrixCRS matrix)
-// {
-// 	MatrixCRS MT;
-// 	InitializeMatrix(matrix.M, matrix.N, matrix.NZ, &MT);
+  return true;
+}
 
-// 	for (int i = 0; i < matrix.NZ; i++)
-// 	{
-// 		MT.row_index[matrix.col[i] + 1]++;
-// 	}
+MatrixCRS Transpose(MatrixCRS matrix) {
+  MatrixCRS MT;
+  InitializeMatrix(matrix.M, matrix.N, matrix.NZ, &MT);
 
-// 	int tmp = 0;
-// 	double S = 0;
-// 	for (int i = 1; i <= matrix.M; i++)
-// 	{
-// 		tmp = MT.row_index[i];
-// 		MT.row_index[i] = S;
-// 		S += tmp;
-// 	}
+  for (int i = 0; i < matrix.NZ; i++) {
+    MT.row_index[matrix.col[i] + 1]++;
+  }
 
-// 	int col1 = 0, col2 = 0, col = 0, row_idx = 0, i_idx = 0;
-// 	double tmp_val = 0;
-// 	for (int i = 0; i < matrix.N; i++)
-// 	{
-// 		col1 = matrix.row_index[i];
-// 		col2 = matrix.row_index[i + 1];
-// 		col = i;
-// 		for (int j = col1; j < col2; j++)
-// 		{
-// 			tmp_val = matrix.value[j];
-// 			row_idx = matrix.col[j];
-// 			i_idx = MT.row_index[row_idx + 1];
-// 			MT.value[i_idx] = tmp_val;
-// 			MT.col[i_idx] = col;
-// 			MT.row_index[row_idx + 1]++;
-// 		}
-// 	}
+  int tmp = 0;
+  double S = 0;
+  for (int i = 1; i <= matrix.M; i++) {
+    tmp = MT.row_index[i];
+    MT.row_index[i] = S;
+    S += tmp;
+  }
 
-// 	return MT;
-// }
-// int CRSMultiply(MatrixCRS A, MatrixCRS B, MatrixCRS &C)
-// {
-// 	if (A.M != B.N)
-// 	{
-// 		std::cout << "Incorrect sizes of matrix\n";
-// 		return 1;
-// 	}
-// 	B = Transpose(B);
-// 	double S = 0;
-// 	int row_NZ = 0;
+  int col1 = 0, col2 = 0, col = 0, row_idx = 0, i_idx = 0;
+  double tmp_val = 0;
+  for (int i = 0; i < matrix.N; i++) {
+    col1 = matrix.row_index[i];
+    col2 = matrix.row_index[i + 1];
+    col = i;
+    for (int j = col1; j < col2; j++) {
+      tmp_val = matrix.value[j];
+      row_idx = matrix.col[j];
+      i_idx = MT.row_index[row_idx + 1];
+      MT.value[i_idx] = tmp_val;
+      MT.col[i_idx] = col;
+      MT.row_index[row_idx + 1]++;
+    }
+  }
 
-// 	std::vector<double> vals;
-// 	std::vector<int> col;
-// 	std::vector<int> row_idx{0};
+  return MT;
+}
+int CRSMultiply(MatrixCRS A, MatrixCRS B, MatrixCRS &C) {
+  if (A.M != B.N) {
+    std::cout << "Incorrect sizes of matrix\n";
+    return 1;
+  }
+  B = Transpose(B);
+  double S = 0;
+  int row_NZ = 0;
 
-// 	for (int i = 0; i < A.N; i++)
-// 	{
-// 		row_NZ = 0;
-// 		for (int j = 0; j < B.N; j++)
-// 		{
-// 			S = 0;
-// 			for (int k = A.row_index[i]; k < A.row_index[i + 1]; k++)
-// 			{
-// 				for (int l = B.row_index[j]; l < B.row_index[j + 1]; l++)
-// 				{
-// 					if (A.col[k] == B.col[l])
-// 					{
-// 						S += A.value[k] * B.value[l];
-// 						break;
-// 					}
-// 				}
-// 			}
+  std::vector<double> vals;
+  std::vector<int> col;
+  std::vector<int> row_idx{0};
 
-// 			if (std::fabs(S) > 0.000001)
-// 			{
-// 				col.push_back(j);
-// 				vals.push_back(S);
-// 				row_NZ++;
-// 			}
-// 		}
-// 		row_idx.push_back(row_NZ + row_idx[i]);
-// 	}
+  for (int i = 0; i < A.N; i++) {
+    row_NZ = 0;
+    for (int j = 0; j < B.N; j++) {
+      S = 0;
+      for (int k = A.row_index[i]; k < A.row_index[i + 1]; k++) {
+        for (int l = B.row_index[j]; l < B.row_index[j + 1]; l++) {
+          if (A.col[k] == B.col[l]) {
+            S += A.value[k] * B.value[l];
+            break;
+          }
+        }
+      }
 
-// 	InitializeMatrix(A.N, B.N, col.size(), &C);
+      if (std::fabs(S) > 0.000001) {
+        col.push_back(j);
+        vals.push_back(S);
+        row_NZ++;
+      }
+    }
+    row_idx.push_back(row_NZ + row_idx[i]);
+  }
 
-// 	int col_size = col.size();
-// 	for (int i = 0; i < col_size; i++)
-// 	{
-// 		C.col[i] = col[i];
-// 		C.value[i] = vals[i];
-// 	}
-// 	for (int i = 0; i <= A.N; i++)
-// 	{
-// 		C.row_index[i] = row_idx[i];
-// 	}
+  InitializeMatrix(A.N, B.N, col.size(), &C);
 
-// 	return 0;
-// }
-// int NormalMulty(std::vector<std::vector<double>> A, std::vector<std::vector<double>> B, std::vector<std::vector<double>> &C)
-// {
-// 	std::vector<std::vector<double>> result = std::vector<std::vector<double>>(A.size());
-// 	if (A.size() != 0 && (A[0].size() != B.size()))
-// 	{
-// 		std::cout << "Incorrect sizes of matrix\n";
-// 		return 1;
-// 	}
-// 	int row1 = A.size(), col1 = A[0].size(), col2 = B[0].size();
+  int col_size = col.size();
+  for (int i = 0; i < col_size; i++) {
+    C.col[i] = col[i];
+    C.value[i] = vals[i];
+  }
+  for (int i = 0; i <= A.N; i++) {
+    C.row_index[i] = row_idx[i];
+  }
 
-// 	for (int i = 0; i < row1; i++)
-// 	{
-// 		result[i] = std::vector<double>(col2);
-// 		for (int j = 0; j < col2; j++)
-// 		{
-// 			result[i][j] = 0;
-// 			for (int k = 0; k < col1; k++)
-// 				result[i][j] += A[i][k] * B[k][j];
-// 		}
-// 	}
-// 	C = result;
-// 	return 0;
-// }
+  return 0;
+}
+int NormalMulty(std::vector<std::vector<double>> A,
+                std::vector<std::vector<double>> B,
+                std::vector<std::vector<double>> &C) {
+  std::vector<std::vector<double>> result =
+      std::vector<std::vector<double>>(A.size());
+  if (A.size() != 0 && (A[0].size() != B.size())) {
+    std::cout << "Incorrect sizes of matrix\n";
+    return 1;
+  }
+  int row1 = A.size(), col1 = A[0].size(), col2 = B[0].size();
 
-// bool CompareMatrixNormal(std::vector<std::vector<double>> A, std::vector<std::vector<double>> B)
-// {
-// 	if (A.size() != 0 && B.size() != 0)
-// 	{
-// 		if (A.size() != B.size() || A[0].size() != B[0].size())
-// 		{
-// 			std::cout << "Incorrect sizes of matrix\n";
-// 			return false;
-// 		}
-// 	}
-// 	int N = A.size(), M = A[0].size();
-// 	for (int i = 0; i < N; i++)
-// 	{
-// 		for (int j = 0; j < M; j++)
-// 		{
-// 			if (A[i][j] != B[i][j])
-// 			{
-// 				return false;
-// 			}
-// 		}
-// 	}
-// 	return true;
-// }
+  for (int i = 0; i < row1; i++) {
+    result[i] = std::vector<double>(col2);
+    for (int j = 0; j < col2; j++) {
+      result[i][j] = 0;
+      for (int k = 0; k < col1; k++) result[i][j] += A[i][k] * B[k][j];
+    }
+  }
+  C = result;
+  return 0;
+}
+
+bool CompareMatrixNormal(std::vector<std::vector<double>> A,
+                         std::vector<std::vector<double>> B) {
+  if (A.size() != 0 && B.size() != 0) {
+    if (A.size() != B.size() || A[0].size() != B[0].size()) {
+      std::cout << "Incorrect sizes of matrix\n";
+      return false;
+    }
+  }
+  int N = A.size(), M = A[0].size();
+  for (int i = 0; i < N; i++) {
+    for (int j = 0; j < M; j++) {
+      if (std::fabs(A[i][j] - B[i][j]) > 0.000001) {
+        std::cout << "A != B \n";
+        return false;
+      }
+    }
+  }
+  return true;
+}
