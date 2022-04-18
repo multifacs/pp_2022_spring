@@ -8,7 +8,7 @@ std::vector<int> getRandomVector(int size) {
     std::random_device dev;
     std::mt19937 gen(dev());
     std::vector<int> vec(size);
-    for (int  i = 0; i < size; i++) {
+    for (int i = 0; i < size; i++) {
         vec[i] = gen() % size;
     }
     return vec;
@@ -17,15 +17,15 @@ std::vector<int> getRandomVector(int size) {
 // Shell sort with Hibbard's step
 // https://www.cyberforum.ru/cpp-beginners/thread2430694.html
 void ShellSortSequantial(std::vector<int>* vec) {
-    unsigned size = vec->size();
-    unsigned k = 1;
+    vec_size_t size = vec->size();
+    vec_size_t k = 1;
     while ((k << 1 | 1) < size) {  // 2 * k + 1 < size
         k = (k << 1) | 1;  // k = 2 * k + 1
     }
     for (; k > 0; k >>= 1) {  // k /= 2
-        for (unsigned i = k; i < size; i++) {
+        for (vec_size_t i = k; i < size; i++) {
             int t = (*vec)[i];
-            unsigned j = i;
+            vec_size_t j = i;
             for (; (j >= k) && (t < (*vec)[j - k]); j -= k) {
                 (*vec)[j] = (*vec)[j - k];
             }
@@ -64,14 +64,14 @@ void ShellSortParallel(std::vector<int>* vec) {
             push_mutex.unlock();
         });
     *vec = proc_res[0];
-    for (auto i = 1; i < proc_res.size(); i++) {
+    for (vec_size_t i = 1; i < proc_res.size(); i++) {
         *vec = merge(*vec, proc_res[i]);
     }
 }
 
 bool checkSort(const std::vector<int>& vec) {
-    unsigned size = vec.size();
-    for (unsigned i = 1; i < size; i++) {
+    vec_size_t size = vec.size();
+    for (vec_size_t i = 1; i < size; i++) {
         if (vec[i - 1] > vec[i]) {
             return false;
         }
