@@ -47,8 +47,6 @@ TEST(Multiplication, normal_3x3) {
 }
 
 TEST(Multiplication, crs_3x3_4) {
-  double t1, t2, t1_norm, t2_norm;
-
   MatrixCRS matrix_A = GenerateRandomMatrixCRS(3, 3, 4);
   MatrixCRS matrix_B = GenerateRandomMatrixCRS(3, 3, 4);
 
