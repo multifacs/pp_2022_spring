@@ -53,105 +53,79 @@ TEST(Multiplication, crs_3x3_4) {
   MatrixCRS matrix_B = GenerateRandomMatrixCRS(3, 3, 4);
 
   MatrixCRS matrix_C;
-  t1 = omp_get_wtime();
   CRSMultiply(matrix_A, matrix_B, &matrix_C);
-  t2 = omp_get_wtime();
+
   std::vector<std::vector<double>> C;
 
   std::vector<std::vector<double>> exp_A = ExpandMatrix(matrix_A),
                                    exp_B = ExpandMatrix(matrix_B);
-  t1_norm = omp_get_wtime();
+
   NormalMulty(exp_A, exp_B, &C);
-  t2_norm = omp_get_wtime();
 
   MatrixCRS crs_C;
   ConvertToCRS(C, &crs_C);
 
   ASSERT_TRUE(CompareMatrixCRS(matrix_C, crs_C));
-  std::cout << "Normal multiply time = " << t2_norm - t1_norm
-            << "\nCRS multiply time = " << t2 - t1
-            << "\nAcceleration = " << (t2_norm - t1_norm) / (t2 - t1) << "\n";
 }
 
 TEST(Multiplication, crs_200x200_500) {
-  double t1, t2, t1_norm, t2_norm;
-
   MatrixCRS matrix_A = GenerateRandomMatrixCRS(200, 200, 500);
   MatrixCRS matrix_B = GenerateRandomMatrixCRS(200, 200, 500);
 
   MatrixCRS matrix_C;
-  t1 = omp_get_wtime();
   CRSMultiply(matrix_A, matrix_B, &matrix_C);
-  t2 = omp_get_wtime();
+
   std::vector<std::vector<double>> C;
 
   std::vector<std::vector<double>> exp_A = ExpandMatrix(matrix_A),
                                    exp_B = ExpandMatrix(matrix_B);
-  t1_norm = omp_get_wtime();
+
   NormalMulty(exp_A, exp_B, &C);
-  t2_norm = omp_get_wtime();
 
   MatrixCRS crs_C;
   ConvertToCRS(C, &crs_C);
 
   ASSERT_TRUE(CompareMatrixCRS(matrix_C, crs_C));
-  std::cout << "Normal multiply time = " << t2_norm - t1_norm
-            << "\nCRS multiply time = " << t2 - t1
-            << "\nAcceleration = " << (t2_norm - t1_norm) / (t2 - t1) << "\n";
 }
 
 TEST(Multiplication, crs_200x200_1000) {
-  double t1, t2, t1_norm, t2_norm;
-
   MatrixCRS matrix_A = GenerateRandomMatrixCRS(200, 200, 1000);
   MatrixCRS matrix_B = GenerateRandomMatrixCRS(200, 200, 1000);
 
   MatrixCRS matrix_C;
-  t1 = omp_get_wtime();
   CRSMultiply(matrix_A, matrix_B, &matrix_C);
-  t2 = omp_get_wtime();
+
   std::vector<std::vector<double>> C;
 
   std::vector<std::vector<double>> exp_A = ExpandMatrix(matrix_A),
                                    exp_B = ExpandMatrix(matrix_B);
-  t1_norm = omp_get_wtime();
+
   NormalMulty(exp_A, exp_B, &C);
-  t2_norm = omp_get_wtime();
 
   MatrixCRS crs_C;
   ConvertToCRS(C, &crs_C);
 
   ASSERT_TRUE(CompareMatrixCRS(matrix_C, crs_C));
-  std::cout << "Normal multiply time = " << t2_norm - t1_norm
-            << "\nCRS multiply time = " << t2 - t1
-            << "\nAcceleration = " << (t2_norm - t1_norm) / (t2 - t1) << "\n";
 }
 
 TEST(Multiplication, crs_200x200_25000) {
-  double t1, t2, t1_norm, t2_norm;
-
   MatrixCRS matrix_A = GenerateRandomMatrixCRS(200, 200, 25000);
   MatrixCRS matrix_B = GenerateRandomMatrixCRS(200, 200, 25000);
 
   MatrixCRS matrix_C;
-  t1 = omp_get_wtime();
   CRSMultiply(matrix_A, matrix_B, &matrix_C);
-  t2 = omp_get_wtime();
+
   std::vector<std::vector<double>> C;
 
   std::vector<std::vector<double>> exp_A = ExpandMatrix(matrix_A),
                                    exp_B = ExpandMatrix(matrix_B);
-  t1_norm = omp_get_wtime();
+
   NormalMulty(exp_A, exp_B, &C);
-  t2_norm = omp_get_wtime();
 
   MatrixCRS crs_C;
   ConvertToCRS(C, &crs_C);
 
   ASSERT_TRUE(CompareMatrixCRS(matrix_C, crs_C));
-  std::cout << "Normal multiply time = " << t2 - t1
-            << "\nCRS multiply time = " << t2_norm - t1_norm
-            << "\nAcceleration = " << (t2_norm - t1_norm) / (t2 - t1) << "\n";
 }
 
 int main(int argc, char **argv) {
