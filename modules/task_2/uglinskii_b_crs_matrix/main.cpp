@@ -85,8 +85,28 @@ TEST(Multiplication_parallel, 200x200_350) {
 TEST(Multiplication_parallel, 250x250_400) {
   double t1, t2, t1_, t2_;
 
-  MatrixCRS matrix_A = GenerateRandomMatrixCRS(250, 250, 6000);
-  MatrixCRS matrix_B = GenerateRandomMatrixCRS(250, 250, 6000);
+  MatrixCRS matrix_A = GenerateRandomMatrixCRS(250, 250, 400);
+  MatrixCRS matrix_B = GenerateRandomMatrixCRS(250, 250, 400);
+
+  MatrixCRS matrix_C;
+  t1 = omp_get_wtime();
+  CRSMultiply(matrix_A, matrix_B, &matrix_C);
+  t2 = omp_get_wtime();
+
+  MatrixCRS C_omp;
+  t1_ = omp_get_wtime();
+  CRSMultiplyOMP(matrix_A, matrix_B, &C_omp);
+  t2_ = omp_get_wtime();
+  std::cout << "NO OMP time = " << t2 - t1 << "\nOMP time = " << t2_ - t1_
+            << "\nAcceleration = " << (t2 - t1) / (t2_ - t1_) << "\n";
+  ASSERT_TRUE(CompareMatrixCRS(matrix_C, C_omp));
+}
+
+TEST(Multiplication_parallel, 300x300_1000) {
+  double t1, t2, t1_, t2_;
+
+  MatrixCRS matrix_A = GenerateRandomMatrixCRS(300, 300, 1000);
+  MatrixCRS matrix_B = GenerateRandomMatrixCRS(300, 300, 1000);
 
   MatrixCRS matrix_C;
   t1 = omp_get_wtime();
