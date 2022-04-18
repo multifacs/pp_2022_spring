@@ -1,7 +1,6 @@
 // Copyright 2022 Denisova Julia
 #include <gtest/gtest.h>
 #include <vector>
-#include <gtest/gtest.h>
 #include <tbb/tbb.h>
 #include "./radix_sort_tbb.h"
 
