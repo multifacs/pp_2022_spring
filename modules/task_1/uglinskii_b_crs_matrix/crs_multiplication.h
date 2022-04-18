@@ -15,7 +15,6 @@ struct MatrixCRS {
 };
 
 void InitializeMatrix(int rows, int col, int NZ, MatrixCRS *M);
-void FreeMatrix(MatrixCRS *M);
 
 double GenerateValue(double min, double max);
 MatrixCRS GenerateRandomMatrixCRS(int N, int M, int NZ);

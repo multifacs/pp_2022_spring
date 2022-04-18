@@ -12,11 +12,6 @@ void InitializeMatrix(int rows, int col, int NZ, MatrixCRS *M) {
   M->col = std::vector<int>(NZ);
   M->row_index = std::vector<int>(rows + 1);
 }
-void FreeMatrix(MatrixCRS *M) {
-  M->col.clear();
-  M->row_index.clear();
-  M->value.clear();
-}
 
 double GenerateValue(double min, double max) {
   std::random_device dev;
