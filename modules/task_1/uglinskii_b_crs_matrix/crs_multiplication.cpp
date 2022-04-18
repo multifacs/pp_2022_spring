@@ -296,13 +296,6 @@ bool CompareMatrixNormal(std::vector<std::vector<double>> A,
     }
   }
 
-  if (A.size() != 0 && B.size() != 0) {
-    if (A.size() != B.size() || A[0].size() != B[0].size()) {
-      std::cout << "Incorrect sizes of matrix\n";
-      return false;
-    }
-  }
-  int N = A.size(), M = A[0].size();
   for (int i = 0; i < A_N; i++) {
     for (int j = 0; j < A_M; j++) {
       if (std::fabs(A[i][j] - B[i][j]) > 0.000001) {
