@@ -66,9 +66,9 @@ TEST(Multiplication, crs_3x3_4) {
   ASSERT_TRUE(CompareMatrixCRS(matrix_C, crs_C));
 }
 
-TEST(Multiplication, crs_200x200_500) {
-  MatrixCRS matrix_A = GenerateRandomMatrixCRS(200, 200, 500);
-  MatrixCRS matrix_B = GenerateRandomMatrixCRS(200, 200, 500);
+TEST(Multiplication, crs_100x100_100) {
+  MatrixCRS matrix_A = GenerateRandomMatrixCRS(100, 100, 100);
+  MatrixCRS matrix_B = GenerateRandomMatrixCRS(100, 100, 100);
 
   MatrixCRS matrix_C;
   CRSMultiply(matrix_A, matrix_B, &matrix_C);
@@ -86,9 +86,9 @@ TEST(Multiplication, crs_200x200_500) {
   ASSERT_TRUE(CompareMatrixCRS(matrix_C, crs_C));
 }
 
-TEST(Multiplication, crs_200x200_1000) {
-  MatrixCRS matrix_A = GenerateRandomMatrixCRS(200, 200, 1000);
-  MatrixCRS matrix_B = GenerateRandomMatrixCRS(200, 200, 1000);
+TEST(Multiplication, crs_100x100_350) {
+  MatrixCRS matrix_A = GenerateRandomMatrixCRS(100, 100, 350);
+  MatrixCRS matrix_B = GenerateRandomMatrixCRS(100, 100, 350);
 
   MatrixCRS matrix_C;
   CRSMultiply(matrix_A, matrix_B, &matrix_C);
@@ -106,9 +106,9 @@ TEST(Multiplication, crs_200x200_1000) {
   ASSERT_TRUE(CompareMatrixCRS(matrix_C, crs_C));
 }
 
-TEST(Multiplication, crs_200x200_25000) {
-  MatrixCRS matrix_A = GenerateRandomMatrixCRS(200, 200, 25000);
-  MatrixCRS matrix_B = GenerateRandomMatrixCRS(200, 200, 25000);
+TEST(Multiplication, crs_100x100_2000) {
+  MatrixCRS matrix_A = GenerateRandomMatrixCRS(100, 100, 2000);
+  MatrixCRS matrix_B = GenerateRandomMatrixCRS(100, 100, 2000);
 
   MatrixCRS matrix_C;
   CRSMultiply(matrix_A, matrix_B, &matrix_C);
