@@ -1,8 +1,8 @@
 // Copyright 2022 Denisova Julia
-#include "./radix_sort_tbb.h"
-#include <tbb/tbb.h>
 #include <gtest/gtest.h>
 #include <vector>
+#include <tbb/tbb.h>
+#include "./radix_sort_tbb.h"
 
 
 TEST(TBB_RadixSort, 321) {

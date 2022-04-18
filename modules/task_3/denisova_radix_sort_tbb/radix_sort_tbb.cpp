@@ -100,24 +100,23 @@ void Merge(int** arrs, int* sizes, int th, int* output) {
 }
 
 class SortFunctor {
-     private:
-             int** arrs;
-             int* arr;
-             int* sizes;
-             int* begins;
-
-     public:
-            SortFunctor(int** _arrs, int* _arr, int* _sizes, int* _begins)
-                : arrs(_arrs), arr(_arr), sizes(_sizes), begins(_begins) {}
-            void operator()(const tbb::blocked_range<int>& range) const {
-                for (auto id = range.begin(); id != range.end(); id++) {
-                   for (int i = begins[id], j = 0; i < begins[id] + sizes[id];
-                      i++, j++) {
-                      arrs[id][j] = arr[i];
-                   }
-                   radixSort(arrs[id], sizes[id]);
-                }
+ private:
+         int** arrs;
+         int* arr;
+         int* sizes;
+         int* begins;
+ public:
+        SortFunctor(int** _arrs, int* _arr, int* _sizes, int* _begins)
+            : arrs(_arrs), arr(_arr), sizes(_sizes), begins(_begins) {}
+        void operator()(const tbb::blocked_range<int>& range) const {
+            for (auto id = range.begin(); id != range.end(); id++) {
+               for (int i = begins[id], j = 0; i < begins[id] + sizes[id];
+                  i++, j++) {
+                  arrs[id][j] = arr[i];
+               }
+               radixSort(arrs[id], sizes[id]);
             }
+        }
 };
 
 void parallelSort(int* arr, int size, int threads) {
