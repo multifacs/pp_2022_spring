@@ -6,18 +6,17 @@ bool test(int size) {
     std::vector<int> vec_seq = getRandomVector(size);
     std::vector<int> vec_par = vec_seq;
 
-    volatile double start_seq = omp_get_wtime();
+    // volatile double start_seq = omp_get_wtime();
     ShellSortSequantial(&vec_seq);
-    volatile double end_seq = omp_get_wtime();
+    // volatile double end_seq = omp_get_wtime();
 
-    volatile double start_par = omp_get_wtime();
+    // volatile double start_par = omp_get_wtime();
     ShellSortParallel(&vec_par);
-    volatile double end_par = omp_get_wtime();
+    // volatile double end_par = omp_get_wtime();
 
-    double seq_time = end_seq - start_seq;
-    double par_time = end_par - start_par;
-
-    std::cout << "Effective: " << seq_time / par_time << '\n';
+    // double seq_time = end_seq - start_seq;
+    // double par_time = end_par - start_par;
+    // std::cout << "Effective: " << seq_time / par_time << '\n';
 
     return vec_seq == vec_par && checkSort(vec_par);
 }
