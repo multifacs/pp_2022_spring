@@ -29,8 +29,6 @@ class SparseMatrix {
     void printFullMatrix(std::vector<std::vector<std::complex<int>>>)const;
     std::vector<std::vector<std::complex<int>>> getFullMatrix();
     std::vector<std::vector<std::complex<int>>> getEmptyMatrix(int m, int n) const;
-    void threadTask(int from, int to, SparseMatrix& matrix, 
-        std::vector<std::vector<std::complex<int>>>& resultMatrix);
 };
 
 

@@ -42,19 +42,19 @@ TEST(Matrix_Multiplication_STD, parallel_multiplication_returns_same_result) {
     ASSERT_TRUE(result1 == result2);
 }
 
- //TEST(Matrix_Multiplication_STD, parallel_multiplication_works) {
- //   SparseMatrix matrix1(100, 100);
- //   SparseMatrix matrix2(100, 100);
- //   double startSeq = omp_get_wtime();
- //   SparseMatrix result1 = matrix1.multiply_seq(matrix2);
- //   double finishSeq = omp_get_wtime();
- //   double startParallel = omp_get_wtime();
- //   SparseMatrix result2 = matrix1.multiply_parallel(matrix2);
- //   double finishParallel = omp_get_wtime();
- //   std::cout << "Sequential time: " << finishSeq - startSeq<< " s." << std::endl;
- //   std::cout << "Parallel time: " << finishParallel - startParallel << " s." << std::endl;
- //   ASSERT_TRUE(result1 == result2);
- //}
+// TEST(Matrix_Multiplication_STD, parallel_multiplication_works) {
+//   SparseMatrix matrix1(100, 100);
+//   SparseMatrix matrix2(100, 100);
+//   double startSeq = omp_get_wtime();
+//   SparseMatrix result1 = matrix1.multiply_seq(matrix2);
+//   double finishSeq = omp_get_wtime();
+//   double startParallel = omp_get_wtime();
+//   SparseMatrix result2 = matrix1.multiply_parallel(matrix2);
+//   double finishParallel = omp_get_wtime();
+//   std::cout << "Sequential time: " << finishSeq - startSeq<< " s." << std::endl;
+//   std::cout << "Parallel time: " << finishParallel - startParallel << " s." << std::endl;
+//   ASSERT_TRUE(result1 == result2);
+// }
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);

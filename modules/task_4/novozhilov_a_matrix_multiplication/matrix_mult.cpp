@@ -92,10 +92,9 @@ SparseMatrix SparseMatrix::multiply_parallel(const SparseMatrix& matrix) const {
                         resultMatrix[i][j] = tmp;
                     }
                 }
-            }
-        ));
+            }));
     }
-    for (int i = 0; i < threads.size(); i++) {
+    for (int i = 0; i < static_cast<int>(threads.size()); i++) {
         threads[i].join();
     }
     return SparseMatrix(resultMatrix);
@@ -202,8 +201,4 @@ std::vector<std::vector<std::complex<int>>> SparseMatrix::getEmptyMatrix(int m, 
         matrix.push_back(std::vector<std::complex<int>>(n));
     }
     return matrix;
-}
-
-void SparseMatrix::threadTask(int from, int to, SparseMatrix& matrix, std::vector<std::vector<std::complex<int>>>& resultMatrix) {
-    
 }
