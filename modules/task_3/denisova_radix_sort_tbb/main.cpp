@@ -31,18 +31,18 @@ TEST(TBB_RadixSort, random) {
     // printVec(a);
     std::vector<int> b = a;
     std::vector<int> p = a;
-    //tbb::tick_count start_seq = tbb::tick_count::now();
+    // tbb::tick_count start_seq = tbb::tick_count::now();
     radixSort(&a[0], a.size());
-    //tbb::tick_count stop_seq = tbb::tick_count::now();
+    // tbb::tick_count stop_seq = tbb::tick_count::now();
     parallelSort(&p[0], p.size(), 4);
-    //tbb::tick_count stop_par = tbb::tick_count::now();
+    // tbb::tick_count stop_par = tbb::tick_count::now();
     std::sort(std::begin(b), std::end(b));
     // printVec(a);
     ASSERT_EQ(a, b);
     ASSERT_EQ(p, b);
-    //double seq = (stop_seq - start_seq).seconds();
-    //double par = (stop_par - stop_seq).seconds();
-    //std::cout << seq << "  " << par << "  " << seq / par << std::endl;
+    // double seq = (stop_seq - start_seq).seconds();
+    // double par = (stop_par - stop_seq).seconds();
+    // std::cout << seq << "  " << par << "  " << seq / par << std::endl;
 }
 
 int main(int argc, char **argv) {
