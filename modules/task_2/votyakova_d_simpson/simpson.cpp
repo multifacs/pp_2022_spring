@@ -15,7 +15,7 @@ double getOMPSimpson(const std::function<double(std::vector<double>)>& f,
     h[i] = (limits[i].second - limits[i].first) / n[i];
     counter *= n[i];
   }
-  double result = 0.0;
+  double result = 0;
 
 #pragma omp parallel
 #pragma omp for schedule(static, 1) reduction(+ : result)
