@@ -15,8 +15,8 @@ std::vector<int> getSequentialDeicstra(
 
 void getThreadIteration(const std::vector<std::vector<int>>& graf,
                         const int start, const int numTops,
-                        std::vector<int>& result);
+                        std::vector<int>* result);
 
 std::vector<int> getParallelDeicstra(const std::vector<std::vector<int>>& graf);
 
-#endif  // MODULES_TASK_4_ERSHOV_A_DEICSTRA_ALGORITHM_STD_DEICSTRA_TBB_H_
+#endif  // MODULES_TASK_4_ERSHOV_A_DEICSTRA_ALGORITHM_STD_DEICSTRA_STD_H_

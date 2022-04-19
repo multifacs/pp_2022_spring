@@ -3,9 +3,10 @@
 
 #include <algorithm>
 #include <random>
-#include <thread>
 #include <utility>
 #include <vector>
+
+#include "../../../3rdparty/unapproved/unapproved.h"
 
 std::vector<std::vector<int>> getRandomVector(const int count) {
   std::vector<std::vector<int>> graf(count, std::vector<int>(count));
@@ -62,12 +63,12 @@ std::vector<int> getSequentialDeicstra(
 
 void getThreadIteration(const std::vector<std::vector<int>>& graf,
                         const int start, const int numTops,
-                        std::vector<int>& result) {
+                        std::vector<int>* result) {
   for (int i = start; i < start + numTops; ++i) {
     auto tmp = getDeicstra(graf, i);
     int count = graf.size();
     for (int j = 0; j < count; ++j) {
-      result[i * count + j] = tmp[j];
+      (*result)[i * count + j] = tmp[j];
     }
   }
 }
@@ -82,14 +83,14 @@ std::vector<int> getParallelDeicstra(
   std::vector<int> result(count * count, 0);
 
   for (int i = 0; i < numThreads; ++i) {
-    vThread.push_back(std::thread(getThreadIteration, graf, start, numTops,
-                                  std::ref(result)));
+    vThread.push_back(
+        std::thread(getThreadIteration, graf, start, numTops, &result));
     start += numTops;
   }
 
   if (numTops * numThreads != count) {
     vThread.push_back(std::thread(getThreadIteration, graf, start,
-                                  count - (numTops * numThreads), result));
+                                  count - (numTops * numThreads), &result));
   }
 
   for (int i = 0; i < numThreads; ++i) {
