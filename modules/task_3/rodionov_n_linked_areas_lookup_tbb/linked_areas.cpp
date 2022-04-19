@@ -128,7 +128,8 @@ struct RowProcessor {
     this->equivalents = processor.equivalents;
   }
   void operator()(const tbb::blocked_range<int>& r) const {
-    for (size_t x = r.begin(); x != r.end(); x++) {
+    for (tbb::blocked_range<int>::const_iterator x = r.begin(); x != r.end();
+         x++) {
       int label = x * image->size + 1;
       for (int y = 0; y < this->rows; y++) {
         if (!image->Get(x, y)) {
