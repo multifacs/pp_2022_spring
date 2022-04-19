@@ -1,5 +1,5 @@
 // Copyright 2022 Kutuev Roman
-#include <gtest/gtest.h>
+#include "gtest/gtest.h"
 
 #include "../../../modules/task_1/kutuev_r_jarvis/jarvis.h"
 TEST(Jarvis, test_1) {
