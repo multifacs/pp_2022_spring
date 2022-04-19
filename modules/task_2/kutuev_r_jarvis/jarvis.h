@@ -24,6 +24,7 @@ struct Point {
 };
 
 class jarvis {
+
     public:
     std::vector<Point> set_points(int size);
     int find_lowest_left_most_point_index(const std::vector<Point>& points);
