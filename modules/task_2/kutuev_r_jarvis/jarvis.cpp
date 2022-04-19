@@ -1,4 +1,4 @@
-﻿//  Copyright 2022 Kutuev Roman
+﻿//    Copyright 2022 Kutuev Roman
 
 #include "../../../modules/task_2/kutuev_r_jarvis/jarvis.h"
 static const int NUM_THREADS = 12;
@@ -102,7 +102,7 @@ std::vector<Point> jarvis::convex_hull_omp(const std::vector<Point>& points) {
         next = (current + 1) % size;
 #pragma omp parallel for shared(input, size, next) private(i, sign) \
     num_threads(NUM_THREADS)
-        for (i = size - 1; i >= 0; i--) { 
+        for (i = size - 1; i >= 0; i--) {
             if (input[i].x != input[current].x ||
                 input[i].y != input[current].y) {
                 sign = orientation(input[current], input[i], input[next]);
