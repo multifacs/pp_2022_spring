@@ -2,8 +2,6 @@
 #include <gtest/gtest.h>
 #include <iostream>
 #include <cstdio>
-#include <gtest-mpi-listener.hpp>
-
 #include "./linked_areas.h"
 
 const int IMAGE_SIZE1 = 5;
@@ -94,11 +92,5 @@ TEST(LinkedAreasLookup, EqualityTest5) {
 
 int main(int argc, char** argv) {
   ::testing::InitGoogleTest(&argc, argv);
-  ::testing::TestEventListeners& listeners =
-      ::testing::UnitTest::GetInstance()->listeners();
-
-  listeners.Release(listeners.default_result_printer());
-  listeners.Release(listeners.default_xml_generator());
-
   return RUN_ALL_TESTS();
 }
