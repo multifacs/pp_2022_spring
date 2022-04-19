@@ -36,7 +36,6 @@ TEST(lakhov_trapezoidal_rule, func1) {
   intervals[0] = {0, 10};
   int interval_count = 5;
   double result = trapezoidalRule(f1, intervals, interval_count);
-  std::cout<<result<<std::endl;
   ASSERT_NEAR(50, result, 1);
 }
 
@@ -47,7 +46,6 @@ TEST(lakhov_trapezoidal_rule, func2) {
   intervals[1] = {0, 2};
   int interval_count = 70;
   double result = trapezoidalRule(f2, intervals, interval_count);
-  std::cout<<result<<std::endl;
   ASSERT_NEAR(8.0, result, 0.2);
 }
 
@@ -58,7 +56,6 @@ TEST(lakhov_trapezoidal_rule, func3) {
   intervals[2] = {0, 3};
   int interval_count = 100;
   double result = trapezoidalRule(f3, intervals, interval_count);
-  std::cout<<result<<std::endl;
   ASSERT_NEAR(121.5, result, 1);
 }
 
@@ -69,7 +66,6 @@ TEST(lakhov_trapezoidal_rule, func4) {
   intervals[2] = {0, 1};
   int interval_count = 100;
   double result = trapezoidalRule(f4, intervals, interval_count);
-  std::cout<<result<<std::endl;
   ASSERT_NEAR(0.2525, result, 0.01);
 }
 
@@ -79,7 +75,6 @@ TEST(lakhov_trapezoidal_rule, func5) {
   intervals[1] = {0, 2};
   int interval_count = 100;
   double result = trapezoidalRule(f5, intervals, interval_count);
-  std::cout<<result<<std::endl;
   ASSERT_NEAR(10.9, result, 0.2);
 }
 
