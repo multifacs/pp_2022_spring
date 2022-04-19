@@ -1,50 +1,55 @@
 // Copyright 2022 Nikita Rodionov
 #ifndef MODULES_TASK_3_RODIONOV_N_LINKED_AREAS_LOOKUP_TBB_LINKED_AREAS_H_
 #define MODULES_TASK_3_RODIONOV_N_LINKED_AREAS_LOOKUP_TBB_LINKED_AREAS_H_
+#include <tbb/tbb.h>
 #include <algorithm>
 #include <cstdlib>
-#include <mutex>
 #include <vector>
 
+typedef tbb::queuing_mutex Mutex;
 struct Equivalents {
   std::vector<std::vector<int>> equivalents;
-  std::mutex mutex;
+  Mutex mutex;
   void Add(int a, int b) {
     if (a == b) {
       return;
     }
-    this->mutex.lock();
-    std::vector<std::vector<int>>::iterator containing = std::find_if(
-        equivalents.begin(), equivalents.end(), [&](std::vector<int> p) {
-          return std::find_if(p.begin(), p.end(), [&](int p1) {
-                   return p1 == a || p1 == b;
-                 }) != p.end();
-        });
-    // We have not found any equivalents
-    if (containing == equivalents.end()) {
-      std::vector<int> toAdd;
-      toAdd.push_back(a);
-      toAdd.push_back(b);
-      equivalents.push_back(toAdd);
-    } else {
-      // Contains both
-      if (std::find_if(containing->begin(), containing->end(),
-                       [&](int p1) { return p1 == a; }) != containing->end() &&
-          std::find_if(containing->begin(), containing->end(),
-                       [&](int p1) { return p1 == b; }) != containing->end()) {
-        // Do nothing
-      } else if (std::find_if(containing->begin(), containing->end(),
-                              [&](int p1) { return p1 == a; }) !=
-                 containing->end()) {
-        // Contains first
-        containing->push_back(b);
-
+    Mutex::scoped_lock lock(mutex);
+    {
+      std::vector<std::vector<int>>::iterator containing = std::find_if(
+          equivalents.begin(), equivalents.end(), [&](std::vector<int> p) {
+            return std::find_if(p.begin(), p.end(), [&](int p1) {
+                     return p1 == a || p1 == b;
+                   }) != p.end();
+          });
+      // We have not found any equivalents
+      if (containing == equivalents.end()) {
+        std::vector<int> toAdd;
+        toAdd.push_back(a);
+        toAdd.push_back(b);
+        equivalents.push_back(toAdd);
       } else {
-        // Contains second
-        containing->push_back(a);
+        // Contains both
+        if (std::find_if(containing->begin(), containing->end(),
+                         [&](int p1) { return p1 == a; }) !=
+                containing->end() &&
+            std::find_if(containing->begin(), containing->end(), [&](int p1) {
+              return p1 == b;
+            }) != containing->end()) {
+          // Do nothing
+        } else if (std::find_if(containing->begin(), containing->end(),
+                                [&](int p1) { return p1 == a; }) !=
+                   containing->end()) {
+          // Contains first
+          containing->push_back(b);
+
+        } else {
+          // Contains second
+          containing->push_back(a);
+        }
       }
     }
-    this->mutex.unlock();
+    lock.release();
   }
   int Get(int a) {
     std::vector<std::vector<int>>::iterator containing = std::find_if(

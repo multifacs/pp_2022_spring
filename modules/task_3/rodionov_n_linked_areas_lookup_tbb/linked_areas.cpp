@@ -1,9 +1,5 @@
 // Copyright 2022 Nikita Rodionov
 #include "../../../modules/task_3/rodionov_n_linked_areas_lookup_tbb/linked_areas.h"
-
-#include <omp.h>
-#include <tbb/tbb.h>
-
 #include <algorithm>
 #include <functional>
 #include <map>
