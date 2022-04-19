@@ -14,7 +14,7 @@ double getSeqSimpson(
     h[i] = (limits[i].second - limits[i].first) / n[i];
     counter *= n[i];
   }
-  double result = 0.0;
+  double result = 0;
   for (int i = 0; i < counter; ++i) {
     std::vector<std::vector<double>> params(dim);
     int temp = i;
