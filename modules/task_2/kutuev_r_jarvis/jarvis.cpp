@@ -1,4 +1,5 @@
-﻿//    Copyright 2022 Kutuev Roman
+﻿
+// Copyright 2022 Kutuev Roman
 
 #include "../../../modules/task_2/kutuev_r_jarvis/jarvis.h"
 static const int NUM_THREADS = 12;

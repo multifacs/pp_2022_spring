@@ -1,4 +1,5 @@
-﻿//    Copyright 2022 Kutuev Roman
+﻿
+// Copyright 2022 Kutuev Roman
 #include <gtest/gtest.h>
 
 #include "../../../modules/task_2/kutuev_r_jarvis/jarvis.h"
