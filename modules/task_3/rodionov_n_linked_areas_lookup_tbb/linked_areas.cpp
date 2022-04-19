@@ -54,7 +54,7 @@ BinaryImageAreas* FindAreas(BinaryImage image) {
           static_cast<int>(_3 != -1) + static_cast<int>(_4 != -1);
       if (total_non_bg == 0) {
         areas->image[x][y] = label;
-        label++;
+        ++label;
       } else if (total_non_bg == 1) {
         if (_1 != -1) {
           areas->image[x][y] = _1;
@@ -128,8 +128,7 @@ struct RowProcessor {
     this->equivalents = processor.equivalents;
   }
   void operator()(const tbb::blocked_range<int>& r) const {
-    for (tbb::blocked_range<int>::const_iterator x = r.begin(); x != r.end();
-         x++) {
+    for (tbb::blocked_range<int>::const_iterator x = r.begin(); x != r.end(); x++) {
       int label = x * image->size + 1;
       for (int y = 0; y < this->rows; y++) {
         if (!image->Get(x, y)) {
@@ -146,7 +145,7 @@ struct RowProcessor {
             static_cast<int>(_3 != -1) + static_cast<int>(_4 != -1);
         if (total_non_bg == 0) {
           areas->image[x][y] = label;
-          label++;
+          ++label;
         } else if (total_non_bg == 1) {
           if (_1 != -1) {
             areas->image[x][y] = _1;
