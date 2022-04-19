@@ -4,7 +4,7 @@
 #include "../../../modules/task_2/kutuev_r_jarvis/jarvis.h"
 static const int NUM_THREADS = 12;
 
-std::vector<Point> jarvis::set_points(int size) {
+std::vector<Point> set_points(int size) {
     std::random_device dev;
     std::mt19937 gen(dev());
     std::uniform_real_distribution<> urd(-1000, 1000);
@@ -15,7 +15,7 @@ std::vector<Point> jarvis::set_points(int size) {
     return points;
 }
 
-int jarvis::find_lowest_left_most_point_index(const std::vector<Point>& points) {
+int find_lowest_left_most_point_index(const std::vector<Point>& points) {
     int index = 0;
     int min_x = points[0].x;
     int min_y = points[0].y;
@@ -32,7 +32,7 @@ int jarvis::find_lowest_left_most_point_index(const std::vector<Point>& points) 
 }
 
 
-int jarvis::orientation(const Point& p0, const Point& p1, const Point& p2) {
+int orientation(const Point& p0, const Point& p1, const Point& p2) {
     int value = (p1.x * p2.y - p2.x * p1.y) - (p0.x * p2.y - p2.x * p0.y) +
         (p0.x * p1.y - p0.y * p1.x);
 
@@ -44,11 +44,11 @@ int jarvis::orientation(const Point& p0, const Point& p1, const Point& p2) {
         return left;
 }
 
-int jarvis::sq_distance(const Point& p0, const Point& p1) {
+int sq_distance(const Point& p0, const Point& p1) {
     return (p0.x - p1.x) * (p0.x - p1.x) + (p0.y - p1.y) * (p0.y - p1.y);
 }
 
-std::vector<Point> jarvis::convex_hull(const std::vector<Point>& points) {
+std::vector<Point> convex_hull(const std::vector<Point>& points) {
     std::vector<Point> input = points;
     int size = points.size();
     std::vector<Point> CH;
@@ -73,7 +73,7 @@ std::vector<Point> jarvis::convex_hull(const std::vector<Point>& points) {
     return CH;
 }
 
-std::vector<Point> jarvis::convex_hull_omp(const std::vector<Point>& points) {
+std::vector<Point> convex_hull_omp(const std::vector<Point>& points) {
     std::vector<Point> input = points;
     int size = points.size();
     std::vector<Point> CH;
