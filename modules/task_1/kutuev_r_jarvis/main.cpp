@@ -60,8 +60,8 @@ TEST(Jarvis, test_4) {
 
 TEST(Jarvis, test_5) {
   jarvis quick_hull;
-  double time1 = omp_get_wtime();
+  auto time1 = clock();
   std::vector<Point> quick = quick_hull.convex_hull(quick_hull.set_points(1));
-  double time2 = omp_get_wtime();
-  printf("time : %lf\n\n", (time2 - time1));
+  auto time2 = clock();
+  printf("time : %f\n\n", static_cast<float>(time2 - time1) / CLOCKS_PER_SEC);
 }
