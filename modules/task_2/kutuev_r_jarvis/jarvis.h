@@ -24,8 +24,8 @@ struct Point {
 };
 
 class jarvis {
-public:
 
+public:
     std::vector<Point> set_points(int size);
 
     int find_lowest_left_most_point_index(const std::vector<Point>& points);
@@ -37,8 +37,5 @@ public:
     std::vector<Point> convex_hull(const std::vector<Point>& points);
 
     std::vector<Point> convex_hull_omp(const std::vector<Point>& points);
-
 };
-
-
 #endif  // MODULES_TASK_2_KUTUEV_R_JARVIS_JARVIS_H_

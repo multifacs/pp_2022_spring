@@ -59,7 +59,7 @@ TEST(Jarvis, test_4) {
 
 TEST(Jarvis, test_5) {
     jarvis quick_hull;
-    std::vector<Point> polygon = quick_hull.set_points(3000000);
+    std::vector<Point> polygon = quick_hull.set_points(1);
     double time1 = omp_get_wtime();
     std::vector<Point> quick = quick_hull.convex_hull(polygon);
     double time2 = omp_get_wtime();
@@ -76,9 +76,9 @@ TEST(Jarvis, test_5) {
     for (int i = 0; i < quick_omp.size(); i++) {
       printf("%d ; %d\n", quick_omp[i].x, quick_omp[i].y);
     }*/
-    for (int i = 0; i < quick.size(); i++) {
+    int size = quick.size();
+    for (int i = 0; i < size; i++) {
         EXPECT_DOUBLE_EQ(quick[i].x, quick_omp[i].x);
         EXPECT_DOUBLE_EQ(quick[i].y, quick_omp[i].y);
     }
-
 }
