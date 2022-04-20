@@ -140,11 +140,14 @@ MatrixComplex MatrixComplex::Multiply(
     std::vector<std::complex<int>> values;
     std::vector<int> rows;
     std::vector<int> columnIndexes;
-    int* temp = new int[size];
+    std::vector<int> temp;
+    temp.resize(size);
     int nonZero = 0;
     columnIndexes.push_back(0);
     for (int i = 0; i < size; i++) {
-        memset(temp, -1, size * sizeof(int));
+        for (size_t f = 0; f < temp.size(); f++) {
+            temp[f] = -1;
+        }
         for (int j = right.columnIndexes[i];
             j < right.columnIndexes[static_cast<size_t>(i) + 1]; j++) {
             int row = right.rows[j];
