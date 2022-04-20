@@ -16,15 +16,6 @@ void randomVector(vector<int>* data, size_t size, size_t rad) {
         data->at(i) = dist(mersenne);
 }
 
-size_t rad(size_t value) {
-    size_t counter = 0;
-    while (value != 0) {
-        value /= 10;
-        counter++;
-    }
-    return counter;
-}
-
 int getNum(int val, size_t pos) {
     while (pos > 1) {
         val /= 10;
@@ -32,6 +23,15 @@ int getNum(int val, size_t pos) {
     }
 
     return val % 10;
+}
+
+size_t rad(size_t value) {
+    size_t counter = 0;
+    while (value != 0) {
+        value /= 10;
+        counter++;
+    }
+    return counter;
 }
 
 void radixSort(vector<int>* data) {
