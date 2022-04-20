@@ -8,6 +8,7 @@
 #include <complex>
 #include <iostream>
 #include <random>
+#include <cstring>
 class MatrixComplex {
  private:
     int Size;  // Kol-vo strok i stolbcov
@@ -23,7 +24,6 @@ class MatrixComplex {
     explicit MatrixComplex(std::vector<std::vector<std::complex<int>>> matrix);
     MatrixComplex& operator=(const MatrixComplex& tmp);
     std::complex<int> get(int row, int col)const;
-    ~MatrixComplex();
     int getSize();
     int getNonZero();
     void setSize(int s);
@@ -33,7 +33,7 @@ class MatrixComplex {
     std::vector<int> getColumnIndex();
     std::vector<std::vector<std::complex<int>>> getRandomMatrix(int size);
     MatrixComplex Multiply(MatrixComplex left,
-        MatrixComplex right, MatrixComplex* result);
+        MatrixComplex right);
     friend std::ostream& operator << (std::ostream& os, const MatrixComplex& p);
     friend std::istream& operator >> (std::istream& in, MatrixComplex& p);
 };

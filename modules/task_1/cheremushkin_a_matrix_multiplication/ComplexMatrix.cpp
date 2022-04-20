@@ -1,32 +1,33 @@
 // Copyright 2022 Cheremushkin Kirill
 #include "../../../modules/task_1/cheremushkin_a_matrix_multiplication/ComplexMatrix.h"
-
-MatrixComplex::MatrixComplex() {
-    Size = 3;
-    NonZero = 3;
-    values = { {3, 2}, {4, 3}, {2, 4} };
-    rows = { 0, 1, 2 };
-    columnIndexes = { 0, 1, 2, 2 };
+#include <vector>
+#include <string>
+#include <stdexcept>
+#include <complex>
+#include <iostream>
+#include <random>
+#include <cstring>
+MatrixComplex::MatrixComplex() : Size{ 3 }, NonZero{ 3 },
+values{ {3, 2}, {4, 3}, {2, 4} }, rows { 0, 1, 2 },
+columnIndexes { 0, 1, 2, 2 } {
 }
-MatrixComplex::MatrixComplex(const MatrixComplex &tmp) {
-    Size = tmp.Size;
-    NonZero = tmp.NonZero;
-    values = tmp.values;
-    rows = tmp.rows;
-    columnIndexes = tmp.columnIndexes;
+MatrixComplex::MatrixComplex(const MatrixComplex &tmp) : Size{ tmp.Size },
+NonZero{ tmp.NonZero },
+values{ tmp.values }, rows{ tmp.rows },
+columnIndexes{ tmp.columnIndexes } {
 }
 MatrixComplex::MatrixComplex(int size) {
     std::vector<std::vector<std::complex<int>>> matrix = getRandomMatrix(size);
-    Size = matrix.size();
+    Size = static_cast<int>(matrix.size());
     NonZero = 0;
     std::complex<int> zero(0, 0);
     this->columnIndexes.push_back(0);
     int counter = 0;
-    for (int i = 0; i < static_cast<int>(matrix.size()); i++) {
-        for (int j = 0; j < static_cast<int>(matrix[i].size()); j++) {
+    for (size_t i = 0; i < static_cast<size_t>(matrix.size()); i++) {
+        for (size_t j = 0; j < static_cast<size_t>(matrix[i].size()); j++) {
             if (matrix[i][j] != zero) {
                 values.push_back(matrix[i][j]);
-                rows.push_back(j);
+                rows.push_back(static_cast<int>(j));
                 NonZero++;
                 counter++;
             }
@@ -36,16 +37,16 @@ MatrixComplex::MatrixComplex(int size) {
 }
 MatrixComplex::MatrixComplex(
     std::vector<std::vector<std::complex<int>>> matrix) {
-    Size = matrix.size();
+    Size = static_cast<int>(matrix.size());
     NonZero = 0;
     std::complex<int> zero(0, 0);
     this->columnIndexes.push_back(0);
     int counter = 0;
-    for (int i = 0; i < static_cast<int>(matrix.size()); i++) {
-        for (int j = 0; j < static_cast<int>(matrix[i].size()); j++) {
+    for (size_t i = 0; i < static_cast<size_t>(matrix.size()); i++) {
+        for (size_t j = 0; j < static_cast<size_t>(matrix[i].size()); j++) {
             if (matrix[i][j] != zero) {
                 values.push_back(matrix[i][j]);
-                rows.push_back(j);
+                rows.push_back(static_cast<int>(j));
                 NonZero++;
                 counter++;
             }
@@ -65,21 +66,16 @@ std::complex<int> MatrixComplex::get(int row, int col) const {
     if (row > Size || col > Size || row < 0 || col < 0) {
         throw std::invalid_argument("index out of matrix range");
     }
+
     int currRow;
-    for (int pos = columnIndexes[row]; pos < columnIndexes[row + 1]; pos++) {
+    for (int pos = columnIndexes[col];
+        pos < columnIndexes[static_cast<size_t>(col) + 1]; pos++) {
         currRow = rows[pos];
-        if (currRow == col) {
+        if (currRow == row) {
             return values[pos];
         }
     }
     return std::complex<int>();
-}
-MatrixComplex::~MatrixComplex() {
-    Size = 0;
-    NonZero = 0;
-    values.~vector();
-    rows.~vector();
-    columnIndexes.~vector();
 }
 
 int MatrixComplex::getSize() {
@@ -91,11 +87,17 @@ int MatrixComplex::getNonZero() {
 }
 
 void MatrixComplex::setSize(int s) {
+    if (s < 0) {
+        throw std::invalid_argument("value < 0");
+    }
      Size = s;
 }
 
 void MatrixComplex::setNonZero(int n) {
-     NonZero = n;
+    if (n < 0) {
+        throw std::invalid_argument("value < 0");
+    }
+    NonZero = n;
 }
 
 std::vector<std::complex<int>> MatrixComplex::getValues() {
@@ -130,41 +132,40 @@ MatrixComplex::getRandomMatrix(int size) {
     return result;
 }
 MatrixComplex MatrixComplex::Multiply(
-    MatrixComplex left, MatrixComplex right, MatrixComplex*result) {
+    MatrixComplex left, MatrixComplex right) {
     if (left.Size != right.Size) {
-        throw std::invalid_argument("invalid matrix size");
+        throw std::invalid_argument("invalid matrix");
     }
     int size = left.Size;
     std::vector<std::complex<int>> values;
     std::vector<int> rows;
     std::vector<int> columnIndexes;
-    int* temp = new int[size];
+    std::vector<int> temp;
+    temp.resize(size);
     int nonZero = 0;
     columnIndexes.push_back(0);
     for (int i = 0; i < size; i++) {
-        memset(temp, -1, size * sizeof(int));
-		/*if (right.columnIndexes[i] == -2 || right.columnIndexes[i + 1] == -2) {
-			continue;
-		}*/
+        for (size_t f = 0; f < temp.size(); f++) {
+            temp[f] = -1;
+        }
         for (int j = right.columnIndexes[i];
-            j < right.columnIndexes[i + 1]; j++) {
+            j < right.columnIndexes[static_cast<size_t>(i) + 1]; j++) {
             int row = right.rows[j];
             temp[row] = j;
         }
         for (int j = 0; j < size; j++) {
             std::complex<int> sum = 0;
-			/*if (left.columnIndexes[j] == -2 || left.columnIndexes[j + 1] == -2) {
-				continue;
-			}*/
             for (int k = left.columnIndexes[j];
-                k < left.columnIndexes[j + 1]; k++) {
+                k < left.columnIndexes[static_cast<size_t>(j) + 1]; k++) {
                 int row = left.rows[k];
                 int index = temp[row];
                 if (index != -1) {
-                    sum += { left.values[k].real() * right.values[index].real()-
+                    sum = {sum.real() + (left.values[k].real() *
+                        right.values[index].real()) -
                         left.values[k].imag() * right.values[index].imag(),
-                        left.values[k].real() * right.values[index].imag()+
-                        left.values[k].imag() * right.values[index].real()
+                        sum.imag()+
+                        (left.values[k].real() * right.values[index].imag()+
+                        left.values[k].imag() * right.values[index].real())
                     };
                 }
             }
@@ -176,36 +177,36 @@ MatrixComplex MatrixComplex::Multiply(
         }
         columnIndexes.push_back(nonZero);
     }
-    delete[] temp;
-    // Initialize(result, size, nonZero);
-    result->Size = size;
-    result->rows.resize(rows.size());
-    result->values.resize(values.size());
-    result->columnIndexes.resize(columnIndexes.size());
+    // delete[] temp;
+    MatrixComplex res = MatrixComplex();
+    res.Size = size;
+    res.rows.resize(rows.size());
+    res.values.resize(values.size());
+    res.columnIndexes.resize(columnIndexes.size());
     for (int i = 0; i < nonZero; i++) {
-        result->rows[i] = rows[i];
-        result->values[i] = values[i];
+        res.rows[i] = rows[i];
+        res.values[i] = values[i];
     }
-    for (int i = 0; i < columnIndexes.size(); i++) {
-        result->columnIndexes[i] = columnIndexes[i];
+    for (size_t i = 0; i < columnIndexes.size(); i++) {
+        res.columnIndexes[i] = columnIndexes[i];
     }
-    return *result;
+    return res;
 }
 
 std::ostream& operator<<(std::ostream& os, const MatrixComplex& p) {
-    os << "Value: ";
+    os << "values";
     for (int i = 0; i < p.NonZero; i++) {
-        os << '[' << i << "] " << p.values[i] << ", ";
+        os << "[" << i << "]" << p.values[i] << ",";
     }
     os << std::endl;
-    os << "Rows: ";
-    for (int i = 0; i < p.rows.size(); i++) {
-        os << '[' << i << "] " << p.rows[i] << ", ";
+    os << "Rows:";
+    for (size_t i = 0; i < p.rows.size(); i++) {
+        os << "[" << i << "] " << p.rows[i] << ", ";
     }
     os << std::endl;
     os << "ColumnIndx: ";
-    for (int i = 0; i < p.columnIndexes.size(); i++) {
-        os << '[' << i << "] " << p.columnIndexes[i] << ", ";
+    for (size_t i = 0; i < p.columnIndexes.size(); i++) {
+        os << "[" << i << "] " << p.columnIndexes[i] << ", ";
     }
     os << std::endl;
     return os;
@@ -223,8 +224,6 @@ std::istream& operator>>(std::istream& in, MatrixComplex& p) {
     std::vector<int> bufC;
     int flag = p.NonZero;
     bool flagc = false;
-    bool flagL = false;
-    bool flagZ = false;
     bool flagIns = false;
     std::complex<int> buf;
     int b1;
@@ -234,8 +233,8 @@ std::istream& operator>>(std::istream& in, MatrixComplex& p) {
     for (int i = 0; i < p.Size; i++) {
         for (int j = 0; j < p.Size; j++) {
             if (flag > 0) {
-                std::cout << "Input elements " << '[' << i
-                    << ']' << '[' << j << ']' << ":" << std::endl;
+                std::cout << "Input elements " << "[" << i
+                    << "]" << "[" << j << "]" << ":" << std::endl;
                 std::cout << "Input  real: ";
                 in >> b1;
                 if (b1 == 0) {
@@ -250,14 +249,12 @@ std::istream& operator>>(std::istream& in, MatrixComplex& p) {
                     bufV.push_back(buf);
                     bufR.push_back(j);
                     flag--;
-                    flagZ = true;
                     if (flagc == false) {
-                        bufC.push_back(bufV.size() - 1);
+                        bufC.push_back(static_cast<int>(bufV.size()) - 1);
                         flagc = true;
                     }
                     if (i == p.Size - 1 && j == p.Size - 1) {
-                        bufC.push_back(bufV.size() - 1);
-                        flagL = true;
+                        bufC.push_back(static_cast<int>(bufV.size()) - 1);
                     }
                 }
             } else {
@@ -275,12 +272,12 @@ std::istream& operator>>(std::istream& in, MatrixComplex& p) {
     }
     p.rows = {};
     p.rows.resize(bufR.size());
-    for (int i = 0; i < bufR.size(); i++) {
+    for (size_t i = 0; i < bufR.size(); i++) {
          p.rows[i] = bufR[i];
     }
     p.columnIndexes = {};
     p.columnIndexes.resize(bufC.size());
-    for (int i = 0; i < bufC.size(); i++) {
+    for (size_t i = 0; i < bufC.size(); i++) {
          p.columnIndexes[i] = bufC[i];
     }
     return in;
