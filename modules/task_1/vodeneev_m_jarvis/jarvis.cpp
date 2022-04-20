@@ -55,9 +55,7 @@ std::vector<std::pair<double, double>> JarvisSeq(std::vector<std::pair
 
         if (points[next_point] == hull[0]) {
             return hull;
-        }
-
-        else {
+        } else {
             hull.push_back(points[next_point]);
             points.erase(points.begin() + next_point);
         }

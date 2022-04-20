@@ -10,8 +10,8 @@ std::vector<std::pair<double, double>> GetPoints(int left_border, int right_bord
 
     std::vector<std::pair<double, double>> res(size);
     for (size_t i = 0; i < size; i++) {
-        res[i].first = left_border + static_cast<double>(rand()) / RAND_MAX * (right_border - left_border);
-        res[i].second = low_border + static_cast<double>(rand()) / RAND_MAX * (high_border - low_border);
+        res[i].first = left_border + static_cast<double>(std::rand()) / RAND_MAX * (right_border - left_border);
+        res[i].second = low_border + static_cast<double>(std::rand()) / RAND_MAX * (high_border - low_border);
     }
 
     return res;
@@ -26,7 +26,6 @@ double OrientationPointRelativeToVector(std::pair<double, double> A,
 
 std::vector<std::pair<double, double>> JarvisSeq(std::vector<std::pair
     <double, double>> points) {
-
     if (points.size() < 1)
         throw - 1;
 
@@ -55,9 +54,7 @@ std::vector<std::pair<double, double>> JarvisSeq(std::vector<std::pair
 
         if (points[next_point] == hull[0]) {
             return hull;
-        }
-
-        else {
+        } else {
             hull.push_back(points[next_point]);
             points.erase(points.begin() + next_point);
         }
@@ -66,9 +63,7 @@ std::vector<std::pair<double, double>> JarvisSeq(std::vector<std::pair
 
 std::vector<std::pair<double, double>> JarvisOmp(std::vector<std::pair
     <double, double>> points, int numthreads) {
-
     int set_size = points.size();
-
     if (set_size < 1)
         throw - 1;
 
@@ -108,7 +103,7 @@ std::vector<std::pair<double, double>> JarvisOmp(std::vector<std::pair
             indexes[omp_get_thread_num()] = temp_index;
         }
 
-        std::sort(indexes.begin(), indexes.end());
+        sort(indexes.begin(), indexes.end());
 
         next_point = indexes[0];
 

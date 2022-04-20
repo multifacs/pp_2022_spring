@@ -5,6 +5,7 @@
 #include <omp.h>
 
 #include <random>
+#include <algorithm>
 #include <vector>
 
 std::vector<std::pair<double, double>> GetPoints(int left_border, int right_border,
