@@ -2,6 +2,7 @@
 #ifndef MODULES_TASK_1_VODENEEV_M_JARVIS_JARVIS_H_
 #define MODULES_TASK_1_VODENEEV_M_JARVIS_JARVIS_H_
 #include <random>
+#include <utility>
 #include <vector>
 
 std::vector<std::pair<double, double>> GetPoints(int left_border, int right_border,

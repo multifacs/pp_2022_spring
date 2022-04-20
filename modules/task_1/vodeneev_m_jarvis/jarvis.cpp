@@ -10,8 +10,8 @@ std::vector<std::pair<double, double>> GetPoints(int left_border, int right_bord
 
     std::vector<std::pair<double, double>> res(size);
     for (size_t i = 0; i < size; i++) {
-        res[i].first = left_border + static_cast<double>(rand()) / RAND_MAX * (right_border - left_border);
-        res[i].second = low_border + static_cast<double>(rand()) / RAND_MAX * (high_border - low_border);
+        res[i].first = left_border + static_cast<double>(std::rand()) / RAND_MAX * (right_border - left_border);
+        res[i].second = low_border + static_cast<double>(std::rand()) / RAND_MAX * (high_border - low_border);
     }
 
     return res;
@@ -26,7 +26,6 @@ double OrientationPointRelativeToVector(std::pair<double, double> A,
 
 std::vector<std::pair<double, double>> JarvisSeq(std::vector<std::pair
     <double, double>> points) {
-
     if (points.size() < 1)
         throw - 1;
 

@@ -29,7 +29,7 @@ TEST(Jarvis_test_omp, hull_for_5_points) {
     std::vector<std::pair<double, double>> points = { {0, 0}, {0, 4}, {4, 4}, {4, 0}, {2, 2} };
 
     std::vector<std::pair<double, double>> res = JarvisOmp(points, 6);
-    std::vector<std::pair<double, double>> expect_set = { {0, 0}, {4, 0},{4, 4}, {0, 4} };
+    std::vector<std::pair<double, double>> expect_set = { {0, 0}, {4, 0}, {4, 4}, {0, 4} };
 
     ASSERT_EQ(res, expect_set);
 }
@@ -38,7 +38,7 @@ TEST(Jarvis_test_omp, hull_for_8_points) {
     std::vector<std::pair<double, double>> points = { {0, 0}, {0, 4}, {4, 4}, {4, 0}, {2, 2},
         {0.5, 0.5}, {1, 1.5}, {1.5, 1} };
     std::vector<std::pair<double, double>> res = JarvisOmp(points, 4);
-    std::vector<std::pair<double, double>> expect_set = { {0, 0}, {4, 0},{4, 4}, {0, 4} };
+    std::vector<std::pair<double, double>> expect_set = { {0, 0}, {4, 0}, {4, 4}, {0, 4} };
 
     ASSERT_EQ(res, expect_set);
 }

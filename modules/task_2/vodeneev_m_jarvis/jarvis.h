@@ -6,6 +6,7 @@
 
 #include <random>
 #include <algorithm>
+#include <utility>
 #include <vector>
 
 std::vector<std::pair<double, double>> GetPoints(int left_border, int right_border,
