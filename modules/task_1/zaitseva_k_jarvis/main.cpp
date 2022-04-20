@@ -43,7 +43,7 @@ TEST(Sequential, Test_Generate_and_Draw) {
   std::ofstream fout("shell.txt");
   std::ofstream fout2("points.txt");
   std::vector<Point> res = Jarvis(points);
-  for (int i = 0; i < res.size(); i++)
+  for (std::size_t i = 0; i < res.size(); i++)
     fout << res[i].x << std::endl << res[i].y << std::endl;
   fout << res[0].x << std::endl << res[0].y << std::endl;
   for (auto i = points.begin(); i != points.end(); i++)
