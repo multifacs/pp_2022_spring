@@ -3,14 +3,14 @@
 #include <vector>
 #include "./ComplexMatrix.h"
 
-TEST(MatrixComplex_Seq, getSize) {
+TEST(MatrixComplex_Seq, setSize) {
     MatrixComplex matrix(3);
-    EXPECT_NO_THROW(matrix.getSize(), 3);
+    EXPECT_NO_THROW(matrix.setSize(3));
 }
 
-TEST(MatrixComplex_Seq, get_throws_exception) {
+TEST(MatrixComplex_Seq, setSizeErr) {
     MatrixComplex matrix(3);
-    EXPECT_ANY_THROW(matrix.get(4, 4));
+    EXPECT_ANY_THROW(matrix.setSize(-1));
 }
 
 TEST(MatrixComplex_Seq, multiplication_works) {
