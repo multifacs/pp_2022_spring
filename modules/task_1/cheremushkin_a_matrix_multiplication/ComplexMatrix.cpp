@@ -138,9 +138,6 @@ MatrixComplex MatrixComplex::Multiply(
     columnIndexes.push_back(0);
     for (int i = 0; i < size; i++) {
         memset(temp, -1, size * sizeof(int));
-		/*if (right.columnIndexes[i] == -2 || right.columnIndexes[i + 1] == -2) {
-			continue;
-		}*/
         for (int j = right.columnIndexes[i];
             j < right.columnIndexes[i + 1]; j++) {
             int row = right.rows[j];
@@ -148,9 +145,6 @@ MatrixComplex MatrixComplex::Multiply(
         }
         for (int j = 0; j < size; j++) {
             std::complex<int> sum = 0;
-			/*if (left.columnIndexes[j] == -2 || left.columnIndexes[j + 1] == -2) {
-				continue;
-			}*/
             for (int k = left.columnIndexes[j];
                 k < left.columnIndexes[j + 1]; k++) {
                 int row = left.rows[k];
@@ -173,7 +167,6 @@ MatrixComplex MatrixComplex::Multiply(
         columnIndexes.push_back(nonZero);
     }
     delete[] temp;
-    // Initialize(result, size, nonZero);
     result->Size = size;
     result->rows.resize(rows.size());
     result->values.resize(values.size());
@@ -186,4 +179,94 @@ MatrixComplex MatrixComplex::Multiply(
         result->columnIndexes[i] = columnIndexes[i];
     }
     return *result;
+}
+
+std::ostream& operator<<(std::ostream& os, const MatrixComplex& p) {
+    os << "values";
+    for (int i = 0; i < p.NonZero; i++) {
+        os << "[" << i << "]" << p.values[i] << ",";
+    }
+    os << std::endl;
+    os << "Rows:";
+    for (size_t i = 0; i < p.rows.size(); i++) {
+        os << "[" << i << "] " << p.rows[i] << ", ";
+    }
+    os << std::endl;
+    os << "ColumnIndx: ";
+    for (size_t i = 0; i < p.columnIndexes.size(); i++) {
+        os << "[" << i << "] " << p.columnIndexes[i] << ", ";
+    }
+    os << std::endl;
+    return os;
+}
+
+std::istream& operator>>(std::istream& in, MatrixComplex& p) {
+    std::cout << "VVedite razmernost: ";
+    in >> p.Size;
+    std::cout << "Vvedite kol-vo NonZero elements: ";
+    in >> p.NonZero;
+    p.values = {};
+    p.values.resize(p.NonZero);
+    std::vector<std::complex<int>> bufV;
+    std::vector<int> bufR;
+    std::vector<int> bufC;
+    int flag = p.NonZero;
+    bool flagc = false;
+    bool flagIns = false;
+    std::complex<int> buf;
+    int b1;
+    int b2;
+    std::cout << "Column: " << "I" << std::endl;
+    std::cout << "Rows : " << "J" << std::endl;
+    for (int i = 0; i < p.Size; i++) {
+        for (int j = 0; j < p.Size; j++) {
+            if (flag > 0) {
+                std::cout << "Input elements " << "[" << i
+                    << "]" << "[" << j << "]" << ":" << std::endl;
+                std::cout << "Input  real: ";
+                in >> b1;
+                if (b1 == 0) {
+                    continue;
+                }
+                std::cout << "Input image: ";
+                in >> b2;
+                std::cout << std::endl;
+                buf = { b1, b2 };
+                if (buf.real() != 0 && buf.imag() != 0) {
+                    flagIns = true;
+                    bufV.push_back(buf);
+                    bufR.push_back(j);
+                    flag--;
+                    if (flagc == false) {
+                        bufC.push_back(bufV.size() - 1);
+                        flagc = true;
+                    }
+                    if (i == p.Size - 1 && j == p.Size - 1) {
+                        bufC.push_back(bufV.size() - 1);
+                    }
+                }
+            } else {
+               break;
+            }
+        }
+        flagc = false;
+        if (flagIns == false) {
+            bufC.push_back(-2);
+        }
+        flagIns = false;
+    }
+    for (int i = 0; i < p.NonZero; i++) {
+         p.values[i] = bufV[i];
+    }
+    p.rows = {};
+    p.rows.resize(bufR.size());
+    for (size_t i = 0; i < bufR.size(); i++) {
+         p.rows[i] = bufR[i];
+    }
+    p.columnIndexes = {};
+    p.columnIndexes.resize(bufC.size());
+    for (size_t i = 0; i < bufC.size(); i++) {
+         p.columnIndexes[i] = bufC[i];
+    }
+    return in;
 }
