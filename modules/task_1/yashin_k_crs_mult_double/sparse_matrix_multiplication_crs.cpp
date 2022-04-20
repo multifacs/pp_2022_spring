@@ -11,7 +11,6 @@ bool sparse_matrix::operator== (const sparse_matrix& matrix) const& {
     for (int i = 0; i < values.size(); i++)
         if ((std::fabs(matrix.values[i] - values[i]) > 0.00001))
             return false;
-            
     return true;
 }
 

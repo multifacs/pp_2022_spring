@@ -1,6 +1,6 @@
 // Copyright 2022 Yashin Kirill
-#ifndef MODULES_TASK_1_YASHIN_K_SPARSE_MATRIX_MULTIPLICATION_CRS_SPARSE_MATRIX_MULTIPLICATION_CRS_H_
-#define MODULES_TASK_1_YASHIN_K_SPARSE_MATRIX_MULTIPLICATION_CRS_SPARSE_MATRIX_MULTIPLICATION_CRS_H_
+#ifndef MODULES_TASK_1_YASHIN_K_CRS_MULT_DOUBLE_SPARSE_MATRIX_MULTIPLICATION_CRS_H_
+#define MODULES_TASK_1_YASHIN_K_CRS_MULT_DOUBLE_SPARSE_MATRIX_MULTIPLICATION_CRS_H_
 
 #include <iostream>
 #include <iomanip>
@@ -29,7 +29,7 @@ class sparse_matrix {
       row_index.resize(_rows + 1);
      }
 
-     sparse_matrix(int _rows, int _cols, std::vector<double> _values, 
+     sparse_matrix(int _rows, int _cols, std::vector<double> _values,
         std::vector<int> _col_index, std::vector<int> _row_index) {
       rows = _rows;
       columns = _cols;
@@ -74,13 +74,13 @@ class sparse_matrix {
      void printDefault();
      void printMatrix();
 
-     friend sparse_matrix sparse_multiplication(const sparse_matrix& A, 
+     friend sparse_matrix sparse_multiplication(const sparse_matrix& A,
       const sparse_matrix& B);
 };
 
-sparse_matrix sparse_multiplication(const sparse_matrix& A, 
+sparse_matrix sparse_multiplication(const sparse_matrix& A,
   const sparse_matrix& B);
 Matrix matrix_multiplication(const Matrix& A, const Matrix& B);
 Matrix random_matrix(const int& rows, const int& columns);
 
-#endif  // MODULES_TASK_1_YASHIN_K_SPARSE_MATRIX_MULTIPLICATION_CRS_SPARSE_MATRIX_MULTIPLICATION_CRS_H_
+#endif  // MODULES_TASK_1_YASHIN_K_CRS_MULT_DOUBLE_SPARSE_MATRIX_MULTIPLICATION_CRS_H_

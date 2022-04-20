@@ -31,7 +31,6 @@ TEST(Yashin_Kirill_Sparse_Matrix, Can_Compare_Sparse_Matrix) {
 
     sparse_matrix A(rows, cols, values, col_index, row_index);
     sparse_matrix B(rows, cols, values, col_index, row_index);
-    EXPECT_NO_THROW(A == B);
     ASSERT_TRUE(A == B);
 }
 
