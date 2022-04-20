@@ -61,6 +61,7 @@ struct Image {
     for (int i = 0; i < img.size * img.size; i++) {
       this->data[i] = img.data[i];
     }
+    return *this;
   }
   ~Image() {
     if (this->data) {
