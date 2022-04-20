@@ -2,7 +2,7 @@
 
 #include <gtest/gtest.h>
 #include <vector>
-#include "./block_gauss.h"
+#include "../../../modules/task_1/kitaev_p_block_gauss/block_gauss.h"
 
 TEST(Sequential_gauss, CanCreateRandomMatrix) {
   ASSERT_NO_THROW(getRandomMatrix(100, 100));

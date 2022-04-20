@@ -1,6 +1,6 @@
 // Copyright 2022 Kitaev Pavel
 
-#include "./block_gauss.h"
+#include "../../../modules/task_1/kitaev_p_block_gauss/block_gauss.h"
 
 std::vector<int> getRandomMatrix(int row, int col) {
   std::random_device dev;
@@ -20,7 +20,7 @@ std::vector<int> getGaussKernel(double sigma) {
 
   for (int i = 0; i < 3; i++) {
     for (int j = 0; j < 3; j++) {
-      gauss_kernel[i * 3 + j] = exp(-(i * 3. + j) * 
+      gauss_kernel[i * 3 + j] = exp(-(i * 3. + j) *
         (i * 3. + j) / (2. * sigma * sigma));
       norm += gauss_kernel[i * 3 + j];
     }
@@ -35,9 +35,8 @@ std::vector<int> getGaussKernel(double sigma) {
   return gauss_kernel;
 }
 
-std::vector<int> SequentialGauss(std::vector<int> img, 
-  int row, int col, double sigma)
-{
+std::vector<int> SequentialGauss(std::vector<int> img,
+  int row, int col, double sigma) {
   std::vector<int> gauss_kernel = getGaussKernel(sigma);
 
   std::vector<int> res(img);
