@@ -6,6 +6,7 @@
 #include <list>
 #include <random>
 #include <ctime>
+#include <algorithm>
 
 using std::vector;
 using std::list;
