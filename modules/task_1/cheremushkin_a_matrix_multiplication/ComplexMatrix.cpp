@@ -1,19 +1,14 @@
 // Copyright 2022 Cheremushkin Kirill
 #include "../../../modules/task_1/cheremushkin_a_matrix_multiplication/ComplexMatrix.h"
 
-MatrixComplex::MatrixComplex() {
-    Size = 3;
-    NonZero = 3;
-    values = { {3, 2}, {4, 3}, {2, 4} };
-    rows = { 0, 1, 2 };
-    columnIndexes = { 0, 1, 2, 2 };
+MatrixComplex::MatrixComplex() : Size{ 3 }, NonZero{ 3 },
+values{ {3, 2}, {4, 3}, {2, 4} }, rows { 0, 1, 2 },
+columnIndexes { 0, 1, 2, 2 } {
 }
-MatrixComplex::MatrixComplex(const MatrixComplex &tmp) {
-    Size = tmp.Size;
-    NonZero = tmp.NonZero;
-    values = tmp.values;
-    rows = tmp.rows;
-    columnIndexes = tmp.columnIndexes;
+MatrixComplex::MatrixComplex(const MatrixComplex &tmp) : Size{ tmp.Size },
+NonZero{ tmp.NonZero },
+values{ tmp.values }, rows{ tmp.rows },
+columnIndexes{ tmp.columnIndexes } {
 }
 MatrixComplex::MatrixComplex(int size) {
     std::vector<std::vector<std::complex<int>>> matrix = getRandomMatrix(size);
