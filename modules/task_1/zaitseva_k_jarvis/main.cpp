@@ -1,7 +1,7 @@
 // Copyright 2022 Zaitseva Ksenia
 #include <gtest/gtest.h>
 #include <vector>
-#include "jarvis.h"
+#include "./jarvis.h"
 
 TEST(Sequential, Test_Point_equal) {
   Point p1 = {0.2, 0.1};

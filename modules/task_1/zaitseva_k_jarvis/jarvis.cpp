@@ -1,38 +1,35 @@
 // Copyright 2022 Zaitseva Ksenia
-#include "jarvis.h"
+#include "./jarvis.h"
 
 bool Point::operator<(const Point& other) const {
-if ((y < other.y) || ((y == other.y) && (x > other.x)))
+  if ((y < other.y) || ((y == other.y) && (x > other.x)))
     return 1;
   else
     return 0;
 }
 
 bool Point::operator==(const Point& other) const {
-return (std::fabs(x - other.x) <
+  return (std::fabs(x - other.x) <
           1000 * std::numeric_limits<double>::epsilon()) &&
          (std::fabs(y - other.y) <
           1000 * std::numeric_limits<double>::epsilon());
 }
 
-bool Point::operator!=(const Point& other) const {
-    return !(*this == other); 
-}
+bool Point::operator!=(const Point& other) const { return !(*this == other); }
 
 Point Point::operator-(const Point& other) const {
-return Point(x - other.x, y - other.y);
+  return Point(x - other.x, y - other.y);
 }
 
 double cross(const Point& a, const Point& b) { return a.x * b.y - b.x * a.y; }
 
-bool turn(const Point& a, const Point& b,
-          const Point& c) {
+bool turn(const Point& a, const Point& b, const Point& c) {
   double det = cross(b - a, c - a);
-  if (det > 0.0)
+  if (det > 0.0) {
     return 0;
-  else if (det < 0.0)
+  } else if (det < 0.0) {
     return 1;
-  else if (det == 0.0) {
+  } else if (det == 0.0) {
     double distans_a_b =
         std::sqrt((b.x - a.x) * (b.x - a.x) * (b.y - a.y) * (b.y - a.y));
     double distans_a_c =

@@ -1,15 +1,17 @@
 // Copyright 2022 Zaitseva Ksenia
-#ifndef MODULES_TASK_1_ZAITSEVA_KSENIA_JARVIS_H_
-#define MODULES_TASK_1_ZAITSEVA_KSENIA_JARVIS_H_
+#ifndef MODULES_TASK_1_ZAITSEVA_K_JARVIS_JARVIS_H_
+#define MODULES_TASK_1_ZAITSEVA_K_JARVIS_JARVIS_H_
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
 #include <fstream>
 #include <random>
+#include <limits>
+#include <utility>
 
 struct Point {
-  Point(double x_ = 0.0, double y_ = 0.0) : x(x_), y(y_){};
+  explicit Point() : x(0), y(0) {}
+  Point(double x_, double y_) : x(x_), y(y_){}
   double x;
   double y;
   bool operator<(const Point& other) const;
@@ -27,4 +29,4 @@ std::vector<Point> Jarvis(std::vector<Point> points);
 
 std::vector<Point> Generate(int n);
 
-#endif  // MODULES_TASK_1_ZAITSEVA_KSENIA_JARVIS_H_
+#endif  // MODULES_TASK_1_ZAITSEVA_K_JARVIS_JARVIS_H_
