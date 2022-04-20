@@ -161,10 +161,11 @@ MatrixComplex MatrixComplex::Multiply(
                 int row = left.rows[k];
                 int index = temp[row];
                 if (index != -1) {
-                    sum += { left.values[k].real() * right.values[index].real()-
+                    sum = {sum.real() + (left.values[k].real() * right.values[index].real()) -
                         left.values[k].imag() * right.values[index].imag(),
-                        left.values[k].real() * right.values[index].imag()+
-                        left.values[k].imag() * right.values[index].real()
+                        sum.imag()+
+                        (left.values[k].real() * right.values[index].imag()+
+                        left.values[k].imag() * right.values[index].real())
                     };
                 }
             }
@@ -186,7 +187,7 @@ MatrixComplex MatrixComplex::Multiply(
         result->rows[i] = rows[i];
         result->values[i] = values[i];
     }
-    for (int i = 0; i < columnIndexes.size(); i++) {
+    for (auto i = 0; i < columnIndexes.size(); i++) {
         result->columnIndexes[i] = columnIndexes[i];
     }
     return *result;
@@ -199,12 +200,12 @@ std::ostream& operator<<(std::ostream& os, const MatrixComplex& p) {
     }
     os << std::endl;
     os << "Rows: ";
-    for (int i = 0; i < p.rows.size(); i++) {
+    for (auto i = 0; i < p.rows.size(); i++) {
         os << '[' << i << "] " << p.rows[i] << ", ";
     }
     os << std::endl;
     os << "ColumnIndx: ";
-    for (int i = 0; i < p.columnIndexes.size(); i++) {
+    for (auto i = 0; i < p.columnIndexes.size(); i++) {
         os << '[' << i << "] " << p.columnIndexes[i] << ", ";
     }
     os << std::endl;
@@ -275,12 +276,12 @@ std::istream& operator>>(std::istream& in, MatrixComplex& p) {
     }
     p.rows = {};
     p.rows.resize(bufR.size());
-    for (int i = 0; i < bufR.size(); i++) {
+    for (auto i = 0; i < bufR.size(); i++) {
          p.rows[i] = bufR[i];
     }
     p.columnIndexes = {};
     p.columnIndexes.resize(bufC.size());
-    for (int i = 0; i < bufC.size(); i++) {
+    for (auto i = 0; i < bufC.size(); i++) {
          p.columnIndexes[i] = bufC[i];
     }
     return in;

@@ -8,6 +8,7 @@
 #include <complex>
 #include <iostream>
 #include <random>
+#include <cstring>
 class MatrixComplex {
  private:
     int Size;  // Kol-vo strok i stolbcov
