@@ -9,10 +9,9 @@ std::vector<std::pair<double, double>> GetPoints(int left_border, int right_bord
     srand(time(NULL));
 
     std::vector<std::pair<double, double>> res(size);
-    for (size_t i = 0; i < size; i++)
-    {
-        res[i].first = left_border + (double)rand() / RAND_MAX * (right_border - left_border);
-        res[i].second = low_border + (double)rand() / RAND_MAX * (high_border - low_border);
+    for (size_t i = 0; i < size; i++) {
+        res[i].first = left_border + static_cast<double>(rand()) / RAND_MAX * (right_border - left_border);
+        res[i].second = low_border + static_cast<double>(rand()) / RAND_MAX * (high_border - low_border);
     }
 
     return res;
@@ -33,10 +32,8 @@ std::vector<std::pair<double, double>> JarvisSeq(std::vector<std::pair
 
     std::pair<double, double> left_point = points[0];
     int current_index = 0;
-    for (size_t i = 0; i < points.size(); i++)
-    {
-        if (points[i].first < left_point.first)
-        {
+    for (size_t i = 0; i < points.size(); i++) {
+        if (points[i].first < left_point.first) {
             left_point = points[i];
             current_index = i;
         }
@@ -48,24 +45,19 @@ std::vector<std::pair<double, double>> JarvisSeq(std::vector<std::pair
     points.erase(points.begin() + current_index);
     points.push_back(left_point);
 
-    while (true)
-    {
+    while (true) {
         size_t next_point = 0;
-        for (size_t i = 0; i < points.size(); i++)
-        {
-            if (OrientationPointRelativeToVector(hull.back(), points[next_point], points[i]) < 0)
-            {
+        for (size_t i = 0; i < points.size(); i++) {
+            if (OrientationPointRelativeToVector(hull.back(), points[next_point], points[i]) < 0) {
                 next_point = i;
             }
         }
 
-        if (points[next_point] == hull[0])
-        {
+        if (points[next_point] == hull[0]) {
             return hull;
         }
 
-        else
-        {
+        else {
             hull.push_back(points[next_point]);
             points.erase(points.begin() + next_point);
         }
@@ -83,10 +75,8 @@ std::vector<std::pair<double, double>> JarvisOmp(std::vector<std::pair
     std::pair<double, double> left_point = points[0];
     int current_index = 0;
 
-    for (int i = 0; i < points.size(); i++)
-    {
-       if (points[i].first < left_point.first)
-       {
+    for (size_t i = 0; i < points.size(); i++) {
+       if (points[i].first < left_point.first) {
           left_point = points[i];
           current_index = i;
        }
@@ -101,16 +91,14 @@ std::vector<std::pair<double, double>> JarvisOmp(std::vector<std::pair
 
     std::vector<int> indexes(numthreads);
 
-    while (true)
-    {
+    while (true) {
 
 #pragma omp parallel num_threads(numthreads)
-        {
+{
             int temp_index = 0;
 
 #pragma omp for
-            for (int i = 0; i < set_size; i++)
-            {
+            for (int i = 0; i < set_size; i++) {
                 if (OrientationPointRelativeToVector(hull.back(), points[temp_index], points[i]) < 0)
                 {
                     temp_index = i;
@@ -120,27 +108,23 @@ std::vector<std::pair<double, double>> JarvisOmp(std::vector<std::pair
             indexes[omp_get_thread_num()] = temp_index;
         }
 
-        sort(indexes.begin(), indexes.end());
+        std::sort(indexes.begin(), indexes.end());
 
         next_point = indexes[0];
 
-        for (uint64_t i = 0; i < indexes.size(); i++)
-        {
-            if (OrientationPointRelativeToVector(hull.back(), points[next_point], points[indexes[i]]) < 0)
-            {
+        for (uint64_t i = 0; i < indexes.size(); i++) {
+            if (OrientationPointRelativeToVector(hull.back(), points[next_point], points[indexes[i]]) < 0) {
                 next_point = indexes[i];
             }
         }
 
-        if (points[next_point] != hull[0])
-        {
+        if (points[next_point] != hull[0]) {
             hull.push_back(points[next_point]);
             points.erase(points.begin() + next_point);
             set_size--;
         }
 
-        else
-        {
+        else {
             return hull;
         }
     }
