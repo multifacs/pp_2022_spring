@@ -60,8 +60,8 @@ TEST(Yashin_Kirill_Sparse_Matrix, Can_Miltiply) {
     ASSERT_EQ(result.size(), true_result.size());
     ASSERT_EQ(result[0].size(), true_result[0].size());
 
-    for (int i = 0; i < result.size(); i++) {
-        for (int j = 0; j < result[0].size(); j++)
+    for (auto i = 0; i < result.size(); i++) {
+        for (auto j = 0; j < result[0].size(); j++)
             ASSERT_DOUBLE_EQ(result[i][j], true_result[i][j]);
     }
 }
