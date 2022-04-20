@@ -3,7 +3,7 @@
 #include <iostream>
 #include "../../../modules/task_1/olenin_s_sobel_detection_edge/sobel_detection_edge.h"
 #include "gtest/gtest.h"
-const int SIZE_1 = 10;
+const int SIZE_1 = 20;
 const int SIZE_2 = 100;
 const int SIZE_3 = 200;
 const int SIZE_4 = 500;
