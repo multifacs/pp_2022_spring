@@ -15,7 +15,7 @@ TEST(SEQ_RADIX_SORT, TEST_SMALL_DATA) {
     randomVector(&data, size, countRad);
     radixSort(&data);
 
-    for (int i = 0; i < size - 1; i++)
+    for (size_t i = 0; i < size - 1; i++)
         ASSERT_LE(data[i], data[i + 1]);
 }
 
@@ -27,7 +27,7 @@ TEST(SEQ_RADIX_SORT, TEST_BIG_DATA) {
     randomVector(&data, size, countRad);
     radixSort(&data);
 
-    for (int i = 0; i < size - 1; i++)
+    for (size_t i = 0; i < size - 1; i++)
         ASSERT_LE(data[i], data[i + 1]);
 }
 
@@ -42,7 +42,7 @@ TEST(SEQ_RADIX_SORT, TEST_DIFFERRENT_RAD) {
     size += 2;
     radixSort(&data);
 
-    for (int i = 0; i < size - 1; i++)
+    for (size_t i = 0; i < size - 1; i++)
         ASSERT_LE(data[i], data[i + 1]);
 }
 
