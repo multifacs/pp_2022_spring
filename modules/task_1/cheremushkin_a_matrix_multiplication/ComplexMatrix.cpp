@@ -77,13 +77,6 @@ std::complex<int> MatrixComplex::get(int row, int col) const {
     }
     return std::complex<int>();
 }
-MatrixComplex::~MatrixComplex() {
-    Size = 0;
-    NonZero = 0;
-    values.~vector();
-    rows.~vector();
-    columnIndexes.~vector();
-}
 
 int MatrixComplex::getSize() {
     return Size;
@@ -181,7 +174,7 @@ MatrixComplex MatrixComplex::Multiply(
         }
         columnIndexes.push_back(nonZero);
     }
-    delete[] temp;
+    // delete[] temp;
     result->Size = size;
     result->rows.resize(rows.size());
     result->values.resize(values.size());

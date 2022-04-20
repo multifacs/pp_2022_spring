@@ -24,7 +24,6 @@ class MatrixComplex {
     explicit MatrixComplex(std::vector<std::vector<std::complex<int>>> matrix);
     MatrixComplex& operator=(const MatrixComplex& tmp);
     std::complex<int> get(int row, int col)const;
-    ~MatrixComplex();
     int getSize();
     int getNonZero();
     void setSize(int s);
