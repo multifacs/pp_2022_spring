@@ -35,7 +35,5 @@ class MatrixComplex {
     std::vector<std::vector<std::complex<int>>> getRandomMatrix(int size);
     MatrixComplex Multiply(MatrixComplex left,
         MatrixComplex right, MatrixComplex* result);
-    friend std::ostream& operator << (std::ostream& os, const MatrixComplex& p);
-    friend std::istream& operator >> (std::istream& in, MatrixComplex& p);
 };
 #endif  // MODULES_TASK_1_CHEREMUSHKIN_K_MATRIX_MULTIPLICATION_MATRIX_MULT_H_
