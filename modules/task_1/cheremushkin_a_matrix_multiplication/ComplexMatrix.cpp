@@ -1,6 +1,12 @@
 // Copyright 2022 Cheremushkin Kirill
 #include "../../../modules/task_1/cheremushkin_a_matrix_multiplication/ComplexMatrix.h"
-
+#include <vector>
+#include <string>
+#include <stdexcept>
+#include <complex>
+#include <iostream>
+#include <random>
+#include <cstring>
 MatrixComplex::MatrixComplex() : Size{ 3 }, NonZero{ 3 },
 values{ {3, 2}, {4, 3}, {2, 4} }, rows { 0, 1, 2 },
 columnIndexes { 0, 1, 2, 2 } {
@@ -12,16 +18,16 @@ columnIndexes{ tmp.columnIndexes } {
 }
 MatrixComplex::MatrixComplex(int size) {
     std::vector<std::vector<std::complex<int>>> matrix = getRandomMatrix(size);
-    Size = matrix.size();
+    Size = static_cast<int>(matrix.size());
     NonZero = 0;
     std::complex<int> zero(0, 0);
     this->columnIndexes.push_back(0);
     int counter = 0;
-    for (int i = 0; i < static_cast<int>(matrix.size()); i++) {
-        for (int j = 0; j < static_cast<int>(matrix[i].size()); j++) {
+    for (size_t i = 0; i < static_cast<int>(matrix.size()); i++) {
+        for (size_t j = 0; j < static_cast<int>(matrix[i].size()); j++) {
             if (matrix[i][j] != zero) {
                 values.push_back(matrix[i][j]);
-                rows.push_back(j);
+                rows.push_back(static_cast<int>(j));
                 NonZero++;
                 counter++;
             }
@@ -31,16 +37,16 @@ MatrixComplex::MatrixComplex(int size) {
 }
 MatrixComplex::MatrixComplex(
     std::vector<std::vector<std::complex<int>>> matrix) {
-    Size = matrix.size();
+    Size = static_cast<int>(matrix.size());
     NonZero = 0;
     std::complex<int> zero(0, 0);
     this->columnIndexes.push_back(0);
     int counter = 0;
-    for (int i = 0; i < static_cast<int>(matrix.size()); i++) {
-        for (int j = 0; j < static_cast<int>(matrix[i].size()); j++) {
+    for (size_t i = 0; i < static_cast<int>(matrix.size()); i++) {
+        for (size_t j = 0; j < static_cast<int>(matrix[i].size()); j++) {
             if (matrix[i][j] != zero) {
                 values.push_back(matrix[i][j]);
-                rows.push_back(j);
+                rows.push_back(static_cast<int>(j));
                 NonZero++;
                 counter++;
             }
@@ -150,7 +156,8 @@ MatrixComplex MatrixComplex::Multiply(
                 int row = left.rows[k];
                 int index = temp[row];
                 if (index != -1) {
-                    sum = {sum.real() + (left.values[k].real() * right.values[index].real()) -
+                    sum = {sum.real() + (left.values[k].real() *
+                        right.values[index].real()) -
                         left.values[k].imag() * right.values[index].imag(),
                         sum.imag()+
                         (left.values[k].real() * right.values[index].imag()+
@@ -238,11 +245,11 @@ std::istream& operator>>(std::istream& in, MatrixComplex& p) {
                     bufR.push_back(j);
                     flag--;
                     if (flagc == false) {
-                        bufC.push_back(bufV.size() - 1);
+                        bufC.push_back(static_cast<int>(bufV.size()) - 1);
                         flagc = true;
                     }
                     if (i == p.Size - 1 && j == p.Size - 1) {
-                        bufC.push_back(bufV.size() - 1);
+                        bufC.push_back(static_cast<int>(bufV.size()) - 1);
                     }
                 }
             } else {
