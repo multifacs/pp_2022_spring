@@ -51,12 +51,16 @@ struct Image {
   Image(const Image& img) {
     this->size = img.size;
     this->data = new char[img.size * img.size];
-    memcpy(this->data, img.data, sizeof(char) * img.size * img.size);
+    for (int i = 0; i < img.size * img.size; i++) {
+      this->data[i] = img.data[i];
+    }
   }
   Image operator=(const Image& img) {
     this->size = img.size;
     this->data = new char[img.size * img.size];
-    memcpy(this->data, img.data, sizeof(char) * img.size * img.size);
+    for (int i = 0; i < img.size * img.size; i++) {
+      this->data[i] = img.data[i];
+    }
   }
   ~Image() {
     if (this->data) {
