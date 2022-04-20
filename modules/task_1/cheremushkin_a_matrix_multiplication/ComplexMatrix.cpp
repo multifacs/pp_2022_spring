@@ -132,7 +132,7 @@ MatrixComplex::getRandomMatrix(int size) {
     return result;
 }
 MatrixComplex MatrixComplex::Multiply(
-    MatrixComplex left, MatrixComplex right, MatrixComplex*result) {
+    MatrixComplex left, MatrixComplex right) {
     if (left.Size != right.Size) {
         throw std::invalid_argument("invalid matrix");
     }
@@ -175,18 +175,19 @@ MatrixComplex MatrixComplex::Multiply(
         columnIndexes.push_back(nonZero);
     }
     // delete[] temp;
-    result->Size = size;
-    result->rows.resize(rows.size());
-    result->values.resize(values.size());
-    result->columnIndexes.resize(columnIndexes.size());
+    MatrixComplex res = MatrixComplex();
+    res.Size = size;
+    res.rows.resize(rows.size());
+    res.values.resize(values.size());
+    res.columnIndexes.resize(columnIndexes.size());
     for (int i = 0; i < nonZero; i++) {
-        result->rows[i] = rows[i];
-        result->values[i] = values[i];
+        res.rows[i] = rows[i];
+        res.values[i] = values[i];
     }
     for (size_t i = 0; i < columnIndexes.size(); i++) {
-        result->columnIndexes[i] = columnIndexes[i];
+        res.columnIndexes[i] = columnIndexes[i];
     }
-    return *result;
+    return res;
 }
 
 std::ostream& operator<<(std::ostream& os, const MatrixComplex& p) {

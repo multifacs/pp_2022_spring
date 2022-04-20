@@ -33,7 +33,7 @@ class MatrixComplex {
     std::vector<int> getColumnIndex();
     std::vector<std::vector<std::complex<int>>> getRandomMatrix(int size);
     MatrixComplex Multiply(MatrixComplex left,
-        MatrixComplex right, MatrixComplex* result);
+        MatrixComplex right);
     friend std::ostream& operator << (std::ostream& os, const MatrixComplex& p);
     friend std::istream& operator >> (std::istream& in, MatrixComplex& p);
 };
