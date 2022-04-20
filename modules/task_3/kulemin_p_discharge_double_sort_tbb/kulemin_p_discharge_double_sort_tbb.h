@@ -41,7 +41,7 @@ struct vector {
 };
 vector* create_random_vector(int size_n);
 void union_from_lists_seq(std::vector<std::list<double>> *lists, double* in);
-void discharge_sort(vector* v);
+void discharge_sort(vector* v, vector* res);
 void discharge_sort_seq(vector* v);
 bool check_vectors(double* st, double* sd, int size);
 void copy_vectors(double* st, double* sd, int size);
