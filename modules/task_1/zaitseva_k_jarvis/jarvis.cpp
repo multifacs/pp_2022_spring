@@ -29,9 +29,9 @@ bool turn(const Point& a, const Point& b,
           const Point& c) {
   double det = cross(b - a, c - a);
   if (det > 0.0)
-    return 0;  // лежит слева от отрезка
+    return 0;
   else if (det < 0.0)
-    return 1;  // лежит справа от отрезка
+    return 1;
   else if (det == 0.0) {
     double distans_a_b =
         std::sqrt((b.x - a.x) * (b.x - a.x) * (b.y - a.y) * (b.y - a.y));
@@ -42,12 +42,13 @@ bool turn(const Point& a, const Point& b,
     else
       return 0;
   }
+  return 0;
 }
 
 std::vector<Point> Jarvis(std::vector<Point> points) {
   Point p0 = points[0];
   int k = 0;
-  for (int i = 1; i < points.size(); i++) {
+  for (std::size_t i = 1; i < points.size(); i++) {
     if (points[i] < p0) {
       p0 = points[i];
       k = i;
@@ -55,11 +56,11 @@ std::vector<Point> Jarvis(std::vector<Point> points) {
   }
   std::swap(points[k], points[0]);
   Point p_next, p_i = p0;
-  int i = 1;
+  std::size_t i = 1;
   for (i = 1; i < points.size(); i++) {
     p_next = points[i];
     k = i;
-    for (int j = i + 1; j < points.size(); j++) {
+    for (std::size_t j = i + 1; j < points.size(); j++) {
       if (turn(p_i, p_next, points[j])) {
         p_next = points[j];
         k = j;
