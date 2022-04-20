@@ -66,7 +66,7 @@ vector<int> simpleMerge(const vector<int>& firstVector,
     const vector<int>& secondVector) {
     vector<int> resultVector(firstVector.size() + secondVector.size());
 
-    int firstIt, secondIt, resutIt;
+    size_t firstIt, secondIt, resutIt;
     firstIt = secondIt = resutIt = 0;
 
     while (firstIt < firstVector.size() && secondIt < secondVector.size()) {
