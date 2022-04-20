@@ -1,6 +1,6 @@
 // Copyright 2022 Gudkov Andrey
-#include "./gaussian.h"
 #include <gtest/gtest.h>
+#include "./gaussian.h"
 
 TEST(Gauss_Filter, Get_Index_Is_Correct) {
     int offset = 136;
