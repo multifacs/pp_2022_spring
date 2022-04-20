@@ -67,7 +67,8 @@ std::complex<int> MatrixComplex::get(int row, int col) const {
         throw std::invalid_argument("index out of matrix range");
     }
     int currRow;
-    for (int pos = columnIndexes[row]; pos < columnIndexes[row + 1]; pos++) {
+    for (int pos = columnIndexes[row];
+        pos < columnIndexes[static_cast<size_t>(row) + 1]; pos++) {
         currRow = rows[pos];
         if (currRow == col) {
             return values[pos];
@@ -145,14 +146,14 @@ MatrixComplex MatrixComplex::Multiply(
     for (int i = 0; i < size; i++) {
         memset(temp, -1, size * sizeof(int));
         for (int j = right.columnIndexes[i];
-            j < right.columnIndexes[i + 1]; j++) {
+            j < right.columnIndexes[static_cast<size_t>(i) + 1]; j++) {
             int row = right.rows[j];
             temp[row] = j;
         }
         for (int j = 0; j < size; j++) {
             std::complex<int> sum = 0;
             for (int k = left.columnIndexes[j];
-                k < left.columnIndexes[j + 1]; k++) {
+                k < left.columnIndexes[static_cast<size_t>(j) + 1]; k++) {
                 int row = left.rows[k];
                 int index = temp[row];
                 if (index != -1) {
