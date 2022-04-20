@@ -1,78 +1,48 @@
 // Copyright 2022 Gudkov Andrey
-#include <algorithm>
-#include <cmath>
-#include <ctime>
-#include <numeric>
-#include <stdexcept>
-#include <random>
-#include <vector>
+#define _USE_MATH_DEFINES
 #include "../../modules/task_1/gudkov_a_gaussian_hor/gaussian.h"
 
-bool operator==(const Pixel &a, const Pixel &b) {
-    return (a.r == b.r) && (a.g == b.g) && (a.b == b.b);
+int GetIndex(int i, int j, int offset) {
+    return offset * i + j;
 }
 
-static std::vector <double> generateGaussianKernel(int dim) {
-    if (dim % 2 == 0) {
-        throw std::runtime_error("Kernel size must be odd!");
-    }
-    std::vector <double> res(dim * dim);
-    const double sigma = 1., s = 2 * sigma * sigma;
-    const int shift = dim / 2;
-    double sum = 0.;
-    for (int x = -shift; x <= shift; ++x) {
-        for (int y = -shift; y <= shift; ++y) {
-            sum += res[(x + shift) * dim + y + shift] = (exp(-(x * x + y * y) / s)) / (acos(-1.) * s);
-        }
-    }
-    for (int i = 0; i < dim * dim; ++i) {
-        res[i] /= sum;
-    }
-
-    return res;
-}
-
-static int offset = 0;
-static const int gaussianKernelSize = 3;
-static const std::vector <double> gaussianKernel = generateGaussianKernel(gaussianKernelSize);
-
-Image generateRandomImage(int rows, int cols) {
+std::vector<uint8_t> GetRandMatrix(int offset, int pixelHeight) {
+    if ((offset < 0) || (pixelHeight < 0))
+        throw "Matrix size error!!!";
     std::mt19937 gen;
-    gen.seed((unsigned)time(0) + ++offset);
-    std::uniform_int_distribution<int> dis(0, 255);
-    Image result(rows * cols);
-    #pragma omp parallel for
-    for (int i = 0; i < rows * cols; ++i) {
-        result[i] = {static_cast<uint8_t>(dis(gen)), static_cast<uint8_t>(dis(gen)), static_cast<uint8_t>(dis(gen))};
+    gen.seed(static_cast<uint8_t>(time(0)));
+    std::vector<uint8_t> a(offset * pixelHeight);
+    for (int i = 0; i < offset * pixelHeight; i++) {
+        a[i] = gen() % 256;
+    }
+    return a;
+}
+
+std::vector<uint8_t> Filter(std::vector<uint8_t> srcVec, int offset,
+    int pixelHeight, double sigma) {
+    if ((offset < 0) || (pixelHeight < 0))
+        throw "Size error!!!";
+    std::vector<uint8_t> result;
+    if (srcVec == result)
+        srcVec = GetRandMatrix(offset, pixelHeight);
+    if (srcVec.size() != static_cast<size_t>(offset * pixelHeight))
+        throw "Size non equal!!!";
+    for (int i = 0; i < pixelHeight; i++) {
+        for (int j = 0; j < offset; j++) {
+            if (i == 0 || j == 0 || i == pixelHeight - 1 || j == offset - 1) {
+                result.push_back(srcVec[GetIndex(i, j, offset)]);
+            }
+            else {
+                double res = 0;
+                for (int x = -1; x < 2; x++) {
+                    for (int y = -1; y < 2; y++) {
+                        int r = x * x + y * y;
+                        res += exp(-r / (2 * sigma * sigma)) * (srcVec[GetIndex(i + x, j + y, offset)]);
+                    }
+                }
+                result.push_back(static_cast<uint8_t>(res / (2 * M_PI * sigma * sigma)));
+            }
+        }
     }
     return result;
-}
-
-Image gaussianFilter(const Image &a, int rows, int cols) {
-    Image res(a);
-    if (rows * cols != static_cast<int>(res.size())) {
-        throw std::runtime_error("Matrix dimensions do not match");
-    }
-    for (int i = 0; i < rows; ++i) {
-        for (int j = 0; j < cols; ++j) {
-            double r = 0, g = 0, b = 0;
-            int gaussianIndex = 0;
-            for (int l = -gaussianKernelSize / 2; l <= gaussianKernelSize / 2; ++l) {
-                for (int k = -gaussianKernelSize / 2; k <= gaussianKernelSize / 2; ++k) {
-                    int idX = std::max(0, std::min(i + l, rows - 1));
-                    int idY = std::max(0, std::min(j + k, cols - 1));
-                    Pixel p = a[idX * cols + idY];
-                    r += gaussianKernel[gaussianIndex] * p.r;
-                    g += gaussianKernel[gaussianIndex] * p.g;
-                    b += gaussianKernel[gaussianIndex] * p.b;
-                    ++gaussianIndex;
-                }
-            }
-            Pixel &p = res[i * cols + j];
-            p.r = std::max(0, std::min(static_cast<int>(r), 255));
-            p.g = std::max(0, std::min(static_cast<int>(g), 255));
-            p.b = std::max(0, std::min(static_cast<int>(b), 255));
-        }
-    }
-    return res;
 }

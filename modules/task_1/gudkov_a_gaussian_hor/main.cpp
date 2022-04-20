@@ -1,55 +1,54 @@
 // Copyright 2022 Gudkov Andrey
 #include <gtest/gtest.h>
-#include <omp.h>
 #include "./gaussian.h"
 
-TEST(Gudkov_Gauss, _10x10) {
-    const int width = 10;
-    const int height = 10;
-
-    Image img = generateRandomImage(width, height);
-    Image res = gaussianFilter(img, width, height);
-
-    ASSERT_NE(res, img);
+TEST(Gauss_Filter, Get_Index_Is_Correct) {
+	int offset = 136;
+	int i = 120;
+	int j = 19;
+	EXPECT_EQ(GetIndex(i, j, offset), 16339);
 }
 
-TEST(Gaussian_Image_Filtering_seq, _0x0) {
-    const int width = 0;
-    const int height = 0;
-
-    Image img = generateRandomImage(width, height);
-
-    ASSERT_EQ(img, gaussianFilter(img, width, height));
+TEST(Gauss_Filter, Get_Rand_Matrix_Throws) {
+	ASSERT_ANY_THROW(GetRandMatrix(-125, 4));
 }
 
-TEST(Gaussian_Image_Filtering_seq, _50x2) {
-    const int width = 50;
-    const int height = 2;
-
-    Image img = generateRandomImage(width, height);
-
-    ASSERT_NE(img, gaussianFilter(img, width, height));
+TEST(Gauss_Filter, Filter_Throws1) {
+	std::vector<uint8_t> a;
+	int offset = -2;
+	int pixelHeight = 129;
+	ASSERT_ANY_THROW(Filter(a, offset, pixelHeight));
 }
 
-TEST(Gaussian_Image_Filtering_seq, _2x50) {
-    const int width = 2;
-    const int height = 50;
-
-    Image img = generateRandomImage(width, height);
-
-    ASSERT_NE(img, gaussianFilter(img, width, height));
+TEST(Gauss_Filter, Filter_Throws2) {
+	std::vector<uint8_t> a(5);
+	int offset = 137;
+	int pixelHeight = 129;
+	ASSERT_ANY_THROW(Filter(a, offset, pixelHeight));
 }
 
-TEST(Gaussian_Image_Filtering_seq, _10x10_incorrect) {
-    const int width = 10;
-    const int height = 10;
+TEST(Gauss_Filter, Filter_Generates_Matrix) {
+	std::vector<uint8_t> a;
+	int offset = 10;
+	int pixelHeight = 15;
+	size_t s = 150;
+	EXPECT_EQ(Filter(a, offset, pixelHeight).size(), s);
+}
 
-    Image img = generateRandomImage(width, height);
+TEST(Gauss_Filter, Filter_Is_Correct1) {
+	std::vector<uint8_t> a = { 0, 1, 2, 3, 4, 5 };
+	std::vector<uint8_t> b = { 0, 1, 2, 3, 4, 5 };
+	EXPECT_EQ(Filter(a, 2, 3, 1), b);
+}
 
-    ASSERT_ANY_THROW(gaussianFilter(img, width, height - 1));
+TEST(Gauss_Filter, Filter_Is_Correct2) {
+	std::vector<uint8_t> a = { 0, 0, 0, 0, 63, 0, 0, 0, 0 };
+	std::vector<uint8_t> b = { 0, 0, 0, 0, 10, 0, 0, 0, 0 };
+	EXPECT_EQ(Filter(a, 3, 3, 1), b);
 }
 
 int main(int argc, char** argv) {
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
+	::testing::InitGoogleTest(&argc, argv);
+	return RUN_ALL_TESTS();
+	return 0;
 }
