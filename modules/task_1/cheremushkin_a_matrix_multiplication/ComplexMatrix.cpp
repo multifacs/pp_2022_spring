@@ -187,7 +187,7 @@ MatrixComplex MatrixComplex::Multiply(
         result->rows[i] = rows[i];
         result->values[i] = values[i];
     }
-    for (auto i = 0; i < columnIndexes.size(); i++) {
+    for (size_t i = 0; i < columnIndexes.size(); i++) {
         result->columnIndexes[i] = columnIndexes[i];
     }
     return *result;
@@ -200,12 +200,12 @@ std::ostream& operator<<(std::ostream& os, const MatrixComplex& p) {
     }
     os << std::endl;
     os << "Rows: ";
-    for (auto i = 0; i < p.rows.size(); i++) {
+    for (size_t i = 0; i < p.rows.size(); i++) {
         os << '[' << i << "] " << p.rows[i] << ", ";
     }
     os << std::endl;
     os << "ColumnIndx: ";
-    for (auto i = 0; i < p.columnIndexes.size(); i++) {
+    for (size_t i = 0; i < p.columnIndexes.size(); i++) {
         os << '[' << i << "] " << p.columnIndexes[i] << ", ";
     }
     os << std::endl;
@@ -224,8 +224,6 @@ std::istream& operator>>(std::istream& in, MatrixComplex& p) {
     std::vector<int> bufC;
     int flag = p.NonZero;
     bool flagc = false;
-    bool flagL = false;
-    bool flagZ = false;
     bool flagIns = false;
     std::complex<int> buf;
     int b1;
@@ -251,14 +249,12 @@ std::istream& operator>>(std::istream& in, MatrixComplex& p) {
                     bufV.push_back(buf);
                     bufR.push_back(j);
                     flag--;
-                    flagZ = true;
                     if (flagc == false) {
                         bufC.push_back(bufV.size() - 1);
                         flagc = true;
                     }
                     if (i == p.Size - 1 && j == p.Size - 1) {
                         bufC.push_back(bufV.size() - 1);
-                        flagL = true;
                     }
                 }
             } else {
@@ -276,12 +272,12 @@ std::istream& operator>>(std::istream& in, MatrixComplex& p) {
     }
     p.rows = {};
     p.rows.resize(bufR.size());
-    for (auto i = 0; i < bufR.size(); i++) {
+    for (size_t i = 0; i < bufR.size(); i++) {
          p.rows[i] = bufR[i];
     }
     p.columnIndexes = {};
     p.columnIndexes.resize(bufC.size());
-    for (auto i = 0; i < bufC.size(); i++) {
+    for (size_t i = 0; i < bufC.size(); i++) {
          p.columnIndexes[i] = bufC[i];
     }
     return in;
