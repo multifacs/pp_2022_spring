@@ -4,10 +4,10 @@
 #include "../../../modules/task_1/olenin_s_sobel_detection_edge/sobel_detection_edge.h"
 #include "gtest/gtest.h"
 const int SIZE_1 = 20;
-const int SIZE_2 = 100;
-const int SIZE_3 = 200;
-const int SIZE_4 = 500;
-const int SIZE_5 = 1000;
+const int SIZE_2 = 50;
+const int SIZE_3 = 60;
+const int SIZE_4 = 80;
+const int SIZE_5 = 100;
 
 TEST(seqSobelFilter, SobelTest1) {
   Image image = Image::GenerateRandomImage(SIZE_1);
