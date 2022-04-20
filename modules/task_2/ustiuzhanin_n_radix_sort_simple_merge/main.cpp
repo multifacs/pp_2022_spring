@@ -7,7 +7,7 @@
 using std::vector;
 using std::cout;
 
-TEST(SEQ_RADIX_SORT, TEST_SMALL_DATA) {
+TEST(OMP_RADIX_SORT, TEST_SMALL_DATA) {
     vector<int> data;
     size_t size = 10;
     size_t countRad = 3;
@@ -19,7 +19,7 @@ TEST(SEQ_RADIX_SORT, TEST_SMALL_DATA) {
         ASSERT_LE(data[i], data[i + 1]);
 }
 
-TEST(SEQ_RADIX_SORT, TEST_BIG_DATA) {
+TEST(OMP_RADIX_SORT, TEST_BIG_DATA) {
     vector<int> data;
     size_t size = 10000;
     size_t countRad = 6;
@@ -31,7 +31,7 @@ TEST(SEQ_RADIX_SORT, TEST_BIG_DATA) {
         ASSERT_LE(data[i], data[i + 1]);
 }
 
-TEST(SEQ_RADIX_SORT, TEST_DIFFERRENT_RAD) {
+TEST(OMP_RADIX_SORT, TEST_DIFFERRENT_RAD) {
     vector<int> data;
     size_t size = 10;
     size_t countRad = 4;
@@ -46,7 +46,7 @@ TEST(SEQ_RADIX_SORT, TEST_DIFFERRENT_RAD) {
         ASSERT_LE(data[i], data[i + 1]);
 }
 
-TEST(SEQ_RADIX_SORT, TEST_EMPTY) {
+TEST(OMP_RADIX_SORT, TEST_EMPTY) {
     vector<int> data;
     size_t size = 0;
     size_t countRad = 4;
@@ -55,7 +55,7 @@ TEST(SEQ_RADIX_SORT, TEST_EMPTY) {
     ASSERT_NO_THROW(radixSortOMP(&data));
 }
 
-TEST(SEQ_RADIX_SORT, TEST_WRONG_DATA) {
+TEST(OMP_RADIX_SORT, TEST_WRONG_DATA) {
     vector<int> data;
     size_t size = 10;
     size_t countRad = 4;

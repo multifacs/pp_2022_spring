@@ -88,6 +88,13 @@ vector<int> simpleMerge(const vector<int>& firstVector,
 }
 
 void radixSortOMP(vector<int>* data) {
+    if (!data->size())
+        return;
+
+    if (std::find_if(data->begin(), data->end(), [](int val) {
+        return val < 0; }) != data->end())
+        throw std::string("Try sort numbers less then 0");
+
     int numberOfThread = omp_get_num_procs();
     int dataPortion = data->size() / numberOfThread;
 
