@@ -8,7 +8,7 @@
 #include <vector>
 
 std::vector<std::pair<double, double>> GetPoints(int left_border, int right_border,
-    int low_border, int high_border, int size);
+    int low_border, int high_border, size_t size);
 
 double OrientationPointRelativeToVector(std::pair<double, double> A,
     std::pair<double, double> B, std::pair<double, double> point);

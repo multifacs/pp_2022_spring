@@ -4,12 +4,12 @@
 #include "../../../modules/task_1/vodeneev_m_jarvis/jarvis.h"
 
 std::vector<std::pair<double, double>> GetPoints(int left_border, int right_border,
-    int low_border, int high_border, int size) {
+    int low_border, int high_border, size_t size) {
 
     srand(time(NULL));
 
     std::vector<std::pair<double, double>> res(size);
-    for (int i = 0; i < size; i++)
+    for (size_t i = 0; i < size; i++)
     {
         res[i].first = left_border + (double)rand() / RAND_MAX * (right_border - left_border);
         res[i].second = low_border + (double)rand() / RAND_MAX * (high_border - low_border);
@@ -33,7 +33,7 @@ std::vector<std::pair<double, double>> JarvisSeq(std::vector<std::pair
 
     std::pair<double, double> left_point = points[0];
     int current_index = 0;
-    for (int i = 0; i < points.size(); i++)
+    for (size_t i = 0; i < points.size(); i++)
     {
         if (points[i].first < left_point.first)
         {
@@ -50,8 +50,8 @@ std::vector<std::pair<double, double>> JarvisSeq(std::vector<std::pair
 
     while (true)
     {
-        int next_point = 0;
-        for (int i = 0; i < points.size(); i++)
+        size_t next_point = 0;
+        for (size_t i = 0; i < points.size(); i++)
         {
             if (OrientationPointRelativeToVector(hull.back(), points[next_point], points[i]) < 0)
             {

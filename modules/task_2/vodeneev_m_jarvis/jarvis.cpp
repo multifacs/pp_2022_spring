@@ -4,12 +4,12 @@
 #include "../../../modules/task_2/vodeneev_m_jarvis/jarvis.h"
 
 std::vector<std::pair<double, double>> GetPoints(int left_border, int right_border,
-    int low_border, int high_border, int size) {
+    int low_border, int high_border, size_t size) {
 
     srand(time(NULL));
 
     std::vector<std::pair<double, double>> res(size);
-    for (int i = 0; i < size; i++)
+    for (size_t i = 0; i < size; i++)
     {
         res[i].first = left_border + (double)rand() / RAND_MAX * (right_border - left_border);
         res[i].second = low_border + (double)rand() / RAND_MAX * (high_border - low_border);
@@ -33,7 +33,7 @@ std::vector<std::pair<double, double>> JarvisSeq(std::vector<std::pair
 
     std::pair<double, double> left_point = points[0];
     int current_index = 0;
-    for (int i = 0; i < points.size(); i++)
+    for (size_t i = 0; i < points.size(); i++)
     {
         if (points[i].first < left_point.first)
         {
@@ -50,8 +50,8 @@ std::vector<std::pair<double, double>> JarvisSeq(std::vector<std::pair
 
     while (true)
     {
-        int next_point = 0;
-        for (int i = 0; i < points.size(); i++)
+        size_t next_point = 0;
+        for (size_t i = 0; i < points.size(); i++)
         {
             if (OrientationPointRelativeToVector(hull.back(), points[next_point], points[i]) < 0)
             {
@@ -75,7 +75,9 @@ std::vector<std::pair<double, double>> JarvisSeq(std::vector<std::pair
 std::vector<std::pair<double, double>> JarvisOmp(std::vector<std::pair
     <double, double>> points, int numthreads) {
 
-    if (points.size() < 1)
+    int set_size = points.size();
+
+    if (set_size < 1)
         throw - 1;
 
     std::pair<double, double> left_point = points[0];
@@ -107,7 +109,7 @@ std::vector<std::pair<double, double>> JarvisOmp(std::vector<std::pair
             int temp_index = 0;
 
 #pragma omp for
-            for (int i = 0; i < points.size(); i++)
+            for (int i = 0; i < set_size; i++)
             {
                 if (OrientationPointRelativeToVector(hull.back(), points[temp_index], points[i]) < 0)
                 {
@@ -122,7 +124,7 @@ std::vector<std::pair<double, double>> JarvisOmp(std::vector<std::pair
 
         next_point = indexes[0];
 
-        for (int i = 0; i < indexes.size(); i++)
+        for (uint64_t i = 0; i < indexes.size(); i++)
         {
             if (OrientationPointRelativeToVector(hull.back(), points[next_point], points[indexes[i]]) < 0)
             {
@@ -134,6 +136,7 @@ std::vector<std::pair<double, double>> JarvisOmp(std::vector<std::pair
         {
             hull.push_back(points[next_point]);
             points.erase(points.begin() + next_point);
+            set_size--;
         }
 
         else
