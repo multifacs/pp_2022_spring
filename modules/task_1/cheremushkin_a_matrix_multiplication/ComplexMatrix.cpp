@@ -23,8 +23,8 @@ MatrixComplex::MatrixComplex(int size) {
     std::complex<int> zero(0, 0);
     this->columnIndexes.push_back(0);
     int counter = 0;
-    for (size_t i = 0; i < static_cast<int>(matrix.size()); i++) {
-        for (size_t j = 0; j < static_cast<int>(matrix[i].size()); j++) {
+    for (size_t i = 0; i < static_cast<size_t>(matrix.size()); i++) {
+        for (size_t j = 0; j < static_cast<size_t>(matrix[i].size()); j++) {
             if (matrix[i][j] != zero) {
                 values.push_back(matrix[i][j]);
                 rows.push_back(static_cast<int>(j));
@@ -42,8 +42,8 @@ MatrixComplex::MatrixComplex(
     std::complex<int> zero(0, 0);
     this->columnIndexes.push_back(0);
     int counter = 0;
-    for (size_t i = 0; i < static_cast<int>(matrix.size()); i++) {
-        for (size_t j = 0; j < static_cast<int>(matrix[i].size()); j++) {
+    for (size_t i = 0; i < static_cast<size_t>(matrix.size()); i++) {
+        for (size_t j = 0; j < static_cast<size_t>(matrix[i].size()); j++) {
             if (matrix[i][j] != zero) {
                 values.push_back(matrix[i][j]);
                 rows.push_back(static_cast<int>(j));
