@@ -66,23 +66,16 @@ std::complex<int> MatrixComplex::get(int row, int col) const {
     if (row > Size || col > Size || row < 0 || col < 0) {
         throw std::invalid_argument("index out of matrix range");
     }
-    try {
-        int currRow;
-        for (int pos = columnIndexes[col];
-            pos < columnIndexes[static_cast<size_t>(col) + 1]; pos++) {
-            currRow = rows[pos];
-            if (currRow == row) {
-                return values[pos];
-            }
-            if (columnIndexes.size() < static_cast<size_t>(col) + 1) {
-                throw "-1";
-            }
+
+    int currRow;
+    for (int pos = columnIndexes[col];
+        pos < columnIndexes[static_cast<size_t>(col) + 1]; pos++) {
+        currRow = rows[pos];
+        if (currRow == row) {
+            return values[pos];
         }
-        return std::complex<int>();
     }
-    catch (const char*  msg) {
-        std::cout << msg;
-    }
+    return std::complex<int>();
 }
 MatrixComplex::~MatrixComplex() {
     Size = 0;

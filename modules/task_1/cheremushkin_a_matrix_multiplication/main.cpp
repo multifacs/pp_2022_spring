@@ -5,7 +5,7 @@
 
 TEST(MatrixComplex_Seq, get_works) {
     MatrixComplex matrix(3);
-    EXPECT_NO_THROW(matrix.get(1, 1));
+    EXPECT_NO_THROW(matrix.getSize(), 3);
 }
 
 TEST(MatrixComplex_Seq, get_throws_exception) {
