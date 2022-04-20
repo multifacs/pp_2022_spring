@@ -1,4 +1,4 @@
-// Copyright 2022 Chremushkin Kirill
+// Copyright 2022 Cheremushkin Kirill
 #include <gtest/gtest.h>
 #include <vector>
 #include "./ComplexMatrix.h"
