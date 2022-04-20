@@ -46,7 +46,7 @@ void radixSort(vector<int>* data) {
 
     vector<list<int>> helpList(10);
 
-    for (int i = 1; i <= maxRad; i++) {
+    for (size_t i = 1; i <= maxRad; i++) {
         for (int val : *data) {
             helpList[getNum(val, i)].push_back(val);
         }
