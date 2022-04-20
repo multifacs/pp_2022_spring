@@ -191,17 +191,17 @@ MatrixComplex MatrixComplex::Multiply(
 std::ostream& operator<<(std::ostream& os, const MatrixComplex& p) {
     os << "Value: ";
     for (int i = 0; i < p.NonZero; i++) {
-        os << '[' << i << "] " << p.values[i] << ", ";
+        os << "[" << i << "] " << p.values[i] << ", ";
     }
     os << std::endl;
     os << "Rows: ";
     for (size_t i = 0; i < p.rows.size(); i++) {
-        os << '[' << i << "] " << p.rows[i] << ", ";
+        os << "[" << i << "] " << p.rows[i] << ", ";
     }
     os << std::endl;
     os << "ColumnIndx: ";
     for (size_t i = 0; i < p.columnIndexes.size(); i++) {
-        os << '[' << i << "] " << p.columnIndexes[i] << ", ";
+        os << "[" << i << "] " << p.columnIndexes[i] << ", ";
     }
     os << std::endl;
     return os;
@@ -228,8 +228,8 @@ std::istream& operator>>(std::istream& in, MatrixComplex& p) {
     for (int i = 0; i < p.Size; i++) {
         for (int j = 0; j < p.Size; j++) {
             if (flag > 0) {
-                std::cout << "Input elements " << '[' << i
-                    << ']' << '[' << j << ']' << ":" << std::endl;
+                std::cout << "Input elements " << "[" << i
+                    << "]" << "[" << j << "]" << ":" << std::endl;
                 std::cout << "Input  real: ";
                 in >> b1;
                 if (b1 == 0) {
