@@ -127,7 +127,7 @@ MatrixComplex::getRandomMatrix(int size) {
 MatrixComplex MatrixComplex::Multiply(
     MatrixComplex left, MatrixComplex right, MatrixComplex*result) {
     if (left.Size != right.Size) {
-        throw std::invalid_argument("invalid matrix size");
+        throw std::invalid_argument("invalid matrix");
     }
     int size = left.Size;
     std::vector<std::complex<int>> values;
@@ -189,28 +189,28 @@ MatrixComplex MatrixComplex::Multiply(
 }
 
 std::ostream& operator<<(std::ostream& os, const MatrixComplex& p) {
-    os << "Value: ";
+    os << "values";
     for (int i = 0; i < p.NonZero; i++) {
-        os << "[" << i << "] " << p.values[i] << ", ";
+        os << "[" << i << "]" << p.values[i] << ",";
     }
     os << std::endl;
-    os << "Rows: ";
+    os << "Rows:";
     for (size_t i = 0; i < p.rows.size(); i++) {
-        os << "[" << i << "] " << p.rows[i] << ", ";
+        os << "[" << i << "]" << p.rows[i] << ",";
     }
     os << std::endl;
-    os << "ColumnIndx: ";
+    os << "ColumnIndx:";
     for (size_t i = 0; i < p.columnIndexes.size(); i++) {
-        os << "[" << i << "] " << p.columnIndexes[i] << ", ";
+        os << "[" << i << "]" << p.columnIndexes[i] << ",";
     }
     os << std::endl;
     return os;
 }
 
 std::istream& operator>>(std::istream& in, MatrixComplex& p) {
-    std::cout << "VVedite razmernost: ";
+    std::cout << "";
     in >> p.Size;
-    std::cout << "Vvedite kol-vo NonZero elements: ";
+    std::cout << "";
     in >> p.NonZero;
     p.values = {};
     p.values.resize(p.NonZero);
@@ -223,19 +223,17 @@ std::istream& operator>>(std::istream& in, MatrixComplex& p) {
     std::complex<int> buf;
     int b1;
     int b2;
-    std::cout << "Column: " << "I" << std::endl;
-    std::cout << "Rows : " << "J" << std::endl;
     for (int i = 0; i < p.Size; i++) {
         for (int j = 0; j < p.Size; j++) {
             if (flag > 0) {
-                std::cout << "Input elements " << "[" << i
+                std::cout << "" << "[" << i
                     << "]" << "[" << j << "]" << ":" << std::endl;
-                std::cout << "Input  real: ";
+                std::cout << "";
                 in >> b1;
                 if (b1 == 0) {
                     continue;
                 }
-                std::cout << "Input image: ";
+                std::cout << "";
                 in >> b2;
                 std::cout << std::endl;
                 buf = { b1, b2 };
