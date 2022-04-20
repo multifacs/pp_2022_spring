@@ -12,7 +12,7 @@ class MatrixComplex {
  private:
     int Size;  // Kol-vo strok i stolbcov
     int NonZero;  // Kol-vo ne nulevih
-    std::vector<std::complex<int>> values;  // Vector znacheniy
+    std::vector<std::complex<int>> values;  // Vector znacheniy‡‡
     std::vector<int> rows;  // Vector numeric rows
     std::vector<int> columnIndexes;  // Vector indexov
 
