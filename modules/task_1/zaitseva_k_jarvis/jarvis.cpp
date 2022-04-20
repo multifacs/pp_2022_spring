@@ -1,5 +1,5 @@
 // Copyright 2022 Zaitseva Ksenia
-#include "jarvis.h"
+#include "../../modules/task_1/zaitseva_k_jarvis/jarvis.h"
 
 bool Point::operator<(const Point& other) const {
   if ((y < other.y) || ((y == other.y) && (x > other.x)))
