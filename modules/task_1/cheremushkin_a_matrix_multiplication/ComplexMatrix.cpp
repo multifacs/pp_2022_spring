@@ -94,11 +94,17 @@ int MatrixComplex::getNonZero() {
 }
 
 void MatrixComplex::setSize(int s) {
+    if (s < 0) {
+        throw std::invalid_argument("value < 0");
+    }
      Size = s;
 }
 
 void MatrixComplex::setNonZero(int n) {
-     NonZero = n;
+    if (n < 0) {
+        throw std::invalid_argument("value < 0");
+    }
+    NonZero = n;
 }
 
 std::vector<std::complex<int>> MatrixComplex::getValues() {

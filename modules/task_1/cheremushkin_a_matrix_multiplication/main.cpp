@@ -3,7 +3,7 @@
 #include <vector>
 #include "./ComplexMatrix.h"
 
-TEST(MatrixComplex_Seq, get_works) {
+TEST(MatrixComplex_Seq, getSize) {
     MatrixComplex matrix(3);
     EXPECT_NO_THROW(matrix.getSize(), 3);
 }
