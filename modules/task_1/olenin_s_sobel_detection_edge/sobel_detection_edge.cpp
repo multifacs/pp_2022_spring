@@ -22,7 +22,7 @@ Image ApplySobel(Image img) {
           ++kernelIndex;
         }
       int value = static_cast<int>(sqrt(rX * rX + rY * rY));
-      char real = value > 255 ? 255 : value;
+      char real = static_cast<char>(value > 255 ? 255 : value);
       result.Set(x, y, real);
     }
   }
