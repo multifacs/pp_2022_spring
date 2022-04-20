@@ -33,7 +33,7 @@ class SparseM {
       }
       col_idx.push_back(k);
   }
-  SparseM(const SparseM& lhs) :rows(lhs.rows),
+  SparseM(const SparseM& lhs) : rows(lhs.rows),
    cols(lhs.cols), col_idx(lhs.col_idx), row(lhs.row), value(lhs.value) {}
   SparseM& operator = (const SparseM& lhs) {
       if (this == &lhs) return (*this);
