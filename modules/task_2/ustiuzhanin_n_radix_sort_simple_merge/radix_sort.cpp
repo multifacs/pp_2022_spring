@@ -1,6 +1,7 @@
 // Copyright 2022 Ustiuzhanin Nikita
 
-#include "../ustiuzhanin_n_radix_sort_simple_merge/radix_sort.h"
+#include "../../../pp_2022_spring/modules/task_2/ustiuzhanin_n_radix_sort_simple_merge/radix_sort.h"
+#include <string>
 
 void randomVector(vector<int>* data, size_t size, size_t rad) {
     if (!size)
