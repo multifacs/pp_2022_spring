@@ -8,7 +8,7 @@ bool sparse_matrix::operator== (const sparse_matrix& matrix) const& {
       || row_index != matrix.row_index || values.size() != matrix.values.size())
         return false;
 
-    for (int i = 0; i < values.size(); i++)
+    for (size_t i = 0; i < values.size(); i++)
         if ((std::fabs(matrix.values[i] - values[i]) > 0.00001))
             return false;
     return true;
@@ -56,13 +56,13 @@ sparse_matrix sparse_multiplication(const sparse_matrix& A, const sparse_matrix&
 
 Matrix matrix_multiplication(const Matrix& A, const Matrix& B) {
     Matrix result(A.size());
-    for (int i = 0; i < result.size(); i++)
+    for (size_t i = 0; i < result.size(); i++)
         result[i].resize(B[0].size());
 
-    for (int i = 0; i < A.size(); i++) {
-        for (int j = 0; j < B[0].size(); j++) {
+    for (size_t i = 0; i < A.size(); i++) {
+        for (size_t j = 0; j < B[0].size(); j++) {
             result[i][j] = 0;
-            for (int k = 0; k < A[0].size(); k++)
+            for (size_t k = 0; k < A[0].size(); k++)
                 result[i][j] += A[i][k] * B[k][j];
         }
     }
