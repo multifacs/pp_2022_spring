@@ -1,7 +1,7 @@
 // Copyright 2022 Gudkov Andrey
-#include "./gaussian.h"
 #include <gtest/gtest.h>
 #include <omp.h>
+#include "./gaussian.h"
 #define THREAD_NUM 4
 
 TEST(Gauss_Filter, _50x50) {
