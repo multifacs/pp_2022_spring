@@ -2,16 +2,16 @@
 #ifndef MODULES_TASK_1_ZAITSEVA_K_JARVIS_JARVIS_H_
 #define MODULES_TASK_1_ZAITSEVA_K_JARVIS_JARVIS_H_
 
-#include <iostream>
-#include <vector>
 #include <fstream>
-#include <random>
+#include <iostream>
 #include <limits>
+#include <random>
 #include <utility>
+#include <vector>
 
 struct Point {
-  explicit Point() : x(0), y(0) {}
-  Point(double x_, double y_) : x(x_), y(y_){}
+  Point() : x(0), y(0) {}
+  Point(double x_, double y_) : x(x_), y(y_) {}
   double x;
   double y;
   bool operator<(const Point& other) const;
@@ -22,8 +22,7 @@ struct Point {
 
 double cross(const Point& a, const Point& b);
 
-bool turn(const Point& a, const Point& b,
-          const Point& c);
+bool turn(const Point& a, const Point& b, const Point& c);
 
 std::vector<Point> Jarvis(std::vector<Point> points);
 
