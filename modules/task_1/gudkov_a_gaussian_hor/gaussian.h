@@ -6,8 +6,8 @@
 #include <cmath>
 #include <ctime>
 #include <vector>
-#include <cinttypes>
 #include <random>
+#include <cinttypes>
 
 int GetIndex(int i, int j, int offset);
 std::vector<uint8_t> GetRandMatrix(int offset, int pixelHeight);

@@ -31,8 +31,7 @@ std::vector<uint8_t> Filter(std::vector<uint8_t> srcVec, int offset,
         for (int j = 0; j < offset; j++) {
             if (i == 0 || j == 0 || i == pixelHeight - 1 || j == offset - 1) {
                 result.push_back(srcVec[GetIndex(i, j, offset)]);
-            }
-            else {
+            } else {
                 double res = 0;
                 for (int x = -1; x < 2; x++) {
                     for (int y = -1; y < 2; y++) {
