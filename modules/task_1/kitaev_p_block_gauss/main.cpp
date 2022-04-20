@@ -17,14 +17,14 @@ TEST(Sequential_gauss, test_10x10) {
   ASSERT_NO_THROW(SequentialGauss(mtr, 10, 10, 10));
 }
 
-TEST(Sequential_gauss, test_100x100) {
-  std::vector<int> mtr = getRandomMatrix(100, 100);
-  ASSERT_NO_THROW(SequentialGauss(mtr, 100, 100, 10));
+TEST(Sequential_gauss, test_20x20) {
+  std::vector<int> mtr = getRandomMatrix(20, 20);
+  ASSERT_NO_THROW(SequentialGauss(mtr, 20, 20, 10));
 }
 
-TEST(Sequential_gauss, test_1000x1000) {
-  std::vector<int> mtr = getRandomMatrix(1000, 1000);
-  ASSERT_NO_THROW(SequentialGauss(mtr, 1000, 1000, 10));
+TEST(Sequential_gauss, test_30x30) {
+  std::vector<int> mtr = getRandomMatrix(30, 30);
+  ASSERT_NO_THROW(SequentialGauss(mtr, 30, 30, 10));
 }
 
 int main(int argc, char** argv) {
