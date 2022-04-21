@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <cstring>
+#include <cmath>
 #include "../../modules/task_3/yashin_k_crs_mult_double_tbb/sparse_matrix_multiplication_tbb.h"
 
 bool sparse_matrix::operator== (const sparse_matrix& matrix) const& {
