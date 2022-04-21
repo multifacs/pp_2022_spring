@@ -1,8 +1,7 @@
 // Copyright 2022 Krivosheev Miron
+
 #include <gtest/gtest.h>
-
 #include <vector>
-
 #include "./batcher.h"
 
 TEST(Radix_Sort_W_Batcher, Test_CorrectSort) {
@@ -36,6 +35,7 @@ TEST(Radix_Sort_W_Batcher, Test_Batcher) {
   std::vector<int> odd = oddBatch(part1, part2);
   std::vector<int> res = EvenOddBatch(even, odd);
   std::vector<int>stl_mege(20);
-  std::merge(part1.begin(), part1.end(), part2.begin(), part2.end(), stl_mege.begin());
+  std::merge(part1.begin(), part1.end(), part2.begin(),
+    part2.end(), stl_mege.begin());
   ASSERT_EQ(stl_mege, res);
 }

@@ -1,8 +1,11 @@
 // Copyright 2022 Krivosheev Miron
-#include <vector>
-#include <random>
-#include <utility>
 
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <ctime>
+#include <utility>
+#include <random>
 #include "../../../modules/task_1/krivosheev_m_radix_sort_w_batcher/batcher.h"
 
 bool checkSort(std::vector<int> arr) {
@@ -90,8 +93,7 @@ std::vector<int> evenBatch(std::vector<int> vec1, std::vector<int> vec2) {
     if (vec1[i1] <= vec2[i2]) {
       res[i] = vec1[i1];
       i1 += 2;
-    }
-    else {
+    } else {
       res[i] = vec2[i2];
       i2 += 2;
     }
@@ -103,8 +105,7 @@ std::vector<int> evenBatch(std::vector<int> vec1, std::vector<int> vec2) {
       res[i] = vec2[l];
       i++;
     }
-  }
-  else {
+  } else {
     for (int l = i1; l < size1; l += 2) {
       res[i] = vec1[l];
       i++;
@@ -126,8 +127,7 @@ std::vector<int> oddBatch(std::vector<int> vec1, std::vector<int> vec2) {
     if (vec1[i1] <= vec2[i2]) {
       res[i] = vec1[i1];
       i1 += 2;
-    }
-    else {
+    } else {
       res[i] = vec2[i2];
       i2 += 2;
     }
@@ -139,8 +139,7 @@ std::vector<int> oddBatch(std::vector<int> vec1, std::vector<int> vec2) {
       res[i] = vec2[l];
       i++;
     }
-  }
-  else {
+  } else {
     for (int l = i1; l < size1; l += 2) {
       res[i] = vec1[l];
       i++;
