@@ -124,9 +124,9 @@ sparse_matrix sparse_multiplication_omp(const sparse_matrix& A, const sparse_mat
     result.row_index[A.rows] = temp_rows;
     result.col_index.resize(temp_rows);
     result.values.resize(temp_rows);
-    for (int i{0}; i < result.rows; ++i) {
-        size_t size {temp_result_column[i].size()};
-        if (size != 0) {
+    for (int i = 0; i < result.rows; i++) {
+        size_t size = temp_result_column[i].size();
+        if (size) {
             memcpy(&result.col_index[count], &temp_result_column[i][0], size * sizeof(int));
             memcpy(&result.values[count], &temp_result_values[i][0], size * sizeof(double));
             count += size;
