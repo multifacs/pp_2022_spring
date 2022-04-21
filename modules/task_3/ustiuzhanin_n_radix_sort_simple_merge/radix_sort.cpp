@@ -96,19 +96,20 @@ void radixSortTBB(vector<int>* data) {
         return val < 0; }) != data->end())
         throw std::string("Try sort numbers less then 0");
 
-        vector<vector<int>> vecOfVec;
+    vector<vector<int>> vecOfVec;
 
-        tbb::mutex pushMutex;
-        tbb::parallel_for(tbb::blocked_range<vector<int>::const_iterator>(
-            data->begin(), data->end(), 10),
-            [&](tbb::blocked_range<vector<int>::const_iterator> r) {
-                vector<int> local = { r.begin(), r.end() };
-                radixSort(&local);
+    tbb::mutex pushMutex;
+    tbb::parallel_for(tbb::blocked_range<vector<int>::const_iterator>(
+        data->begin(), data->end(), 10),
+        [&](tbb::blocked_range<vector<int>::const_iterator> r) {
+        vector<int> local = { r.begin(), r.end() };
+        radixSort(&local);
 
-                pushMutex.lock();
-                vecOfVec.push_back(std::move(local));
-                pushMutex.unlock();
-            });
+        pushMutex.lock();
+        vecOfVec.push_back(std::move(local));
+        pushMutex.unlock();
+        });
+
 
     vector<int> resultVector = vecOfVec[0];
     for (size_t i = 1; i < vecOfVec.size(); ++i) {
