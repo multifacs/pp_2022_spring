@@ -1,6 +1,5 @@
 // Copyright 2022 Yashin Kirill
 
-#include <tbb/tbb.h>
 #include <iostream>
 #include <vector>
 #include <cstring>
