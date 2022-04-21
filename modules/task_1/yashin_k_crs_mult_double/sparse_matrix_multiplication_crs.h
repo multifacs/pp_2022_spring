@@ -2,12 +2,7 @@
 #ifndef MODULES_TASK_1_YASHIN_K_CRS_MULT_DOUBLE_SPARSE_MATRIX_MULTIPLICATION_CRS_H_
 #define MODULES_TASK_1_YASHIN_K_CRS_MULT_DOUBLE_SPARSE_MATRIX_MULTIPLICATION_CRS_H_
 
-#include <iostream>
-#include <iomanip>
-#include <cmath>
 #include <random>
-#include <utility>
-#include <algorithm>
 #include <vector>
 
 using Matrix = std::vector<std::vector<double>>;
