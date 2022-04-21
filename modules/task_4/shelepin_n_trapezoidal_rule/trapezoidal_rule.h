@@ -4,8 +4,7 @@
 
 #include <cmath>
 #include <functional>
-#include <mutex>
-#include <thread>
+#include <thread> // NOLINT
 #include <utility>
 #include <vector>
 

@@ -15,13 +15,7 @@ double getParallelTrapezoidal(
   }
 
   auto total_result = 0.0;
-  double* local_result = new double[THREADS];
-
-  for (int i = 0; i < THREADS; i++) {
-    local_result[i] = 0.0;
-  }
-
-  // std::mutex mutex;
+  std::vector<double> local_result(THREADS, 0.0);
 
   auto worker = [&dimension, &limits, &n, &h, &f, &local_result](
                     int begin, int end, int ind) {
@@ -30,7 +24,6 @@ double getParallelTrapezoidal(
       for (int i = 0; i < dimension; i++) {
         combinations[i] = limits[i].first + (j % n) * h[i] + h[i] * 0.5;
       }
-      // std::lock_guard<std::mutex> guard(mutex);
       local_result[ind] += f(combinations);
     }
   };
@@ -52,8 +45,8 @@ double getParallelTrapezoidal(
     i.join();
   }
 
-  for (int i = 0; i < THREADS; i++) {
-    total_result += local_result[i];
+  for (auto val : local_result) {
+    total_result += val;
   }
 
   for (int i = 0; i < dimension; i++) {
