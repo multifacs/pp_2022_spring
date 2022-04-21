@@ -204,8 +204,12 @@ BinaryImageAreas* FindAreasOmp(BinaryImage image) {
     }
   }
 
-  int onedimblocks = 20;
+  int onedimblocks = 5;
   int blockSize = (image.size / onedimblocks);
+  if (blockSize == 0) {
+    onedimblocks = 1;
+    blockSize = (image.size / onedimblocks);
+  }
   int blockSizeArea =
       (image.size / onedimblocks) * (image.size / onedimblocks) + 1;
 
@@ -215,9 +219,10 @@ BinaryImageAreas* FindAreasOmp(BinaryImage image) {
     int offsetX = (block / onedimblocks) * image.size / onedimblocks;
     int offsetY = (block % onedimblocks) * image.size / onedimblocks;
     int startLabel = block * blockSizeArea;
+    auto subarea = FindSubArea(image, offsetX, offsetY, blockSize, startLabel);
 #pragma omp critical
     blocks.insert(std::make_pair(
-        block, FindSubArea(image, offsetX, offsetY, blockSize, startLabel)));
+        block, subarea));
   }
 
   // Merge vertical
@@ -293,6 +298,6 @@ BinaryImageAreas* FindAreasOmp(BinaryImage image) {
     }
   }
 
-  // areas->components = label;
+  areas->components = 0;
   return areas;
 }
