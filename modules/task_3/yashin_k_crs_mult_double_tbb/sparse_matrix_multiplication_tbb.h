@@ -21,22 +21,17 @@ class sparse_matrix {
      std::vector<int> row_index;
 
      sparse_matrix() : rows(0), columns(0) {}
-     sparse_matrix(const int& _rows, const int& _cols, const int& cnt) {
+     sparse_matrix(const int& _rows, const int& _columns, const int& cnt) {
       rows = _rows;
-      columns = _cols;
+      columns = _columns;
       values.resize(cnt);
       col_index.resize(cnt);
       row_index.resize(_rows + 1);
      }
 
-     sparse_matrix(const int& _rows, const int& _cols, const std::vector<double>& _values,
-        const std::vector<int>& _col_index, const std::vector<int>& _row_index) {
-      rows = _rows;
-      columns = _cols;
-      values = _values;
-      col_index = _col_index;
-      row_index = _row_index;
-    }
+     sparse_matrix(const int& _rows, const int& _columns, const std::vector<double>& _values,
+        const std::vector<int>& _col_index, const std::vector<int>& _row_index) : rows(_rows), columns(_columns), 
+          values(_values), col_index(_col_index), row_index(_row_index) {}
 
      explicit sparse_matrix(const Matrix& matrix) {
       rows = matrix.size();
@@ -63,13 +58,8 @@ class sparse_matrix {
       }
      }
 
-     sparse_matrix(const sparse_matrix& matrix) {
-      rows = matrix.rows;
-      columns = matrix.columns;
-      values = matrix.values;
-      col_index = matrix.col_index;
-      row_index = matrix.row_index;
-     }
+     sparse_matrix(const sparse_matrix& matrix) : rows(matrix.rows), columns(matrix.columns),
+      values(matrix.values), col_index(matrix.col_index), row_index(matrix.row_index) {}
 
      ~sparse_matrix() {}
 
