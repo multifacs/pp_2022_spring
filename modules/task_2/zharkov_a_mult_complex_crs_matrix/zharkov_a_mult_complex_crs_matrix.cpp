@@ -151,7 +151,7 @@ SparseMatrix SparseMatrix::openMPMultiplication(const SparseMatrix& a) {
           cur += values[used[a_t_cols[i]]] * a_t_values[i];
         }
         if (!equalZero(cur)) {
-          parallel_columns[row1].emplace_back(row2); // создаёт обЪект в конец вектора
+          parallel_columns[row1].emplace_back(row2); // create object in end of vector
           parallel_values[row1].emplace_back(cur);
         }
       }

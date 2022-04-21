@@ -1,6 +1,6 @@
 // Copyright 2022 Zharkov Andrey
-#ifndef MODULES_TASK_2_KULANDIN_D_MULT_COMPLEX_CRS_MATRIX_H_
-#define MODULES_TASK_2_KULANDIN_D_MULT_COMPLEX_CRS_MATRIX_H_
+#ifndef MODULES_TASK_2_ZHARKOV_A_MULT_COMPLEX_CRS_MATRIX_ZHARKOV_A_MULT_COMPLEX_CRS_MATRIX_H_
+#define MODULES_TASK_2_ZHARKOV_A_MULT_COMPLEX_CRS_MATRIX_ZHARKOV_A_MULT_COMPLEX_CRS_MATRIX_H_
 
 #include <complex>
 #include <vector>
@@ -36,4 +36,4 @@ SparseMatrix generateRandomSparseMatrix(const int size,
 std::vector<std::complex<double>> stupidDenseMultiplication(
     const std::vector<std::complex<double>>& a,
     const std::vector<std::complex<double>>& b, const int size);
-#endif  // MODULES_TASK_2_KULANDIN_D_MULT_COMPLEX_CRS_MATRIX_H_
+#endif  // MODULES_TASK_2_ZHARKOV_A_MULT_COMPLEX_CRS_MATRIX_ZHARKOV_A_MULT_COMPLEX_CRS_MATRIX_H_
