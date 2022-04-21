@@ -10,6 +10,7 @@
 #include <numeric>
 #include <random>
 #include <vector>
+#include <utility>
 
 struct Equivalents {
   std::vector<std::vector<int>> equivalents;
