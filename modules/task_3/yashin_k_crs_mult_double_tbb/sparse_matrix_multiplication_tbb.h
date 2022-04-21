@@ -26,8 +26,8 @@ class sparse_matrix {
       row_index.resize(_rows + 1);
      }
 
-     sparse_matrix(const int& _rows, const int& _cols, std::vector<double> _values,
-        std::vector<int> _col_index, std::vector<int> _row_index) {
+     sparse_matrix(const int& _rows, const int& _cols, const std::vector<double>& _values,
+        const std::vector<int>& _col_index, const std::vector<int>& _row_index) {
       rows = _rows;
       columns = _cols;
       values = _values;
