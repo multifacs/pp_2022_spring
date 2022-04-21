@@ -1,6 +1,5 @@
 // Copyright 2022 Yashin Kirill
 #include <gtest/gtest.h>
-#include <iostream>
 #include <vector>
 #include "../../modules/task_1/yashin_k_crs_mult_double/sparse_matrix_multiplication_crs.h"
 
