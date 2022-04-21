@@ -2,7 +2,6 @@
 #include <limits>
 #include <random>
 #include <set>
-#include <omp.h>
 
 #include "../../../modules/task_2/zharkov_a_mult_complex_crs_matrix/zharkov_a_mult_complex_crs_matrix.h"
 
