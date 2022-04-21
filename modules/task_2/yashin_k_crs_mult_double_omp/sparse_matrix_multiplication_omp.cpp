@@ -2,6 +2,7 @@
 
 #include <omp.h>
 #include <vector>
+#include <cstring>
 #include "../../modules/task_2/yashin_k_crs_mult_double_omp/sparse_matrix_multiplication_omp.h"
 
 bool sparse_matrix::operator== (const sparse_matrix& matrix) const& {

@@ -52,13 +52,13 @@ TEST(Yashin_Kirill_Sparse_Matrix, Test_Omp_Matrix_Multiplication_Size_50) {
     double t1_omp = omp_get_wtime();
     sparse_matrix _sparse_result_omp = sparse_multiplication_omp(sA, sB);
     double t2_omp = omp_get_wtime();
-    
+
     double t1_no_omp = omp_get_wtime();
     sparse_matrix _sparse_result = sparse_multiplication(sA, sB);
     double t2_no_omp = omp_get_wtime();
 
     double acceleration = (t2_no_omp - t1_no_omp) / (t2_omp - t1_omp);
-    std::cout << "OMP time for size 50: " << t2_omp - t1_omp 
+    std::cout << "OMP time for size 50: " << t2_omp - t1_omp
               << "\nNo OMP time for size 50: " << t2_no_omp - t1_no_omp
               << "\nAcceleration: " << acceleration << std::endl;
     ASSERT_EQ(sparse_result, _sparse_result_omp);
@@ -78,13 +78,13 @@ TEST(Yashin_Kirill_Sparse_Matrix, Test_Omp_Matrix_Multiplication_Size_100) {
     double t1_omp = omp_get_wtime();
     sparse_matrix _sparse_result_omp = sparse_multiplication_omp(sA, sB);
     double t2_omp = omp_get_wtime();
-    
+
     double t1_no_omp = omp_get_wtime();
     sparse_matrix _sparse_result = sparse_multiplication(sA, sB);
     double t2_no_omp = omp_get_wtime();
 
     double acceleration = (t2_no_omp - t1_no_omp) / (t2_omp - t1_omp);
-    std::cout << "OMP time for size 100: " << t2_omp - t1_omp 
+    std::cout << "OMP time for size 100: " << t2_omp - t1_omp
               << "\nNo OMP time for size 100: " << t2_no_omp - t1_no_omp
               << "\nAcceleration: " << acceleration << std::endl;
     ASSERT_EQ(sparse_result, _sparse_result_omp);
@@ -104,13 +104,13 @@ TEST(Yashin_Kirill_Sparse_Matrix, Test_Omp_Matrix_Multiplication_Size_250) {
     double t1_omp = omp_get_wtime();
     sparse_matrix _sparse_result_omp = sparse_multiplication_omp(sA, sB);
     double t2_omp = omp_get_wtime();
-    
+
     double t1_no_omp = omp_get_wtime();
     sparse_matrix _sparse_result = sparse_multiplication(sA, sB);
     double t2_no_omp = omp_get_wtime();
 
     double acceleration = (t2_no_omp - t1_no_omp) / (t2_omp - t1_omp);
-    std::cout << "OMP time for size 250: " << t2_omp - t1_omp 
+    std::cout << "OMP time for size 250: " << t2_omp - t1_omp
               << "\nNo OMP time for size 250: " << t2_no_omp - t1_no_omp
               << "\nAcceleration: " << acceleration << std::endl;
     ASSERT_EQ(sparse_result, _sparse_result_omp);
@@ -130,13 +130,13 @@ TEST(Yashin_Kirill_Sparse_Matrix, Test_Omp_Matrix_Multiplication_Size_500) {
     double t1_omp = omp_get_wtime();
     sparse_matrix _sparse_result_omp = sparse_multiplication_omp(sA, sB);
     double t2_omp = omp_get_wtime();
-    
+
     double t1_no_omp = omp_get_wtime();
     sparse_matrix _sparse_result = sparse_multiplication(sA, sB);
     double t2_no_omp = omp_get_wtime();
 
     double acceleration = (t2_no_omp - t1_no_omp) / (t2_omp - t1_omp);
-    std::cout << "OMP time for size 500: " << t2_omp - t1_omp 
+    std::cout << "OMP time for size 500: " << t2_omp - t1_omp
               << "\nNo OMP time for size 500: " << t2_no_omp - t1_no_omp
               << "\nAcceleration: " << acceleration << std::endl;
     ASSERT_EQ(sparse_result, _sparse_result_omp);
