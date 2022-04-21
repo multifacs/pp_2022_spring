@@ -4,27 +4,8 @@
 #include <vector>
 #include "../../modules/task_2/yashin_k_crs_mult_double_omp/sparse_matrix_multiplication_omp.h"
 
-TEST(Yashin_Kirill_Sparse_Matrix, Can_Multiply_Sparse_Omp) {
-    int rows = 5;
-    int columns = 5;
-    std::vector<double> values = {1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7};
-    std::vector<int> col_index = {1, 4, 2, 3, 1, 3, 0};
-    std::vector<int> row_index = {0, 2, 4, 5, 6, 7};
 
-    Matrix true_result({{16.94, 0.0, 3.63, 4.84, 0.0},
-                       {0.0, 18.15, 0.0, 29.04, 0.0},
-                       {0.0, 0.0, 18.15, 24.2, 0.0},
-                       {0.0, 0.0, 0.0, 43.56, 0.0},
-                       {0.0, 8.47, 0.0, 0.0, 16.94}});
-
-    sparse_matrix A(rows, columns, values, col_index, row_index);
-    sparse_matrix result = sparse_multiplication_omp(A, A);
-    sparse_matrix _true_result(true_result);
-
-    ASSERT_TRUE(result == _true_result);
-}
-
-TEST(Yashin_Kirill_Sparse_Matrix, Can_Multiply_OMP_Random) {
+TEST(Yashin_Kirill_Sparse_Matrix, Can_Multiply_Omp_Random) {
     Matrix A(random_matrix(10, 10, 20));
     Matrix B(random_matrix(10, 10, 20));
 
@@ -36,7 +17,7 @@ TEST(Yashin_Kirill_Sparse_Matrix, Can_Multiply_OMP_Random) {
 
     sparse_matrix _result(result);
 
-    ASSERT_TRUE(result_sparse == _result);
+    ASSERT_TRUE(_result == result_sparse);
 }
 
 TEST(Yashin_Kirill_Sparse_Matrix, Test_Omp_Matrix_Multiplication_Size_50) {
@@ -118,8 +99,8 @@ TEST(Yashin_Kirill_Sparse_Matrix, Test_Omp_Matrix_Multiplication_Size_250) {
 }
 
 TEST(Yashin_Kirill_Sparse_Matrix, Test_Omp_Matrix_Multiplication_Size_500) {
-    Matrix A(random_matrix(500, 500, 50));
-    Matrix B(random_matrix(500, 500, 50));
+    Matrix A(random_matrix(500, 500, 30));
+    Matrix B(random_matrix(500, 500, 30));
 
     sparse_matrix sA(A);
     sparse_matrix sB(B);

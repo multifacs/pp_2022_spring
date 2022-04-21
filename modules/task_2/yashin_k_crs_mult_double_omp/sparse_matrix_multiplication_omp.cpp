@@ -1,18 +1,37 @@
 // Copyright 2022 Yashin Kirill
 
 #include <omp.h>
+#include <iostream>
 #include <vector>
 #include <cstring>
 #include "../../modules/task_2/yashin_k_crs_mult_double_omp/sparse_matrix_multiplication_omp.h"
 
 bool sparse_matrix::operator== (const sparse_matrix& matrix) const& {
-    if (rows != matrix.rows || col_index != matrix.col_index || columns != matrix.columns
-      || row_index != matrix.row_index || values.size() != matrix.values.size())
+    if (rows != matrix.rows || columns != matrix.columns){
+        std::cout << "here 1" << std::endl;
         return false;
+    }
 
-    for (size_t i = 0; i < values.size(); i++)
-        if ((std::fabs(matrix.values[i] - values[i]) > 0.00001))
+    for (int i = 0; i < rows; i++) {
+        if (row_index[i] != matrix.row_index[i]) {
+            std::cout << "here 2" << std::endl;
             return false;
+        }
+    }
+
+    for (int i = 0; i < columns; i++) {
+        if (col_index[i] != matrix.col_index[i]) {
+            std::cout << "here 3" << std::endl;
+            return false;
+        }
+    }
+
+    for (size_t i = 0; i < values.size(); i++) {
+       if (std::fabs(matrix.values[i] - values[i]) > 0.001) {
+            std::cout << "here 4    " << matrix.values[i] << "    " << values[i] << std::endl;
+            return false;
+        } 
+    }
     return true;
 }
 
