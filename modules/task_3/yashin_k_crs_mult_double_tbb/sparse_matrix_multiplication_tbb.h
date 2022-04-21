@@ -4,11 +4,6 @@
 
 #include <tbb/tbb.h>
 #include <iostream>
-#include <utility>
-#include <iomanip>
-#include <cstring>
-#include <cmath>
-#include <algorithm>
 #include <random>
 #include <vector>
 
@@ -23,15 +18,15 @@ class sparse_matrix {
      std::vector<int> row_index;
 
      sparse_matrix() : rows(0), columns(0) {}
-     sparse_matrix(int _rows, int _cols, int _elemsCount) {
+     sparse_matrix(const int& _rows, const int& _cols, const int& cnt) {
       rows = _rows;
       columns = _cols;
-      values.resize(_elemsCount);
-      col_index.resize(_elemsCount);
+      values.resize(cnt);
+      col_index.resize(cnt);
       row_index.resize(_rows + 1);
      }
 
-     sparse_matrix(int _rows, int _cols, std::vector<double> _values,
+     sparse_matrix(const int& _rows, const int& _cols, std::vector<double> _values,
         std::vector<int> _col_index, std::vector<int> _row_index) {
       rows = _rows;
       columns = _cols;
