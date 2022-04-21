@@ -4,6 +4,7 @@
 
 #include <complex>
 #include <vector>
+#include <omp.h>
 
 class SparseMatrix {
  public:
