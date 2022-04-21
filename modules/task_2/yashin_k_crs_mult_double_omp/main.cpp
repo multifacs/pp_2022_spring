@@ -21,7 +21,7 @@ TEST(Yashin_Kirill_Sparse_Matrix, Can_Multiply_Sparse_Omp) {
     sparse_matrix result = sparse_multiplication_omp(A, A);
     sparse_matrix _true_result(true_result);
 
-    ASSERT_NEAR(_true_result, result, 0.0001);
+    ASSERT_TRUE(result == _true_result);
 }
 
 TEST(Yashin_Kirill_Sparse_Matrix, Can_Multiply_OMP_Random) {
@@ -36,7 +36,7 @@ TEST(Yashin_Kirill_Sparse_Matrix, Can_Multiply_OMP_Random) {
 
     sparse_matrix _result(result);
 
-    ASSERT_NEAR(_result, result_sparse, 0.0001);
+    ASSERT_TRUE(result_sparse == result);
 }
 
 TEST(Yashin_Kirill_Sparse_Matrix, Test_Omp_Matrix_Multiplication_Size_50) {
@@ -61,8 +61,8 @@ TEST(Yashin_Kirill_Sparse_Matrix, Test_Omp_Matrix_Multiplication_Size_50) {
     std::cout << "OMP time for size 50: " << t2_omp - t1_omp
               << "\nNo OMP time for size 50: " << t2_no_omp - t1_no_omp
               << "\nAcceleration: " << acceleration << std::endl;
-    ASSERT_NEAR(sparse_result, _sparse_result_omp, 0.0001);
-    ASSERT_NEAR(sparse_result, _sparse_result, 0.0001);
+    ASSERT_TRUE(sparse_result == _sparse_result_omp);
+    ASSERT_TRUE(sparse_result == _sparse_result);
 }
 
 TEST(Yashin_Kirill_Sparse_Matrix, Test_Omp_Matrix_Multiplication_Size_100) {
@@ -87,8 +87,8 @@ TEST(Yashin_Kirill_Sparse_Matrix, Test_Omp_Matrix_Multiplication_Size_100) {
     std::cout << "OMP time for size 100: " << t2_omp - t1_omp
               << "\nNo OMP time for size 100: " << t2_no_omp - t1_no_omp
               << "\nAcceleration: " << acceleration << std::endl;
-    ASSERT_NEAR(sparse_result, _sparse_result_omp, 0.0001);
-    ASSERT_NEAR(sparse_result, _sparse_result, 0.0001);
+    ASSERT_TRUE(sparse_result == _sparse_result_omp);
+    ASSERT_TRUE(sparse_result == _sparse_result);
 }
 
 TEST(Yashin_Kirill_Sparse_Matrix, Test_Omp_Matrix_Multiplication_Size_250) {
@@ -113,8 +113,8 @@ TEST(Yashin_Kirill_Sparse_Matrix, Test_Omp_Matrix_Multiplication_Size_250) {
     std::cout << "OMP time for size 250: " << t2_omp - t1_omp
               << "\nNo OMP time for size 250: " << t2_no_omp - t1_no_omp
               << "\nAcceleration: " << acceleration << std::endl;
-    ASSERT_NEAR(sparse_result, _sparse_result_omp, 0.0001);
-    ASSERT_NEAR(sparse_result, _sparse_result, 0.0001);
+    ASSERT_TRUE(sparse_result == _sparse_result_omp);
+    ASSERT_TRUE(sparse_result == _sparse_result);
 }
 
 TEST(Yashin_Kirill_Sparse_Matrix, Test_Omp_Matrix_Multiplication_Size_500) {
@@ -139,6 +139,6 @@ TEST(Yashin_Kirill_Sparse_Matrix, Test_Omp_Matrix_Multiplication_Size_500) {
     std::cout << "OMP time for size 500: " << t2_omp - t1_omp
               << "\nNo OMP time for size 500: " << t2_no_omp - t1_no_omp
               << "\nAcceleration: " << acceleration << std::endl;
-    ASSERT_NEAR(sparse_result, _sparse_result_omp, 0.0001);
-    ASSERT_NEAR(sparse_result, _sparse_result, 0.0001);
+    ASSERT_TRUE(sparse_result == _sparse_result_omp);
+    ASSERT_TRUE(sparse_result == _sparse_result);
 }
