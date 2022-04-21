@@ -36,7 +36,7 @@ TEST(Yashin_Kirill_Sparse_Matrix, Can_Multiply_OMP_Random) {
 
     sparse_matrix _result(result);
 
-    ASSERT_TRUE(result_sparse == result);
+    ASSERT_TRUE(result_sparse == _result);
 }
 
 TEST(Yashin_Kirill_Sparse_Matrix, Test_Omp_Matrix_Multiplication_Size_50) {
