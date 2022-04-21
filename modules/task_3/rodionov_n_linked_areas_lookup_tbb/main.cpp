@@ -1,7 +1,9 @@
 // Copyright 2022 Nikita Rodionov
 #include <gtest/gtest.h>
-#include <iostream>
+
 #include <cstdio>
+#include <iostream>
+
 #include "./linked_areas.h"
 
 const int IMAGE_SIZE1 = 5;
@@ -30,30 +32,6 @@ TEST(LinkedAreasLookup, EqualityTest1) {
   BinaryImage image = GenerateBinrayImage(IMAGE_SIZE1);
   BinaryImageAreas* areas = FindAreas(image);
   BinaryImageAreas* areasOmp = FindAreasTBB(image);
-  /*
-      for (int x = 0; x < image.size; x++) {
-    std::cout << "\n";
-    for (int y = 0; y < image.size; y++) {
-      std::cout << image.Get(x, y) << " ";
-    }
-  }
-  std::cout << "\n";
-  std::cout << "\n";
-  for (int x=0;x<image.size;x++) {
-    std::cout << "\n";
-    for (int y = 0; y < image.size; y++) {
-      std::cout << areas->Get(x, y) << " ";
-    }
-  }
-  std::cout << "\n";
-  std::cout << "\n";
-  for (int x = 0; x < image.size; x++) {
-    std::cout << "\n";
-    for (int y = 0; y < image.size; y++) {
-      std::cout << areasOmp->Get(x, y) << " ";
-    }
-  }
-  */
   bool valid = CompareAreas(areas, areasOmp);
   ASSERT_TRUE(valid);
 }
