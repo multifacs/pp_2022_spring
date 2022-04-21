@@ -6,7 +6,7 @@
 
 #include "../../../modules/task_2/danshin_g_integral_rectangle/integral_rectangle.hpp"
 
-TEST(Danshin, Test1) {
+TEST(IntegralRectangle, Function1) {
     size_t dim = 1;
     auto step = new double{0.1};
     auto lower = new double{0.0};
@@ -25,7 +25,7 @@ TEST(Danshin, Test1) {
     ASSERT_DOUBLE_EQ(result, 0.45);
 }
 
-TEST(Danshin, Test2) {
+TEST(IntegralRectangle, Function2Step1) {
     size_t dim = 2;
     auto step = new double[2]{0.1, 0.1};
     auto lower = new double[2]{0.0, 0.0};
@@ -43,7 +43,7 @@ TEST(Danshin, Test2) {
     ASSERT_DOUBLE_EQ(result, 0.2025);
 }
 
-TEST(Danshin, Test3) {
+TEST(IntegralRectangle, Function2Step2) {
     size_t dim = 2;
     auto step = new double[2]{0.001, 0.001};
     auto lower = new double[2]{0.0, 0.0};
@@ -62,7 +62,7 @@ TEST(Danshin, Test3) {
     ASSERT_NEAR(result, 0.2495, 0.0001);
 }
 
-TEST(Danshin, Test4) {
+TEST(IntegralRectangle, Function3Step1) {
     size_t dim = 3;
     auto step = new double[3]{0.1, 0.1, 0.1};
     auto lower = new double[3]{0.0, 0.0, 0.0};
@@ -81,7 +81,7 @@ TEST(Danshin, Test4) {
     ASSERT_NEAR(result, 3.249, 0.001);
 }
 
-TEST(Danshin, Test5) {
+TEST(IntegralRectangle, Function3Step2) {
     size_t dim = 3;
     auto step = new double[3]{0.001, 0.001, 0.1};
     auto lower = new double[3]{0.0, 0.0, 0.0};
