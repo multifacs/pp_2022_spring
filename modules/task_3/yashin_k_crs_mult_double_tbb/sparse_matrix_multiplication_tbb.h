@@ -61,7 +61,7 @@ class sparse_matrix {
       }
      }
 
-     sparse_matrix(const sparse_matrix& matrix) {}
+     sparse_matrix(const sparse_matrix& matrix) = default;
 
      ~sparse_matrix() {}
 
