@@ -3,6 +3,9 @@
 #define MODULES_TASK_3_YASHIN_K_CRS_MULT_DOUBLE_TBB_SPARSE_MATRIX_MULTIPLICATION_TBB_H_
 
 #include <tbb/tbb.h>
+#include <iostream>
+#include <utility>
+#include <algorithm>
 #include <random>
 #include <vector>
 
