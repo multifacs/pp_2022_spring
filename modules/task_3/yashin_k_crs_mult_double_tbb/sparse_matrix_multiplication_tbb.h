@@ -30,7 +30,7 @@ class sparse_matrix {
      }
 
      sparse_matrix(const int& _rows, const int& _columns, const std::vector<double>& _values,
-        const std::vector<int>& _col_index, const std::vector<int>& _row_index) : rows(_rows), columns(_columns), 
+        const std::vector<int>& _col_index, const std::vector<int>& _row_index) : rows(_rows), columns(_columns),
           values(_values), col_index(_col_index), row_index(_row_index) {}
 
      explicit sparse_matrix(const Matrix& matrix) {
