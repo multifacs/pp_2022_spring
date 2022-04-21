@@ -64,7 +64,7 @@ TEST(Yashin_Kirill_Sparse_Matrix, Can_Miltiply) {
     }
 }
 
-TEST(Yashin_Kirill_Sparse_Matrix, Can_Miltiply_Sparse) {
+TEST(Yashin_Kirill_Sparse_Matrix, Can_Multiply_Sparse) {
     int rows = 5;
     int columns = 5;
     std::vector<double> values = {1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7};
@@ -84,7 +84,7 @@ TEST(Yashin_Kirill_Sparse_Matrix, Can_Miltiply_Sparse) {
     ASSERT_EQ(_true_result, result);
 }
 
-TEST(Yashin_Kirill_Sparse_Matrix, Can_Miltiply_Random) {
+TEST(Yashin_Kirill_Sparse_Matrix, Can_Multiply_Random) {
     Matrix A(random_matrix(10, 10));
     Matrix B(random_matrix(10, 10));
 
