@@ -8,4 +8,4 @@ using Function = std::function<double(double*)>;
 
 double Integrate(size_t, double*, double*, double*, Function);
 
-#endif // MODULES_TASK_1_DANSHIN_G_INTEGRAL_RECTANGLE_INTEGRAL_RECTANGLE_HPP_
+#endif  // MODULES_TASK_1_DANSHIN_G_INTEGRAL_RECTANGLE_INTEGRAL_RECTANGLE_HPP_
