@@ -60,7 +60,13 @@ class sparse_matrix {
       }
      }
 
-     sparse_matrix(const sparse_matrix& matrix) {}
+     sparse_matrix(const sparse_matrix& matrix) {
+      rows = matrix.rows;
+      columns = matrix.columns;
+      values = matrix.values;
+      col_index = matrix.col_index;
+      row_index = matrix.row_index;
+     }
 
      ~sparse_matrix() {}
 
