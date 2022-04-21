@@ -4,8 +4,8 @@
 #include <string>
 #include <algorithm>
 #include <ctime>
-#include <utility>
 #include <random>
+#include <utility>
 #include "../../../modules/task_1/krivosheev_m_radix_sort_w_batcher/batcher.h"
 
 bool checkSort(std::vector<int> arr) {
