@@ -8,7 +8,7 @@
 #include "./linked_areas.h"
 const int IMAGE_SIZE1 = 5;
 const int IMAGE_SIZE2 = 10;
-const int IMAGE_SIZE3 = 200;
+const int IMAGE_SIZE3 = 20;
 const int IMAGE_SIZE4 = 50;
 const int IMAGE_SIZE5 = 100;
 
@@ -28,7 +28,6 @@ bool CompareAreas(BinaryImageAreas* area1, BinaryImageAreas* area2) {
   return true;
 }
 
-/*
 
 TEST(LinkedAreasLookup, EqualityTest1) {
     BinaryImage image = GenerateBinrayImage(IMAGE_SIZE1);
@@ -45,19 +44,19 @@ TEST(LinkedAreasLookup, EqualityTest2) {
   bool valid = CompareAreas(areas, areasOmp);
   ASSERT_TRUE(valid);
 }
-*/
+
 TEST(LinkedAreasLookup, EqualityTest3) {
   BinaryImage image = GenerateBinrayImage(IMAGE_SIZE3);
-  auto start = omp_get_wtime();
+  // auto start = omp_get_wtime();
   BinaryImageAreas* areas = FindAreas(image);
-  auto seq = omp_get_wtime();
+  // auto seq = omp_get_wtime();
   BinaryImageAreas* areasOmp = FindAreasOmp(image);
-  auto omp = omp_get_wtime();
-  std::cout << (seq - start) << "   " << (omp - seq) << std::endl;
+  // auto omp = omp_get_wtime();
+  // std::cout << (seq - start) << "   " << (omp - seq) << std::endl;
   bool valid = CompareAreas(areas, areasOmp);
-  // ASSERT_TRUE(valid);
+  ASSERT_TRUE(valid);
 }
-/*
+
 TEST(LinkedAreasLookup, EqualityTest4) {
   BinaryImage image = GenerateBinrayImage(IMAGE_SIZE4);
   BinaryImageAreas* areas = FindAreas(image);
@@ -72,7 +71,7 @@ TEST(LinkedAreasLookup, EqualityTest5) {
   BinaryImageAreas* areasOmp = FindAreasOmp(image);
   bool valid = CompareAreas(areas, areasOmp);
   ASSERT_TRUE(valid);
-}*/
+}
 
 int main(int argc, char** argv) {
   /*

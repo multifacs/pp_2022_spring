@@ -250,7 +250,6 @@ BinaryImageAreas* FindAreasOmp(BinaryImage image) {
       }
     }
   }
-
   // Merge horizontal
   for (int row = 0; row < onedimblocks; row++) {
     for (int column = 0; column < onedimblocks - 1; column++) {

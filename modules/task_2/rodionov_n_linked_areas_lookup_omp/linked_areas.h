@@ -13,8 +13,8 @@ struct Equivalents {
     }
     std::vector<std::vector<int>>::iterator containing = std::find_if(
         equivalents.begin(), equivalents.end(),
-        [a = a, b = b](std::vector<int> p) {
-          return std::find_if(p.begin(), p.end(), [a = a, b = b](int p1) {
+        [&](std::vector<int> p) {
+          return std::find_if(p.begin(), p.end(), [&](int p1) {
                    return p1 == a || p1 == b;
                  }) != p.end();
         });
