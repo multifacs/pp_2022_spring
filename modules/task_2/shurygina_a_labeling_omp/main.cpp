@@ -48,29 +48,6 @@ TEST(labeling, 5x6) {
     ASSERT_EQ(expres, res);
 }
 
-TEST(labeling, 6x12) {
-    int rows = 6;
-    int cols = 12;
-    const std::vector<int> img = {
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0,
-        0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0,
-        0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0,
-        0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-    };
-    std::vector<int> expres = {
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 1, 1, 0, 2, 2, 0, 0, 3, 0,
-        0, 4, 4, 0, 1, 0, 2, 0, 2, 0, 3, 0,
-        0, 4, 0, 0, 1, 0, 2, 0, 2, 0, 0, 0,
-        0, 4, 4, 0, 1, 0, 2, 2, 2, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-    };
-    std::vector<int> res = CLabelingOmp(img, rows, cols);
-    ASSERT_EQ(expres, res);
-}
-
 TEST(labeling, 2x2) {
     int rows = 2;
     int cols = 2;
