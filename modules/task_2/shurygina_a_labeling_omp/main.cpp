@@ -1,4 +1,5 @@
 // Copyright 2022 Shurygina A
+
 #include <gtest/gtest.h>
 #include <omp.h>
 #include <iostream>
@@ -66,6 +67,12 @@ TEST(labeling, 2x2) {
 TEST(Clabeling_Matrix_gen, invalid_size) {
     int rows = -5;
     int cols = 7;
+    ASSERT_ANY_THROW(getRandomImg(rows, cols));
+}
+
+TEST(Clabeling_Matrix_gen, invalid_size2) {
+    int rows = 5;
+    int cols = -7;
     ASSERT_ANY_THROW(getRandomImg(rows, cols));
 }
 
