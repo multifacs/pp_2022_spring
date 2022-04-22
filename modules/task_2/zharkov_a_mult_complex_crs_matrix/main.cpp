@@ -94,5 +94,5 @@ TEST_P(parametrized_matrix_multiplication, mult_small_dimensions) {
 }
 
 INSTANTIATE_TEST_SUITE_P(matrix_CSR_complex, parametrized_matrix_multiplication,
-                         testing::Combine(testing::Values(100, 200, 500),
-                                          testing::Values(5, 10, 15)));
+                         testing::Combine(testing::Values(100, 200),
+                                          testing::Values(5, 10)));
