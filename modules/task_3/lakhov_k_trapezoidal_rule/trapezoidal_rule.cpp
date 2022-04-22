@@ -49,6 +49,20 @@ double _trapezoidalRule(std::function<double(std::vector<double>)> func,
         return result;
 }
 
+double trapezoidalRuleSeq(std::function<double(std::vector<double>)> func,
+                       const std::vector<std::pair<double, double>>& intervals,
+                       int interval_count) {
+        int position = 0;
+        int dimensions = intervals.size();
+        std::vector<double> args(dimensions);
+        std::vector<int> interval_count_v(dimensions);
+        for (int i = 0; i < dimensions; i++) {
+          args[i] = intervals[i].first;
+          interval_count_v[i] = interval_count;
+        }
+        return _trapezoidalRule(func, args, position,
+                                intervals, interval_count_v);
+}
 
 double trapezoidalRuleParallel(std::function<double(std::vector<double>)> func,
                        const std::vector<std::pair<double, double>>& intervals,
@@ -78,16 +92,19 @@ double trapezoidalRuleParallel(std::function<double(std::vector<double>)> func,
         intervals_to_thread[i] = current_intervals;
     }
 
-
-  double result = tbb::parallel_reduce(tbb::blocked_range<integral_intervals::const_iterator>(intervals_to_thread.begin(), intervals_to_thread.end()),
-                        0.0,
-                    [&](tbb::blocked_range<integral_intervals::const_iterator> range, double result) {
-                       auto task = range.begin();
-                       while (task != range.end()) {
-                         result += _trapezoidalRule(func, args, position, (*task), interval_count_v);
-                         ++task;
-                       }
-                       return result;
-                    }, std::plus<double>());
+  double result = tbb::parallel_reduce(
+    tbb::blocked_range<integral_intervals::const_iterator>
+                    (intervals_to_thread.begin(), intervals_to_thread.end()),
+    0.0,
+    [&](tbb::blocked_range<integral_intervals::const_iterator> range,
+        double result) {
+        auto task = range.begin();
+        while (task != range.end()) {
+          result += _trapezoidalRule(func, args,
+                                     position, (*task), interval_count_v);
+          ++task;
+        }
+        return result;
+      }, std::plus<double>());
   return result;
 }
