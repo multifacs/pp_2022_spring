@@ -1,98 +1,89 @@
 // Copyright 2022 Zharkov Andrey
 #include <gtest/gtest.h>
 #include <omp.h>
-#include <complex>
+
+#include <iostream>
 #include <vector>
 
-#include "./zharkov_a_mult_complex_crs_matrix.h"
+#include "../../modules/task_2/zharkov_a_mult_complex_crs_matrix/zharkov_a_mult_complex_crs_matrix.h"
 
-TEST(matrix_CSR_complex, matrix_constructor_and_createDenseMatrix) {
+
+TEST(SparceMatrixMultiplication, matrix_to_csr) {
+  std::vector<std::vector<std::complex<double>>> mat;
+  SparseComplexMatrix crsMat;
+  mat = randomMatrix(5, 5, 30);
+  ASSERT_NO_THROW(crsMat.matrixToCRS(mat));
+}
+
+TEST(SparceMatrixMultiplication, transpose) {
+  std::vector<std::complex<double>> vals_trans = {std::complex<double>(0, 5),
+                                                  std::complex<double>(7, 9)};
+  std::vector<int> col_ind_trans = {0, 0};
+  std::vector<int> row_ind_trans = {0, 0, 1, 1, 2, 2, 2};
+
+  std::vector<std::complex<double>> vals = {std::complex<double>(0, 5),
+                                            std::complex<double>(7, 9)};
+  std::vector<int> col_ind = {1, 3};
+  std::vector<int> row_ind = {0, 2, 2, 2};
+
+  SparseComplexMatrix mat(3, 6, vals, col_ind, row_ind);
+  SparseComplexMatrix mat_trans(6, 3, vals_trans, col_ind_trans, row_ind_trans);
+  SparseComplexMatrix tmp;
+  tmp = mat.transposeCRS();
+
+  ASSERT_TRUE(mat_trans == tmp);
+}
+
+TEST(SparceMatrixMultiplication, can_multimply_square_csr_matrices) {
   int size = 5;
-  std::vector<std::complex<double>> a = {
-      {1, 0}, {-1, 0}, {0, 0}, {-3, 0}, {0, 0}, {-2, 0}, {5, 0},
-      {0, 0}, {0, 0},  {0, 0}, {0, 0},  {0, 0}, {4, 0},  {6, 0},
-      {4, 0}, {-4, 0}, {0, 0}, {2, 0},  {7, 0}, {0, 0},  {0, 0},
-      {8, 0}, {0, 0},  {0, 0}, {-5, 0}};
-  SparseMatrix b(a, size);
-  ASSERT_EQ(b.getSize(), size);
-  ASSERT_EQ(a, b.getDenseMatrix());
+  std::vector<std::vector<std::complex<double>>> mat1;
+  std::vector<std::vector<std::complex<double>>> mat2;
+  SparseComplexMatrix crsMat1;
+  SparseComplexMatrix crsMat2;
+  SparseComplexMatrix crsMat3;
+  mat1 = randomMatrix(size, size, 30);
+  mat2 = randomMatrix(size, size, 30);
+  crsMat1 = crsMat1.matrixToCRS(mat1);
+  crsMat2 = crsMat2.matrixToCRS(mat2);
+  ASSERT_NO_THROW(crsMat3 = crsMat1 * crsMat2);
 }
 
-TEST(matrix_CSR_complex, transposition_and_getDenseMatrix) {
-  int size = 4;
-  std::vector<std::complex<double>> a = {
-      {0, 0}, {4, 0}, {5, 0}, {0, 0}, {0, 0}, {4, 0}, {1, 0},  {0, 0},
-      {0, 0}, {0, 0}, {0, 0}, {2, 0}, {9, 0}, {6, 0}, {0, 0}, {2, 0}};
-  SparseMatrix b(a, size);
-  ASSERT_EQ(b.getSize(), size);
-  ASSERT_EQ(a, b.transposition().transposition().getDenseMatrix());
+TEST(SparceMatrixMultiplication, can_multimply_not_square_csr_matrices) {
+  int rows1 = 200;
+  int cols1 = 110;
+  int rows2 = 110;
+  int cols2 = 350;
+  double percent = 50;
+  std::vector<std::vector<std::complex<double>>> mat1;
+  std::vector<std::vector<std::complex<double>>> mat2;
+  SparseComplexMatrix crsMat1;
+  SparseComplexMatrix crsMat2;
+  SparseComplexMatrix crsMat3;
+  SparseComplexMatrix crsMat4;
+  mat1 = randomMatrix(rows1, cols1, percent);
+  mat2 = randomMatrix(rows2, cols2, percent);
+  crsMat1 = crsMat1.matrixToCRS(mat1);
+  crsMat2 = crsMat2.matrixToCRS(mat2);
+
+
+  double start_seq = omp_get_wtime();
+  crsMat3 = crsMat1 * crsMat2;
+  double end_seq = omp_get_wtime();
+
+
+  double start_par = omp_get_wtime();
+  crsMat4 = crsMat1.crsParallelMult(crsMat2);
+  double end_par = omp_get_wtime();
+
+
+  std::cout << "Seq time: " << end_seq - start_seq << "\n";
+  std::cout << "Par time: " << end_par - start_par << "\n";
+  std::cout << "Boost time: " << (end_seq - start_seq) / (end_par - start_par) << "\n";
+
+  ASSERT_TRUE(crsMat3 == crsMat4);
 }
 
-TEST(matrix_CSR_complex, square_matrix_multiplication) {
-  int size = 4;
-  std::vector<std::complex<double>> a = {
-      {0, 0}, {3, 0}, {0, 0}, {7, 0}, {0, 0}, {0, 0}, {8, 0},  {0, 0},
-      {0, 0}, {0, 0}, {0, 0}, {0, 0}, {9, 0}, {0, 0}, {15, 0}, {16, 0}};
-  std::vector<std::complex<double>> ans = {
-      {63, 0},  {0, 0},  {129, 0}, {112, 0}, {0, 0}, {0, 0},
-      {0, 0},   {0, 0},  {0, 0},   {0, 0},   {0, 0}, {0, 0},
-      {144, 0}, {27, 0}, {240, 0}, {319, 0}};
-  SparseMatrix b(a, size);
-  ASSERT_NO_THROW(b.operator*(b));
-  SparseMatrix c = b * b;
-  ASSERT_EQ(c.getSize(), size);
-  ASSERT_EQ(c.getDenseMatrix(), ans);
-  ASSERT_EQ(b.operator*(b).getDenseMatrix(), ans);
+int main(int argc, char **argv) {
+  ::testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
 }
-
-TEST(matrix_CSR_complex, matrix_multiplication_only0) {
-  int sizeA = 2;
-  std::vector<std::complex<double>> a = {{0, 0}, {0, 0}, {0, 0}, {0, 0}};
-  int sizeB = 2;
-  std::vector<std::complex<double>> b = {{0, 0}, {0, 0}, {0, 0}, {0, 0}};
-  std::vector<std::complex<double>> ans = {{0, 0}, {0, 0}, {0, 0}, {0, 0}};
-  SparseMatrix matrA(a, sizeA);
-  SparseMatrix matrB(b, sizeB);
-  SparseMatrix res = matrA * matrB;
-  ASSERT_EQ(res.getDenseMatrix(), ans);
-}
-
-typedef testing::TestWithParam<std::tuple<int, int>>
-    parametrized_matrix_multiplication;
-
-TEST_P(parametrized_matrix_multiplication, mult_small_dimensions) {
-  int size = std::get<0>(GetParam());
-  int nonZero = std::get<1>(GetParam());
-  if (nonZero > size) {
-    ASSERT_THROW(generateRandomSparseMatrix(size, nonZero), std::string);
-    return;
-  }
-  SparseMatrix a = generateRandomSparseMatrix(size, nonZero);
-  SparseMatrix b = generateRandomSparseMatrix(size, nonZero);
-
-  std::cout << "size = " << size << "; nonZeroElementsInEveryRow = " << nonZero
-            << '\n';
-  auto begin = omp_get_wtime();
-  SparseMatrix seq_res = a * b;
-  auto end = omp_get_wtime();
-  auto elapsed_ms_seq = end - begin;
-  std::cout << "Sequential time = " << elapsed_ms_seq << "s\n";
-
-  begin = omp_get_wtime();
-  SparseMatrix openmp_res = a.openMPMultiplication(b);
-  end = omp_get_wtime();
-  auto elapsed_ms_paral = end - begin;
-  std::cout << "openMP time = " << elapsed_ms_paral << "s\n";
-
-  double boost = elapsed_ms_seq / elapsed_ms_paral;
-  std::cout << "Boost of time = " << boost << "s\n";
-
-  ASSERT_EQ(seq_res.getSize(), openmp_res.getSize());
-  ASSERT_EQ(seq_res.getCols(), openmp_res.getCols());
-  ASSERT_EQ(seq_res.getValues(), openmp_res.getValues());
-  ASSERT_EQ(seq_res.getPointers(), openmp_res.getPointers());
-}
-
-INSTANTIATE_TEST_SUITE_P(matrix_CSR_complex, parametrized_matrix_multiplication,
-                         testing::Combine(testing::Values(100, 200),
-                                          testing::Values(5, 10)));

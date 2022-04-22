@@ -1,39 +1,41 @@
 // Copyright 2022 Zharkov Andrey
-#ifndef MODULES_TASK_2_ZHARKOV_A_MULT_COMPLEX_CRS_MATRIX_ZHARKOV_A_MULT_COMPLEX_CRS_MATRIX_H_
-#define MODULES_TASK_2_ZHARKOV_A_MULT_COMPLEX_CRS_MATRIX_ZHARKOV_A_MULT_COMPLEX_CRS_MATRIX_H_
+#ifndef MODULES_TASK_2_ZHARKOV_A_MULT_COMPLEX_CRS_MATRIX_MULT_COMPLEX_CRS_MATRIX_H_
+#define MODULES_TASK_2_ZHARKOV_A_MULT_COMPLEX_CRS_MATRIX_MULT_COMPLEX_CRS_MATRIX_H_
 
+#include <algorithm>
 #include <complex>
+#include <ctime>
+#include <iostream>
+#include <random>
 #include <vector>
 
-class SparseMatrix {
- public:
-  explicit SparseMatrix(int _size = 0);
-  SparseMatrix(const SparseMatrix& a);
-  SparseMatrix(const std::vector<std::complex<double>>& a, int _size);
-  ~SparseMatrix() = default;
-  SparseMatrix& operator=(const SparseMatrix& a);
-  SparseMatrix operator*(const SparseMatrix& a);
-  std::vector<std::complex<double>> getValues() const;
-  std::vector<int> getCols() const;
-  std::vector<int> getPointers() const;
-  int getSize() const;
-  void setSize(const int size);
-  void setValues(const std::vector<std::complex<double>>& val);
-  void setCols(const std::vector<int>& col);
-  void setPointers(const std::vector<int>& pointers);
-  std::vector<std::complex<double>> getDenseMatrix() const;
-  SparseMatrix transposition() const;
-  SparseMatrix openMPMultiplication(const SparseMatrix& a);
-
+class SparseComplexMatrix {
  private:
-  int size;
+  int rows_num;
+  int cols_num;
+
   std::vector<std::complex<double>> values;
-  std::vector<int> cols, pointers;
+  std::vector<int> col_index;
+  std::vector<int> row_index;
+
+ public:
+  SparseComplexMatrix();
+  SparseComplexMatrix(int _rows_num, int _cols_num);
+  SparseComplexMatrix(int _rows_num, int _cols_num,
+                      std::vector<std::complex<double>> _values,
+                      std::vector<int> _col_index, std::vector<int> _row_index);
+  SparseComplexMatrix(const SparseComplexMatrix& sparse_complex_matrix);
+  bool operator==(const SparseComplexMatrix& mat) const&;
+  SparseComplexMatrix operator*(const SparseComplexMatrix& mat) const&;
+  SparseComplexMatrix crsParallelMult(const SparseComplexMatrix& mat) const&;
+  SparseComplexMatrix matrixToCRS(
+      std::vector<std::vector<std::complex<double>>> matrix);
+  SparseComplexMatrix transposeCRS();
+  void printCRS();
 };
 
-SparseMatrix generateRandomSparseMatrix(const int size,
-                                        const int nonZeroElementsInEveryRow);
-std::vector<std::complex<double>> stupidDenseMultiplication(
-    const std::vector<std::complex<double>>& a,
-    const std::vector<std::complex<double>>& b, const int size);
-#endif  // MODULES_TASK_2_ZHARKOV_A_MULT_COMPLEX_CRS_MATRIX_ZHARKOV_A_MULT_COMPLEX_CRS_MATRIX_H_
+std::vector<std::vector<std::complex<double>>> randomMatrix(int _rows_num,
+                                                            int _cols_num,
+                                                            double percent);
+void print(std::vector<std::vector<std::complex<double>>> matrix);
+#endif  // MODULES_TASK_2_ZHARKOV_A_MULT_COMPLEX_CRS_MATRIX_MULT_COMPLEX_CRS_MATRIX_H_
