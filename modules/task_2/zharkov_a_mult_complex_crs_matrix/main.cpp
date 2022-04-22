@@ -83,6 +83,39 @@ TEST(SparceMatrixMultiplication, can_multimply_not_square_csr_matrices) {
   ASSERT_TRUE(crsMat3 == crsMat4);
 }
 
+TEST(SparceMatrixMultiplication, can_multimply_square_new_csr_matrices) {
+  int rows1 = 350;
+  int cols1 = 110;
+  int rows2 = 110;
+  int cols2 = 350;
+  double percent = 50;
+  std::vector<std::vector<std::complex<double>>> mat1;
+  std::vector<std::vector<std::complex<double>>> mat2;
+  SparseComplexMatrix crsMat1;
+  SparseComplexMatrix crsMat2;
+  SparseComplexMatrix crsMat3;
+  SparseComplexMatrix crsMat4;
+  mat1 = randomMatrix(rows1, cols1, percent);
+  mat2 = randomMatrix(rows2, cols2, percent);
+  crsMat1 = crsMat1.matrixToCRS(mat1);
+  crsMat2 = crsMat2.matrixToCRS(mat2);
+
+  double start_seq = omp_get_wtime();
+  crsMat3 = crsMat1 * crsMat2;
+  double end_seq = omp_get_wtime();
+
+  double start_par = omp_get_wtime();
+  crsMat4 = crsMat1.crsParallelMult(crsMat2);
+  double end_par = omp_get_wtime();
+
+  std::cout << "Seq time: " << end_seq - start_seq << "\n";
+  std::cout << "Par time: " << end_par - start_par << "\n";
+  std::cout << "Boost time: " << (end_seq - start_seq) / (end_par - start_par)
+            << "\n";
+
+  ASSERT_TRUE(crsMat3 == crsMat4);
+}
+
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
