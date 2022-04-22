@@ -1,6 +1,6 @@
 // Copyright 2022 Zharkov Andrey
-#ifndef MODULES_TASK_2_ZHARKOV_A_MULT_COMPLEX_CRS_MATRIX_MULT_COMPLEX_CRS_MATRIX_H_
-#define MODULES_TASK_2_ZHARKOV_A_MULT_COMPLEX_CRS_MATRIX_MULT_COMPLEX_CRS_MATRIX_H_
+#ifndef MODULES_TASK_2_ZHARKOV_A_MULT_COMPLEX_CRS_MATRIX_ZHARKOV_A_MULT_COMPLEX_CRS_MATRIX_H_
+#define MODULES_TASK_2_ZHARKOV_A_MULT_COMPLEX_CRS_MATRIX_ZHARKOV_A_MULT_COMPLEX_CRS_MATRIX_H_
 
 #include <algorithm>
 #include <complex>
@@ -38,4 +38,4 @@ std::vector<std::vector<std::complex<double>>> randomMatrix(int _rows_num,
                                                             int _cols_num,
                                                             double percent);
 void print(std::vector<std::vector<std::complex<double>>> matrix);
-#endif  // MODULES_TASK_2_ZHARKOV_A_MULT_COMPLEX_CRS_MATRIX_MULT_COMPLEX_CRS_MATRIX_H_
+#endif  // MODULES_TASK_2_ZHARKOV_A_MULT_COMPLEX_CRS_MATRIX_ZHARKOV_A_MULT_COMPLEX_CRS_MATRIX_H_
