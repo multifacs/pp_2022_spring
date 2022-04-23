@@ -162,46 +162,38 @@ bool MatrixCRS::operator==(const MatrixCRS& otherMatrix) {
 }
 
 MatrixCRS getParallelMult(const MatrixCRS& first, const MatrixCRS& second) {
-  assert(first.m_numberOfColumns == second.m_numberOfRows);
+ assert(first.m_numberOfColumns == second.m_numberOfRows);
 
-  MatrixCRS result(first.m_numberOfRows, second.m_numberOfColumns);
+   MatrixCRS result(first.m_numberOfRows, second.m_numberOfColumns);
   MatrixCRS transponseSecond = second;
   transponseSecond.transponse();
 
-  int numberOfThread = omp_get_num_procs();
-  int dataPortion = first.m_numberOfRows / numberOfThread;
-
-  vector<std::pair<size_t, size_t>> vectorOfRange(numberOfThread);
+  int numberOfTreads = omp_get_num_procs();
   vector<vector<pair<size_t, complex<double>>>> intermediateResult(
-      first.m_numberOfRows);
+      numberOfTreads);
+  vector<size_t> intermediateAccum(first.m_numberOfRows);
 
-  for (int i = 0; i < numberOfThread; ++i) {
-    if (i != numberOfThread - 1) {
-      vectorOfRange[i] = {i * dataPortion, (i + 1) * dataPortion};
-    } else {
-      vectorOfRange[i] = {i * dataPortion, first.m_numberOfRows};
-    }
-  }
-
-#pragma omp parallel
-  {
-    for (int i = vectorOfRange[omp_get_thread_num()].first;
-         i < vectorOfRange[omp_get_thread_num()].second; ++i) {
-      auto currentRow = first.getRow(i);
-      for (size_t j = 0; j < transponseSecond.m_numberOfRows; ++j) {
-        auto currentCol = transponseSecond.getRow(j);
-        auto res = multiplicationUnit(currentRow, currentCol);
-        if (res != complex<double>(0.0, 0.0)) {
-          intermediateResult[i].push_back({j, res});
-        }
+#pragma omp parallel for num_threads(numberOfTreads)
+  for (int i = 0; i < static_cast<int>(first.m_numberOfRows); ++i) {
+    intermediateAccum[i] = 0;
+    auto currentRow = first.getRow(i);
+    for (size_t j = 0; j < transponseSecond.m_numberOfRows; ++j) {
+      auto currentCol = transponseSecond.getRow(j);
+      auto res = multiplicationUnit(currentRow, currentCol);
+      if (res != complex<double>(0.0, 0.0)) {
+        intermediateResult[omp_get_thread_num()].push_back({j, res});
+        intermediateAccum[i]++;
       }
     }
   }
 
-  for (auto& vec : intermediateResult) {
+  for (size_t i = 0; i < intermediateAccum.size(); ++i) {
     result.m_accumulateNonZeros.push_back(
         result.m_accumulateNonZeros[result.m_accumulateNonZeros.size() - 1] +
-        vec.size());
+        intermediateAccum[i]);
+  }
+
+  for (auto& vec : intermediateResult) {
     for (auto& elem : vec) {
       result.m_columnsOfValues.push_back(elem.first);
       result.m_values.push_back(elem.second);
