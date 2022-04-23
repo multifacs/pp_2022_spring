@@ -1,6 +1,8 @@
 // Copyright 2022 Zaytsev Mikhail
 #include "../../../modules/task_2/zaytsev_m_multiply_crs_matrix/multiply_crs_matrix.h"
+
 #include <omp.h>
+
 #include <algorithm>
 #include <cassert>
 #include <utility>
@@ -20,8 +22,7 @@ MatrixCRS::MatrixCRS(const size_t numberOfRows, const size_t numberOfColumns)
   m_accumulateNonZeros.push_back(0);
 }
 MatrixCRS::MatrixCRS(
-    const size_t numberOfRows,
-    const size_t numberOfColumns,
+    const size_t numberOfRows, const size_t numberOfColumns,
     const vector<vector<pair<size_t, complex<double>>>>& vectorOfPair)
     : m_numberOfRows(numberOfRows),
       m_numberOfColumns(numberOfColumns),
@@ -105,8 +106,7 @@ complex<double> multiplicationUnit(
                                  return p.first == el.first;
                                });
 
-    if (finded != second.end())
-      result += el.second * (*finded).second;
+    if (finded != second.end()) result += el.second * (*finded).second;
   }
 
   return result;
@@ -154,17 +154,16 @@ bool MatrixCRS::operator==(const MatrixCRS& otherMatrix) {
   }
 
   for (size_t i = 0; i < this->m_values.size(); ++i) {
-    if (this->m_values[i] != otherMatrix.m_values[i])
-      return false;
+    if (this->m_values[i] != otherMatrix.m_values[i]) return false;
   }
 
   return true;
 }
 
 MatrixCRS getParallelMult(const MatrixCRS& first, const MatrixCRS& second) {
- assert(first.m_numberOfColumns == second.m_numberOfRows);
+  assert(first.m_numberOfColumns == second.m_numberOfRows);
 
-   MatrixCRS result(first.m_numberOfRows, second.m_numberOfColumns);
+  MatrixCRS result(first.m_numberOfRows, second.m_numberOfColumns);
   MatrixCRS transponseSecond = second;
   transponseSecond.transponse();
 
