@@ -2,10 +2,10 @@
 #ifndef MODULES_TASK_3_KULEMIN_P_DISCHARGE_DOUBLE_SORT_TBB_KULEMIN_P_DISCHARGE_DOUBLE_SORT_TBB_H_
 #define MODULES_TASK_3_KULEMIN_P_DISCHARGE_DOUBLE_SORT_TBB_KULEMIN_P_DISCHARGE_DOUBLE_SORT_TBB_H_
 
+#include <tbb/tbb.h>
 #include <vector>
 #include <string>
 #include <list>
-#include <tbb/tbb.h>
 struct vector {
     double* ptr;
     int last_el;
