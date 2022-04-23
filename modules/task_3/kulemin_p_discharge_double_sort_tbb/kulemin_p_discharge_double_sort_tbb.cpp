@@ -24,7 +24,8 @@ struct DischargeSort {
     explicit DischargeSort(vector* ta, size_t _b,
     std::vector<int>* _list): arr(ta), byte(_b), list(_list)
     {}
-    DischargeSort(DischargeSort&s, tbb::split) : arr(s.arr), byte(s.byte) {}
+    DischargeSort(const DischargeSort&s,
+    tbb::split) : arr(s.arr), byte(s.byte), list(s.list) {}
     void operator()(const tbb::blocked_range<int>& r)const {
         int end = r.end();
         int begin = r.begin();
