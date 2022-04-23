@@ -22,10 +22,13 @@ struct DischargeSort {
     size_t byte;
     static tbb::mutex m;
     explicit DischargeSort(vector* ta, size_t _b,
-    std::vector<int>* _list): arr(ta), byte(_b), list(_list)
-    {}
+    std::vector<int>* _list): arr(ta), list(_list) {
+        byte = _b;
+    }
     DischargeSort(const DischargeSort&s,
-    tbb::split) : arr(s.arr), byte(s.byte), list(s.list) {}
+    tbb::split) : arr(s.arr), list(s.list) {
+        byte = s.byte;
+    }
     void operator()(const tbb::blocked_range<int>& r)const {
         int end = r.end();
         int begin = r.begin();
