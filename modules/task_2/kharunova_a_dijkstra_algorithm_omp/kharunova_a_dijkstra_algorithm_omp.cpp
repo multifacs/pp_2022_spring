@@ -4,7 +4,7 @@
 #include <iostream>
 #include <random>
 #include <vector>
-#include "../../../modules/task_1/kharunova_a_dijkstra_algorithm/dijkstra_algorithm.h"
+#include "../../../modules/task_2/kharunova_a_dijkstra_algorithm_omp/kharunova_a_dijkstra_algorithm_omp.h"
 
 std::vector<std::vector<int>> create_random_graph(int num_of_vertex,
                                                   int max_destination) {
@@ -59,7 +59,8 @@ void start_parallel_algorithm(int start_vertex, int num_of_vertex,
      int min_weight2 = 10000;
 #pragma omp parallel shared( \
     min_destinations, passed_vertexes) \
-    firstprivate(min_weight, min_index, j) {
+    firstprivate(min_weight, min_index, j)
+     {
 #pragma omp for
       for (j = 0; j < num_of_vertex; j++) {
         if (!passed_vertexes[j] && min_destinations[j] <= min_weight) {
@@ -75,7 +76,8 @@ void start_parallel_algorithm(int start_vertex, int num_of_vertex,
     passed_vertexes[min_index2] = 1;
 #pragma omp parallel shared(min_destinations, matrix_of_connections, \
                             passed_vertexes) \
-    firstprivate(k) {
+    firstprivate(k)
+    {
 #pragma omp for
       for (k = 0; k < num_of_vertex; k++) {
         if (!passed_vertexes[k] && min_destinations[min_index2] != 10000 &&
