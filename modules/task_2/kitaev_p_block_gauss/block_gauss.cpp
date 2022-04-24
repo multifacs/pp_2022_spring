@@ -65,7 +65,7 @@ std::vector<int> SequentialGauss(std::vector<int> img,
 }
 
 std::vector<int> ParallelGauss(std::vector<int> img,
-  std::vector<double> gauss_kernel,int row, int col) {
+  std::vector<double> gauss_kernel, int row, int col) {
   std::vector<int> res(img);
   int i, j;
 #pragma omp parallel private(i, j)

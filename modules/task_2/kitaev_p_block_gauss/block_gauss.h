@@ -14,4 +14,4 @@ std::vector<int> SequentialGauss(std::vector<int> img,
 std::vector<int> ParallelGauss(std::vector<int> img,
   std::vector<double> gauss_kernel, int row, int col);
 
-#endif  // MODULES_TASK_1_KITAEV_P_BLOCK_GAUSS_BLOCK_GAUSS_H_
+#endif  // MODULES_TASK_2_KITAEV_P_BLOCK_GAUSS_BLOCK_GAUSS_H_
