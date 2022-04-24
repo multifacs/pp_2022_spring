@@ -48,45 +48,45 @@ void start_parallel_algorithm(int start_vertex, int num_of_vertex,
 
   std::vector<int> min_destinations(num_of_vertex, 10000);
   std::vector<int> passed_vertexes(num_of_vertex, 0);
-  int temp, min_index, min_dest, i, j, k, min_index2 = 0;
+  int last_index = 0, j, k, last_index2 = 0;
   std::vector<std::vector<int>> matrix_of_connections =
       create_random_graph(num_of_vertex, max_destination);
 
   min_destinations[start_vertex] = 0;
 
   for (int i = 0; i < num_of_vertex; i++) {
-    int min_weight = 10000;
-     int min_weight2 = 10000;
+    int min_dest = 10000;
+     int min_dest2 = 10000;
 #pragma omp parallel shared( \
     min_destinations, passed_vertexes) \
-    firstprivate(min_weight, min_index, j)
+    firstprivate(min_dest, last_index, j)
      {
 #pragma omp for
       for (j = 0; j < num_of_vertex; j++) {
-        if (!passed_vertexes[j] && min_destinations[j] <= min_weight) {
-          min_weight = min_destinations[j];
-          min_index = j;
+        if (!passed_vertexes[j] && min_destinations[j] <= min_dest) {
+          min_dest = min_destinations[j];
+          last_index = j;
         }
       }
-      if (min_weight < min_weight2) {
-        min_weight2 = min_weight;
-        min_index2 = min_index;
+      if (min_dest < min_dest2) {
+        min_dest2 = min_dest;
+        last_index2 = last_index;
       }
     }
-    passed_vertexes[min_index2] = 1;
+    passed_vertexes[last_index2] = 1;
 #pragma omp parallel shared(min_destinations, matrix_of_connections, \
                             passed_vertexes) \
     firstprivate(k)
     {
 #pragma omp for
       for (k = 0; k < num_of_vertex; k++) {
-        if (!passed_vertexes[k] && min_destinations[min_index2] != 10000 &&
-            matrix_of_connections[min_index2][k] &&
-            min_destinations[min_index2] +
-                    matrix_of_connections[min_index2][k] <
+        if (!passed_vertexes[k] && min_destinations[last_index2] != 10000 &&
+            matrix_of_connections[last_index2][k] &&
+            min_destinations[last_index2] +
+                    matrix_of_connections[last_index2][k] <
                 min_destinations[k]) {
-          min_destinations[k] = min_destinations[min_index2] +
-                                matrix_of_connections[min_index2][k];
+          min_destinations[k] = min_destinations[last_index2] +
+                                matrix_of_connections[last_index2][k];
         }
       }
     }
