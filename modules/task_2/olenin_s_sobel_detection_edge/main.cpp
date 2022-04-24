@@ -12,7 +12,7 @@ const int SIZE_5 = 6;
 
 TEST(seqSobelFilter, SobelTest1) {
   Image image = Image::GenerateRandomImage(SIZE_1);
-
+  /*
   double startseq = omp_get_wtime();
   Image resseq = ApplySobel(image);
   double endseq = omp_get_wtime();
@@ -26,11 +26,12 @@ TEST(seqSobelFilter, SobelTest1) {
   std::cout << "sequential_runtime = " << timeseq << std::endl;
   std::cout << "parallel_omp_runtime = " << timeomp
     << std::endl;
-
+  */
   ASSERT_NO_FATAL_FAILURE(ApplySobelomp(image));
 }
 TEST(seqSobelFilter, SobelTest2) {
   Image image = Image::GenerateRandomImage(SIZE_2);
+  /*
   double startseq = omp_get_wtime();
   Image resseq = ApplySobel(image);
   double endseq = omp_get_wtime();
@@ -42,29 +43,35 @@ TEST(seqSobelFilter, SobelTest2) {
   double timeomp = endomp - startomp;
 
   std::cout << "sequential_runtime = " << timeseq << std::endl;
-  std::cout << "parallel_omp_runtime = " << timeomp << std::endl;
+  std::cout << "parallel_omp_runtime = " << timeomp
+    << std::endl;
+  */
 
   ASSERT_NO_FATAL_FAILURE(ApplySobelomp(image));
 }
 TEST(seqSobelFilter, SobelTest3) {
   Image image = Image::GenerateRandomImage(SIZE_3);
-  double startseq = omp_get_wtime();
-  Image resseq = ApplySobel(image);
-  double endseq = omp_get_wtime();
-  double timeseq = endseq - startseq;
+  /*
+ double startseq = omp_get_wtime();
+ Image resseq = ApplySobel(image);
+ double endseq = omp_get_wtime();
+ double timeseq = endseq - startseq;
 
-  double startomp = omp_get_wtime();
-  Image resomp = ApplySobelomp(image);
-  double endomp = omp_get_wtime();
-  double timeomp = endomp - startomp;
+ double startomp = omp_get_wtime();
+ Image resomp = ApplySobelomp(image);
+ double endomp = omp_get_wtime();
+ double timeomp = endomp - startomp;
 
-  std::cout << "sequential_runtime = " << timeseq << std::endl;
-  std::cout << "parallel_omp_runtime = " << timeomp << std::endl;
+ std::cout << "sequential_runtime = " << timeseq << std::endl;
+ std::cout << "parallel_omp_runtime = " << timeomp
+   << std::endl;
+ */
 
   ASSERT_NO_FATAL_FAILURE(ApplySobelomp(image));
 }
 TEST(seqSobelFilter, SobelTest4) {
   Image image = Image::GenerateRandomImage(SIZE_4);
+  /*
   double startseq = omp_get_wtime();
   Image resseq = ApplySobel(image);
   double endseq = omp_get_wtime();
@@ -76,12 +83,15 @@ TEST(seqSobelFilter, SobelTest4) {
   double timeomp = endomp - startomp;
 
   std::cout << "sequential_runtime = " << timeseq << std::endl;
-  std::cout << "parallel_omp_runtime = " << timeomp << std::endl;
+  std::cout << "parallel_omp_runtime = " << timeomp
+    << std::endl;
+  */
 
   ASSERT_NO_FATAL_FAILURE(ApplySobelomp(image));
 }
 TEST(seqSobelFilter, SobelTest5) {
   Image image = Image::GenerateRandomImage(SIZE_5);
+  /*
   double startseq = omp_get_wtime();
   Image resseq = ApplySobel(image);
   double endseq = omp_get_wtime();
@@ -93,7 +103,9 @@ TEST(seqSobelFilter, SobelTest5) {
   double timeomp = endomp - startomp;
 
   std::cout << "sequential_runtime = " << timeseq << std::endl;
-  std::cout << "parallel_omp_runtime = " << timeomp << std::endl;
+  std::cout << "parallel_omp_runtime = " << timeomp
+    << std::endl;
+  */
 
   ASSERT_NO_FATAL_FAILURE(ApplySobelomp(image));
 }
