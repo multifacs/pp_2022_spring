@@ -57,11 +57,9 @@ void start_parallel_algorithm(int start_vertex, int num_of_vertex,
   for (int i = 0; i < num_of_vertex; i++) {
     int min_dest = 10000;
      int min_dest2 = 10000;
-#pragma omp parallel shared( \
-    min_destinations, passed_vertexes) \
-    firstprivate(min_dest, last_index, j)
-     {
-#pragma omp for
+#pragma omp parallel firstprivate(min_dest, last_index, j)
+      {
+      #pragma omp for
       for (j = 0; j < num_of_vertex; j++) {
         if (!passed_vertexes[j] && min_destinations[j] <= min_dest) {
           min_dest = min_destinations[j];
@@ -74,11 +72,9 @@ void start_parallel_algorithm(int start_vertex, int num_of_vertex,
       }
     }
     passed_vertexes[last_index2] = 1;
-#pragma omp parallel shared(min_destinations, matrix_of_connections, \
-                            passed_vertexes) \
-    firstprivate(k)
-    {
-#pragma omp for
+#pragma omp parallel firstprivate(k)
+  {
+    #pragma omp for
       for (k = 0; k < num_of_vertex; k++) {
         if (!passed_vertexes[k] && min_destinations[last_index2] != 10000 &&
             matrix_of_connections[last_index2][k] &&
