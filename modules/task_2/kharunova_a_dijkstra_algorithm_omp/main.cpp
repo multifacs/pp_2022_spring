@@ -27,10 +27,6 @@ TEST(search_path_omp, 1000_size_graph_100) {
   ASSERT_NO_THROW(start_parallel_algorithm(0, 1000, 100));
 }
 
-TEST(search_path_omp, 5000_size_graph_1000) {
-  ASSERT_NO_THROW(start_parallel_algorithm(0, 5000, 1000));
-}
-
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
