@@ -10,32 +10,32 @@
 
 std::vector<std::vector<double>> createGaussian();
 std::vector<std::vector<int>> GaussianFilter_Seq(
-	std::vector<std::vector<int>> sourceImg);
+    std::vector<std::vector<int>> sourceImg);
 int newPixelColor(std::vector<std::vector<int>> sourceImg,
-	int x, int y, std::vector<std::vector<double>> kernel);
+    int x, int y, std::vector<std::vector<double>> kernel);
 std::vector<std::vector<int>> GaussianFilter_Par(
-	std::vector<std::vector<int>> sourceImg);
+    std::vector<std::vector<int>> sourceImg);
 int newPixelColor(std::vector<std::vector<int>> sourceImg,
-	int x, int y, std::vector<std::vector<double>> kernel);
+    int x, int y, std::vector<std::vector<double>> kernel);
 int checkValue(int value, int min, int max);
 std::vector<std::vector<int>> getRandomImg(int width, int height);
 
 template<class T>
 bool imgEquivalent(std::vector<std::vector<T>> sourceImg,
-	std::vector<std::vector<T>> resultImg) {
-	int sourceW = sourceImg.size();
-	int sourceH = sourceImg[0].size();
-	int resultW = resultImg.size();
-	int resultH = resultImg[0].size();
+    std::vector<std::vector<T>> resultImg) {
+    int sourceW = sourceImg.size();
+    int sourceH = sourceImg[0].size();
+    int resultW = resultImg.size();
+    int resultH = resultImg[0].size();
 
-	if (sourceW != resultW || sourceH != resultH) return false;
-	for (int i = 0; i < sourceW; i++) {
-		for (int j = 0; j < sourceH; j++) {
-			if (sourceImg[i][j] != resultImg[i][j])
-				return false;
-		}
-	}
-	return true;
+    if (sourceW != resultW || sourceH != resultH) return false;
+    for (int i = 0; i < sourceW; i++) {
+        for (int j = 0; j < sourceH; j++) {
+            if (sourceImg[i][j] != resultImg[i][j])
+                return false;
+        }
+    }
+    return true;
 }
 
 #endif  // MODULES_TASK_2_SAMOILUK_A_VERT_GAUSSIAN_VERT_GAUSSIAN_H_
