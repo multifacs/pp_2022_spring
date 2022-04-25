@@ -117,6 +117,24 @@ TEST(Gaussian, can_process_image_5) {
     EXPECT_TRUE(imgEquivalent(resultImg_seq, resultImg_par));
 }
 
+TEST(Gaussian, can_process_image_6) {
+    std::vector<std::vector<int>> sourceImg = getRandomImg(50, 100);
+
+    double t_start, dt_1, dt_2;
+
+    t_start = omp_get_wtime();
+    std::vector<std::vector<int>> resultImg_seq = GaussianFilter_Seq(sourceImg);
+    dt_1 = omp_get_wtime() - t_start;
+
+    t_start = omp_get_wtime();
+    std::vector<std::vector<int>> resultImg_par = GaussianFilter_Par(sourceImg);
+    dt_2 = omp_get_wtime() - t_start;
+
+    std::cout << "eff = " << dt_2 / dt_1;
+
+    EXPECT_TRUE(imgEquivalent(resultImg_seq, resultImg_par));
+}
+
 int main(int argc, char** argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

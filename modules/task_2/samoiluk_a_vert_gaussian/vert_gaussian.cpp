@@ -47,8 +47,8 @@ std::vector<std::vector<int>> GaussianFilter_Par(
 
     std::vector<std::vector<double>> kernel = createGaussian();
 #pragma omp parallel for
-    for (int j = 0; j < static_cast<int>(sourceImg.size()); j++) {
-        for (std::vector<int>::size_type i = 0; i < sourceImg[0].size(); i++) {
+    for (int j = 0; j < static_cast<int>(sourceImg[0].size()); j++) {
+        for (std::vector<int>::size_type i = 0; i < sourceImg.size(); i++) {
             resultImg[i][j] = newPixelColor(sourceImg, i, j, kernel);
         }
     }
