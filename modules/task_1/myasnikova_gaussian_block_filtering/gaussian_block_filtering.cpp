@@ -58,7 +58,7 @@ std::vector<int> GaussFilterSeq(std::vector<int> matrix,
         sum += static_cast<double>(matrix[region[j]]) * kernel[j];
       }
 
-      result[i] = (int)sum;
+      result[i] = static_cast<int>(sum);
     }
   }
 
