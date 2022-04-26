@@ -34,7 +34,7 @@ double f5(std::vector<double> args) {
   return log10(args[0]*args[0]) + 3 * args[1];
 }
 
-TEST(lakhov_trapezoidal_rule_omp, func1) {
+TEST(lakhov_trapezoidal_rule_tbb, func1) {
   std::vector<std::pair<double, double>> intervals(1);
   intervals[0] = {0, 10};
   int interval_count = 10;
@@ -44,7 +44,7 @@ TEST(lakhov_trapezoidal_rule_omp, func1) {
 }
 
 
-TEST(lakhov_trapezoidal_rule_omp, func2) {
+TEST(lakhov_trapezoidal_rule_tbb, func2) {
   std::vector<std::pair<double, double>> intervals(2);
   intervals[0] = {0, 2};
   intervals[1] = {0, 2};
@@ -54,7 +54,7 @@ TEST(lakhov_trapezoidal_rule_omp, func2) {
   ASSERT_NEAR(result_seq, result_p, 0.1);
 }
 
-TEST(lakhov_trapezoidal_rule_omp, func3) {
+TEST(lakhov_trapezoidal_rule_tbb, func3) {
   std::vector<std::pair<double, double>> intervals(3);
   intervals[0] = {0, 3};
   intervals[1] = {0, 3};
@@ -65,7 +65,7 @@ TEST(lakhov_trapezoidal_rule_omp, func3) {
   ASSERT_NEAR(result_seq, result_p, 0.1);
 }
 
-TEST(lakhov_trapezoidal_rule_omp, func4) {
+TEST(lakhov_trapezoidal_rule_tbb, func4) {
   std::vector<std::pair<double, double>> intervals(3);
   intervals[0] = {0, 1};
   intervals[1] = {0, 1};
@@ -76,7 +76,7 @@ TEST(lakhov_trapezoidal_rule_omp, func4) {
   ASSERT_NEAR(result_seq, result_p, 0.1);
 }
 
-TEST(lakhov_trapezoidal_rule_omp, func5) {
+TEST(lakhov_trapezoidal_rule_tbb, func5) {
   std::vector<std::pair<double, double>> intervals(2);
   intervals[0] = {0, 2};
   intervals[1] = {0, 2};
@@ -88,7 +88,7 @@ TEST(lakhov_trapezoidal_rule_omp, func5) {
 
 #if USE_EFFICIENCY_TESTS == 1
 
-  TEST(lakhov_trapezoidal_rule_omp, ef_test1) {
+  TEST(lakhov_trapezoidal_rule_tbb, ef_test1) {
     std::vector<std::pair<double, double>> intervals(2);
     intervals[0] = {0, 40};
     intervals[1] = {0, 40};
@@ -110,7 +110,7 @@ TEST(lakhov_trapezoidal_rule_omp, func5) {
     ASSERT_NEAR(result_seq, result_p, 0.1);
   }
 
-  TEST(lakhov_trapezoidal_rule_omp, ef_test2) {
+  TEST(lakhov_trapezoidal_rule_tbb, ef_test2) {
     std::vector<std::pair<double, double>> intervals(3);
     intervals[0] = {0, 20};
     intervals[1] = {0, 20};
