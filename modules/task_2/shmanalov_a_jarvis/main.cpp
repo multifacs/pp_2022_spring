@@ -31,15 +31,15 @@ TEST(Omp_Jarvis, PointsCount_75000) {
 
 TEST(Omp_Jarvis, PointsCount_1000000) {
     std::vector<Point> points = getRandomCombinationPoints(1000000);
-    double startSeq = omp_get_wtime();
+    // double startSeq = omp_get_wtime();
     std::vector<Point> resultSeq = sequentinalJarvis(points);
-    double endSeq = omp_get_wtime();
-    double timeSeq = endSeq - startSeq;
+    // double endSeq = omp_get_wtime();
+    // double timeSeq = endSeq - startSeq;
     // std::cout << "Sequential = " << timeSeq << std::endl;
-    double startOmp = omp_get_wtime();
+    // double startOmp = omp_get_wtime();
     std::vector<Point> resultOmp = openmpJarvis(points);
-    double endOmp = omp_get_wtime();
-    double timeOmp = endOmp - startOmp;
+    // double endOmp = omp_get_wtime();
+    // double timeOmp = endOmp - startOmp;
     // std::cout << "Parallel [OpenMP] = " << timeOmp << std::endl;
     // std::cout << "Efficiency = " << timeSeq / timeOmp << std::endl;
     ASSERT_EQ(resultSeq, resultOmp);
