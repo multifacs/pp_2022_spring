@@ -3,44 +3,36 @@
 #include "../../../modules/task_1/borisov_m_radix_sort_double/radix_sort.h"
 #include "gtest/gtest.h"
 
+#define EPSILON 0.0001
+
 TEST(borisov_task1, test_size_10) {
   std::vector<double> vec = random_vec(10);
-  std::vector<double> check_vec = vec;
-  std::sort(check_vec.begin(), check_vec.end());
   vec = radix_sort(vec);
-  ASSERT_EQ(vec, check_vec);
+  ASSERT_TRUE(std::is_sorted(vec.begin(), vec.end()));
 }
 
 TEST(borisov_task1, test_size_100) {
   std::vector<double> vec = random_vec(100);
-  std::vector<double> check_vec = vec;
-  std::sort(check_vec.begin(), check_vec.end());
   vec = radix_sort(vec);
-  ASSERT_EQ(vec, check_vec);
+  ASSERT_TRUE(std::is_sorted(vec.begin(), vec.end()));
 }
 
 TEST(borisov_task1, test_size_500) {
   std::vector<double> vec = random_vec(500);
-  std::vector<double> check_vec = vec;
-  std::sort(check_vec.begin(), check_vec.end());
   vec = radix_sort(vec);
-  ASSERT_EQ(vec, check_vec);
+  ASSERT_TRUE(std::is_sorted(vec.begin(), vec.end()));
 }
 
 TEST(borisov_task1, test_size_1000) {
   std::vector<double> vec = random_vec(1000);
-  std::vector<double> check_vec = vec;
-  std::sort(check_vec.begin(), check_vec.end());
   vec = radix_sort(vec);
-  ASSERT_EQ(vec, check_vec);
+  ASSERT_TRUE(std::is_sorted(vec.begin(), vec.end()));
 }
 
 TEST(borisov_task1, test_size_2000) {
   std::vector<double> vec = random_vec(2000);
-  std::vector<double> check_vec = vec;
-  std::sort(check_vec.begin(), check_vec.end());
   vec = radix_sort(vec);
-  ASSERT_EQ(vec, check_vec);
+  ASSERT_TRUE(std::is_sorted(vec.begin(), vec.end()));
 }
 
 int main(int argc, char** argv) {
