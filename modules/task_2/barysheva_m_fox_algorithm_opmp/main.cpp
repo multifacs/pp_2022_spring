@@ -64,12 +64,8 @@ TEST(OMPBarysheva, Simple_And_Parallel_The_Same_5x5) {
 TEST(OMPBarysheva, Block_And_Parallel_The_Same_5x5) {
   std::vector<std::vector<double>> A = GetRandomMatrix(5);
   std::vector<std::vector<double>> B = GetRandomMatrix(5);
-  double t = omp_get_wtime();
   std::vector<std::vector<double>> res1 = BlockMultiplication(A, B);
-  double seq = omp_get_wtime() - t;
-  t = omp_get_wtime();
   std::vector<std::vector<double>> res2 = FoxParallel(A, B, 2);
-  double par = omp_get_wtime() - t;
   ASSERT_EQ(CompareMatrix(res1, res2), true);
   ASSERT_EQ(CompareMatrix(res1, res2), true);
 }

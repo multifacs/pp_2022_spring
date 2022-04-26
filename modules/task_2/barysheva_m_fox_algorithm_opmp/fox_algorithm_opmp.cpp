@@ -169,7 +169,7 @@ std::vector<std::vector<double>> FoxParallel(
 
   if (n != nold) {
 #pragma omp parallel for
-    for (int i = 0; i < nold; i++) {
+    for (int i = 0; i < static_cast<int>(nold); i++) {
       C[i].resize(nold);
     }
   }
