@@ -10,6 +10,7 @@ TEST(borisov_task1, test_size_10) {
   vec = radix_sort(vec);
   ASSERT_EQ(vec, check_vec);
 }
+
 TEST(borisov_task1, test_size_100) {
   std::vector<double> vec = random_vec(100);
   std::vector<double> check_vec = vec;
@@ -17,6 +18,7 @@ TEST(borisov_task1, test_size_100) {
   vec = radix_sort(vec);
   ASSERT_EQ(vec, check_vec);
 }
+
 TEST(borisov_task1, test_size_500) {
   std::vector<double> vec = random_vec(500);
   std::vector<double> check_vec = vec;
@@ -24,6 +26,7 @@ TEST(borisov_task1, test_size_500) {
   vec = radix_sort(vec);
   ASSERT_EQ(vec, check_vec);
 }
+
 TEST(borisov_task1, test_size_1000) {
   std::vector<double> vec = random_vec(1000);
   std::vector<double> check_vec = vec;
@@ -31,6 +34,7 @@ TEST(borisov_task1, test_size_1000) {
   vec = radix_sort(vec);
   ASSERT_EQ(vec, check_vec);
 }
+
 TEST(borisov_task1, test_size_2000) {
   std::vector<double> vec = random_vec(2000);
   std::vector<double> check_vec = vec;
