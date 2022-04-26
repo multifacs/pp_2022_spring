@@ -4,7 +4,7 @@
 #include "./ccs_matrix_mult.h"
 
 TEST(Bakina_K_ccs_matrix_mult, check_matrix_transposition_small_size) {
-    int n = 10, m = 15, k = 20;
+    int n = 10, m = 15;
     std::vector<std::vector<double>> A = get_random_matrix(n, m);
     std::vector<std::vector<double>> AT = matrix_transposition(A);
     CCS_matrix A_ccs(convet_to_ccs(A));
@@ -16,7 +16,7 @@ TEST(Bakina_K_ccs_matrix_mult, check_matrix_transposition_small_size) {
 }
 
 TEST(Bakina_K_ccs_matrix_mult, check_matrix_transposition_medium_size) {
-    int n = 50, m = 100, k = 80;
+    int n = 50, m = 100;
     std::vector<std::vector<double>> A = get_random_matrix(n, m);
     std::vector<std::vector<double>> AT = matrix_transposition(A);
     CCS_matrix A_ccs(convet_to_ccs(A));
@@ -28,7 +28,7 @@ TEST(Bakina_K_ccs_matrix_mult, check_matrix_transposition_medium_size) {
 }
 
 TEST(Bakina_K_ccs_matrix_mult, check_matrix_transposition_large_size) {
-    int n = 250, m = 150, k = 300;
+    int n = 250, m = 150;
     std::vector<std::vector<double>> A = get_random_matrix(n, m);
     std::vector<std::vector<double>> AT = matrix_transposition(A);
     CCS_matrix A_ccs(convet_to_ccs(A));
