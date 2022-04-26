@@ -15,6 +15,4 @@ std::vector<double> merge(const std::vector<double>& lhs,
 std::vector<int> count_sort(const std::vector<int>& data, int exp);
 std::vector<double> radix_sort(const std::vector<double>& data);
 
-bool is_sorted(const std::vector<double>& data);
-
 #endif  // MODULES_TASK_1_BORISOV_M_RADIX_SORT_DOUBLE_RADIX_SORT_H_

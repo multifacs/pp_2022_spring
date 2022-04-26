@@ -7,7 +7,7 @@ std::vector<double> random_vec(int size) {
   std::mt19937 gen;
   gen.seed(static_cast<uint32_t>(time(0)));
   std::uniform_real_distribution<double> buf(1, 1000);
-  for (int i = 0; i < data.size(); i++) {
+  for (int i = 0; i < static_cast<int>(data.size()); i++) {
     data[i] = buf(gen);
   }
   return data;
@@ -18,9 +18,9 @@ std::vector<int> merge(const std::vector<int>& lhs,
   std::vector<int> out(lhs.size() + rhs.size());
   int x = 0, y = 0;
   for (size_t i = 0; i < lhs.size() + rhs.size(); i++) {
-    if (x >= lhs.size()) {
+    if (x >= static_cast<int>(lhs.size())) {
       out[i] = rhs[y++];
-    } else if (y >= rhs.size()) {
+    } else if (y >= static_cast<int>(rhs.size())) {
       out[i] = lhs[x++];
     } else if (lhs[x] < rhs[y]) {
       out[i] = lhs[x++];
@@ -35,7 +35,7 @@ std::vector<int> count_sort(const std::vector<int>& data, int exp) {
   std::vector<int> out(data.size());
   int count[10] = {0};
 
-  for (int i = 0; i < data.size(); i++) {
+  for (int i = 0; i < static_cast<int>(data.size()); i++) {
     count[(data[i] / exp) % 10]++;
   }
 
@@ -77,11 +77,4 @@ std::vector<double> radix_sort(const std::vector<double>& data) {
     return static_cast<double>(static_cast<double>(var) / 100000);
   });
   return out;
-}
-
-bool is_sorted(const std::vector<double>& data) {
-  for (int i = 1; i < data.size(); i++) {
-    if (data[i] < data[i - 1]) return false;
-  }
-  return true;
 }
