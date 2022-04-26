@@ -19,7 +19,7 @@ void multiply_to_Block(std::vector<std::vector<double>> first_block,
 std::vector<std::vector<double>> cannon_mult_alg_OMP(
     std::vector<std::vector<double>> first_multiplier,
     std::vector<std::vector<double>> second_multiplier, int thread_nums,
-    size_t size_of_block, size_t count_of_block, size_t size);
+    size_t size_of_block, int count_of_block, size_t size);
 std::vector<std::vector<double>> cannon_mult_alg_Seq(
     std::vector<std::vector<double>> first_multiplier,
     std::vector<std::vector<double>> second_multiplier, size_t size_of_block,
