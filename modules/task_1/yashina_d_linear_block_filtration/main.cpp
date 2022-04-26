@@ -10,6 +10,7 @@ TEST(Sequential, Test_img_1) {
     getRandomImg(&image, weight, height);
     ASSERT_NO_THROW(getSequentialOperations(&image, m, weight, height));
     delete[] m;
+    // some commit
 }
 TEST(Sequential, Test_img_2) {
     int weight = 12;
