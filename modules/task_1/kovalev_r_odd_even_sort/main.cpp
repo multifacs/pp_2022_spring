@@ -1,8 +1,8 @@
-// Copyright 2018 Nesterov Alexander
+// Copyright 2022 Kovalev Ruslan
 
-#include "../kovalev_r_odd_even_sort/odd_even_sort.h"
 #include <gtest/gtest.h>
 #include <vector>
+#include "../kovalev_r_odd_even_sort/odd_even_sort.h"
 
 TEST(Sequential_algorithm, radix_sort_1) {
   int size = 10;
