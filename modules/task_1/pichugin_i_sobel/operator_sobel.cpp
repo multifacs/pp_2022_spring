@@ -1,5 +1,7 @@
 // Copyright 2022 Pichugin Ilya
 #include "../../../modules/task_1/pichugin_i_sobel/operator_sobel.h"
+#include <cmath>
+#include <algorithm>
 
 Sobel::Sobel() {
   mSize = 0;
