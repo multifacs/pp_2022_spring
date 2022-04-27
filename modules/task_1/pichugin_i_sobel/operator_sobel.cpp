@@ -43,9 +43,6 @@ Sobel Sobel::operator=(const Sobel& c) {
 }
 
 Sobel Sobel::RandomMatrix(int m_size) {
-  if (m_size <= 0) {
-    throw -1;
-  }
   Sobel sob_Class(m_size);
   int min = 0, max = 255;
   int* Matrix = new int[m_size];

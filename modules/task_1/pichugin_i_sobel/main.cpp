@@ -27,10 +27,6 @@ TEST(TEST_SOBOL, SIZE_MATR_200) {
   s1.RandomMatrix(200);
   ASSERT_NO_FATAL_FAILURE(s2.operator_Sobel(s1));
 }
-TEST(TEST_SOBOL, ANY_THROW_RAND_MATRIX) {
-  Sobel s1;
-  ASSERT_ANY_THROW(s1.RandomMatrix(-1););
-}
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
