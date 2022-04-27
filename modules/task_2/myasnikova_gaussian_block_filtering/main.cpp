@@ -45,7 +45,7 @@ TEST(SeqGaussian, GaussFilterParallelAndSeq) {
   std::vector<int> matrix = CreateMatrix(row, column);
   std::vector<int> kernel = CreateKernel(5);
   std::vector<int> seq_res = GaussFilterSeq(matrix, kernel, row, column);
-  std::vector<int> parallel_res = 
+  std::vector<int> parallel_res =
     GaussFilterParallel(matrix, kernel, row, column);
   ASSERT_EQ(seq_res, parallel_res);
 }
