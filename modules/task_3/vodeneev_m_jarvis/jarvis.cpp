@@ -54,8 +54,7 @@ std::vector<std::pair<double, double>> JarvisSeq(std::vector<std::pair
 
         if (points[next_point] == hull[0]) {
             return hull;
-        }
-        else {
+        } else {
             hull.push_back(points[next_point]);
             points.erase(points.begin() + next_point);
         }
@@ -63,15 +62,12 @@ std::vector<std::pair<double, double>> JarvisSeq(std::vector<std::pair
 }
 
 class Jarvis {
-
     const std::vector<std::pair<double, double>>& points, hull;
     int next_point;
 
-public:
-
+ public:
     Jarvis(const std::vector<std::pair<double, double>>& _points,
-        const std::vector<std::pair<double, double>>& _hull) : points(_points), hull(_hull), next_point(0)
-    {
+        const std::vector<std::pair<double, double>>& _hull) : points(_points), hull(_hull), next_point(0) {
     }
 
     Jarvis(Jarvis& jarvis, tbb::split)
@@ -125,8 +121,7 @@ std::vector<std::pair<double, double>> JarvisTbb(std::vector<std::pair
 
         if (points[jarvis.GetIndexNextPoint()] == hull[0]) {
             return hull;
-        }
-        else {
+        } else {
             hull.push_back(points[jarvis.GetIndexNextPoint()]);
             points.erase(points.begin() + jarvis.GetIndexNextPoint());
         }
