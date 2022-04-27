@@ -77,7 +77,7 @@ Sobel Sobel::operator_Sobel(Sobel c) {
         }
       }
 
-      int val = sqrt(x * x + y * y);
+      double val = sqrt(x * x + y * y);
       int diap = val > max_pix ? max_pix : val < min_pix ? min_pix : val;
       result.set_Matrix(i, j, diap);
     }
