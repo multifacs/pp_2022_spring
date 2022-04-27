@@ -10,7 +10,7 @@ const int IMAGE_SIZE1 = 5;
 const int IMAGE_SIZE2 = 10;
 const int IMAGE_SIZE3 = 20;
 const int IMAGE_SIZE4 = 30;
-const int IMAGE_SIZE5 = 50;
+const int IMAGE_SIZE5 = 40;
 
 bool CompareAreas(BinaryImageAreas* area1, BinaryImageAreas* area2) {
   if (area1->size != area2->size) {
