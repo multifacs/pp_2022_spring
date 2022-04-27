@@ -3,7 +3,7 @@
 #include <random>
 #include <algorithm>
 #include <iostream>
-#include "../../../kovalev_r_odd_even_sort/modules/task_1/kovalev_r_odd_even_sort/odd_even_sort.h"
+#include "../../../modules/task_1/kovalev_r_odd_even_sort/odd_even_sort.h"
 
 void copy_vectors(std::vector<int>* arr_1, std::vector<int>* arr_2, int sz) {
   for (int i = 0; i < sz; i++) {
