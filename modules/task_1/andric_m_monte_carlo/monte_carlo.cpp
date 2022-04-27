@@ -11,7 +11,7 @@
 
 #include "../../modules/task_1/andric_m_monte_carlo/monte_carlo.h"
 
-double seqMonteCarlo(double( * f)(std::vector < double > ),
+double seqMonteCarlo(double(*f)(std::vector < double >),
   const std::vector < double > & a,
     const std::vector < double > & b, int s) {
   double res = 0.0;
