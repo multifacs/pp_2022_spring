@@ -12,7 +12,9 @@ double Rectangle_Method(std::vector <int> start_integ,
         throw "Incorrect step size";
     }
 
-    for (int i = 0; i < start_integ.size(); i++) {
+    int degree_of_integration = start_integ.size();
+
+    for (int i = 0; i < degree_of_integration; i++) {
         if (start_integ[i] > end_integ[i]) {
             throw "Incorrect integration limits";
         }
@@ -20,7 +22,6 @@ double Rectangle_Method(std::vector <int> start_integ,
 
     double result = 1;
     double sum = 0.0;
-    int degree_of_integration = start_integ.size();
     std::vector<double> h;
     std::vector<double> res;
 
