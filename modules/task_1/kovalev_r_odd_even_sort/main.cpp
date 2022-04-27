@@ -66,6 +66,26 @@ TEST(Sequential_algorithm, radix_sort_4) {
   ASSERT_EQ(true, res);
 }
 
+TEST(Sequential_algorithm, radix_sort_5) {
+  int size = 50;
+  std::vector<int> arr_1(50);
+  std::vector<int> arr_2(50);
+  std::vector<int> arr_3;
+  std::vector<int> arr_4;
+  vec_gen(&arr_1, size);
+  vec_gen(&arr_2, size);
+  for (int i = 0; i < size; i++) {
+    arr_3.push_back(arr_1[i]);
+    arr_3.push_back(arr_2[i]);
+  }
+  sort(arr_3.begin(), arr_3.end());
+  sort(arr_1.begin(), arr_1.end());
+  sort(arr_2.begin(), arr_2.end());
+  arr_4 = OddEvenMerge(arr_1, arr_2, size, size);
+  bool res = check(&arr_3, &arr_4, size);
+  ASSERT_EQ(true, res);
+}
+
 
 
 
