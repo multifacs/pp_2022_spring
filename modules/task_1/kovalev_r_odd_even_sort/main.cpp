@@ -41,8 +41,8 @@ TEST(Sequential_algorithm, radix_sort_3) {
   sort(arr_4.begin(), arr_4.end());
   sort(arr_1.begin(), arr_1.end());
   sort(arr_2.begin(), arr_2.end());
-  arr_3=Merge(&arr_1, &arr_2, size, size);
-  bool res = check(&arr_3, &arr_4,size);
+  arr_3 = Merge(&arr_1, &arr_2, size, size);
+  bool res = check(&arr_3, &arr_4, size);
   ASSERT_EQ(true, res);
 }
 
@@ -61,7 +61,7 @@ TEST(Sequential_algorithm, radix_sort_4) {
   sort(arr_3.begin(), arr_3.end());
   sort(arr_1.begin(), arr_1.end());
   sort(arr_2.begin(), arr_2.end());
-  arr_4=OddEvenMerge(arr_1, arr_2, size, size);
+  arr_4 = OddEvenMerge(arr_1, arr_2, size, size);
   bool res = check(&arr_3, &arr_4, size);
   ASSERT_EQ(true, res);
 }

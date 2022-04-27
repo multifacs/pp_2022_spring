@@ -15,8 +15,7 @@ void vec_gen(std::vector<int>* vec, int len) {
   std::random_device dev;
   std::mt19937 rng(dev());
   std::uniform_int_distribution<std::mt19937::result_type> distInt(1,
-                                                                   0x0FFFFFFF);
-                                                                   
+                                                                   0x0FFFFFFF);                                                                 
   for (int i = 0; i < len; i++) {
     vec->at(i) = static_cast<int>(distInt(rng));
   }

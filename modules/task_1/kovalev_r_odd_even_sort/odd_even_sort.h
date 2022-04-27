@@ -1,3 +1,5 @@
+// Copyright 2022 Kovalev Ruslan
+
 #ifndef MODULES_TASK_1_KOVALEV_R_ODD_EVEN_SORT_ODD_EVEN_SORT_H_
 #define MODULES_TASK_1_KOVALEV_R_ODD_EVEN_SORT_ODD_EVEN_SORT_H_
 #include <vector>
