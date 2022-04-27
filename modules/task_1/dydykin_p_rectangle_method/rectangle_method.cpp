@@ -1,5 +1,5 @@
 // Copyright 2022 Dydykin Pavel
-#include "/Users/Pavel/Documents/GitHub/pp_2022_spring/modules/task_1/dydykin_p_rectangle_method/rectangle_method.h"
+#include "../../../modules/task_1/dydykin_p_rectangle_method/rectangle_method.h"
 
 double Rectangle_Method(std::vector <int> start_integ,
     std::vector <int> end_integ,
