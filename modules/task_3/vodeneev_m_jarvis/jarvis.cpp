@@ -70,7 +70,7 @@ class Jarvis {
         const std::vector<std::pair<double, double>>& _hull) : points(_points), hull(_hull), next_point(0) {
     }
 
-    Jarvis(Jarvis& jarvis, tbb::split)
+    Jarvis(const Jarvis& jarvis, tbb::split)
         : points(jarvis.points),
         hull(jarvis.hull),
         next_point(jarvis.next_point) {}
