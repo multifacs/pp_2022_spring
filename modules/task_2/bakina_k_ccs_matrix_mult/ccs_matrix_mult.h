@@ -17,12 +17,6 @@ struct CCS_matrix {
 };
 
 std::vector<std::vector<double>> get_random_matrix(int n, int m);
-std::vector<std::vector<double>> matrix_transposition(
-    const std::vector<std::vector<double>>& B);
-std::vector<std::vector<double>> matrix_multplication(
-    const std::vector<std::vector<double>>& A,
-    const std::vector<std::vector<double>>& B);
-
 CCS_matrix convet_to_ccs(const std::vector<std::vector<double>>& A);
 CCS_matrix ccs_matrix_transposition(const CCS_matrix& B);
 CCS_matrix ccs_matrix_multplication(const CCS_matrix& A, const CCS_matrix& B);

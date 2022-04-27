@@ -28,55 +28,12 @@ bool CCS_matrix::operator==(const CCS_matrix& m) {
     bool x = this->row_n == m.row_n && this->col_n == m.col_n
         && this->row == m.row && this->column_pointer == m.column_pointer;
     if (x) {
-        for (int i = 0; i < value.size(); ++i) {
+        for (int i = 0; i < static_cast<int>(value.size()); ++i) {
             if (std::fabs(value[i] - m.value[i]) > 1e-3)
                 return false;
         }
     }
     return x;
-}
-
-std::vector<std::vector<double>> matrix_transposition(
-    const std::vector<std::vector<double>>& B) {
-    if (B.empty()) {
-        throw("Empty matrix for transposition");
-    }
-    std::vector<std::vector<double>> BT;
-    int m = B[0].size();
-    BT.resize(m);
-    int Bn = B.size();
-    for (int i = 0; i < Bn; ++i) {
-        for (int j = 0; j < m; ++j) {
-            BT[j].push_back(B[i][j]);
-        }
-    }
-    return BT;
-}
-
-std::vector<std::vector<double>> matrix_multplication(
-    const std::vector<std::vector<double>>& A,
-    const std::vector<std::vector<double>>& B) {
-    if (B.size() > 0 && A.size() != B[0].size()) {
-        throw("Wrong matrix sizes for multiplication");
-    }
-    std::vector<std::vector<double>> C;
-    C.resize(B.size());
-    int An = A.size();
-    int Cn = C.size();
-#pragma omp parallel for
-    for (int i = 0; i < Cn; i++) {
-        if (i == 500) {
-            int x = 9;
-        }
-        int m = A[0].size();
-        C[i].resize(m);
-        for (int j = 0; j < m; j++) {
-            C[i][j] = 0;
-            for (int k = 0; k < An; k++)
-                C[i][j] += A[k][j] * B[i][k];
-        }
-    }
-    return C;
 }
 
 CCS_matrix ccs_matrix_transposition(const CCS_matrix& B) {
