@@ -14,6 +14,7 @@ TEST(Gaussian, cant_create_matrix_with_wrong_size) {
     ASSERT_ANY_THROW(img = getRandomImg(0, 20));
     ASSERT_ANY_THROW(img = getRandomImg(15, 0));
     ASSERT_ANY_THROW(img = getRandomImg(-5, -5));
+    ASSERT_ANY_THROW(img = getRandomImg(-3, 0));
 }
 
 TEST(Gaussian, can_create_kernel) {
