@@ -35,7 +35,7 @@ matrix generateMatrix(vec v) {
 void printError(const vec& B, const vec& check, int n) {
   double error = 0;
   for (int i = 0; i < n; i++) {
-    error += std::abs(B[i] - check[i]);
+    error += std::fabs(B[i] - check[i]);
   }
   error /= n;
   std::cout << "Error: " << std::fixed << error << "\n";
