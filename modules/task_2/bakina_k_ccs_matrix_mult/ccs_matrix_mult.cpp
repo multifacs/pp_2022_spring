@@ -17,7 +17,7 @@ std::vector<std::vector<double>> get_random_matrix(int n, int m) {
         matrix[i].resize(m);
         for (int j = 0; j < m; ++j) {
             matrix[i][j] = (std::rand() % 2 == 0) ? 0 :
-                static_cast<double>(std::rand());
+                static_cast<double>(std::rand() % 10000);
         }
     }
     return matrix;
