@@ -43,22 +43,23 @@ TEST(Bakina_K_ccs_matrix_mult, check_matrix_multiplication_small_size) {
     CCS_matrix A_ccs(convet_to_ccs(A));
     CCS_matrix B_ccs(convet_to_ccs(B));
 
-    double t1_s = omp_get_wtime();
+    // double t1_s = omp_get_wtime();
     CCS_matrix C_ccs(ccs_matrix_multplication(A_ccs, B_ccs));
-    double t2_s = omp_get_wtime();
+    // double t2_s = omp_get_wtime();
 
-    double t1 = omp_get_wtime();
+    // double t1 = omp_get_wtime();
     CCS_matrix C_check(ccs_matrix_multplication_omp(A_ccs, B_ccs));
-    double t2 = omp_get_wtime();
+    // double t2 = omp_get_wtime();
 
-    t2 = t2 - t1;
-    t2_s = t2_s - t1_s;
-    std::cout << "Sequential: " << t2_s << "\n";
-    std::cout << "OpenMP: " << t2 << "\n";
-    std::cout << "Sequential/OpenMP " << t2_s / t2 << "\n";
+    // t2 = t2 - t1;
+    // t2_s = t2_s - t1_s;
+    // std::cout << "Sequential: " << t2_s << "\n";
+    // std::cout << "OpenMP: " << t2 << "\n";
+    // std::cout << "Sequential/OpenMP " << t2_s / t2 << "\n";
 
     bool x = C_ccs.row_n == C_check.row_n && C_ccs.col_n == C_check.col_n
-        && C_ccs.row == C_check.row && C_ccs.column_pointer == C_check.column_pointer;
+        && C_ccs.row == C_check.row
+        && C_ccs.column_pointer == C_check.column_pointer;
     if (x) {
         for (int i = 0; i < static_cast<int>(C_check.value.size()); ++i) {
             EXPECT_DOUBLE_EQ(C_ccs.value[i], C_check.value[i]);
@@ -73,21 +74,28 @@ TEST(Bakina_K_ccs_matrix_mult, check_matrix_multiplication_medium_size) {
     CCS_matrix A_ccs(convet_to_ccs(A));
     CCS_matrix B_ccs(convet_to_ccs(B));
 
-    double t1_s = omp_get_wtime();
+    // double t1_s = omp_get_wtime();
     CCS_matrix C_ccs(ccs_matrix_multplication(A_ccs, B_ccs));
-    double t2_s = omp_get_wtime();
+    // double t2_s = omp_get_wtime();
 
-    double t1 = omp_get_wtime();
+    // double t1 = omp_get_wtime();
     CCS_matrix C_check(ccs_matrix_multplication_omp(A_ccs, B_ccs));
-    double t2 = omp_get_wtime();
+    // double t2 = omp_get_wtime();
 
-    t2 = t2 - t1;
-    t2_s = t2_s - t1_s;
-    std::cout << "Sequential: " << t2_s << "\n";
-    std::cout << "OpenMP: " << t2 << "\n";
-    std::cout << "Sequential/OpenMP " << t2_s / t2 << "\n";
+    // t2 = t2 - t1;
+    // t2_s = t2_s - t1_s;
+    // std::cout << "Sequential: " << t2_s << "\n";
+    // std::cout << "OpenMP: " << t2 << "\n";
+    // std::cout << "Sequential/OpenMP " << t2_s / t2 << "\n";
 
-    EXPECT_TRUE(C_ccs == C_check);
+    bool x = C_ccs.row_n == C_check.row_n && C_ccs.col_n == C_check.col_n
+        && C_ccs.row == C_check.row
+        && C_ccs.column_pointer == C_check.column_pointer;
+    if (x) {
+        for (int i = 0; i < static_cast<int>(C_check.value.size()); ++i) {
+            EXPECT_DOUBLE_EQ(C_ccs.value[i], C_check.value[i]);
+        }
+    }
 }
 
 TEST(Bakina_K_ccs_matrix_mult, check_matrix_multiplication_large_size) {
@@ -97,21 +105,28 @@ TEST(Bakina_K_ccs_matrix_mult, check_matrix_multiplication_large_size) {
     CCS_matrix A_ccs(convet_to_ccs(A));
     CCS_matrix B_ccs(convet_to_ccs(B));
 
-    double t1_s = omp_get_wtime();
+    // double t1_s = omp_get_wtime();
     CCS_matrix C_ccs(ccs_matrix_multplication(A_ccs, B_ccs));
-    double t2_s = omp_get_wtime();
+    // double t2_s = omp_get_wtime();
 
-    double t1 = omp_get_wtime();
+    // double t1 = omp_get_wtime();
     CCS_matrix C_check(ccs_matrix_multplication_omp(A_ccs, B_ccs));
-    double t2 = omp_get_wtime();
+    // double t2 = omp_get_wtime();
 
-    t2 = t2 - t1;
-    t2_s = t2_s - t1_s;
-    std::cout << "Sequential: " << t2_s << "\n";
-    std::cout << "OpenMP: " << t2 << "\n";
-    std::cout << "Sequential/OpenMP " << t2_s / t2 << "\n";
+    // t2 = t2 - t1;
+    // t2_s = t2_s - t1_s;
+    // std::cout << "Sequential: " << t2_s << "\n";
+    // std::cout << "OpenMP: " << t2 << "\n";
+    // std::cout << "Sequential/OpenMP " << t2_s / t2 << "\n";
 
-    EXPECT_TRUE(C_ccs == C_check);
+    bool x = C_ccs.row_n == C_check.row_n && C_ccs.col_n == C_check.col_n
+        && C_ccs.row == C_check.row
+        && C_ccs.column_pointer == C_check.column_pointer;
+    if (x) {
+        for (int i = 0; i < static_cast<int>(C_check.value.size()); ++i) {
+            EXPECT_DOUBLE_EQ(C_ccs.value[i], C_check.value[i]);
+        }
+    }
 }
 
 int main(int argc, char **argv) {
