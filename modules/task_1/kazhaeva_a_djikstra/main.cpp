@@ -17,17 +17,6 @@ TEST(Sequential_Deicstra, Test_ASSERT_NO_THROW) {
   ASSERT_NO_THROW(djikstra(0, b));
 }
 
-TEST(Sequential_Deicstra, Test_ASSERT_NO_THROW_2) {
-    std::vector<std::vector<int>> b = {
-                  {0, 1, 7, 6, 3},
-                  {1, 0, 3, 5, 4},
-                  {7, 3, 0, 10, 5},
-                  {6, 5, 10, 0, 4},
-                  {3, 4, 5, 4, 0}
-    };
-  ASSERT_NO_THROW(djikstra(4, b));
-}
-
 TEST(Sequential_Deicstra, Test_Deicstra_1) {
     std::vector<std::vector<int>> b = {
                     {0, 1, 7, 6, 3},
