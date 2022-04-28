@@ -43,7 +43,7 @@ void printError(const vec& B, const vec& check, int n) {
 
 //======================================================================
 
-void print(std::string title, const vec& V) {
+void print(const std::string& title, const vec& V) {
   std::cout << title << '\n';
 
   int n = V.size();
@@ -57,7 +57,7 @@ void print(std::string title, const vec& V) {
 
 //======================================================================
 
-void print(std::string title, const matrix& A) {
+void print(const std::string& title, const matrix& A) {
   std::cout << title << '\n';
 
   int m = A.size(), n = A[0].size();  // A is an m x n matrix

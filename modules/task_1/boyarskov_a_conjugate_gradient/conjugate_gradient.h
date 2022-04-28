@@ -18,8 +18,8 @@ using matrix = std::vector<vec>;  // matrix (=collection of (row) vectors)
 // Prototypes
 vec generateRandomVector(int size);
 matrix generateMatrix(vec v);
-void print(std::string title, const vec& V);
-void print(std::string title, const matrix& A);
+void print(const std::string& title, const vec& V);
+void print(const std::string& title, const matrix& A);
 void printError(const vec& B, const vec& check, int n);
 double scalarProduct(const vec& V, const vec& U);
 vec matrixTimesVector(const matrix& A, const vec& V);
