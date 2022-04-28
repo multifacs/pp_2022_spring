@@ -1,6 +1,6 @@
 // Copyright 2022 Lazarev Aleksey
 
-#include "../../../modules/task_1/lazarev_a_strassen/strassen.h"
+#include "../../../modules/task_2/lazarev_a_strassen/strassen.h"
 
 #include <omp.h>
 
