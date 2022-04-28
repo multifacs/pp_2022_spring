@@ -25,21 +25,16 @@ std::vector<std::vector<double>> get_random_matrix(int n, int m) {
 }
 
 bool CCS_matrix::operator==(const CCS_matrix& m) {
-    std::cout << "CCS_matrix::operator== " << "\n";
     bool x = row_n == m.row_n && col_n == m.col_n
         && row == m.row && column_pointer == m.column_pointer;
     if (x) {
         for (int i = 0; i < static_cast<int>(value.size()); ++i) {
             if (std::fabs(value[i] - m.value[i]) > 1e-1) {
                 return false;
-                std::cout << "value " << value[i] << " " << m.value[i] << "\n";
             }
         }
     }
-    if (row_n != m.row_n) std::cout << "row_n " << row_n << " " << m.row_n << "\n";
-    if (col_n != m.col_n) std::cout << "row_n " << col_n << " " << m.col_n << "\n";
-    if (row != m.row) std::cout << "row " << "\n";
-    if (column_pointer != m.column_pointer) std::cout << "column_pointer " << "\n";
+    std::cout << "CCS_matrix::operator== return" << x << "\n";
     return x;
 }
 
