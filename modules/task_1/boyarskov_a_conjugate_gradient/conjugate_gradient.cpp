@@ -23,7 +23,7 @@ matrix generateMatrix(vec v) {
     for (int col = 0; col < size; col++) {
       if (row == col)  // special case for the main diagonal
         matrix[row][col] = v[0];
-      else if (row + col < size)  // normal case for small indexes
+      else if ((row + col) < size)  // normal case for small indexes
         matrix[row][col] = v[row + col];
       else  // special case for large indexes
         matrix[row][col] = v[2 * (size - 1) - (row + col)];
