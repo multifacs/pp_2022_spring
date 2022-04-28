@@ -57,6 +57,16 @@ TEST(Bakina_K_ccs_matrix_mult, check_matrix_multiplication_small_size) {
     std::cout << "OpenMP: " << t2 << "\n";
     std::cout << "Sequential/OpenMP " << t2_s / t2 << "\n";
 
+    std::cout << "C_ccs " << C_ccs.value.size() << "\n";
+    for (int i = 0; i < static_cast<int>(C_ccs.value.size()); ++i) {
+        std::cout << C_ccs.value[i] << "  ";
+    }
+    std::cout << "\n";
+    std::cout << "C_check " << C_check.value.size() << "\n";
+    for (int i = 0; i < static_cast<int>(C_check.value.size()); ++i) {
+        std::cout << C_check.value[i];
+    }
+
     EXPECT_TRUE(C_ccs == C_check);
 }
 
