@@ -16,17 +16,17 @@ vec generateRandomVector(int size) {
 }
 
 matrix generateMatrix(vec v) {
-  int SIZE = v.size();
-  matrix matrix = std::vector<vec>(SIZE, vec(SIZE, 0));
+  int size = v.size();
+  matrix matrix = std::vector<vec>(size, vec(size, 0));
 
-  for (int row = 0; row < SIZE; row++)
-    for (int col = 0; col < SIZE; col++) {
+  for (int row = 0; row < size; row++)
+    for (int col = 0; col < size; col++) {
       if (row == col)  // special case for the main diagonal
         matrix[row][col] = v[0];
-      else if (row + col < SIZE)  // normal case for small indexes
+      else if (row + col < size)  // normal case for small indexes
         matrix[row][col] = v[row + col];
       else  // special case for large indexes
-        matrix[row][col] = v[2 * (SIZE - 1) - (row + col)];
+        matrix[row][col] = v[2 * (size - 1) - (row + col)];
     }
 
   return matrix;
