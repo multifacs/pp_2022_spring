@@ -29,7 +29,7 @@ bool CCS_matrix::operator==(const CCS_matrix& m) {
         && this->row == m.row && this->column_pointer == m.column_pointer;
     if (x) {
         for (int i = 0; i < static_cast<int>(value.size()); ++i) {
-            if (std::fabs(value[i] - m.value[i]) > 1e-3)
+            if (std::fabs(value[i] - m.value[i]) > 1e-1)
                 return false;
         }
     }
