@@ -9,14 +9,14 @@ img getRandomImage(int width, int height) {
   static std::mt19937 gen(dev());
   std::uniform_int_distribution<> uid(0, 255);
 
-  img img = std::vector<std::vector<int>>(height, std::vector<int>(width, 0));
+  img image = std::vector<std::vector<int>>(height, std::vector<int>(width, 0));
   for (int i = 0; i < height; i++) {
     for (int j = 0; j < width; j++) {
-      img[i][j] = uid(gen);
+      image[i][j] = uid(gen);
     }
   }
 
-  return img;
+  return image;
 }
 
 float calcNewPixelColor(const img& image, int x, int y) {
