@@ -76,7 +76,7 @@ TEST(CONJUGATE_GRAD_OMP, TEST_4) {
 }
 
 TEST(CONJUGATE_GRAD_OMP, TEST_5) {
-  int n = 500;
+  int n = 30;
 
   matrix A;
   vec B;

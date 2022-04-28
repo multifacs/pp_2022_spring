@@ -1,6 +1,6 @@
 // Copyright 2022 Boyarskov Anton
-#ifndef MODULES_TASK_1_BOYARSKOV_A_CONJUGATE_GRADIENT_CONJUGATE_GRADIENT_H_
-#define MODULES_TASK_1_BOYARSKOV_A_CONJUGATE_GRADIENT_CONJUGATE_GRADIENT_H_
+#ifndef MODULES_TASK_2_BOYARSKOV_A_CONJUGATE_GRADIENT_CONJUGATE_GRADIENT_H_
+#define MODULES_TASK_2_BOYARSKOV_A_CONJUGATE_GRADIENT_CONJUGATE_GRADIENT_H_
 
 #include <algorithm>
 #include <cmath>
@@ -25,4 +25,4 @@ double scalarProduct(const vec& V, const vec& U);
 vec matrixTimesVector(const matrix& A, const vec& V);
 vec conjugateGradientSolver(const matrix& A, const vec& V);
 
-#endif  // MODULES_TASK_1_BOYARSKOV_A_CONJUGATE_GRADIENT_CONJUGATE_GRADIENT_H_
+#endif  // MODULES_TASK_2_BOYARSKOV_A_CONJUGATE_GRADIENT_CONJUGATE_GRADIENT_H_
