@@ -76,7 +76,7 @@ void print(const std::string& title, const matrix& A) {
 double scalarProduct(const vec& V, const vec& U) {
   double sclr_res = 0;
 // #pragma omp parallel for schedule(static, 1) reduction(+ : sclr_res)
-  for (int i = 0; i < V.size(); ++i) {
+  for (int i = 0; i < static_cast<int>(V.size()); ++i) {
     sclr_res += V[i] * U[i];
   }
   return sclr_res;
@@ -85,9 +85,9 @@ double scalarProduct(const vec& V, const vec& U) {
 vec matrixTimesVector(const matrix& A, const vec& V) {
   vec C(V.size());
 #pragma omp parallel for schedule(static, 1)
-  for (int i = 0; i < V.size(); ++i) {
+  for (int i = 0; i < static_cast<int>(V.size()); ++i) {
     C[i] = 0;
-    for (int j = 0; j < V.size(); ++j) {
+    for (int j = 0; j < static_cast<int>(V.size()); ++j) {
       C[i] += A[i][j] * V[j];
     }
   }
