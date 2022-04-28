@@ -2,6 +2,7 @@
 #include <omp.h>
 
 #include <iostream>
+#include <utility>
 #include <random>
 #include <string>
 #include <vector>
@@ -126,7 +127,7 @@ std::vector<int> OddEvenMerge(std::vector<int> first, std::vector<int> second,
   return GetResult(first, second);
 }
 
-std::vector<int> getParallelSort(std::vector<int>& commonVector) {
+std::vector<int> getParallelSort(const std::vector<int>& commonVector) {
   int numberOfThread = omp_get_num_procs();
   int dataPortion = commonVector.size() / numberOfThread;
   std::vector<std::vector<int>> vecOfVec(numberOfThread);
@@ -134,7 +135,6 @@ std::vector<int> getParallelSort(std::vector<int>& commonVector) {
   {
     int currentThread = omp_get_thread_num();
     std::vector<int> local;
-
     if (currentThread != numberOfThread - 1) {
       local = {commonVector.begin() + currentThread * dataPortion,
                commonVector.begin() + (currentThread + 1) * dataPortion};
@@ -146,13 +146,11 @@ std::vector<int> getParallelSort(std::vector<int>& commonVector) {
     getSequantialSort(&local, len);
     vecOfVec[currentThread] = local;
   }
-
   std::vector<int> resultVector = vecOfVec[0];
   for (int i = 1; i < numberOfThread; ++i) {
     int len_1 = resultVector.size();
     int len_2 = vecOfVec[i].size();
     resultVector = OddEvenMerge(resultVector, vecOfVec[i], len_1, len_2);
   }
-
   return resultVector;
 }
