@@ -30,11 +30,11 @@ bool CCS_matrix::operator==(const CCS_matrix& m) {
     if (x) {
         for (int i = 0; i < static_cast<int>(value.size()); ++i) {
             if (std::fabs(value[i] - m.value[i]) > 1e-1) {
+                std::cout << "value " << value[i] << " " << m.value[i] << "\n";
                 return false;
             }
         }
     }
-    std::cout << "CCS_matrix::operator== return" << x << "\n";
     return x;
 }
 
