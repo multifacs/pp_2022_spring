@@ -3,54 +3,64 @@
 #include <vector>
 #include "./kulemin_p_discharge_double_sort_tbb.h"
 
-TEST(Parallel_Operations_OpenMP, Test_No_Throw) {
-    vector* vb;
-    vb = create_random_vector(10);
-    ASSERT_NO_THROW(discharge_sort(vb));
-}
-
-TEST(Parallel_Operations_OpenMP, Test_10) {
-    int count = 10;
+TEST(Parallel_Operations_OpenMP, Test_90000) {
+    int count = 90000;
     vector* vb = create_random_vector(count);
     vector* sd = new vector(count);
+    vector* tr = new vector(count);
     copy_vectors(vb->ptr, sd->ptr, count);
-    std::sort(vb->ptr, vb->ptr + count);
-    discharge_sort(sd);
+    discharge_sort_seq(vb);
+    discharge_sort(sd, tr);
     bool res = check_vectors(vb->ptr, sd->ptr, count);
     ASSERT_EQ(true, res);
 }
 
+TEST(Parallel_Operations_OpenMP, Test_100000) {
+    int count = 100000;
+    vector* vb = create_random_vector(count);
+    vector* sd = new vector(count);
+    vector* tr = new vector(count);
+    copy_vectors(vb->ptr, sd->ptr, count);
+    discharge_sort_seq(vb);
+    discharge_sort(sd, tr);
+    bool res = check_vectors(vb->ptr, sd->ptr, count);
+    ASSERT_EQ(true, res);
+}
 
-TEST(Parallel_Operations_OpenMP, Test_100) {
-    int count = 100;
+TEST(Parallel_Operations_OpenMP, Test_150000) {
+    int count = 12000;
     vector* vb = create_random_vector(count);
     vector* sd = new vector(count);
+    vector* tr = new vector(count);
     copy_vectors(vb->ptr, sd->ptr, count);
-    std::sort(vb->ptr, vb->ptr + count);
-    discharge_sort(sd);
+    discharge_sort_seq(vb);
+    discharge_sort(sd, tr);
     bool res = check_vectors(vb->ptr, sd->ptr, count);
     ASSERT_EQ(true, res);
 }
-TEST(Parallel_Operations_OpenMP, Test_150) {
-    int count = 150;
+TEST(Parallel_Operations_OpenMP, Test_200000) {
+    int count = 14000;
     vector* vb = create_random_vector(count);
     vector* sd = new vector(count);
+    vector* tr = new vector(count);
     copy_vectors(vb->ptr, sd->ptr, count);
-    std::sort(vb->ptr, vb->ptr + count);
-    discharge_sort(sd);
+    discharge_sort_seq(vb);
+    discharge_sort(sd, tr);
     bool res = check_vectors(vb->ptr, sd->ptr, count);
     ASSERT_EQ(true, res);
 }
-TEST(Parallel_Operations_OpenMP, Test_200) {
-    int count = 200;
+TEST(Parallel_Operations_OpenMP, Test_400000) {
+    int count = 16000;
     vector* vb = create_random_vector(count);
     vector* sd = new vector(count);
+    vector* tr = new vector(count);
     copy_vectors(vb->ptr, sd->ptr, count);
-    std::sort(vb->ptr, vb->ptr + count);
-    discharge_sort(sd);
+    discharge_sort_seq(vb);
+    discharge_sort(sd, tr);
     bool res = check_vectors(vb->ptr, sd->ptr, count);
     ASSERT_EQ(true, res);
 }
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
