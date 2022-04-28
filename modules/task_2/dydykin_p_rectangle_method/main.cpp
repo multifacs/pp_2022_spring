@@ -79,7 +79,7 @@ TEST(Dydykin_Rectangle_Method, Test_Two_Integral_Func4) {
     EXPECT_NEAR(result, exp, 0.5);
 }
 
-//TEST(Dydykin_Rectangle_Method, Test_Three_Integral_Func) {
+// TEST(Dydykin_Rectangle_Method, Test_Three_Integral_Func) {
 //    std::vector<int> start = { 0, 0, 0 };
 //    std::vector<int> end = { 1, 1, 1 };
 //    int count = 5000;
@@ -93,4 +93,4 @@ TEST(Dydykin_Rectangle_Method, Test_Two_Integral_Func4) {
 //    std::cout << "Parallel time: " << p2 - p1 << std::endl;
 //    std::cout << "Efficiency: " << (t2 - t1) / (p2 - p1) << std::endl;
 //    EXPECT_NEAR(result, result1, 0.5);
-//}
+// }
