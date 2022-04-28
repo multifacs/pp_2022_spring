@@ -17,20 +17,20 @@ vec generateRandomVector(int size) {
 
 matrix generateMatrix(vec v) {
   int size = v.size();
-  matrix matrix = std::vector<vec>(size, vec(size, 0));
+  matrix C = std::vector<vec>(size, vec(size, 0));
 
   for (int row = 0; row < size; row++)
     for (int col = 0; col < size; col++) {
       int temp = row + col;
 
       if (row == col) {
-        matrix[row][col] = v[0];
+        C[row][col] = v[0];
       } else {
-        matrix[row][col] = v[row + col];
+        C[row][col] = v[row + col];
       }
     }
 
-  return matrix;
+  return C;
 }
 
 void printError(const vec& B, const vec& check, int n) {
