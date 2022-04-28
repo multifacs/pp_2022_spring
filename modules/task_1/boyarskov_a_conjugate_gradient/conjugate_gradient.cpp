@@ -23,10 +23,11 @@ matrix generateMatrix(vec v) {
     for (int col = 0; col < size; col++) {
       int temp = row + col;
 
-      if (row == col)
+      if (row == col) {
         matrix[row][col] = v[0];
-      else
+      } else {
         matrix[row][col] = v[row + col];
+      }
     }
 
   return matrix;
