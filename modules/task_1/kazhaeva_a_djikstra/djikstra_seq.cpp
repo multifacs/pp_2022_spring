@@ -3,7 +3,7 @@
 
 std::vector<int> djikstra(const int current,
 const std::vector<std::vector<int>>& matrix) {
-    const int INF = INT_MAX;
+    const int INF = 1000000;
     int const size = static_cast<int>(matrix.size());
     std::vector<int> d(size, INF);
     std::vector<int> v(size, 1);
