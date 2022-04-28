@@ -17,8 +17,7 @@ std::vector<std::vector<double>> get_random_matrix(int n, int m) {
         matrix[i].resize(m);
         for (int j = 0; j < m; ++j) {
             matrix[i][j] = (std::rand() % 2 == 0) ? 0 :
-                static_cast<double>(std::rand()) +
-                static_cast<double>(std::rand()) / RAND_MAX;
+                static_cast<double>(std::rand());
         }
     }
     return matrix;
@@ -29,7 +28,7 @@ bool CCS_matrix::operator==(const CCS_matrix& m) {
         && row == m.row && column_pointer == m.column_pointer;
     if (x) {
         for (int i = 0; i < static_cast<int>(value.size()); ++i) {
-            if (std::fabs(value[i] - m.value[i]) > 5e-1) {
+            if (std::fabs(value[i] - m.value[i]) > 1e-1) {
                 return false;
             }
         }
