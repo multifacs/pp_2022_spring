@@ -55,8 +55,8 @@ TEST(Dydykin_Rectangle_Method, Test_One_Integral_Func1) {
 TEST(Dydykin_Rectangle_Method, Test_One_Integral_Func2) {
     std::vector<int> start = { -2 };
     std::vector<int> end = { 4 };
-    int step = 40;
-    double result = Rectangle_Method(start, end, step, func2);
+    int count = 40;
+    double result = Rectangle_Method(start, end, count, func2);
     double exp = 36;
     EXPECT_NEAR(result, exp, 0.1);
 }
@@ -64,26 +64,26 @@ TEST(Dydykin_Rectangle_Method, Test_One_Integral_Func2) {
 TEST(Dydykin_Rectangle_Method, Test_Two_Integral_Func3) {
     std::vector<int> start = { 2, 5 };
     std::vector<int> end = { 3, 7 };
-    int step = 40;
-    double result = Rectangle_Method(start, end, step, func4);
-    double exp = 200.2;
+    int count = 40;
+    double result = Rectangle_Method(start, end, count, func3);
+    double exp = 50.7;
     EXPECT_NEAR(result, exp, 0.1);
 }
 
 TEST(Dydykin_Rectangle_Method, Test_Two_Integral_Func4) {
     std::vector<int> start = { 2, 5 };
     std::vector<int> end = { 3, 7 };
-    int step = 40;
-    double result = Rectangle_Method(start, end, step, func3);
-    double exp = 50.7;
+    int count = 40;
+    double result = Rectangle_Method(start, end, count, func4);
+    double exp = 200.2;
     EXPECT_NEAR(result, exp, 0.1);
 }
 
 TEST(Dydykin_Rectangle_Method, Test_Three_Integral_Func) {
     std::vector<int> start = { 1, 1, 1 };
     std::vector<int> end = { 2, 2, 2 };
-    int step = 40;
-    double result = Rectangle_Method(start, end, step, func5);
+    int count = 40;
+    double result = Rectangle_Method(start, end, count, func5);
     double exp = 54.5;
     EXPECT_NEAR(result, exp, 0.1);
 }

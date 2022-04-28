@@ -23,7 +23,7 @@ double Rectangle_Method(std::vector <int> start_integ,
     double result = 1;
     double sum = 0.0;
     std::vector<double> h;
-    std::vector<double> res;
+    std::vector<double> half;
 
     for (int i = 0; i < degree_of_integration; i++) {
         h.push_back(static_cast<double> (end_integ[i] - start_integ[i])
@@ -36,11 +36,11 @@ double Rectangle_Method(std::vector <int> start_integ,
             combinations[i] = (start_integ[i] + j * h[i]);
             sum += function(combinations) * h[i];
         }
-        res.push_back(sum);
+        half.push_back(sum);
     }
 
     for (int i = 0; i < degree_of_integration; i++) {
-        result *= res[i];
+        result *= half[i];
     }
 
     return result;
