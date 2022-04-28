@@ -56,15 +56,8 @@ TEST(Bakina_K_ccs_matrix_mult, check_matrix_multiplication_small_size) {
     // std::cout << "Sequential: " << t2_s << "\n";
     // std::cout << "OpenMP: " << t2 << "\n";
     // std::cout << "Sequential/OpenMP " << t2_s / t2 << "\n";
-
-    bool x = C_ccs.row_n == C_check.row_n && C_ccs.col_n == C_check.col_n
-        && C_ccs.row == C_check.row
-        && C_ccs.column_pointer == C_check.column_pointer;
-    if (x) {
-        for (int i = 0; i < static_cast<int>(C_check.value.size()); ++i) {
-            EXPECT_DOUBLE_EQ(C_ccs.value[i], C_check.value[i]);
-        }
-    }
+    
+    EXPECT_TRUE(C_ccs == C_check);
 }
 
 TEST(Bakina_K_ccs_matrix_mult, check_matrix_multiplication_medium_size) {
@@ -88,14 +81,7 @@ TEST(Bakina_K_ccs_matrix_mult, check_matrix_multiplication_medium_size) {
     // std::cout << "OpenMP: " << t2 << "\n";
     // std::cout << "Sequential/OpenMP " << t2_s / t2 << "\n";
 
-    bool x = C_ccs.row_n == C_check.row_n && C_ccs.col_n == C_check.col_n
-        && C_ccs.row == C_check.row
-        && C_ccs.column_pointer == C_check.column_pointer;
-    if (x) {
-        for (int i = 0; i < static_cast<int>(C_check.value.size()); ++i) {
-            EXPECT_DOUBLE_EQ(C_ccs.value[i], C_check.value[i]);
-        }
-    }
+    EXPECT_TRUE(C_ccs == C_check);
 }
 
 TEST(Bakina_K_ccs_matrix_mult, check_matrix_multiplication_large_size) {
@@ -119,14 +105,7 @@ TEST(Bakina_K_ccs_matrix_mult, check_matrix_multiplication_large_size) {
     // std::cout << "OpenMP: " << t2 << "\n";
     // std::cout << "Sequential/OpenMP " << t2_s / t2 << "\n";
 
-    bool x = C_ccs.row_n == C_check.row_n && C_ccs.col_n == C_check.col_n
-        && C_ccs.row == C_check.row
-        && C_ccs.column_pointer == C_check.column_pointer;
-    if (x) {
-        for (int i = 0; i < static_cast<int>(C_check.value.size()); ++i) {
-            EXPECT_DOUBLE_EQ(C_ccs.value[i], C_check.value[i]);
-        }
-    }
+    EXPECT_TRUE(C_ccs == C_check);
 }
 
 int main(int argc, char **argv) {
