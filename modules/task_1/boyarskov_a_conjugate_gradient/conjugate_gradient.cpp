@@ -49,7 +49,7 @@ void print(std::string title, const vec& V) {
   int n = V.size();
   for (int i = 0; i < n; i++) {
     double x = V[i];
-    if (abs(x) < NEARZERO) x = 0.0;
+    if (fabs(x) < NEARZERO) x = 0.0;
     std::cout << x << '\t';
   }
   std::cout << '\n';
@@ -64,7 +64,7 @@ void print(std::string title, const matrix& A) {
   for (int i = 0; i < m; i++) {
     for (int j = 0; j < n; j++) {
       double x = A[i][j];
-      if (abs(x) < NEARZERO) x = 0.0;
+      if (fabs(x) < NEARZERO) x = 0.0;
       std::cout << x << '\t';
     }
     std::cout << '\n';
