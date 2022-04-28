@@ -25,6 +25,7 @@ std::vector<std::vector<double>> get_random_matrix(int n, int m) {
 }
 
 bool CCS_matrix::operator==(const CCS_matrix& m) {
+    std::cout << "CCS_matrix::operator== " << "\n";
     bool x = row_n == m.row_n && col_n == m.col_n
         && row == m.row && column_pointer == m.column_pointer;
     if (x) {
