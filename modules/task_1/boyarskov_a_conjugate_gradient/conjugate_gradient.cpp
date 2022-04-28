@@ -21,13 +21,12 @@ matrix generateMatrix(vec v) {
 
   for (int row = 0; row < size; row++)
     for (int col = 0; col < size; col++) {
-      int temp = row + col;
-
-      if (row == col) {
+      if (row == col)  // special case for the main diagonal
         C[row][col] = v[0];
-      } else {
+      else if (row + col < size)  // normal case for small indexes
         C[row][col] = v[row + col];
-      }
+      else  // special case for large indexes
+        C[row][col] = v[2 * (size - 1) - (row + col)];
     }
 
   return C;
