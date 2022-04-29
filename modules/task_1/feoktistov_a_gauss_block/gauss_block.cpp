@@ -115,18 +115,18 @@ Pixel::~Pixel() {}
 std::vector<Pixel> SequentialGauss(const std::vector<Pixel>& img, int width,
                                            int height,
                                            const std::vector<float>& kernel) {
-  long int PixelCount = width * height;
+  long unsigned int PixelCount = abs( width * height);
   if (width < 0 || height < 0 || PixelCount < img.size()) {
     throw "wrong_pixel_number";
   }
 
   std::vector<Pixel> result(PixelCount);
-  for (int y = 0; y < height; y++)
+  for (int y = 0; y < height; y++) {
     for (int x = 0; x < width; x++) {
       int pixelNumber = y * width + x;
       Pixel newPixel = Pixel::calcNewPixel(x, y, kernel, width, height, img);
       result[pixelNumber] = newPixel;
     }
-
+  }
     return result;
 }
