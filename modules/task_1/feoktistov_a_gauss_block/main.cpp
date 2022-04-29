@@ -14,8 +14,8 @@ TEST(GaussianFilterBlock, Test_Random_Pixel) {
   std::vector<Pixel> img = generateImage(width, height, 2);
   std::vector<float> kernel = createGaussKernel(1, 1.2);
   std::vector<Pixel> rez = SequentialGauss(img, width, height, kernel);
-  int x = gen() % (width+1);
-  int y = gen() % (height+1);
+  int x = gen() % (width);
+  int y = gen() % (height);
   ASSERT_EQ(rez[y*height+x], Pixel::calcNewPixel(x, y, kernel, width,
     height, img));
 }
