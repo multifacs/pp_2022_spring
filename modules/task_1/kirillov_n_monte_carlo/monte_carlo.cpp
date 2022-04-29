@@ -11,7 +11,7 @@
 
 double MonteCarloIntegration_(
     const std::function<double(const std::vector<double>)>& integrand,
-    const std::vector<std::pair<double, double>> intervals, const size_t& N) {
+    const std::vector<std::pair<double, double>>& intervals, const size_t& N) {
   if (N <= 0) throw -1;
 
   size_t num_dims = intervals.size();
