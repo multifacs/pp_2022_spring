@@ -6,21 +6,21 @@
 
 TEST(TEST_SOBOL, SIZE_MATR_500_OMP) {
   double time1, time2;
-  Sobel s1, s2, rand, t_1, t_2;
+  Sobel s1, s2, rand;
   rand = rand.RandomMatrix(500);
 
   time1 = omp_get_wtime();
   s1.operator_Sobel(rand);
   time2 = omp_get_wtime();
-  t_1 = time2 - time1;
+  std::cout << "Execution time of the sequential algorithm: " << time2 - time1
+            << std::endl;
 
   time1 = omp_get_wtime();
   s2.operator_Sobel_parr(rand);
   time2 = omp_get_wtime();
-  t_2 = time2 - time1;
-  std::cout << "Execution time of the sequential algorithm: " << t_1
+
+  std::cout << "Execution time of the parallel algorithm: " << time2 - time1
             << std::endl;
-  std::cout << "Execution time of the parallel algorithm: " << t_2 << std::endl;
 
   ASSERT_NO_FATAL_FAILURE(s2.operator_Sobel(rand));
 }
@@ -33,15 +33,15 @@ TEST(TEST_SOBOL, SIZE_MATR_750_OMP) {
   time1 = omp_get_wtime();
   s1.operator_Sobel(rand);
   time2 = omp_get_wtime();
-  t_1 = time2 - time1;
+  std::cout << "Execution time of the sequential algorithm: " << time2 - time1
+            << std::endl;
 
   time1 = omp_get_wtime();
   s2.operator_Sobel_parr(rand);
   time2 = omp_get_wtime();
-  t_2 = time2 - time1;
-  std::cout << "Execution time of the sequential algorithm: " << t_1
+
+  std::cout << "Execution time of the parallel algorithm: " << time2 - time1
             << std::endl;
-  std::cout << "Execution time of the parallel algorithm: " << t_2 << std::endl;
 
   ASSERT_NO_FATAL_FAILURE(s2.operator_Sobel(rand));
 }
@@ -54,15 +54,15 @@ TEST(TEST_SOBOL, SIZE_MATR_1000_OMP) {
   time1 = omp_get_wtime();
   s1.operator_Sobel(rand);
   time2 = omp_get_wtime();
-  t_1 = time2 - time1;
+  std::cout << "Execution time of the sequential algorithm: " << time2 - time1
+            << std::endl;
 
   time1 = omp_get_wtime();
   s2.operator_Sobel_parr(rand);
   time2 = omp_get_wtime();
-  t_2 = time2 - time1;
-  std::cout << "Execution time of the sequential algorithm: " << t_1
+
+  std::cout << "Execution time of the parallel algorithm: " << time2 - time1
             << std::endl;
-  std::cout << "Execution time of the parallel algorithm: " << t_2 << std::endl;
 
   ASSERT_NO_FATAL_FAILURE(s2.operator_Sobel(rand));
 }
@@ -75,15 +75,15 @@ TEST(TEST_SOBOL, SIZE_MATR_1250_OMP) {
   time1 = omp_get_wtime();
   s1.operator_Sobel(rand);
   time2 = omp_get_wtime();
-  t_1 = time2 - time1;
+  std::cout << "Execution time of the sequential algorithm: " << time2 - time1
+            << std::endl;
 
   time1 = omp_get_wtime();
   s2.operator_Sobel_parr(rand);
   time2 = omp_get_wtime();
-  t_2 = time2 - time1;
-  std::cout << "Execution time of the sequential algorithm: " << t_1
+
+  std::cout << "Execution time of the parallel algorithm: " << time2 - time1
             << std::endl;
-  std::cout << "Execution time of the parallel algorithm: " << t_2 << std::endl;
 
   ASSERT_NO_FATAL_FAILURE(s2.operator_Sobel(rand));
 }
@@ -96,15 +96,15 @@ TEST(TEST_SOBOL, SIZE_MATR_1500_OMP) {
   time1 = omp_get_wtime();
   s1.operator_Sobel(rand);
   time2 = omp_get_wtime();
-  t_1 = time2 - time1;
+  std::cout << "Execution time of the sequential algorithm: " << time2 - time1
+            << std::endl;
 
   time1 = omp_get_wtime();
   s2.operator_Sobel_parr(rand);
   time2 = omp_get_wtime();
-  t_2 = time2 - time1;
-  std::cout << "Execution time of the sequential algorithm: " << t_1
+
+  std::cout << "Execution time of the parallel algorithm: " << time2 - time1
             << std::endl;
-  std::cout << "Execution time of the parallel algorithm: " << t_2 << std::endl;
 
   ASSERT_NO_FATAL_FAILURE(s2.operator_Sobel(rand));
 }
