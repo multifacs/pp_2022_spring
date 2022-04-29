@@ -34,7 +34,7 @@ std::vector<double> merge(const std::vector<double>& arr1,
 }
 void count_sort(double* in, double* out, int len, int exp) {
   u_char* buf = reinterpret_cast<u_char*>(in);
-  int count[256] = {0};
+  int count[257] = {0};
   int val = 0;
   for (int i = 0; i < len; i++) {
     count[buf[8 * i + exp]]++;
