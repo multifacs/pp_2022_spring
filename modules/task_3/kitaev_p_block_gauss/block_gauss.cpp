@@ -66,7 +66,7 @@ std::vector<int> SequentialGauss(std::vector<int> img,
 std::vector<int> ParallelGauss(std::vector<int> img,
   std::vector<int> gauss_kernel, int row, int col) {
   std::vector<int> res(img);
-  tbb::task_scheduler_init init();
+  tbb::task_scheduler_init init;
 
   tbb::parallel_for(tbb::blocked_range<int>(col + 1, row * col - col - 1, 1),
     [&](const tbb::blocked_range<int>& range) {
