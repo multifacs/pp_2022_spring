@@ -1,8 +1,8 @@
 // Copyright 2022 Kitaev Pavel
 
 #include <gtest/gtest.h>
-#include <vector>
 #include <tbb/tbb.h>
+#include <vector>
 #include "../../../modules/task_3/kitaev_p_block_gauss/block_gauss.h"
 
 TEST(Gauss, CanCreateRandomMatrix) {
