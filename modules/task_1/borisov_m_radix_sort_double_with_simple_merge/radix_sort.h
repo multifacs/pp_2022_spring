@@ -13,6 +13,7 @@ std::vector<double> merge(const std::vector<double>& lhs,
                           const std::vector<double>& rhs);
 
 void count_sort(double* in, double* out, int len, int exp);
-std::vector<double> radix_sort(const std::vector<double>& data);
+std::vector<double> radix_sort(std::vector<double> data1,
+                               std::vector<double> data2);
 
 #endif  // MODULES_TASK_1_BORISOV_M_RADIX_SORT_DOUBLE_WITH_SIMPLE_MERGE_RADIX_SORT_H_
