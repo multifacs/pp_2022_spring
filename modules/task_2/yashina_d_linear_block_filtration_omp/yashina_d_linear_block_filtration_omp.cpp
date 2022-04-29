@@ -37,7 +37,7 @@ int weight, int height) {
 }
 
 double calculatedNewPixelColor(double* matrix,
-    const std::vector<std::vector<double>> image, int height,
+    const std::vector<std::vector<double>> &image, int height,
     int weight, const int x, const int y) {
     double color = 0;
     for (int i = -1; i <= 1; i++) {
