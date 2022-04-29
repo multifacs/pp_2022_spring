@@ -12,8 +12,12 @@ std::vector<double> random_vec(int size) {
   return data;
 }
 
-std::vector<double> merge(double* arr1, double* arr2, int len1, int len2) {
-  std::vector<double> out(len1 + len2);
+std::vector<double> merge(const std::vector<double>& arr1,
+                          const std::vector<double>& arr2) {
+  int len1 = arr1.size();
+  int len2 = arr2.size();
+  std::vector<double> out;
+  out.resize(len1 + len2);
   int x = 0, y = 0;
   for (int i = 0; i < len1 + len2; i++) {
     if (x >= len1) {
@@ -28,13 +32,12 @@ std::vector<double> merge(double* arr1, double* arr2, int len1, int len2) {
   }
   return out;
 }
-
 void count_sort(double* in, double* out, int len, int exp) {
   u_char* buf = reinterpret_cast<u_char*>(in);
   int count[256] = {0};
   int val = 0;
   for (int i = 0; i < len; i++) {
-    count[buf[8 * 8 + exp]]++;
+    count[buf[8 * i + exp]]++;
   }
   int j = 0;
   for (; j < 256; j++) {
@@ -56,25 +59,26 @@ void count_sort(double* in, double* out, int len, int exp) {
 
 std::vector<double> radix_sort(std::vector<double> data1,
                                std::vector<double> data2) {
-  std::vector<double> out_data(data1.size());
-
   int len1 = static_cast<int>(data1.size());
   int len2 = static_cast<int>(data2.size());
+  std::vector<double> a(len1);
+  std::vector<double> b(len2);
 
-  double* in1 = data1.data();
-  double* out1 = reinterpret_cast<double*>(malloc(sizeof(double) * len1));
+  std::vector<double> in1 = data1;
+  std::vector<double> out1(data1.size());
 
-  double* in2 = data2.data();
-  double* out2 = reinterpret_cast<double*>(malloc(sizeof(double) * len2));
+  std::vector<double> in2 = data2;
+  std::vector<double> out2(data2.size());
 
   for (int i = 0; i < 4; i++) {
-    count_sort(in1, out1, len1, 2 * i);
-    count_sort(out1, in1, len1, 2 * i + 1);
+    count_sort(in1.data(), out1.data(), len1, 2 * i);
+    count_sort(out1.data(), in1.data(), len1, 2 * i + 1);
   }
 
   for (int i = 0; i < 4; i++) {
-    count_sort(in2, out2, len2, 2 * i);
-    count_sort(out2, in2, len2, 2 * i + 1);
+    count_sort(in2.data(), out2.data(), len2, 2 * i);
+    count_sort(out2.data(), in2.data(), len2, 2 * i + 1);
   }
-  return merge(in1, in2, len1, len2);
+
+  return merge(in1, in2);
 }

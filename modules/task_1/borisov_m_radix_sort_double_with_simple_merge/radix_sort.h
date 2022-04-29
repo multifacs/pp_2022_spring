@@ -9,8 +9,8 @@
 #include <vector>
 
 std::vector<double> random_vec(int size);
-std::vector<double> merge(const std::vector<double>& lhs,
-                          const std::vector<double>& rhs);
+std::vector<double> merge(const std::vector<double>& arr1,
+                          const std::vector<double>& arr2);
 
 void count_sort(double* in, double* out, int len, int exp);
 std::vector<double> radix_sort(std::vector<double> data1,
