@@ -33,7 +33,7 @@ std::vector<double> merge(const std::vector<double>& arr1,
   return out;
 }
 void count_sort(double* in, double* out, int len, int exp) {
-  u_char* buf = reinterpret_cast<u_char*>(in);
+  unsigned char* buf = reinterpret_cast<unsigned char*>(in);
   int count[257] = {0};
   int val = 0;
   for (int i = 0; i < len; i++) {
