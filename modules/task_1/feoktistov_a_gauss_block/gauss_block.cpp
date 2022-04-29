@@ -18,12 +18,12 @@ std::vector<Pixel> generateImage(int  width, int height, int step) {
   if (width <= 0  || height <=0) {
     throw "zero_pixel_exeption";
   }
-
-    std::vector<Pixel> img(width * height);
+  long int PixelCount = width * height;
+  std::vector<Pixel> img(PixelCount);
     for (int i = 0; i < width * height; i++) {
-      img[i] = Pixel(255 * ((i % width) % step > 0),
-                     255 * ((i % width) % (step+1) > 0),
-        255 * ((i % width) % (step + 2) > 0));
+      img[i] = Pixel(255.0 * ((i % width) % step > 0),
+                     255.0 * ((i % width) % (step+1) > 0),
+        255.0 * ((i % width) % (step + 2) > 0));
      // std::cout << img[i].getR() << " " << img[i].getG() << " "
      // << img[i].getB()<< " ";
      // if (i % width == width-1) std::cout << std::endl;
@@ -36,7 +36,7 @@ std::vector<float> createGaussKernel(int radius, float sigma) {
     throw "zero_sigma_exeption";
   }
   int size = 2 * radius + 1;
-  std::vector<float> res(size * size);
+  std::vector<float> res(pow(size, 2));
   float norm = 0;
   for (int x = -radius; x <= radius; x++)
     for (int y = -radius; y <= radius; y++) {
@@ -58,7 +58,8 @@ Pixel Pixel::calcNewPixel(const int x, const int y,
   const int width, const int height, const std::vector<Pixel>& img) {
   int radius = sqrt(kernel.size())/2;
   if (radius == 0) {
-    return img[y * width + x];
+    long N = y * width + x;
+    return img[N];
   }
   float R = 0;
   float G = 0;
@@ -114,11 +115,12 @@ Pixel::~Pixel() {}
 std::vector<Pixel> SequentialGauss(const std::vector<Pixel>& img, int width,
                                            int height,
                                            const std::vector<float>& kernel) {
-  if (width < 0 || height < 0 || width * height < img.size()) {
+  long int PixelCount = width * height;
+  if (width < 0 || height < 0 || PixelCount < img.size()) {
     throw "wrong_pixel_number";
   }
 
-  std::vector<Pixel> result(width * height);
+  std::vector<Pixel> result(PixelCount);
   for (int y = 0; y < height; y++)
     for (int x = 0; x < width; x++) {
       int pixelNumber = y * width + x;
