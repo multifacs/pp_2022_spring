@@ -1,6 +1,6 @@
 // Copyright 2022 Feoktistov Andrei
 #define _USE_MATH_DEFINES
-#include "../../modules/task_1/feoktistov_a_gauss_block/gauss_block.h"
+#include "../../../modules/task_1/feoktistov_a_gauss_block/gauss_block.h"
 #include <omp.h>
 #include <math.h>
 #include <vector>
@@ -18,7 +18,7 @@ std::vector<Pixel> generateImage(int  width, int height, int step) {
   if (width <= 0  || height <=0) {
     throw "zero_pixel_exeption";
   }
-  long int PixelCount = width * height;
+  int PixelCount = width * height;
   std::vector<Pixel> img(PixelCount);
     for (int i = 0; i < width * height; i++) {
       img[i] = Pixel(255.0 * ((i % width) % step > 0),
@@ -58,7 +58,7 @@ Pixel Pixel::calcNewPixel(const int x, const int y,
   const int width, const int height, const std::vector<Pixel>& img) {
   int radius = sqrt(kernel.size())/2;
   if (radius == 0) {
-    long N = y * width + x;
+    int N = y * width + x;
     return img[N];
   }
   float R = 0;
@@ -115,7 +115,7 @@ Pixel::~Pixel() {}
 std::vector<Pixel> SequentialGauss(const std::vector<Pixel>& img, int width,
                                            int height,
                                            const std::vector<float>& kernel) {
-  long unsigned int PixelCount = abs( width * height);
+  unsigned int PixelCount = abs(width * height);
   if (width < 0 || height < 0 || PixelCount < img.size()) {
     throw "wrong_pixel_number";
   }
