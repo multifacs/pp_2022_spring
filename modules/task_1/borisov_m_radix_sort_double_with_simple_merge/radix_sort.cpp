@@ -57,8 +57,8 @@ void count_sort(double* in, double* out, int len, int exp) {
   }
 }
 
-std::vector<double> radix_sort(std::vector<double> data1,
-                               std::vector<double> data2) {
+std::vector<double> radix_sort(const std::vector<double>& data1,
+                               const std::vector<double>& data2) {
   int len1 = static_cast<int>(data1.size());
   int len2 = static_cast<int>(data2.size());
   std::vector<double> a(len1);
