@@ -35,7 +35,7 @@ TEST(MonteCarloIntegration, omp_one_dims_quadratic) {
   double answer = ParallelMonteCarloIntegration(integrand, intervals, N);
   double real_answer = 41.6667;
 
-  ASSERT_NEAR(real_answer, answer, 2.0);
+  ASSERT_NEAR(real_answer, answer, 2.5);
 }
 
 TEST(MonteCarloIntegration, omp_two_dims_hyperboloid) {
@@ -78,7 +78,26 @@ TEST(MonteCarloIntegration, omp_two_dims_inverse_hyperboloid) {
 
   printf("seqTime = %lf\nparallelTime = %lf\nboost = %lf\n", seqTime,
          parallelTime, boost);
-  ASSERT_NEAR(answer, seq_answer, 1.0);
+  ASSERT_NEAR(answer, seq_answer, 1.8);
+}
+
+TEST(MonteCarloIntegration, omp_three_dims_integral) {
+  const size_t dims = 3;
+  std::function<double(const std::vector<double>&)> integrand =
+      [](const std::vector<double>& points) {
+        return pow(points[0], 2) * points[2] *
+               sin(points[0] * points[1] * points[2]);
+      };
+  const double pi = 3.141592;
+  std::vector<std::pair<double, double>> intervals(dims);
+  intervals[0] = {0.0, 2.0};
+  intervals[1] = {0.0, pi};
+  intervals[2] = {0.0, 1.0};
+
+  double answer = ParallelMonteCarloIntegration(integrand, intervals, N);
+  double real_answer = 2.0;
+
+  ASSERT_NEAR(real_answer, answer, 1.0);
 }
 
 int main(int argc, char** argv) {
