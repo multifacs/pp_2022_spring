@@ -1,6 +1,6 @@
 // Copyright 2022 Borisov Maxim
 
-#include "../../../modules/task_1/borisov_m_radix_sort_double/radix_sort.h"
+#include "../../../modules/task_1/borisov_m_radix_sort_double_with_simple_merge/radix_sort.h"
 #include "gtest/gtest.h"
 
 #define EPSILON 0.0001

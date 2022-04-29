@@ -1,6 +1,6 @@
 // Copyright 2022 Borisov Maxim
 
-#include "../../../modules/task_1/borisov_m_radix_sort_double/radix_sort.h"
+#include "../../../modules/task_1/borisov_m_radix_sort_double_with_simple_merge/radix_sort.h"
 
 std::vector<double> random_vec(int size) {
   std::vector<double> data(size);
@@ -15,7 +15,7 @@ std::vector<double> random_vec(int size) {
 std::vector<double> merge(double* arr1, double* arr2, int len1, int len2) {
   std::vector<double> out(len1 + len2);
   int x = 0, y = 0;
-  for (size_t i = 0; i < len1 + len2; i++) {
+  for (int i = 0; i < len1 + len2; i++) {
     if (x >= len1) {
       out[i] = arr2[y++];
     } else if (y >= len2) {
@@ -30,7 +30,7 @@ std::vector<double> merge(double* arr1, double* arr2, int len1, int len2) {
 }
 
 void count_sort(double* in, double* out, int len, int exp) {
-  u_char* buf = (u_char*)in;
+  u_char* buf = reinterpret_cast<u_char*>(in);
   int count[256] = {0};
   int val = 0;
   for (int i = 0; i < len; i++) {
