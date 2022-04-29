@@ -9,7 +9,7 @@
 #include "./monte_carlo.h"
 
 const size_t N = 10000;
-
+//
 TEST(MonteCarloIntegration, one_dims_sin) {
   const size_t dims = 1;
   std::function<double(const std::vector<double>&)> integrand =
