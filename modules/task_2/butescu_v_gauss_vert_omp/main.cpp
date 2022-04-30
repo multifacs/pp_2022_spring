@@ -104,8 +104,8 @@ TEST(Gaussian_Filter_, Test_Random_Matrix_Size_500x500) {
 }
 
 TEST(Gaussian_Filter_, Test_Random_Matrix_Size_1000x1000) {
-    int rows = 500;
-    int cols = 500;
+    int rows = 1000;
+    int cols = 1000;
     std::vector<double> matrix = createRandomMatrix(rows, cols);
 
     double start_seq = omp_get_wtime();
