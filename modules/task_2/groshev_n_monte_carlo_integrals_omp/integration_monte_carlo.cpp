@@ -20,11 +20,13 @@ double getIntegralSequential(int n, const std::vector<double>& low, const std::v
   std::vector<double> rand_vec(dimension);
   for (int i = 0; i < dimension; i++)
     rand_[i] = std::uniform_real_distribution<double>(low[i], top[i]);
+
   for (int i = 0; i < n; i++) {
     for (int j = 0; j < dimension; j++)
       rand_vec[j] = rand_[j](gen);
     res += f(rand_vec);
   }
+
   for (int i = 0; i < dimension; i++)
     res *= (top[i] - low[i]);
   res /= n;
@@ -43,13 +45,15 @@ double getIntegralOMP(
   int dimension = static_cast<int>(low.size());
   std::vector<std::uniform_real_distribution<double>> rand_(dimension);
   std::vector<double> rand_vec(dimension);
+
   for (int i = 0; i < dimension; i++)
     rand_[i] = std::uniform_real_distribution<double>(low[i], top[i]);
 
 omp_set_num_threads(4);
 #pragma omp parallel for reduction(+ : res)
   for (int i = 0; i < n; i++) {
-    for (int j = 0; j < dimension; j++) rand_vec[j] = rand_[j](gen);
+    for (int j = 0; j < dimension; j++)
+        rand_vec[j] = rand_[j](gen);
     res += f(rand_vec);
   }
 
