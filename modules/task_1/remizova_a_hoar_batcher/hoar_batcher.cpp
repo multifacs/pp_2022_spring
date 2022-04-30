@@ -17,11 +17,11 @@ std::vector<double> getRandVector(int size) {
     return vec;
 }
 
-bool isSortCorrectly(std::vector <double>& vec) {
-    return std::is_sorted(vec.begin(), vec.end());
+bool isSortCorrectly(const std::vector <double>& vec) {
+    return is_sorted(vec.begin(), vec.end());
 }
 
-void hoarSort(std::vector <double>& vec, int l_ind, int r_ind) {
+void hoarSort(const std::vector <double>& vec, int l_ind, int r_ind) {
     if (l_ind >= r_ind)
         return;
 
@@ -51,41 +51,39 @@ void hoarSort(std::vector <double>& vec, int l_ind, int r_ind) {
     return;
 }
 
-std::vector<double> evenBatcherSort(const std::vector<double>& vec1, const std::vector<double>& vec2)
-{
+std::vector<double> evenBatcherSort(const std::vector<double>& vec1, const std::vector<double>& vec2) {
     const int size_v1 = vec1.size();
     const int size_v2 = vec2.size();
     int i = 0, j = 0, k = 0, l = 0;
     const int size_eres = vec1.size() / 2 + vec2.size() / 2 + vec1.size() % 2 + vec2.size() % 2;
     std::vector<double> eres(size_eres);
-    for (i, j, k; i < size_v1 && j < size_v2; k++) {
+    for (; i < size_v1 && j < size_v2; k++) {
         if (vec1[i] <= vec2[j]) {
             eres[k] = vec1[i];
             i += 2;
-        }
-        else {
+        } else {
             eres[k] = vec2[j];
             j += 2;
         }
     }
-    if (i >= size_v1)
-        for (k, l = j; l < size_v2; l += 2, k++)
+    if (i >= size_v1) {
+        for (l = j; l < size_v2; l += 2, k++)
             eres[k] = vec2[l];
-    else
-        for (k, l = i; l < size_v1; l += 2, k++)
+    } else {
+        for (l = i; l < size_v1; l += 2, k++)
             eres[k] = vec1[l];
+    }
 
     return eres;
 }
 
-std::vector<double> oddBatcherSort(const std::vector<double>& vec1, const std::vector<double>& vec2)
-{
+std::vector<double> oddBatcherSort(const std::vector<double>& vec1, const std::vector<double>& vec2) {
     const int size_v1 = vec1.size();
     const int size_v2 = vec2.size();
     int i = 1, j = 1, k = 0, l = 0;
     const int size_ores = vec1.size() / 2 + vec2.size() / 2;
     std::vector<double> ores(size_ores);
-    for (i, j, k; i < size_v1 && j < size_v2; k++) {
+    for (; i < size_v1 && j < size_v2; k++) {
         if (vec1[i] <= vec2[j]) {
             ores[k] = vec1[i];
             i += 2;
@@ -95,23 +93,23 @@ std::vector<double> oddBatcherSort(const std::vector<double>& vec1, const std::v
             j += 2;
         }
     }
-    if (i >= size_v1)
-        for (k, l = j; l < size_v2; l += 2, k++)
+    if (i >= size_v1) {
+        for (l = j; l < size_v2; l += 2, k++)
             ores[k] = vec2[l];
-    else
-        for (k, l = i; l < size_v1; l += 2, k++)
+    } else {
+        for (l = i; l < size_v1; l += 2, k++)
             ores[k] = vec1[l];
+    }
 
     return ores;
 }
 
-std::vector<double> oddEvenBatcherSort(const std::vector<double>& vec1, const std::vector<double>& vec2)
-{
+std::vector<double> oddEvenBatcherSort(const std::vector<double>& vec1, const std::vector<double>& vec2) {
     int size_oeres = vec1.size() + vec2.size();
     std::vector<double> oeres(size_oeres);
     for (size_t i = 0; i < vec1.size(); i++)
         oeres[i] = vec1[i];
-    for (size_t i = vec1.size(), j = 0; i < size_oeres; i++, j++)
+    for (int i = vec1.size(), j = 0; i < size_oeres; i++, j++)
         oeres[i] = vec2[j];
 
     return oeres;
