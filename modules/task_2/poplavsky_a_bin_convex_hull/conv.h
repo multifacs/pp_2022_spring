@@ -1,4 +1,5 @@
-﻿//  Copyright 2022 Poplavsky Anton
+﻿
+//   Copyright 2022 Poplavsky Anton
 #ifndef MODULES_TASK_2_POPLAVSKY_A_BIN_CONVEX_HULL_CONV_H_
 #define MODULES_TASK_2_POPLAVSKY_A_BIN_CONVEX_HULL_CONV_H_
 
