@@ -36,7 +36,7 @@ class Stack {
       size++;
       stack_[top] = elem;
     } catch (const char* msg) {
-      printf("%c\n", msg);
+      printf("%s\n", msg);
       exit(0);
     }
   }
@@ -49,7 +49,7 @@ class Stack {
       size--;
       return stack_[top + 1];
     } catch (const char* msg) {
-      printf("%c\n", msg);
+      printf("%s\n", msg);
       exit(0);
     }
   }
@@ -60,7 +60,7 @@ class Stack {
       }
       return stack_[top];
     } catch (const char* msg) {
-      printf("%c\n", msg);
+      printf("%s\n", msg);
       exit(0);
     }
   }
@@ -72,7 +72,7 @@ class Stack {
       }
       return stack_[top - 1];
     } catch (const char* msg) {
-      printf("%c\n", msg);
+      printf("%s\n", msg);
       exit(0);
     }
   }

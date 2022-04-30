@@ -6,7 +6,8 @@ int find_minimal_coordinates(
   int number = 0;
   int minimal_x = input_coordinates[0].X;
   int minimal_y = input_coordinates[0].Y;
-  for (int i = 1; i < input_coordinates.size(); i++) {
+  int size = input_coordinates.size();
+  for (int i = 1; i < size; i++) {
     if ((input_coordinates[i].X < minimal_x) ||
         (input_coordinates[i].X == minimal_x &&
          input_coordinates[i].Y < minimal_y)) {
