@@ -3,6 +3,7 @@
 #include <vector>
 #include <cmath>
 #include "./integration_monte_carlo.h"
+#include <time.h>
 
 std::function<double(const std::vector<double>&)> f1 = [](const std::vector<double>& x) {
   return 2 * x[0];
@@ -28,7 +29,11 @@ TEST(Integration_Monte_Carlo_Seq, n_is_0) {
 
 TEST(Integration_Monte_Carlo_Seq, dimension_is_1) {
   double low = 0.0, top = 3.0;
+  clock_t start = clock();
   double res = getIntegralSequential(200000, { low }, { top }, f1);
+  clock_t end = clock();
+  double seconds = (double)(end - start) / CLOCKS_PER_SEC;
+  printf("The time: %f seconds\n", seconds);
   ASSERT_NEAR(res, 9.0, 0.07);
 }
 
