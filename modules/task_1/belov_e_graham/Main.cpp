@@ -1,6 +1,8 @@
 // Copyright 2022 Belov Egor
 #include <gtest/gtest.h>
-
+#include <algorithm>
+#include <vector>
+#include <iostream>
 #include "../../../modules/task_1/belov_e_graham/graham.h"
 
 TEST(Grahams_Algorithm, Test_1) {

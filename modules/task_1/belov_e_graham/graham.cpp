@@ -1,7 +1,9 @@
 // Copyright 2022 Belov Egor
-
+#include <algorithm>
+#include <utility>
 #include <random>
-
+#include <vector>
+#include <ctime>
 #include "../../../modules/task_1/belov_e_graham/graham.h"
 
 bool rotate(const point& A, const point& B, const point& C) {
@@ -30,7 +32,7 @@ std::vector<point> Graham(std::vector<point> tmp) {
     tmp[i].x -= p.x;
     tmp[i].y -= p.y;
   }
-  sort(tmp.begin() + 1, tmp.end(), &comp);
+  std::sort(tmp.begin() + 1, tmp.end(), &comp);
 
   std::vector<point> res;
   res.push_back(tmp[0]);
