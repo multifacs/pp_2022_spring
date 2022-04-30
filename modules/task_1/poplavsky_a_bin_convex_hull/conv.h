@@ -1,0 +1,107 @@
+﻿// Copyright 2022 Poplavsky Anton
+#ifndef MODULES_TASK_1_POPLAVSKY_A_BINARY_CONVEX_HULL_BINARY_CONVEX_HULL_H_
+#define MODULES_TASK_1_POPLAVSKY_A_BINARY_CONVEX_HULL_BINARY_CONVEX_HULL_H_
+
+#include <algorithm>
+#include <cmath>
+#include <list>
+#include <random>
+#include <stack>
+#include <vector>
+#define SIZE 1000000
+#define COLLINEAR 0
+#define CLOCKWISE -1
+#define ANTICLOCKWISE 1
+#include <iostream>
+
+class Stack {
+  int* stack_;
+  int capacity;
+  int size;
+  int top;
+
+ public:
+  Stack() {
+    capacity = SIZE;
+    stack_ = new int[capacity];
+    top = -1;
+    size = 0;
+  }
+  void push(int elem) {
+    try {
+      if (size == capacity) {
+        throw std::logic_error("Stack overflow");
+      }
+      top++;
+      size++;
+      stack_[top] = elem;
+    } catch (const char* msg) {
+      printf("%ñ\n", msg);
+      exit(0);
+    }
+  }
+  int pop() {
+    try {
+      if (size == 0) {
+        throw std::logic_error("Stack pop");
+      }
+      top--;
+      size--;
+      return stack_[top + 1];
+    } catch (const char* msg) {
+      printf("%ñ\n", msg);
+      exit(0);
+    }
+  }
+  int peek() {
+    try {
+      if (size == 0) {
+        throw std::logic_error("Stack peek");
+      }
+      return stack_[top];
+    } catch (const char* msg) {
+      printf("%ñ\n", msg);
+      exit(0);
+    }
+  }
+  bool empty() { return size == 0; }
+  int next_to_top() {
+    try {
+      if (size == 1) {
+        throw std::logic_error("Stack undeflow");
+      }
+      return stack_[top - 1];
+    } catch (const char* msg) {
+      printf("%ñ\n", msg);
+      exit(0);
+    }
+  }
+};
+
+struct Сoordinates {
+  int X;
+  int Y;
+  Сoordinates() {}
+  Сoordinates(int _X, int _Y) : X(_X), Y(_Y) {}
+  int turn(const Сoordinates& p1, const Сoordinates& p2) {
+    int value = (p1.Y - Y) * (p2.X - p1.X) - (p1.X - X) * (p2.Y - p1.Y);
+    if (value == 0)
+      return COLLINEAR;
+    else if (value > 0)
+      return ANTICLOCKWISE;
+    else
+      return CLOCKWISE;
+  }
+  int vector_norm(const Сoordinates& pt) {
+    return (X - pt.X) * (X - pt.X) + (Y - pt.Y) * (Y - pt.Y);
+  }
+  void set_x(int _x) { X = _x; }
+  void set_y(int _y) { Y = _y; }
+};
+
+int find_minimal_coordinates(const std::vector<Сoordinates>& input_coordinates);
+
+std::vector<Сoordinates> graham(
+    const std::vector<Сoordinates>& _input_coordinates);
+
+#endif  // MODULES_TASK_1_POPLAVSKY_A_BINARY_CONVEX_HULL_BINARY_CONVEX_HULL_H_
