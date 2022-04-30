@@ -41,7 +41,6 @@ double rec_par(std::vector<std::vector<int>> integrals, int step, const std::fun
 
     int step_of_thread = step / nthreads;
     int tmp = step % nthreads;
-    int out = 0;
     for (int i = 0; i < step - tmp; i += step_of_thread) {
         int x1 = i;
         int x2 = x1 - 1 + step_of_thread;
