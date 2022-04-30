@@ -43,7 +43,7 @@ std::vector<Coordinates> graham(
   std::vector<Coordinates> without_collinear;
   without_collinear.push_back(input_coordinates[0]);
   for (int i = 1; i < size; i++) {
-    while (i < input_coordinates.size() - 1 &&
+    while (i < size - 1 &&
            input_coordinates[i - 1].turn(
                input_coordinates[i], input_coordinates[i + 1]) == COLLINEAR) {
       i++;
