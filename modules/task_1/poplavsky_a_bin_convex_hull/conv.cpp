@@ -2,7 +2,7 @@
 #include "../../../modules/task_1/poplavsky_a_bin_convex_hull/conv.h"
 
 int find_minimal_coordinates(
-    const std::vector<Ñoordinates>& input_coordinates) {
+    const std::vector<Coordinates>& input_coordinates) {
   int number = 0;
   int minimal_x = input_coordinates[0].X;
   int minimal_y = input_coordinates[0].Y;
@@ -18,29 +18,29 @@ int find_minimal_coordinates(
   return number;
 }
 
-std::vector<Ñoordinates> graham(
-    const std::vector<Ñoordinates>& _input_coordinates) {
-  std::vector<Ñoordinates> input_coordinates = _input_coordinates;
+std::vector<Coordinates> graham(
+    const std::vector<Coordinates>& _input_coordinates) {
+  std::vector<Coordinates> input_coordinates = _input_coordinates;
   int size = input_coordinates.size();
   if (size < 3) {
     printf("Convex hull doesn't exist!!\n");
-    return std::vector<Ñoordinates>();
+    return std::vector<Coordinates>();
   }
-  Ñoordinates minimal_coordinate;
+  Coordinates minimal_coordinate;
   int minimal = find_minimal_coordinates(input_coordinates);
-  Ñoordinates tmp = input_coordinates[0];
+  Coordinates tmp = input_coordinates[0];
   input_coordinates[0] = input_coordinates[minimal];
   input_coordinates[minimal] = tmp;
   minimal_coordinate = input_coordinates[0];
   std::sort(input_coordinates.begin() + 1, input_coordinates.end(),
-            [&](const Ñoordinates& p1, const Ñoordinates& p2) {
+            [&](const Coordinates& p1, const Coordinates& p2) {
               if (minimal_coordinate.turn(p1, p2) == COLLINEAR) {
                 return (minimal_coordinate.vector_norm(p1) <
                         minimal_coordinate.vector_norm(p2));
               }
               return (minimal_coordinate.turn(p1, p2) == ANTICLOCKWISE);
             });
-  std::vector<Ñoordinates> without_collinear;
+  std::vector<Coordinates> without_collinear;
   without_collinear.push_back(input_coordinates[0]);
   for (int i = 1; i < size; i++) {
     while (i < input_coordinates.size() - 1 &&
@@ -55,7 +55,7 @@ std::vector<Ñoordinates> graham(
   size = input_coordinates.size();
   if (size < 3) {
     printf("Convex hull doesn't exist!!\n");
-    return std::vector<Ñoordinates>();
+    return std::vector<Coordinates>();
   }
   Stack stack_coordinates;
   stack_coordinates.push(0);
@@ -69,7 +69,7 @@ std::vector<Ñoordinates> graham(
     }
     stack_coordinates.push(i);
   }
-  std::vector<Ñoordinates> hull;
+  std::vector<Coordinates> hull;
   while (!stack_coordinates.empty()) {
     hull.push_back(input_coordinates[stack_coordinates.pop()]);
   }

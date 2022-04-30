@@ -8,7 +8,7 @@
 #include <random>
 #include <stack>
 #include <vector>
-#define SIZE 1000000
+#define SIZE 10
 #define COLLINEAR 0
 #define CLOCKWISE -1
 #define ANTICLOCKWISE 1
@@ -78,12 +78,12 @@ class Stack {
   }
 };
 
-struct Сoordinates {
+struct Coordinates {
   int X;
   int Y;
-  Сoordinates() {}
-  Сoordinates(int _X, int _Y) : X(_X), Y(_Y) {}
-  int turn(const Сoordinates& p1, const Сoordinates& p2) {
+  Coordinates() {}
+  Coordinates(int _X, int _Y) : X(_X), Y(_Y) {}
+  int turn(const Coordinates& p1, const Coordinates& p2) {
     int value = (p1.Y - Y) * (p2.X - p1.X) - (p1.X - X) * (p2.Y - p1.Y);
     if (value == 0)
       return COLLINEAR;
@@ -92,16 +92,16 @@ struct Сoordinates {
     else
       return CLOCKWISE;
   }
-  int vector_norm(const Сoordinates& pt) {
+  int vector_norm(const Coordinates& pt) {
     return (X - pt.X) * (X - pt.X) + (Y - pt.Y) * (Y - pt.Y);
   }
   void set_x(int _x) { X = _x; }
   void set_y(int _y) { Y = _y; }
 };
 
-int find_minimal_coordinates(const std::vector<Сoordinates>& input_coordinates);
+int find_minimal_coordinates(const std::vector<Coordinates>& input_coordinates);
 
-std::vector<Сoordinates> graham(
-    const std::vector<Сoordinates>& _input_coordinates);
+std::vector<Coordinates> graham(
+    const std::vector<Coordinates>& _input_coordinates);
 
 #endif  // MODULES_TASK_1_POPLAVSKY_A_BINARY_CONVEX_HULL_BINARY_CONVEX_HULL_H_
