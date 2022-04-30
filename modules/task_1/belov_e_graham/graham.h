@@ -18,7 +18,7 @@ struct point {
   }
 };
 
-bool comp(const point& B, const point& C);  // B<C?
+bool comp(const point& A, const point& B);  // B<C?
 
 bool rotate(const point& A, const point& B, const point& C);
 
