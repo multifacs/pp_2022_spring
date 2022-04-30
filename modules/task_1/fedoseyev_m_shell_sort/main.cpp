@@ -6,9 +6,9 @@
 TEST(SHELL_SORT_SEQ, TEST_1) {
   int size = 10;
   int* a = generate_vector(size);
-  print_list("initial", a, size);
+  print_list(a, size);
   shell_sort(a, size);
-  print_list("sorted", a, size);
+  print_list(a, size);
   ASSERT_EQ(check_list(a, size), 0);
   delete[] a;
 }

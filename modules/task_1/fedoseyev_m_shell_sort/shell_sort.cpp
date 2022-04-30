@@ -32,8 +32,7 @@ void shell_sort(int a[], int n, bool parallel) {
   }
 }
 
-void print_list(char *s, int a[], int n) {
-  printf("%s\n", s);
+void print_list(int a[], int n) {
   for (int i = 0; i < n; i++) {
     printf("%d ", a[i]);
   }
