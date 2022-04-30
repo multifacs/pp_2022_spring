@@ -15,7 +15,7 @@
 #include <iostream>
 
 class Stack {
-  int* stack_;
+  std::vector<int> stack_;
   int capacity;
   int size;
   int top;
@@ -23,7 +23,7 @@ class Stack {
  public:
   Stack() {
     capacity = SIZE;
-    stack_ = new int[capacity];
+    stack_.resize(capacity);
     top = -1;
     size = 0;
   }
