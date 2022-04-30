@@ -30,7 +30,7 @@ std::vector<point> Graham(std::vector<point> tmp) {
     tmp[i].x -= p.x;
     tmp[i].y -= p.y;
   }
-  std::sort(tmp.begin() + 1, tmp.end(), &comp);
+  sort(tmp.begin() + 1, tmp.end(), &comp);
 
   std::vector<point> res;
   res.push_back(tmp[0]);
