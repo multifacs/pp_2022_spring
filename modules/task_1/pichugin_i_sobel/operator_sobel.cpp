@@ -28,7 +28,7 @@ Sobel::Sobel(const Sobel& c) {
   mSize = c.mSize;
   matrix = new int[mSize * mSize];
 
-  for (int i = 0; i < mSize * mSize; i++) {
+  for (size_t i = 0; i < mSize * mSize; i++) {
     matrix[i] = c.matrix[i];
   }
 }
@@ -37,7 +37,7 @@ Sobel Sobel::operator=(const Sobel& c) {
   mSize = c.mSize;
   matrix = new int[mSize * mSize];
 
-  for (int i = 0; i < mSize * mSize; i++) {
+  for (size_t i = 0; i < mSize * mSize; i++) {
     matrix[i] = c.matrix[i];
   }
   return *this;
@@ -48,7 +48,7 @@ Sobel Sobel::RandomMatrix(size_t m_size) {
   int min = 0, max = 255;
   int* Matrix = new int[m_size];
 
-  for (int i = 0; i < m_size; i++) {
+  for (size_t i = 0; i < m_size; i++) {
     Matrix[i] = min + (std::rand() * ((max + 1) - min) / RAND_MAX);
     sob_Class.matrix[i] = Matrix[i];
   }
