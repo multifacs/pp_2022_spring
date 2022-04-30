@@ -12,6 +12,13 @@ T clamp(T value, T max, T min) {
         return min;
     return value;
 }
+template<class K>
+K minimum(const K& a, const K& b) {
+  if (a < b)
+    return a;
+  else
+    return b;
+}
 
 double* create_random_kernel(int size_n, double sigma);
 void getRandomImg(std::vector<std::vector<double>>* img,

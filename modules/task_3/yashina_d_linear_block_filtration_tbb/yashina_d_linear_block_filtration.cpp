@@ -1,10 +1,8 @@
 // Copyright 2018 Nesterov Alexander
-#include <omp.h>
 #include <vector>
 #include <string>
 #include <random>
 #include <iostream>
-#include <algorithm>
 #include "../../../modules/task_3/yashina_d_linear_block_filtration_tbb/yashina_d_linear_block_filtration.h"
 
 double* create_random_kernel(int size_n, double sigma) {
@@ -67,8 +65,8 @@ void getSequentialOperations(std::vector<std::vector<double>>* image,
     for (int y = 0; y < height; y += block_height) {
         for (int x = 0; x < weight; x += block_weight) {
             block_work(image, matrix, x,
-                min(x + block_weight, weight), y,
-                min(y + block_height, height), height, weight);
+                minimum(x + block_weight, weight), y,
+                minimum(y + block_height, height), height, weight);
         }
     }
 }
@@ -84,7 +82,7 @@ void getParallelOperations(std::vector<std::vector<double>>* image,
         int begin = r.begin();
         int end = r.end();
         for (int x = 0; x < weight; x += block_weight) {
-            block_work(image, matrix, x, min(x + block_weight, weight),
+            block_work(image, matrix, x, minimum(x + block_weight, weight),
                 begin, end, height, weight);
         }
     });

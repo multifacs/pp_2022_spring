@@ -1,7 +1,7 @@
 // Copyright 2022 Yashina Darya
 #include <gtest/gtest.h>
 #include <vector>
-#include "./ops_tbb.h"
+#include "./yashina_d_linear_block_filtration.h"
 TEST(Omp, Test_img_1) {
     int weight = 10;
     int height = 10;
