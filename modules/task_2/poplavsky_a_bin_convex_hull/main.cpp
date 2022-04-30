@@ -25,3 +25,59 @@ TEST(ConvexHull, timer) {
   printf("omp time : %lf\n\n", (time4 - time3));
   printf("hull time : %lf\n\n", (time2 - time1) / (time4 - time3));
 }
+
+TEST(ConvexHull, ttt) {
+  std::random_device dev;
+  std::mt19937 gen(dev());
+  std::uniform_real_distribution<> urd(-1000, 1000);
+  std::vector<Coordinates> points;
+  Coordinates pt;
+  for (int i = 0; i < 3; i++) {
+    pt.set_x(urd(gen));
+    pt.set_y(urd(gen));
+    points.push_back(pt);
+  }
+  std::vector<Coordinates> hull = graham_seq(points);
+}
+
+TEST(ConvexHull, iii) {
+  std::random_device dev;
+  std::mt19937 gen(dev());
+  std::uniform_real_distribution<> urd(-1000, 1000);
+  std::vector<Coordinates> points;
+  Coordinates pt;
+  for (int i = 0; i < 5; i++) {
+    pt.set_x(urd(gen));
+    pt.set_y(urd(gen));
+    points.push_back(pt);
+  }
+  std::vector<Coordinates> hull = graham_seq(points);
+}
+
+TEST(ConvexHull, mmm) {
+  std::random_device dev;
+  std::mt19937 gen(dev());
+  std::uniform_real_distribution<> urd(-1000, 1000);
+  std::vector<Coordinates> points;
+  Coordinates pt;
+  for (int i = 0; i < 6; i++) {
+    pt.set_x(urd(gen));
+    pt.set_y(urd(gen));
+    points.push_back(pt);
+  }
+  std::vector<Coordinates> hull = graham_seq(points);
+}
+
+TEST(ConvexHull, eee) {
+  std::random_device dev;
+  std::mt19937 gen(dev());
+  std::uniform_real_distribution<> urd(-1000, 1000);
+  std::vector<Coordinates> points;
+  Coordinates pt;
+  for (int i = 0; i < 9; i++) {
+    pt.set_x(urd(gen));
+    pt.set_y(urd(gen));
+    points.push_back(pt);
+  }
+  std::vector<Coordinates> hull = graham_seq(points);
+}
