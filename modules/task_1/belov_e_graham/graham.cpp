@@ -1,8 +1,10 @@
 // Copyright 2022 Belov Egor
-#include "../../../modules/task_1/belov_e_graham/graham.h"
-
-#include <iostream>
+#include <algorithm>
+#include <utility>
 #include <random>
+#include <vector>
+#include <ctime>
+#include "../../../modules/task_1/belov_e_graham/graham.h"
 
 bool rotate(const point& A, const point& B, const point& C) {
   return (B.x - A.x) * (C.y - B.y) - (B.y - A.y) * (C.x - B.x) >= 0;

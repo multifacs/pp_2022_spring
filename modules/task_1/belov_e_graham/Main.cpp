@@ -1,6 +1,12 @@
 // Copyright 2022 Belov Egor
-#include "../../../modules/task_1/belov_e_graham/graham.h"
 #include "gtest/gtest.h"
+#include <algorithm>
+#include <utility>
+#include <random>
+#include <vector>
+#include <ctime>
+#include "../../../modules/task_1/belov_e_graham/graham.h"
+
 
 TEST(Grahams_Algorithm, Test_1) {
   std::vector<point> tmp{{1, -7}, {3, -2}, {3, 1}, {5, 1}, {1, 3},
