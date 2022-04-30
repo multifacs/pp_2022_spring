@@ -1,9 +1,7 @@
 // Copyright 2022 Belov Egor
-#include <algorithm>
-#include <utility>
+
 #include <random>
-#include <vector>
-#include <ctime>
+
 #include "../../../modules/task_1/belov_e_graham/graham.h"
 
 bool rotate(const point& A, const point& B, const point& C) {
