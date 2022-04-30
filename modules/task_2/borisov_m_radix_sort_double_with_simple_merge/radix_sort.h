@@ -17,7 +17,7 @@ std::vector<double> merge_omp(const std::vector<double>& arr1,
                               const std::vector<double>& arr2);
 
 void count_sort(double* in, double* out, int len, int exp);
-std::vector<double> radix_sort(const std::vector<double>& data1);
+std::vector<double> radix_sort_seq(const std::vector<double>& data1);
 std::vector<double> radix_sort_omp(const std::vector<double>& data,
                                    std::size_t n_threads);
 
