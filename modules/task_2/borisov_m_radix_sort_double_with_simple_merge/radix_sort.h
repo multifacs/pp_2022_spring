@@ -18,6 +18,7 @@ std::vector<double> merge_omp(const std::vector<double>& arr1,
 
 void count_sort(double* in, double* out, int len, int exp);
 std::vector<double> radix_sort(const std::vector<double>& data1);
-std::vector<double> radix_sort_omp(const std::vector<double>& data);
+std::vector<double> radix_sort_omp(const std::vector<double>& data,
+                                   std::size_t n_threads);
 
 #endif  // MODULES_TASK_2_BORISOV_M_RADIX_SORT_DOUBLE_WITH_SIMPLE_MERGE_RADIX_SORT_H_
