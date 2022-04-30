@@ -46,7 +46,7 @@ std::vector<vector_d> genDigitCounters(vector_d* source_vec, size_t elem_num) {
   return digitCounters;
 }
 
-void radixPass(vector_d* source_vec, std::vector<vector_d>& digitCounters) {
+void radixPass(vector_d* source_vec, const std::vector<vector_d>& digitCounters) {
   size_t size;
   size_t j = 0;
 
