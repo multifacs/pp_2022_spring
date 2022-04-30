@@ -1,6 +1,6 @@
 // Copyright 2022 Pichugin Ilya
-#ifndef MODULES_TASK_2_PICHUGIN_I_SOBEL_TBB_OPERATOR_SOBEL_H_
-#define MODULES_TASK_2_PICHUGIN_I_SOBEL_TBB_OPERATOR_SOBEL_H_
+#ifndef MODULES_TASK_3_PICHUGIN_I_SOBEL_TBB_OPERATOR_SOBEL_H_
+#define MODULES_TASK_3_PICHUGIN_I_SOBEL_TBB_OPERATOR_SOBEL_H_
 
 #include <tbb/tbb.h>
 
@@ -27,4 +27,4 @@ class Sobel {
   int get_Matrix(int i, int j);
   void set_Matrix(int i, int j, int val_gradient);
 };
-#endif  // MODULES_TASK_2_PICHUGIN_I_SOBEL_TBB_OPERATOR_SOBEL_H_
+#endif  // MODULES_TASK_3_PICHUGIN_I_SOBEL_TBB_OPERATOR_SOBEL_H_

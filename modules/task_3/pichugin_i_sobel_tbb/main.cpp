@@ -121,5 +121,6 @@ TEST(TEST_SOBOL, SIZE_MATR_3000_OMP) {
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
+  tbb::task_scheduler_init init(2);
   return RUN_ALL_TESTS();
 }
