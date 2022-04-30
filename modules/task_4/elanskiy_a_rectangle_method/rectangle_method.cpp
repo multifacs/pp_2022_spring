@@ -30,7 +30,7 @@ double rec_par(std::vector<std::vector<int>> integrals, int step, const std::fun
     std::vector<double> vec_sum_inter;
     std::vector<std::thread> threads;
     std::vector<int> num_of_thread;
-    int nthreads = std::thread::hardware_concurrency();
+    int nthreads = 2;
 
     for (int i = 0; i < size_integ; i++) {
         float tmp = integrals[i][1] - integrals[i][0];
@@ -42,16 +42,15 @@ double rec_par(std::vector<std::vector<int>> integrals, int step, const std::fun
     int step_of_thread = step / nthreads;
     int tmp = step % nthreads;
     int out = 0;
-    for (int i = 0; i < step; i += out) {
-        int x1 = i * step_of_thread;
-        int x2 = x1 + step_of_thread;
-        if (i + tmp == step) {
+    for (int i = 0; i < step - tmp; i += step_of_thread) {
+        int x1 = i;
+        int x2 = x1 - 1 + step_of_thread;
+        if (i + tmp == step - 1 - tmp) {
             x2 += tmp;
         }
-        out += x2;
         threads.push_back(std::thread(
             [x1, x2, &size_integ, &vec_sum_inter, &f, &integrals, &h]() {
-                for (int e = x1; e < x2; e++) {
+                for (int e = x1; e <= x2; e++) {
                     for (int j = 0; j < size_integ; j++) {
                         vec_sum_inter[j] += f(integrals[j][0] + e * h[j]) * h[j];
                     }
