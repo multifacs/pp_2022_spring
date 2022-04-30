@@ -46,7 +46,7 @@ Sobel Sobel::operator=(const Sobel& c) {
 }
 
 bool Sobel::operator==(const Sobel& c) const {
-  for (int i = 0; i < mSize * mSize; i++) {
+  for (size_t i = 0; i < mSize * mSize; i++) {
     if (matrix[i] != c.matrix[i]) {
       return false;
     }
