@@ -8,7 +8,7 @@
 #include <random>
 #include <stack>
 #include <vector>
-#define SIZE 90
+#define SIZE 110
 #define COLLINEAR 0
 #define CLOCKWISE -1
 #define ANTICLOCKWISE 1
