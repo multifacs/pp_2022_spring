@@ -1,5 +1,4 @@
 // Copyright 2022 Tulkina Olga
-
 #include "../../modules/task_1/tulkina_o_labeling/labeling.h"
 
 std::vector<std::vector<int>> labeling(

@@ -10,7 +10,8 @@ TEST(Sequential, Test_1x1) {
   binary_image = labeling(binary_image);
 
   std::vector<std::vector<int>> expected = {{0}};
-  for (int i = 0; i < binary_image.size(); i++)
+  int a = binary_image.size();
+  for (int i = 0; i < a; i++)
     EXPECT_EQ(expected[i], binary_image[i]);
 }
 
@@ -20,8 +21,9 @@ TEST(Sequential, Test_1x5) {
   binary_image = labeling(binary_image);
 
   std::vector<std::vector<int>> expected = {{0, 2, 2, 0, 5}};
-
-  for (int i = 0; i < binary_image.size(); i++)
+  
+  int a = binary_image.size();
+  for (int i = 0; i < a; i++)
     EXPECT_EQ(expected[i], binary_image[i]);
 }
 
@@ -31,8 +33,8 @@ TEST(Sequential, Test_5x1) {
   binary_image = labeling(binary_image);
 
   std::vector<std::vector<int>> expected = {{0}, {2}, {2}, {2}, {2}};
-
-  for (int i = 0; i < binary_image.size(); i++)
+  int a = binary_image.size();
+  for (int i = 0; i < a; i++)
     EXPECT_EQ(expected[i], binary_image[i]);
 }
 
@@ -44,8 +46,8 @@ TEST(Sequential, Test_2x10) {
 
   std::vector<std::vector<int>> expected = {{0, 2, 2, 0, 2, 0, 0, 0, 0, 0},
                                             {2, 0, 2, 2, 2, 2, 2, 2, 0, 0}};
-
-  for (int i = 0; i < binary_image.size(); i++)
+  int a = binary_image.size();
+  for (int i = 0; i < a; i++)
     EXPECT_EQ(expected[i], binary_image[i]);
 }
 
@@ -65,7 +67,7 @@ TEST(Sequential, Test_10x10) {
       {21, 0, 0, 0, 0, 0, 0, 2, 0, 2},   {21, 0, 0, 2, 0, 2, 0, 2, 0, 0},
       {21, 0, 2, 0, 2, 2, 2, 0, 0, 70},  {21, 0, 0, 2, 2, 2, 0, 0, 70, 70},
       {21, 0, 0, 0, 2, 0, 0, 0, 70, 70}, {21, 0, 0, 0, 0, 0, 70, 70, 70, 70}};
-
-  for (int i = 0; i < binary_image.size(); i++)
+  int a = binary_image.size();
+  for (int i = 0; i < a; i++)
     EXPECT_EQ(expected[i], binary_image[i]);
 }
