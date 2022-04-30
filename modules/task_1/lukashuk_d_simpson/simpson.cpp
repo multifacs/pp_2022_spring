@@ -16,6 +16,7 @@ double simpson(const FUNC_T& f, const BORDER_T& borders,
     h[i] = (borders[i].second - borders[i].first) / steps[i];
     iter *= steps[i];
   }
+
   for (int i = 0, x = i; i < iter; i++, x = i) {
     for (int d = 0; d < dimen; d++) {
       param[d][0] = borders[d].first + (x % steps[d]) * h[d];
