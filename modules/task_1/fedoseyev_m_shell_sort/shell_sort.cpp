@@ -1,6 +1,6 @@
 // Copyright 2022 Fedoseyev Mikhail
 
-#include "../../../modules/task_2/fedoseyev_m_shell_sort/shell_sort.h"
+#include "../../../modules/task_1/fedoseyev_m_shell_sort/shell_sort.h"
 
 int *generate_vector(int n) {
   std::random_device dev;
