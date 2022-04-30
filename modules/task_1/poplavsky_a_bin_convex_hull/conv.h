@@ -1,6 +1,7 @@
-﻿// Copyright 2022 Poplavsky Anton
-#ifndef MODULES_TASK_1_POPLAVSKY_A_BINARY_CONVEX_HULL_BINARY_CONVEX_HULL_H_
-#define MODULES_TASK_1_POPLAVSKY_A_BINARY_CONVEX_HULL_BINARY_CONVEX_HULL_H_
+﻿
+//  Copyright 2022 Poplavsky Anton
+#ifndef MODULES_TASK_1_POPLAVSKY_A_BIN_CONVEX_HULL_CONV_H_
+#define MODULES_TASK_1_POPLAVSKY_A_BIN_CONVEX_HULL_CONV_H_
 
 #include <algorithm>
 #include <cmath>
@@ -104,4 +105,4 @@ int find_minimal_coordinates(const std::vector<Coordinates>& input_coordinates);
 std::vector<Coordinates> graham(
     const std::vector<Coordinates>& _input_coordinates);
 
-#endif  // MODULES_TASK_1_POPLAVSKY_A_BINARY_CONVEX_HULL_BINARY_CONVEX_HULL_H_
+#endif  // MODULES_TASK_1_POPLAVSKY_A_BIN_CONVEX_HULL_CONV_H_
