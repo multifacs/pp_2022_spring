@@ -5,9 +5,10 @@
 #include "gtest/gtest.h"
 
 TEST(TEST_SOBOL, SIZE_MATR_500_OMP) {
+  size_t size = 500;
   double time1, time2;
   Sobel s1, s2, rand;
-  rand = rand.RandomMatrix(500);
+  rand = rand.RandomMatrix(size);
 
   time1 = omp_get_wtime();
   s1.operator_Sobel(rand);
@@ -26,9 +27,10 @@ TEST(TEST_SOBOL, SIZE_MATR_500_OMP) {
 }
 
 TEST(TEST_SOBOL, SIZE_MATR_750_OMP) {
+  size_t size = 750;
   double time1, time2;
   Sobel s1, s2, rand, t_1, t_2;
-  rand = rand.RandomMatrix(750);
+  rand = rand.RandomMatrix(size);
 
   time1 = omp_get_wtime();
   s1.operator_Sobel(rand);
@@ -47,9 +49,10 @@ TEST(TEST_SOBOL, SIZE_MATR_750_OMP) {
 }
 
 TEST(TEST_SOBOL, SIZE_MATR_1000_OMP) {
+  size_t size = 1000;
   double time1, time2;
   Sobel s1, s2, rand, t_1, t_2;
-  rand = rand.RandomMatrix(1000);
+  rand = rand.RandomMatrix(size);
 
   time1 = omp_get_wtime();
   s1.operator_Sobel(rand);
@@ -68,9 +71,10 @@ TEST(TEST_SOBOL, SIZE_MATR_1000_OMP) {
 }
 
 TEST(TEST_SOBOL, SIZE_MATR_1250_OMP) {
+  size_t size = 1250;
   double time1, time2;
   Sobel s1, s2, rand, t_1, t_2;
-  rand = rand.RandomMatrix(1250);
+  rand = rand.RandomMatrix(size);
 
   time1 = omp_get_wtime();
   s1.operator_Sobel(rand);
@@ -89,9 +93,10 @@ TEST(TEST_SOBOL, SIZE_MATR_1250_OMP) {
 }
 
 TEST(TEST_SOBOL, SIZE_MATR_1500_OMP) {
+  size_t size = 1500;
   double time1, time2;
   Sobel s1, s2, rand, t_1, t_2;
-  rand = rand.RandomMatrix(1500);
+  rand = rand.RandomMatrix(size);
 
   time1 = omp_get_wtime();
   s1.operator_Sobel(rand);

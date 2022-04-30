@@ -5,23 +5,22 @@
 #include <iostream>
 
 class Sobel {
- private:
   int* matrix;
-  int mSize;
+  size_t mSize;
 
  public:
   Sobel();
-  explicit Sobel(int m_size);
-  Sobel(const Sobel& c);
   ~Sobel();
+  explicit Sobel(size_t m_size);
+  Sobel(const Sobel& c);
 
   Sobel operator=(const Sobel& c);
-  Sobel RandomMatrix(int m_size);
+  Sobel RandomMatrix(size_t m_size);
   Sobel operator_Sobel(Sobel c);
   Sobel operator_Sobel_parr(Sobel c);
 
   int get_Size_Matrix();
   int get_Matrix(int i, int j);
-  void set_Matrix(int i, int j, int val);
+  void set_Matrix(int i, int j, int val_gradient);
 };
 #endif  // MODULES_TASK_2_PICHUGIN_ILYA_SOBEL_OMP_OPERATOR_SOBEL_H_

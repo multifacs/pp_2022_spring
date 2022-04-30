@@ -17,11 +17,11 @@ Sobel::~Sobel() {
   }
 }
 
-Sobel::Sobel(int m_size) {
+Sobel::Sobel(size_t m_size) {
   mSize = m_size;
-  matrix = new int[mSize * mSize];
+  matrix = new int[m_size * m_size];
 
-  for (int i = 0; i < mSize * mSize; i++) {
+  for (size_t i = 0; i < m_size * m_size; i++) {
     matrix[i] = 0;
   }
 }
@@ -30,7 +30,7 @@ Sobel::Sobel(const Sobel& c) {
   mSize = c.mSize;
   matrix = new int[mSize * mSize];
 
-  for (int i = 0; i < mSize * mSize; i++) {
+  for (size_t i = 0; i < mSize * mSize; i++) {
     matrix[i] = c.matrix[i];
   }
 }
@@ -39,18 +39,18 @@ Sobel Sobel::operator=(const Sobel& c) {
   mSize = c.mSize;
   matrix = new int[mSize * mSize];
 
-  for (int i = 0; i < mSize * mSize; i++) {
+  for (size_t i = 0; i < mSize * mSize; i++) {
     matrix[i] = c.matrix[i];
   }
   return *this;
 }
 
-Sobel Sobel::RandomMatrix(int m_size) {
+Sobel Sobel::RandomMatrix(size_t m_size) {
   Sobel sob_Class(m_size);
   int min = 0, max = 255;
   int* Matrix = new int[m_size];
 
-  for (int i = 0; i < m_size; i++) {
+  for (size_t i = 0; i < m_size; i++) {
     Matrix[i] = min + (std::rand() * ((max + 1) - min) / RAND_MAX);
     sob_Class.matrix[i] = Matrix[i];
   }
@@ -61,7 +61,7 @@ Sobel Sobel::RandomMatrix(int m_size) {
 
 Sobel Sobel::operator_Sobel(Sobel c) {
   int _size = c.get_Size_Matrix();
-  Sobel res(_size);
+  Sobel matrix(_size);
   _size--;
 
   int kern_x[] = {-1, 0, 1, -2, 0, 2, -1, 0, 1};
@@ -79,17 +79,19 @@ Sobel Sobel::operator_Sobel(Sobel c) {
         }
       }
 
-      double val = sqrt(Gx * Gx + Gy * Gy);
-      int diap = val > max_pix ? max_pix : val < min_pix ? min_pix : val;
-      res.set_Matrix(i, j, diap);
+      double val_gradient = sqrt(Gx * Gx + Gy * Gy);
+      int range = val_gradient < min_pix   ? min_pix
+                  : val_gradient > max_pix ? max_pix
+                                           : val_gradient;
+      matrix.set_Matrix(i, j, range);
     }
   }
-  return res;
+  return matrix;
 }
 
 Sobel Sobel::operator_Sobel_parr(Sobel c) {
   int _size = c.get_Size_Matrix();
-  Sobel res(_size);
+  Sobel matrix(_size);
   _size--;
 
   int kern_x[] = {-1, 0, 1, -2, 0, 2, -1, 0, 1};
@@ -108,17 +110,18 @@ Sobel Sobel::operator_Sobel_parr(Sobel c) {
         }
       }
 
-      double val = sqrt(Gx * Gx + Gy * Gy);
-      int diap = val > max_pix ? max_pix : val < min_pix ? min_pix : val;
-      res.set_Matrix(i, j, diap);
+      double val_gradient = sqrt(Gx * Gx + Gy * Gy);
+      int range = val_gradient < min_pix   ? min_pix
+                  : val_gradient > max_pix ? max_pix
+                                           : val_gradient;
+      matrix.set_Matrix(i, j, range);
     }
   }
-
-  return res;
+  return matrix;
 }
 
 int Sobel::get_Size_Matrix() { return mSize; }
 int Sobel::get_Matrix(int i, int j) { return matrix[mSize * i + j]; }
-void Sobel::set_Matrix(int i, int j, int val) {
-  matrix[mSize * i + j] = val;
+void Sobel::set_Matrix(int i, int j, int val_gradient) {
+  matrix[mSize * i + j] = val_gradient;
 }
