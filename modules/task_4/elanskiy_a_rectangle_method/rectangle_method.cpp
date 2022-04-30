@@ -40,7 +40,7 @@ double rec_par(std::vector<std::vector<int>> integrals, int step, const std::fun
 
     int step_of_thread;
     int tmp;
-    if (step / nthreads == 0) { 
+    if (step / nthreads == 0) {
         do {
             nthreads--;
             step_of_thread = step / nthreads;
