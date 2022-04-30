@@ -13,6 +13,7 @@ TEST(TEST_SOBOL, SIZE_MATR_500_OMP) {
   time1 = omp_get_wtime();
   s1.operator_Sobel(rand);
   time2 = omp_get_wtime();
+  std::cout.precision(4);
   std::cout << "Execution time of the sequential algorithm: " << time2 - time1
             << std::endl;
 
@@ -35,6 +36,7 @@ TEST(TEST_SOBOL, SIZE_MATR_750_OMP) {
   time1 = omp_get_wtime();
   s1.operator_Sobel(rand);
   time2 = omp_get_wtime();
+  std::cout.precision(4);
   std::cout << "Execution time of the sequential algorithm: " << time2 - time1
             << std::endl;
 
@@ -57,6 +59,7 @@ TEST(TEST_SOBOL, SIZE_MATR_1000_OMP) {
   time1 = omp_get_wtime();
   s1.operator_Sobel(rand);
   time2 = omp_get_wtime();
+  std::cout.precision(4);
   std::cout << "Execution time of the sequential algorithm: " << time2 - time1
             << std::endl;
 
@@ -79,6 +82,7 @@ TEST(TEST_SOBOL, SIZE_MATR_1250_OMP) {
   time1 = omp_get_wtime();
   s1.operator_Sobel(rand);
   time2 = omp_get_wtime();
+  std::cout.precision(4);
   std::cout << "Execution time of the sequential algorithm: " << time2 - time1
             << std::endl;
 
@@ -101,6 +105,7 @@ TEST(TEST_SOBOL, SIZE_MATR_1500_OMP) {
   time1 = omp_get_wtime();
   s1.operator_Sobel(rand);
   time2 = omp_get_wtime();
+  std::cout.precision(4);
   std::cout << "Execution time of the sequential algorithm: " << time2 - time1
             << std::endl;
 

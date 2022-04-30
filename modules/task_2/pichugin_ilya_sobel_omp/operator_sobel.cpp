@@ -45,6 +45,15 @@ Sobel Sobel::operator=(const Sobel& c) {
   return *this;
 }
 
+bool Sobel::operator==(const Sobel& c) const {
+  for (int i = 0; i < mSize * mSize; i++) {
+    if (matrix[i] != c.matrix[i]) {
+      return false;
+    }
+  }
+  return true;
+}
+
 Sobel Sobel::RandomMatrix(size_t m_size) {
   Sobel sob_Class(m_size);
   int min = 0, max = 255;

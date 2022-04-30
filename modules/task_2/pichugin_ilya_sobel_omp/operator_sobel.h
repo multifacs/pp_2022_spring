@@ -15,6 +15,7 @@ class Sobel {
   Sobel(const Sobel& c);
 
   Sobel operator=(const Sobel& c);
+  bool operator==(const Sobel& c) const;
   Sobel RandomMatrix(size_t m_size);
   Sobel operator_Sobel(Sobel c);
   Sobel operator_Sobel_parr(Sobel c);
