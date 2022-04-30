@@ -5,19 +5,19 @@
 double f1(double x) { return 1 / log(x); }
 double f2(double x) { return x * x / 2; }
 
-TEST(rec_par, test_one_integral_another) {
-    std::vector<std::vector<int>> inter = { { 0, 1 } };
-    int step = 5;
-    double par = rec_par(inter, step, f2);
-    double re = 0.1200;
-    ASSERT_EQ(par, re);
-}
-
 TEST(rec_par, test_one_integral) {
     std::vector<std::vector<int>> inter = { { 2, 5 } };
     int step = 5;
     double par = rec_par(inter, step, f1);
     double re = 2.8638;
+    ASSERT_EQ(par, re);
+}
+
+TEST(rec_par, test_one_integral_another) {
+    std::vector<std::vector<int>> inter = { { 0, 1 } };
+    int step = 5;
+    double par = rec_par(inter, step, f2);
+    double re = 0.1200;
     ASSERT_EQ(par, re);
 }
 
