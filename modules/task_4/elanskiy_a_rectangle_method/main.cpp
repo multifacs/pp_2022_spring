@@ -53,7 +53,7 @@ TEST(rec_par, test_three_integrals_time) {
     std::vector<std::vector<int>> inter = { { 2, 5 },
                                             { 3, 7 },
                                             { 4, 9 } };
-    int step = 100000;
+    int step = 10000000;
     long double par_start, par_stop, seq_start, seq_stop;
     double seq_result, par_result;
     seq_start = omp_get_wtime();
