@@ -20,9 +20,8 @@ class Union {
 
   int get_label(int index) {
     int root = index;
-    while (root != label_image[root])
-      root = label_image[root];  
-    while (label_image[index] != root) {  
+    while (root != label_image[root]) root = label_image[root];
+    while (label_image[index] != root) {
       int new_index = label_image[index];
       label_image[index] = root;
       index = new_index;
@@ -30,12 +29,11 @@ class Union {
     return root;
   }
 
- 
   void set_label(int my_index, int neighbor_index) {
     int my_label = get_label(my_index);
     int neighbor_label = get_label(neighbor_index);
     if (my_label == neighbor_label) return;
-    
+
     (neighbor_label < my_label) ? label_image[my_label] = neighbor_label
                                 : label_image[neighbor_label] = my_label;
   }
