@@ -9,7 +9,8 @@ int find_minimal_coordinates(
   int number = 0;
   double minimal_x = input_coordinates[0].X;
   double minimal_y = input_coordinates[0].Y;
-  for (int i = 1; i < input_coordinates.size(); i++) {
+  int size = input_coordinates.size();
+  for (int i = 1; i < size; i++) {
     if ((input_coordinates[i].X < minimal_x) ||
         (input_coordinates[i].X == minimal_x &&
          input_coordinates[i].Y < minimal_y)) {
@@ -46,7 +47,7 @@ std::vector<Coordinates> graham_seq(
   std::vector<Coordinates> without_collinear;
   without_collinear.push_back(input_coordinates[0]);
   for (int i = 1; i < size; i++) {
-    while (i < input_coordinates.size() - 1 &&
+    while (i < size - 1 &&
            input_coordinates[i - 1].turn(
                input_coordinates[i], input_coordinates[i + 1]) == COLLINEAR) {
       i++;
