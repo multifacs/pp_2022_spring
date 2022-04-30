@@ -49,7 +49,6 @@ double getIntegralOMP(
   for (int i = 0; i < dimension; i++)
     rand_[i] = std::uniform_real_distribution<double>(low[i], top[i]);
 
-omp_set_num_threads(4);
 #pragma omp parallel for reduction(+ : res)
   for (int i = 0; i < n; i++) {
     for (int j = 0; j < dimension; j++)
