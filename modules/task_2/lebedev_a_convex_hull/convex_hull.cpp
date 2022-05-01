@@ -1,6 +1,8 @@
 // Copyright 2022 Lebedev Alexey
 #include <algorithm>
 #include <iostream>
+#include <numeric>
+#include <omp.h>
 #include "../../../modules/task_2/lebedev_a_convex_hull/convex_hull.h"
 
 
@@ -16,7 +18,6 @@ using points_iterator = std::vector<cv::Point2d>::iterator;
 void convex_hull_impl(points_iterator begin, points_iterator end, std::vector<cv::Point2d>* output) {
     size_t size = end - begin;
     if (size <= 2) {
-        output->clear();
         output->resize(size);
         std::copy(begin, end, output->begin());
         return;
@@ -50,8 +51,42 @@ void convex_hull_impl(points_iterator begin, points_iterator end, std::vector<cv
 }
 
 
-void lab2::convex_hull(const cv::Mat& c1_image, std::vector<cv::Point2d>* output) {
+size_t get_effective_num_threads(size_t size) {
+    const static size_t min_step = 100;
+    uint8_t add = size / min_step == 0 ? 1 : 0;
+    return std::min(int(size / min_step + add), omp_get_max_threads());
+}
+
+
+void lab2::convex_hull(const cv::Mat& input, std::vector<cv::Point2d>* output, bool use_seq) {
     std::vector<cv::Point2d> non_zeros;
-    cv::findNonZero(c1_image, non_zeros);
-    convex_hull_impl(non_zeros.begin(), non_zeros.end(), output);
+    cv::findNonZero(input, non_zeros);
+    lab2::convex_hull(&non_zeros, output, use_seq);
+}
+
+void lab2::convex_hull(std::vector<cv::Point2d>* input, std::vector<cv::Point2d>* output, bool use_seq) {
+    size_t jobs = get_effective_num_threads(input->size());
+    if (jobs > 1 && !use_seq) {
+        size_t step = input->size() / jobs;
+        std::vector<cv::Point2d> last(input->end() - input->size() % jobs, input->end());
+        std::vector<std::vector<cv::Point2d>> hulls(jobs);
+#pragma omp parallel num_threads(jobs) shared(input, step, hulls)
+        {
+            int tid = omp_get_thread_num();
+            convex_hull_impl(input->begin() + tid * step, input->begin() + (tid + 1) * step, &hulls[tid]);
+        }
+        size_t size = std::accumulate(hulls.begin(), hulls.end(), 0, [](const size_t& _size, const std::vector<cv::Point2d>& v) {
+            return _size + v.size();
+            });
+        std::vector<cv::Point2d> concat;
+        concat.resize(size + last.size());
+        auto it = std::copy(last.begin(), last.end(), concat.begin());
+        for (const auto& hull : hulls) {
+            it = std::copy(hull.begin(), hull.end(), it);
+        }
+        convex_hull_impl(concat.begin(), concat.end(), output);
+    }
+    else {
+        convex_hull_impl(input->begin(), input->end(), output);
+    }
 }

@@ -1,5 +1,6 @@
 // Copyright 2022 Lebedev Alexey
 #include <gtest/gtest.h>
+#include <omp.h>
 #include <random>
 #include "./convex_hull.h"
 
@@ -68,15 +69,18 @@ void fill_image_random_normal(cv::Mat* c1_image, size_t mean, size_t stddev, siz
 
 
 TEST_F(ConvexHullTEST, Test_uniform_dist) {
-    fill_image_random_uniform(&test_image, { 100, 300, 500, 600 }, 100);
-    fill_image_random_uniform(&test_image, { 500, 600, 100, 400 }, 100);
+    fill_image_random_uniform(&test_image, { 100, 300, 500, 600 }, 10000);
+    fill_image_random_uniform(&test_image, { 500, 600, 100, 400 }, 10000);
+    double t1 = omp_get_wtime();
     lab1::convex_hull(test_image, &conv);
+    double t2 = omp_get_wtime();
+    std::cout << t2 - t1 << std::endl;
 }
 
 TEST_F(ConvexHullTEST, Test_normal_dist) {
-    fill_image_random_normal(&test_image, 300, 50, 100);
-    fill_image_random_normal(&test_image, 500, 50, 50);
-    fill_image_random_normal(&test_image, 200, 50, 50);
+    fill_image_random_normal(&test_image, 300, 50, 1000);
+    fill_image_random_normal(&test_image, 500, 50, 5000);
+    fill_image_random_normal(&test_image, 200, 50, 5000);
     lab1::convex_hull(test_image, &conv);
 }
 

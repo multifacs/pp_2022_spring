@@ -1,11 +1,23 @@
 // Copyright 2022 Lebedev Alexey
 #include <gtest/gtest.h>
+#include <omp.h>
 #include <random>
+#include <iostream>
 #include "./convex_hull.h"
 
 
+
+template<class T>
+double get_time(T input, std::vector<cv::Point2d>* output, bool use_seq = false) {
+    double t1 = omp_get_wtime();
+    lab2::convex_hull(input, output, use_seq);
+    double t2 = omp_get_wtime();
+    return t2 - t1;
+}
+
+
 // image parameters
-static const cv::Size2d image_size(720, 720);
+static const cv::Size2d image_size(1080, 1080);
 static const cv::Scalar background_color(0);
 static const cv::Scalar fill_color(255);
 
@@ -19,6 +31,13 @@ protected:
     cv::Mat test_image;
     std::vector<cv::Point2d> conv;
     std::string test_name;
+
+    void check_time() {
+        double t_seq = get_time(test_image, &conv, true);
+        double t_parallel = get_time(test_image, &conv, false);
+        std::cout << "Speed up " << t_seq / t_parallel << std::endl;
+    }
+
     void SetUp() override {
         test_image = cv::Mat(image_size, CV_8UC1, background_color);
         test_name = ::testing::UnitTest::GetInstance()->current_test_info()->name();
@@ -57,28 +76,35 @@ void fill_image_random_uniform(cv::Mat* c1_image, const std::vector<size_t>& roi
 }
 
 
-void fill_image_random_normal(cv::Mat* c1_image, size_t mean, size_t stddev, size_t num_points) {
+void fill_points_random_uniform(std::vector<cv::Point2d>* input, size_t num_points, const std::vector<size_t>& roi) {
+    if (roi.size() != 4) {
+        throw std::logic_error("Incorrect ROI vector!");
+    }
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::normal_distribution<float> dist(mean, stddev);
+    std::uniform_int_distribution<size_t> w_dist(roi[0], roi[1]);
+    std::uniform_int_distribution<size_t> h_dist(roi[2], roi[3]);
+    input->clear();
+    input->resize(num_points);
     for (size_t i = 0; i < num_points; ++i) {
-        cv::Point2d rand_pix(dist(gen), dist(gen));
-        c1_image->at<uint8_t>(rand_pix) = 255;
+        cv::Point2d p(w_dist(gen), h_dist(gen));
+        input->push_back(p);
     }
 }
 
 
-TEST_F(ConvexHullTEST, Test_uniform_dist) {
-    fill_image_random_uniform(&test_image, { 100, 300, 500, 600 }, 100);
-    fill_image_random_uniform(&test_image, { 500, 600, 100, 400 }, 100);
-    lab2::convex_hull(test_image, &conv);
+TEST_F(ConvexHullTEST, Test_uniform_points) {
+    fill_image_random_uniform(&test_image, { 10, 1070, 10, 1070 }, 1000000);
+    check_time();
 }
 
-TEST_F(ConvexHullTEST, Test_normal_dist) {
-    fill_image_random_normal(&test_image, 300, 50, 100);
-    fill_image_random_normal(&test_image, 500, 50, 50);
-    fill_image_random_normal(&test_image, 200, 50, 50);
-    lab2::convex_hull(test_image, &conv);
+TEST_F(ConvexHullTEST, Test_several_ranges) {
+    fill_image_random_uniform(&test_image, { 100, 300, 100, 300 }, 30000);
+    fill_image_random_uniform(&test_image, { 400, 600, 100, 300 }, 30000);
+    fill_image_random_uniform(&test_image, { 400, 600, 300, 700 }, 60000);
+    fill_image_random_uniform(&test_image, { 50, 400, 500, 1000 }, 200000);
+    fill_image_random_uniform(&test_image, { 500, 1000, 500, 1000 }, 200000);
+    check_time();
 }
 
 TEST_F(ConvexHullTEST, Test_polygon) {
@@ -104,4 +130,16 @@ TEST_F(ConvexHullTEST, Test_line) {
 TEST_F(ConvexHullTEST, Test_empty) {
     lab2::convex_hull(test_image, &conv);
     ASSERT_TRUE(conv.empty());
+}
+
+
+TEST(TEST_POINTS_ONLY, Test_time) {
+    std::vector<cv::Point2d> input;
+    fill_points_random_uniform(&input, 1000000, {0, 2000000, 0, 2000000});
+    std::vector<cv::Point2d> input_ref(input);
+    std::vector<cv::Point2d> output, output_ref;
+    double t_seq = get_time(&input, &output, true);
+    double t_parallel = get_time(&input_ref, &output_ref, false);
+    std::cout << "Speed up: " << t_seq / t_parallel << std::endl;
+    ASSERT_EQ(output, output_ref);
 }
