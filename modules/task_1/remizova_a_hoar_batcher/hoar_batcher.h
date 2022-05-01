@@ -7,7 +7,7 @@
 
 std::vector<double> getRandVector(int size);
 bool isSortCorrectly(const std::vector <double>& vec);
-void hoarSort(std::vector <double>& vec, int left, int right);
+void hoarSort(std::vector <double>* vec, int left, int right);
 std::vector<double> evenBatcherSort(const std::vector<double>& vec1, const std::vector<double>& vec2);
 std::vector<double> oddBatcherSort(const std::vector<double>& vec1, const std::vector<double>& vec2);
 std::vector<double> oddEvenBatcherSort(const std::vector<double>& vec1, const std::vector<double>& vec2);

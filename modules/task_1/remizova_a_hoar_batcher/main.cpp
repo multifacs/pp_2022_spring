@@ -23,7 +23,7 @@ TEST(SEQ_hoar_batcher, can_not_create_rand_vec_with_negative_size) {
 TEST(SEQ_hoar_batcher, can_hoar_sort_rand_vec) {
     int size = 231;
     std::vector<double> v = getRandVector(size);
-    hoarSort(v, 0, size - 1);
+    hoarSort(&v, 0, size - 1);
     EXPECT_EQ(1, isSortCorrectly(v));
 }
 

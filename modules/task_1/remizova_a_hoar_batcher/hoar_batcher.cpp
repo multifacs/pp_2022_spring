@@ -18,27 +18,24 @@ std::vector<double> getRandVector(int size) {
 }
 
 bool isSortCorrectly(const std::vector <double>& vec) {
-    bool sort = std::is_sorted(vec.begin(), vec.end());
+    bool sort = is_sorted(vec.begin(), vec.end());
     return sort;
 }
 
-void hoarSort(std::vector <double>& vec, int l_ind, int r_ind) {
+void hoarSort(std::vector <double>* vec, int l_ind, int r_ind) {
     if (l_ind >= r_ind)
         return;
 
-    if (isSortCorrectly(vec))
-        return;
-
     int l = l_ind, r = r_ind;
-    double pvt = vec[(l + r) / 2];
+    double pvt = vec->at((l + r) / 2);
 
     while (l <= r) {
-        while (vec[l] < pvt)
+        while (vec->at(l) < pvt)
             l++;
-        while (vec[r] > pvt)
+        while (vec->at(r) > pvt)
             r--;
         if (l <= r) {
-            std::swap(vec[l], vec[r]);
+            std::swap(vec->at(l), vec->at(r));
             l++;
             r--;
         }
@@ -143,16 +140,16 @@ std::vector<double> mergeBatcher(const std::vector<double>& vec, int middle) {
 
 std::vector<double> hoarBatcher(const std::vector<double>& vec, int size) {
     int k = size / 2;
-    std::vector<double>arr1;
-    arr1.assign(vec.begin(), vec.end() - k);
-    hoarSort(arr1, 0, arr1.size() - 1);
+    std::vector<double>vec1;
+    vec1.assign(vec.begin(), vec.end() - k);
+    hoarSort(&vec1, 0, vec1.size() - 1);
 
-    std::vector<double> arr2;
-    arr2.assign(vec.end() - k, vec.end());
-    hoarSort(arr2, 0, arr2.size() - 1);
+    std::vector<double> vec2;
+    vec2.assign(vec.end() - k, vec.end());
+    hoarSort(&vec2, 0, vec2.size() - 1);
 
-    std::vector<double>even = evenBatcherSort(arr1, arr2);
-    std::vector<double>odd = oddBatcherSort(arr1, arr2);
+    std::vector<double>even = evenBatcherSort(vec1, vec2);
+    std::vector<double>odd = oddBatcherSort(vec1, vec2);
     std::vector<double>res_oe = oddEvenBatcherSort(even, odd);
     std::vector<double>sort_res = mergeBatcher(res_oe, even.size());
     return sort_res;
