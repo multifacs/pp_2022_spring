@@ -184,7 +184,7 @@ std::vector<double> hoarBatcherPar(const std::vector<double>& vec, int size) {
         {
             even = evenBatcherSort(vec1, vec2);
         }
-        
+
 #pragma omp section
         {
             odd = oddBatcherSort(vec1, vec2);
