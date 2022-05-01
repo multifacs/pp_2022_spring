@@ -4,14 +4,14 @@
 
 #include "../../modules/task_2/tulkina_o_labeling/labeling.h"
 
-TEST(OMP, Test_1x1) {  
+TEST(OMP, Test_1x1) {
   std::vector<std::vector<int>> binary_image = {{0}};
 
   binary_image = labeling(binary_image);
 
   std::vector<std::vector<int>> expected = {{0}};
-  for (int i = 0; i < binary_image.size(); i++)
-    EXPECT_EQ(expected[i], binary_image[i]);
+  int a = binary_image.size();
+  for (int i = 0; i < a; i++) EXPECT_EQ(expected[i], binary_image[i]);
 }
 
 TEST(OMP, Test_1x5) {
@@ -21,8 +21,8 @@ TEST(OMP, Test_1x5) {
 
   std::vector<std::vector<int>> expected = {{0, 2, 2, 0, 5}};
 
-  for (int i = 0; i < binary_image.size(); i++)
-    EXPECT_EQ(expected[i], binary_image[i]);
+  int a = binary_image.size();
+  for (int i = 0; i < a; i++) EXPECT_EQ(expected[i], binary_image[i]);
 }
 
 TEST(OMP, Test_5x1) {
@@ -32,8 +32,8 @@ TEST(OMP, Test_5x1) {
 
   std::vector<std::vector<int>> expected = {{0}, {2}, {2}, {2}, {2}};
 
-  for (int i = 0; i < binary_image.size(); i++)
-    EXPECT_EQ(expected[i], binary_image[i]);
+  int a = binary_image.size();
+  for (int i = 0; i < a; i++) EXPECT_EQ(expected[i], binary_image[i]);
 }
 
 TEST(OMP, Test_10x10) {
@@ -53,11 +53,11 @@ TEST(OMP, Test_10x10) {
       {21, 0, 2, 0, 2, 2, 2, 0, 0, 70},  {21, 0, 0, 2, 2, 2, 0, 0, 70, 70},
       {21, 0, 0, 0, 2, 0, 0, 0, 70, 70}, {21, 0, 0, 0, 0, 0, 70, 70, 70, 70}};
 
-  for (int i = 0; i < binary_image.size(); i++)
-    EXPECT_EQ(expected[i], binary_image[i]);
+  int a = binary_image.size();
+  for (int i = 0; i < a; i++) EXPECT_EQ(expected[i], binary_image[i]);
 }
 
-TEST(OMP, Test_3000x3000) { 
+TEST(OMP, Test_3000x3000) {
   int width = 3000;
   int height = 3000;
   std::random_device dev;
@@ -82,7 +82,8 @@ TEST(OMP, Test_3000x3000) {
   binary_image_omp = labeling_omp(binary_image);
   double t4 = omp_get_wtime();
 
-  for (int i = 0; i < binary_image.size(); i++)
+  int a = binary_image.size();
+  for (int i = 0; i < a; i++)
     EXPECT_EQ(binary_image_omp[i], binary_image_seq[i]);
   printf("seq labeling: %lf\n", t2 - t1);
   printf("parallel labeling: %lf\n", t4 - t3);

@@ -9,18 +9,18 @@
 #include <random>
 #include <vector>
 
-class Union {  
+class Union {
   std::vector<int> label_image;
 
  public:
-  Union(int N) {
+  explicit Union(int N) {
     label_image.resize(N);
     for (int i = 0; i < N; i++) {
       label_image[i] = i;
     }
   }
 
-  int get_label(int index) { 
+  int get_label(int index) {
     int root = index;
     while (root != label_image[root]) root = label_image[root];
     while (label_image[index] != root) {
