@@ -1,6 +1,7 @@
 // Copyright 2022 Remizova Antonina
 #include "../../../modules/task_1/remizova_a_hoar_batcher/hoar_batcher.h"
 #include <iostream>
+#include <algorithm>
 #include <random>
 #include <vector>
 
@@ -18,7 +19,7 @@ std::vector<double> getRandVector(int size) {
 }
 
 bool isSortCorrectly(const std::vector <double>& vec) {
-    bool sort = is_sorted(vec.begin(), vec.end());
+    bool sort = std::is_sorted(vec.begin(), vec.end());
     return sort;
 }
 
