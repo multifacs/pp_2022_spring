@@ -84,7 +84,7 @@ void floatRadixSort(vector_d* source_vec) {
   radixPass(source_vec, digitCounters);
 }
 
-void evenSplitter(vector_d& res_vec, const vector_d& first_vec,
+void evenSplitter(vector_d* res_vec, const vector_d& first_vec,
                   const vector_d& second_vec) {
   size_t index_a = 0;
   size_t index_b = 0;
@@ -95,26 +95,27 @@ void evenSplitter(vector_d& res_vec, const vector_d& first_vec,
 
   while ((index_a < first_size) && (index_b < second_size)) {
     if (first_vec[index_a] <= second_vec[index_b]) {
-      res_vec[i] = first_vec[index_a];
+      (*res_vec)[i] = first_vec[index_a];
       index_a += 2;
     } else {
-      res_vec[i] = second_vec[index_b];
+      (*res_vec)[i] = second_vec[index_b];
       index_b += 2;
     }
     i += 2;
   }
 
-  if (index_a >= first_size)
+  if (index_a >= first_size) {
     for (size_t j = index_b; j < second_size && i < first_size + second_size;
          j += 2, i += 2)
-      res_vec[i] = second_vec[j];
-  else
+      (*res_vec)[i] = second_vec[j];
+  } else {
     for (size_t j = index_a; j < first_size && i < first_size + second_size;
          j += 2, i += 2)
-      res_vec[i] = first_vec[j];
+      (*res_vec)[i] = first_vec[j];
+  }
 }
 
-void oddSplitter(vector_d& res_vec, const vector_d& first_vec,
+void oddSplitter(vector_d* res_vec, const vector_d& first_vec,
                  const vector_d& second_vec) {
   size_t index_a = 1;
   size_t index_b = 1;
@@ -125,46 +126,48 @@ void oddSplitter(vector_d& res_vec, const vector_d& first_vec,
 
   while ((index_a < first_size) && (index_b < second_size)) {
     if (first_vec[index_a] <= second_vec[index_b]) {
-      res_vec[i] = first_vec[index_a];
+      (*res_vec)[i] = first_vec[index_a];
       index_a += 2;
     } else {
-      res_vec[i] = second_vec[index_b];
+      (*res_vec)[i] = second_vec[index_b];
       index_b += 2;
     }
     i += 2;
   }
 
-  if (index_a >= first_size)
+  if (index_a >= first_size) {
     for (size_t j = index_b; j < second_size && i < first_size + second_size;
          j += 2, i += 2)
-      res_vec[i] = second_vec[j];
-  else
+      (*res_vec)[i] = second_vec[j];
+  } else {
     for (size_t j = index_a; j < first_size && i < first_size + second_size;
          j += 2, i += 2)
-      res_vec[i] = first_vec[j];
+      (*res_vec)[i] = first_vec[j];
+  }
 
   if (first_size % 2 == 1 && second_size % 2 == 1) {
-    res_vec[first_size + second_size - 1] =
+    (*res_vec)[first_size + second_size - 1] =
         std::max(first_vec[first_size - 1], second_vec[second_size - 1]);
   }
 }
 
-void batcherComparator(vector_d& res_vec) {
-  auto res_size = res_vec.size();
+void batcherComparator(vector_d* res_vec) {
+  auto res_size = res_vec->size();
+
   for (size_t i = 1; i < res_size; ++i) {
-    if (res_vec[i] < res_vec[i - 1])
-      std::swap(res_vec[i], res_vec[i - 1]);
+    if ((*res_vec)[i] < (*res_vec)[i - 1])
+      std::swap((*res_vec)[i], (*res_vec)[i - 1]);
   }
 }
 
-vector_d batcherMerge(vector_d& first_vec, vector_d& second_vec) {
+vector_d batcherMerge(const vector_d& first_vec, const vector_d& second_vec) {
   auto first_size = first_vec.size();
   auto second_size = second_vec.size();
   vector_d res_vec(first_size + second_size);
 
-  evenSplitter(res_vec, first_vec, second_vec);
-  oddSplitter(res_vec, first_vec, second_vec);
-  batcherComparator(res_vec);
+  evenSplitter(&res_vec, first_vec, second_vec);
+  oddSplitter(&res_vec, first_vec, second_vec);
+  batcherComparator(&res_vec);
 
   return res_vec;
 }
