@@ -15,4 +15,4 @@
 double rec_seq(std::vector<std::vector<int>> integrals, int step, const std::function<double(const double&)>& f);
 double rec_par(std::vector<std::vector<int>> integrals, int step, const std::function<double(const double&)>& f);
 
-#endif //  MODULES_TASK_3_ELANSKIY_A_RECTANGLE_METHOD_RECTANGLE_METHOD_H_
+#endif  //  MODULES_TASK_3_ELANSKIY_A_RECTANGLE_METHOD_RECTANGLE_METHOD_H_
