@@ -28,7 +28,7 @@ double rec_par(std::vector<std::vector<int>> integrals, int step, const std::fun
     int size_integ = integrals.size();
     std::vector<double> h;
     std::vector<double> vec_sum_inter;
-    //  tbb::task_scheduler_init init(8);
+    //  tbb::task_scheduler_init init(16);
     tbb::parallel_for(tbb::blocked_range<int>(0, size_integ),
         [&vec_sum_inter, &integrals, &step, &h](const tbb::blocked_range<int>& r) {
             for (int i = r.begin(); i != r.end(); i++) {
