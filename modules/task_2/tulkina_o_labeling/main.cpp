@@ -4,7 +4,7 @@
 
 #include "../../modules/task_2/tulkina_o_labeling/labeling.h"
 
-TEST(OMP, Test_1x1) { 
+TEST(OMP, Test_1x1) {  
   std::vector<std::vector<int>> binary_image = {{0}};
 
   binary_image = labeling(binary_image);
@@ -57,7 +57,7 @@ TEST(OMP, Test_10x10) {
     EXPECT_EQ(expected[i], binary_image[i]);
 }
 
-TEST(OMP, Test_3000x3000) {
+TEST(OMP, Test_3000x3000) { 
   int width = 3000;
   int height = 3000;
   std::random_device dev;

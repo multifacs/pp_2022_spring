@@ -3,7 +3,7 @@
 #include "../../modules/task_2/tulkina_o_labeling/labeling.h"
 const int THREADS = 12;
 
-std::vector<std::vector<int>> labeling(
+std::vector<std::vector<int>> labeling( 
     const std::vector<std::vector<int>>& binary_image) {
   int width = binary_image[0].size(), height = binary_image.size();
 
@@ -53,7 +53,7 @@ std::vector<std::vector<int>> labeling_omp(
 #pragma omp parallel shared(width, un) firstprivate(height) num_threads(THREADS)
   {
 #pragma omp for nowait
-    for (int y = 0; y < height; y++) {
+    for (int y = 0; y < height; y++) { 
       for (int x = 0; x < width; x++) {
         if (binary_image[y][x] > 0) {
           int index = y * width + x + 1;
