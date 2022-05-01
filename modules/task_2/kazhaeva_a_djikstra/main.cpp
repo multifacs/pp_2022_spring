@@ -88,3 +88,8 @@ TEST(Kazhaeva_Parallel_Deicstra, Test_Deicstra_5) {
     std::vector<std::vector<int>> b = randomVectorDjikstra(50);
     ASSERT_NO_THROW(parallelDjikstra(4, b));
 }
+
+TEST(Kazhaeva_Parallel_Deicstra, Test_Deicstra_6) {
+    std::vector<std::vector<int>> b = randomVectorDjikstra(70);
+    ASSERT_NO_THROW(parallelDjikstra(4, b));
+}
