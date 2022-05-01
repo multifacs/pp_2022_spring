@@ -110,7 +110,7 @@ TEST(PAR_hoar_batcher, compare_seq_seq_sort_with_vec_size_10) {
 TEST(PAR_hoar_batcher, compare_seq_par_sort_with_vec_size_100) {
     int size = 10000;
     std::vector<double> v = getRandVector(size);
-    
+
     double start_time, seq_time, par_time;
     start_time = omp_get_wtime();
     std::vector<double> res_seq = hoarBatcherSeq(v, v.size());
@@ -160,8 +160,6 @@ TEST(PAR_hoar_batcher, compare_seq_par_sort_with_vec_size_1000000) {
 
     EXPECT_EQ(res_seq, res_par);
 }
-
-
 
 int main(int argc, char** argv) {
     ::testing::InitGoogleTest(&argc, argv);

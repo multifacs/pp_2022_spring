@@ -165,7 +165,7 @@ std::vector<double> hoarBatcherPar(const std::vector<double>& vec, int size) {
     vec2.assign(vec.end() - k, vec.end());
     std::vector<double>even;
     std::vector<double>odd;
-#pragma omp parallel sections 
+#pragma omp parallel sections
     {
 #pragma omp section
         {
@@ -178,7 +178,7 @@ std::vector<double> hoarBatcherPar(const std::vector<double>& vec, int size) {
         }
     }
 
-#pragma omp parallel sections 
+#pragma omp parallel sections
     {
 #pragma omp section
         {
@@ -189,9 +189,8 @@ std::vector<double> hoarBatcherPar(const std::vector<double>& vec, int size) {
         {
             odd = oddBatcherSort(vec1, vec2);
         }
-        
     }
-    
+
     std::vector<double>res_oe = oddEvenBatcherSort(even, odd);
     std::vector<double>sort_res = mergeBatcher(res_oe, even.size());
     return sort_res;
