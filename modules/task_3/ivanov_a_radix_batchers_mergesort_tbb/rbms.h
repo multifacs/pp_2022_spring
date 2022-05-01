@@ -43,20 +43,19 @@
 * }
 */
 class Barrier {
-private:
+ private:
     const unsigned int threadCount;
     volatile unsigned int threadsWaiting;
     std::condition_variable waitVariable;
     std::mutex mutex;
     volatile bool isLocked;
 
-public:
-
+ public:
     Barrier() = delete;
     Barrier(const Barrier& c) = delete;
     Barrier& operator=(const Barrier& c) = delete;
 
-    Barrier(unsigned int n) :
+    explicit Barrier(unsigned int n) :
         threadCount(n),
         threadsWaiting(0),
         isLocked(true) {}
@@ -72,7 +71,7 @@ public:
             lk.unlock();
             waitVariable.notify_all();
         } else {
-            while (isLocked && threadsWaiting != 0) 
+            while (isLocked && threadsWaiting != 0)
                 waitVariable.wait(lk);
             isLocked = true;  // to make reusable
         }
