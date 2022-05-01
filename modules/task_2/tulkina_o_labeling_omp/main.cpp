@@ -4,7 +4,7 @@
 
 #include "../../modules/task_2/tulkina_o_labeling/labeling.h"
 
-TEST(OMP, Test_1x1) {
+TEST(OMP, Test_1x1) { 
   std::vector<std::vector<int>> binary_image = {{0}};
 
   binary_image = labeling(binary_image);

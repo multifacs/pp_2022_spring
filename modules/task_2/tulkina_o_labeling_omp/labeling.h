@@ -9,7 +9,7 @@
 #include <random>
 #include <vector>
 
-class Union {
+class Union { 
   std::vector<int> label_image;
 
  public:
