@@ -8,7 +8,7 @@ std::vector<double> getRandVector(int size) {
     if (size < 0)
         throw "negative vector size";
 
-    std::mt19937 gen(time(0));
+    std::mt19937 gen((unsigned int)time(0));
     std::uniform_int_distribution <int> dist(-100000, 100000);
     std::vector <double> vec(size);
     for (int i = 0; i < size; i++) {
@@ -18,10 +18,11 @@ std::vector<double> getRandVector(int size) {
 }
 
 bool isSortCorrectly(const std::vector <double>& vec) {
-    return is_sorted(vec.begin(), vec.end());
+    bool sort = std::is_sorted(vec.begin(), vec.end());
+    return sort;
 }
 
-void hoarSort(const std::vector <double>& vec, int l_ind, int r_ind) {
+void hoarSort(std::vector <double>& vec, int l_ind, int r_ind) {
     if (l_ind >= r_ind)
         return;
 
@@ -87,8 +88,7 @@ std::vector<double> oddBatcherSort(const std::vector<double>& vec1, const std::v
         if (vec1[i] <= vec2[j]) {
             ores[k] = vec1[i];
             i += 2;
-        }
-        else {
+        } else {
             ores[k] = vec2[j];
             j += 2;
         }
