@@ -1,9 +1,11 @@
 // Copyright 2022 Lebedev Alexey
-#include <algorithm>
-#include <iostream>
-#include <numeric>
-#include <omp.h>
 #include "../../../modules/task_2/lebedev_a_convex_hull/convex_hull.h"
+#include <omp.h>
+#include <iostream>
+#include <algorithm>
+#include <numeric>
+
+#define MIN_STEP 100
 
 
 bool cw(const cv::Point2d& p1, const cv::Point2d& p2, const cv::Point2d& p3) {
@@ -52,9 +54,8 @@ void convex_hull_impl(points_iterator begin, points_iterator end, std::vector<cv
 
 
 size_t get_effective_num_threads(size_t size) {
-    const static size_t min_step = 100;
-    uint8_t add = size / min_step == 0 ? 1 : 0;
-    return std::min(int(size / min_step + add), omp_get_max_threads());
+    uint8_t add = size / MIN_STEP == 0 ? 1 : 0;
+    return std::min(static_cast<int>(size / MIN_STEP + add), omp_get_max_threads());
 }
 
 
@@ -75,8 +76,9 @@ void lab2::convex_hull(std::vector<cv::Point2d>* input, std::vector<cv::Point2d>
             int tid = omp_get_thread_num();
             convex_hull_impl(input->begin() + tid * step, input->begin() + (tid + 1) * step, &hulls[tid]);
         }
-        size_t size = std::accumulate(hulls.begin(), hulls.end(), 0, [](const size_t& _size, const std::vector<cv::Point2d>& v) {
-            return _size + v.size();
+        size_t size = std::accumulate(hulls.begin(), hulls.end(), 0,
+            [](const size_t& _size, const std::vector<cv::Point2d>& v) {
+                return _size + v.size();
             });
         std::vector<cv::Point2d> concat;
         concat.resize(size + last.size());
@@ -85,8 +87,7 @@ void lab2::convex_hull(std::vector<cv::Point2d>* input, std::vector<cv::Point2d>
             it = std::copy(hull.begin(), hull.end(), it);
         }
         convex_hull_impl(concat.begin(), concat.end(), output);
-    }
-    else {
+    } else {
         convex_hull_impl(input->begin(), input->end(), output);
     }
 }
