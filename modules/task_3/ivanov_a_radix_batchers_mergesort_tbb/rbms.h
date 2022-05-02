@@ -372,6 +372,10 @@ void radixBatchersMergesort_tbb(std::vector<T>* data, int degree) {
             });
     }
     group.wait();
+
+    delete[] from;
+    delete[] to;
+
     if (isResized)
         data->resize(oldSize);
 }
