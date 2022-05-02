@@ -305,14 +305,14 @@ void mergeFragments(T* data, T* res, T* partnerData,
 }
 
 template<class T>
-void singleThreadComputing(int selfID, Barrier& b1, Barrier& b2, Barrier& b3,
+void singleThreadComputing(int selfID, Barrier* b1, Barrier* b2, Barrier* b3,
     T** from, T** to, std::vector<T>* data, int blockSize,
     int degree, T* mainData) {
     // sort step
     radixSort<T>(data, selfID * blockSize, blockSize);
 
     // barrier
-    b3.wait();
+    b3->wait();
 
     // merge step
     // Batcher's merge network realisation
@@ -323,11 +323,11 @@ void singleThreadComputing(int selfID, Barrier& b1, Barrier& b2, Barrier& b3,
             partnerID = partner(selfID, stage, step);
 
             mergeFragments(from[selfID], to[selfID], from[partnerID], blockSize, selfID, partnerID);
-            b1.wait();
+            b1->wait();
 
             if (selfID != partnerID)
                 std::swap(from[selfID], to[selfID]);
-            b2.wait();
+            b2->wait();
 
             if (stage == degree && step == degree) {
                 for (int i = 0; i < blockSize; i++)
@@ -335,12 +335,11 @@ void singleThreadComputing(int selfID, Barrier& b1, Barrier& b2, Barrier& b3,
             }
         }
     }
-    b3.wait();
+    b3->wait();
 }
 
 template<class T>
 void radixBatchersMergesort_std(std::vector<T>* data, int degree) {
-
     if (degree == 0) {  // numThreads = 1
         radixSort<T>(data, 0, data->size());
         return;
@@ -381,7 +380,7 @@ void radixBatchersMergesort_std(std::vector<T>* data, int degree) {
 
     for (int selfID = 0; selfID < numThreads; selfID++) {
         threads.emplace_back(singleThreadComputing<T>,
-            selfID, std::ref(b1), std::ref(b2), std::ref(b3),
+            selfID, &b1, &b2, &b3,
             from, to, data, blockSize, degree, mainData);
 
 #if WIN32 == 1 && USE_EFFICIENCY_TESTS == 1
@@ -401,6 +400,10 @@ void radixBatchersMergesort_std(std::vector<T>* data, int degree) {
 
     for (auto& t : threads)
         t.join();
+
+    delete[] from;
+    delete[] to;
+
     if (isResized)
         data->resize(oldSize);
 }
