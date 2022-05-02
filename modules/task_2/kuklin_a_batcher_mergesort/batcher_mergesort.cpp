@@ -196,7 +196,7 @@ void floatRadixSortParallel(vector_d* source_vec) {
 
   int totalNum = threadNum;
   int mergeCount = threadNum >> 1;
-  
+
   while (mergeCount) {
     for (int i = 0; i < mergeCount; ++i) {
       vec_segments[i] =

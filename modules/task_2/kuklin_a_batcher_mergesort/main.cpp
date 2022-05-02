@@ -1,7 +1,6 @@
 // Copyright 2022 Kuklin Andrey
 #include <gtest/gtest.h>
 #include <omp.h>
-// #include <iostream>
 #include "./batcher_mergesort.h"
 
 TEST(kuklin_a_betcher_mergesort, genRandVec) {
@@ -161,16 +160,8 @@ TEST(kuklin_a_betcher_mergesort, parallel_sort_faster_sequence) {
   auto seq_vec = getRandVec(100000, -100., 100.);
   vector_d par_vec = seq_vec;
 
-  auto seq_start_t = omp_get_wtime();
   floatRadixSort(&seq_vec);
-  auto seq_finish_t = omp_get_wtime();
-
-  auto par_start_t = omp_get_wtime();
   floatRadixSortParallel(&par_vec);
-  auto par_finish_t = omp_get_wtime();
-
-  // std::cout « "seq = " « seq_finish_t - seq_start_t « std::endl;
-  // std::cout « "par = " « par_finish_t - par_start_t « std::endl;
 
   ASSERT_EQ(seq_vec, par_vec);
 }

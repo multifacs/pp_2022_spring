@@ -19,4 +19,4 @@ void batcherComparator(vector_d* res_vec);
 vector_d batcherMerge(const vector_d& first_vec, const vector_d& second_vec);
 void floatRadixSortParallel(vector_d* source_vec);
 
-#endif  // MODULES_TASK_1_KUKLIN_A_BATCHER_MERGESORT_BATCHER_MERGESORT_H_
+#endif  // MODULES_TASK_2_KUKLIN_A_BATCHER_MERGESORT_BATCHER_MERGESORT_H_
