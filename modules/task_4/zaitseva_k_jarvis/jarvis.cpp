@@ -82,31 +82,35 @@ std::vector<Point> Generate(int n) {
   return res;
 }
 
-void Jarvis_for_std(std::vector<Point> points, std::vector<Point>& res) {
-  res = Jarvis(points);
+void Jarvis_for_std(const std::vector<Point>& points,
+                    std::promise<std::vector<Point>>&& res) {
+  res.set_value(Jarvis(points));
 }
 
-std::vector<Point> Jarvis_parallel_std(std::vector<Point> points) {
+std::vector<Point> Jarvis_parallel_std(const std::vector<Point>& points) {
   int num_threads = 4;
   std::vector<std::thread> threads(num_threads);
-  std::vector<std::vector<Point>> shells(num_threads);
   int step = points.size() / num_threads;
   int th_num = 0;
+  std::vector<std::promise<std::vector<Point>>> promises(num_threads);
+  std::vector<std::future<std::vector<Point>>> futures(num_threads);
   for (auto it = std::begin(threads); it != std::end(threads); ++it) {
+    futures[th_num] = promises[th_num].get_future();
     auto end = th_num == (num_threads - 1)
                    ? points.end()
                    : points.begin() + (th_num + 1) * step;
     *it = std::thread(Jarvis_for_std,
                       std::vector<Point>(points.begin() + th_num * step, end),
-                      std::ref(shells[th_num]));
+                      std::move(promises[th_num]));
     th_num++;
   }
   for (auto&& i : threads) {
     i.join();
   }
   std::vector<Point> new_points;
-  for (int i = 0; i < num_threads; i++)
-    std::copy(shells[i].begin(), shells[i].end(),
-              std::back_inserter(new_points));
+  for (int i = 0; i < num_threads; i++) {
+    std::vector<Point> shell = futures[i].get();
+    std::copy(shell.begin(), shell.end(), std::back_inserter(new_points));
+  }
   return Jarvis(new_points);
 }

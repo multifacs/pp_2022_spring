@@ -6,9 +6,10 @@
 #include <iostream>
 #include <limits>
 #include <random>
-#include <thread>
 #include <utility>
 #include <vector>
+
+#include "../../../3rdparty/unapproved/unapproved.h"
 
 struct Point {
   Point() : x(0), y(0) {}
@@ -29,6 +30,6 @@ std::vector<Point> Jarvis(std::vector<Point> points);
 
 std::vector<Point> Generate(int n);
 
-std::vector<Point> Jarvis_parallel_std(std::vector<Point> points);
+std::vector<Point> Jarvis_parallel_std(const std::vector<Point>& points);
 
 #endif  // MODULES_TASK_4_ZAITSEVA_K_JARVIS_JARVIS_H_
