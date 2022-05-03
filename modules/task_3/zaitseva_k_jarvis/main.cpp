@@ -1,7 +1,7 @@
 // Copyright 2022 Zaitseva Ksenia
 #include <gtest/gtest.h>
 
-#include <chrono>
+#include <chrono> // NOLINT [build/c++11]
 #include <vector>
 
 #include "./jarvis.h"

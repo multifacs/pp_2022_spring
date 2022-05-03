@@ -1,7 +1,6 @@
 // Copyright 2022 Zaitseva Ksenia
 #include "../../modules/task_3/zaitseva_k_jarvis/jarvis.h"
 
-using namespace tbb;
 bool Point::operator<(const Point& other) const {
   if ((y < other.y) || ((y == other.y) && (x > other.x)))
     return 1;
