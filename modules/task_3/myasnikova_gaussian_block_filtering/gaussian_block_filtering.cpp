@@ -93,7 +93,6 @@ std::vector<int> GaussFilterParallel(std::vector<int> matrix,
           result[i] = static_cast<int>(sum);
         }
       }
-
     });
 
   return result;
