@@ -3,7 +3,7 @@
 
 #include "./dijkstra.h"
 
-TEST(DEICSTRA_ALGORITHM_SEQ, TEST_1) {
+TEST(DIJKSTRA_SEQ, TEST_1) {
   int V = 9;
   Graph graph = {{0, 4, 0, 0, 0, 0, 0, 8, 0},  {4, 0, 8, 0, 0, 0, 0, 11, 0},
                  {0, 8, 0, 7, 0, 4, 0, 0, 2},  {0, 0, 7, 0, 9, 14, 0, 0, 0},
@@ -14,25 +14,25 @@ TEST(DEICSTRA_ALGORITHM_SEQ, TEST_1) {
   Graph result = sequentialDijkstra(graph, V);
 }
 
-TEST(DEICSTRA_ALGORITHM_SEQ, TEST_2) {
+TEST(DIJKSTRA_SEQ, TEST_2) {
   int V = 10;
   Graph graph = getRandomGraph(V);
   Graph result = sequentialDijkstra(graph, V);
 }
 
-TEST(DEICSTRA_ALGORITHM_SEQ, TEST_3) {
+TEST(DIJKSTRA_SEQ, TEST_3) {
   int V = 20;
   Graph graph = getRandomGraph(V);
   Graph result = sequentialDijkstra(graph, V);
 }
 
-TEST(DEICSTRA_ALGORITHM_SEQ, TEST_4) {
+TEST(DIJKSTRA_SEQ, TEST_4) {
   int V = 30;
   Graph graph = getRandomGraph(V);
   Graph result = sequentialDijkstra(graph, V);
 }
 
-TEST(DEICSTRA_ALGORITHM_SEQ, TEST_5) {
+TEST(DIJKSTRA_SEQ, TEST_5) {
   int V = 40;
   Graph graph = getRandomGraph(V);
   Graph result = sequentialDijkstra(graph, V);

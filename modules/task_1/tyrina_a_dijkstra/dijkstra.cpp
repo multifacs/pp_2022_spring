@@ -57,10 +57,9 @@ VectorInt dijkstra(const Graph& graph, int src, int V) {
 }
 
 Graph sequentialDijkstra(const Graph& graph, int V) {
-  int src = 0;
   Graph result(V, VectorInt(V));
 
-  for (src = 0; src < V; ++src) {
+  for (int src = 0; src < V; ++src) {
     VectorInt temp = dijkstra(graph, src, V);
     for (int i = 0; i < V; ++i) {
       result[src][i] = temp[i];
