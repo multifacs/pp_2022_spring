@@ -67,7 +67,6 @@ std::vector<int> SequentialGauss(std::vector<int> img,
 std::vector<int> ParallelGauss(std::vector<int> img,
   std::vector<double> gauss_kernel, int row, int col) {
   std::vector<int> res(img);
-  int block[9] = { 0 };
 
   const int th_num = std::thread::hardware_concurrency();
   std::thread* threads = new std::thread[th_num];
