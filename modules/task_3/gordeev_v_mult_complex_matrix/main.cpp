@@ -1,8 +1,8 @@
 // Copyright 2022 Gordeev Viktor
 
-#include "../../../modules/task_3/gordeev_v_mult_complex_matrix/mult_complex_matrix.h"
-
 #include <gtest/gtest.h>
+
+#include "../../../modules/task_3/gordeev_v_mult_complex_matrix/mult_complex_matrix.h"
 
 TEST(Gordeev_Mult_Matrix, Constructor_With_No_Throw) {
     EXPECT_NO_THROW(MultMatrix mtx(5, 5));
