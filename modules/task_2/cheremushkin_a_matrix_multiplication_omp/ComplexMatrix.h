@@ -36,8 +36,8 @@ class MatrixComplex {
     std::vector<std::vector<std::complex<int>>> getRandomMatrix(int size);
     MatrixComplex Multiply(MatrixComplex left,
         MatrixComplex right);
-    MatrixComplex Multiply_parallel(MatrixComplex left,
-        MatrixComplex right);
+    MatrixComplex Multiply_parallel(const MatrixComplex& left,
+        const MatrixComplex& right);
     bool operator==(const MatrixComplex& matrix)const;
     std::vector<std::vector<std::complex<int>>> getDummyM(int s) const;
     friend std::ostream& operator << (std::ostream& os, const MatrixComplex& p);

@@ -194,7 +194,7 @@ MatrixComplex MatrixComplex::Multiply(
 }
 
 MatrixComplex MatrixComplex::Multiply_parallel
-(MatrixComplex left, MatrixComplex right) {
+(const MatrixComplex&left, const MatrixComplex& right) {
     if (left.Size != right.Size) {
        throw std::invalid_argument("invalid size");
     }
