@@ -1,4 +1,4 @@
-// Copyrights 2022 Utyugov Denis
+// Copyright 2022 Utyugov Denis
 #include <gtest/gtest.h>
 
 #include <vector>
@@ -29,7 +29,6 @@ TEST(Multiplicate, Check_Result_On_3x3) {
 }
 
 TEST(Multiplicate, Check_Result_On_5x5) {
-  int size = 5;
   double sum = 0;
   std::vector<std::vector<double>> A = {{1, 2, 3, 4, 5},
                                         {6, 7, 8, 9, 10},
@@ -46,7 +45,6 @@ TEST(Multiplicate, Check_Result_On_5x5) {
 }
 
 TEST(BlockMultiplicate, BlockMult_and_Mult_BlockSize_is_two) {
-  double sum = 0;
   std::vector<std::vector<double>> A = {{1, 2, 3, 4, 5},
                                         {6, 7, 8, 9, 10},
                                         {11, 12, 13, 14, 15},
@@ -61,7 +59,6 @@ TEST(BlockMultiplicate, BlockMult_and_Mult_BlockSize_is_two) {
 }
 
 TEST(BlockMultiplicate, BlockMult_and_Mult_BlockSize_is_three) {
-  double sum = 0;
   std::vector<std::vector<double>> A = {{1, 2, 3, 4, 5},
                                         {6, 7, 8, 9, 10},
                                         {11, 12, 13, 14, 15},
