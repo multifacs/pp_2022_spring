@@ -1,7 +1,7 @@
 // Copyright 2022 Gleb "belgad" Danshin
-#include "integral_rectangle.hpp"
-
 #include <tbb/tbb.h>
+
+#include "../../../modules/task_3/danshin_g_integral_rectangle/integral_rectangle.hpp"
 
 double Integrate(size_t dim, double* step, double* lower, double* upper, Function func, size_t thread_num) {
   double result = 0;

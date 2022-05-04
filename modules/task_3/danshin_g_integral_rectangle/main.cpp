@@ -5,7 +5,7 @@
 
 #include "gtest/gtest.h"
 
-#include "integral_rectangle.hpp"
+#include "../../../modules/task_3/danshin_g_integral_rectangle/integral_rectangle.hpp"
 
 TEST(IntegralRectangle, Function1) {
     size_t dim = 1;
