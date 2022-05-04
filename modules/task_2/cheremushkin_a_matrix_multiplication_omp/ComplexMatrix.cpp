@@ -201,9 +201,10 @@ MatrixComplex MatrixComplex::Multiply_parallel
     std::complex<int> tmp;
     std::vector<std::vector<std::complex<int>>>
         resultMatrix = getDummyM(left.Size);
-// #pragma omp parallel for shared(left, right, resultMatrix) private(tmp)
-        for (int i = 0; i < left.Size; i++) {
-            for (int j = 0; j < left.Size; j++) {
+    int i, j;
+#pragma omp parallel for shared(left, right, resultMatrix) private(tmp, i, j)
+        for (i = 0; i < left.Size; i++) {
+            for (j = 0; j < left.Size; j++) {
                 tmp = std::complex<int>();
                 for (int k = 0; k < left.Size; k++) {
                     tmp += left.get(k, i) * right.get(k, j);
