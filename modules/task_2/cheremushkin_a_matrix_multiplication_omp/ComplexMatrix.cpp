@@ -21,7 +21,7 @@ MatrixComplex::MatrixComplex(int size) {
     Size = static_cast<int>(matrix.size());
     NonZero = 0;
     std::complex<int> zero(0, 0);
-    this->columnIndexes.push_back(0);
+    columnIndexes.push_back(0);
     int counter = 0;
     for (size_t i = 0; i < static_cast<size_t>(matrix.size()); i++) {
         for (size_t j = 0; j < static_cast<size_t>(matrix[i].size()); j++) {
@@ -40,7 +40,7 @@ MatrixComplex::MatrixComplex(
     Size = static_cast<int>(matrix.size());
     NonZero = 0;
     std::complex<int> zero(0, 0);
-    this->columnIndexes.push_back(0);
+    columnIndexes.push_back(0);
     int counter = 0;
     for (size_t i = 0; i < static_cast<size_t>(matrix.size()); i++) {
         for (size_t j = 0; j < static_cast<size_t>(matrix[i].size()); j++) {
@@ -201,8 +201,6 @@ MatrixComplex MatrixComplex::Multiply_parallel
     std::complex<int> tmp;
     std::vector<std::vector<std::complex<int>>>
         resultMatrix = getDummyM(left.Size);
-#pragma omp parallel
-    {
 #pragma omp parallel for shared(left, right, resultMatrix) private(tmp) \
     schedule(dynamic)
         for (int i = 0; i < left.Size; i++) {
@@ -214,8 +212,6 @@ MatrixComplex MatrixComplex::Multiply_parallel
                 resultMatrix[j][i] = tmp;
             }
         }
-    }
-#pragma omp barrier
     return MatrixComplex(resultMatrix);
 }
 bool MatrixComplex::operator==(const MatrixComplex& matrix) const {

@@ -42,16 +42,16 @@ TEST(Matrix_Multiplication_OMP, parallel_multiplication_returns_same_result) {
     double start_time;
     double end_time;
     double search_time;
-    start_time = omp_get_wtime();
+    // start_time = omp_get_wtime();
     result1 = matrix1.Multiply(matrix1, matrix2);
-    end_time = omp_get_wtime();
+    // end_time = omp_get_wtime();
     MatrixComplex result2;
-    start_time = omp_get_wtime();
+    // start_time = omp_get_wtime();
     result2 = matrix1.Multiply_parallel(matrix1, matrix2);
-    end_time = omp_get_wtime();
-    search_time = end_time - start_time;
-    std::cout << "Line time: " << search_time * 4 << std::endl;
-    std::cout << "Parallel time: " << search_time << std::endl;
+    // end_time = omp_get_wtime();
+    // search_time = end_time - start_time;
+    /*std::cout << "Line time: " << search_time * 4 << std::endl;
+    std::cout << "Parallel time: " << search_time << std::endl;*/
     ASSERT_TRUE(result1 == result2);
 }
 int main(int argc, char **argv) {
