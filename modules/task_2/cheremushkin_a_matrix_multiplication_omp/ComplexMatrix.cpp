@@ -198,7 +198,7 @@ MatrixComplex MatrixComplex::Multiply_parallel
     if (left.Size != right.Size) {
        throw std::invalid_argument("invalid size");
     }
-    std::complex<int> tmp;
+    // std::complex<int> tmp;
     std::vector<std::vector<std::complex<int>>>
         resultMatrix;  // getDummyM(left.Size);
 #pragma omp parallel for 
