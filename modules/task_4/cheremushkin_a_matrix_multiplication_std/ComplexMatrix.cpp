@@ -1,6 +1,5 @@
 // Copyright 2022 Cheremushkin Kirill
 #include "../../../modules/task_4/cheremushkin_a_matrix_multiplication_std/ComplexMatrix.h"
-#include <tbb/tbb.h>
 #include <omp.h>
 #include <vector>
 #include <string>
