@@ -2,6 +2,7 @@
 #pragma once
 #ifndef MODULES_TASK_2_CHEREMUSHKIN_K_MATRIX_MULTIPLICATION_MATRIX_MULT_H_
 #define MODULES_TASK_2_CHEREMUSHKIN_K_MATRIX_MULTIPLICATION_MATRIX_MULT_H_
+#include <omp.h>
 #include <vector>
 #include <string>
 #include <stdexcept>
@@ -9,6 +10,7 @@
 #include <iostream>
 #include <random>
 #include <utility>
+
 class MatrixComplex {
  private:
     int Size;  // Kol-vo strok i stolbcov
