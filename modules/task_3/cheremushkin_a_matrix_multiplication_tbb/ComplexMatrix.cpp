@@ -203,7 +203,7 @@ MatrixComplex MatrixComplex::Multiply_parallel
     std::vector<std::vector<std::complex<int>>>
         resultMatrix = getDummyM(left.Size);
     tbb::parallel_for(tbb::blocked_range<int>(0, left.Size),
-        [this, &left, &right, &resultMatrix](tbb::blocked_range<int>& r) {
+        [&left, &right, &resultMatrix](tbb::blocked_range<int>& r) {
             std::complex<int> tmp;
             for (int i = r.begin(); i != r.end(); i++) {
                 for (int j = 0; j < left.Size; j++) {
