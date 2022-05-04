@@ -69,30 +69,29 @@ std::vector<int> ParallelGauss(std::vector<int> img,
   std::vector<int> res(img);
   int block[9] = { 0 };
 
-  const int nthreads = std::thread::hardware_concurrency();
-  std::thread* threads = new std::thread[nthreads];
+  const int th_num = std::thread::hardware_concurrency();
+  std::thread* threads = new std::thread[th_num];
 
-  const int delta = row / nthreads;
-  int residue = row % nthreads;
+  const int delta = row / th_num;
+  int residue = row % th_num;
 
-  int my_begin, my_end = col + 1;
-  for (int k = 0; k < nthreads; k++) {
-    my_begin = my_end;
-    my_end += (col * delta);
+  int temp_start, temp_end = col + 1;
+  for (int k = 0; k < th_num; k++) {
+    temp_start = temp_end;
+    temp_end += (col * delta);
 
     if (residue > 0) {
-      my_end++;
+      temp_end++;
       residue--;
     }
 
-    if (k == nthreads - 1)
-    {
-      my_end = row * col - col - 1;
+    if (k == th_num - 1) {
+      temp_end = row * col - col - 1;
     }
 
-    threads[k] = std::thread([&](int begin, int end) {
+    threads[k] = std::thread([&](int start, int end) {
       int block[9] = { 0 };
-      for (int i = begin; i < end; i++) {
+      for (int i = start; i < end; i++) {
         if (i % col != 0 && (i + 1) % col != 0) {
           block[0] = i - col - 1;
           block[1] = i - col;
@@ -112,10 +111,10 @@ std::vector<int> ParallelGauss(std::vector<int> img,
           res[i] = static_cast<int>(sum / 9);
         }
       }
-      }, my_begin, my_end);
+      }, temp_start, temp_end);
   }
 
-  for (int i = 0; i < nthreads; ++i) {
+  for (int i = 0; i < th_num; i++) {
     threads[i].join();
   }
 
