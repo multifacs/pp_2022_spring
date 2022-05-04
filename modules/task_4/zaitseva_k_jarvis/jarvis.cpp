@@ -103,8 +103,9 @@ std::vector<Point> Jarvis_parallel_std(const std::vector<Point>& points) {
     i.join();
   }
   std::vector<Point> new_points;
-  for (int i = 0; i < num_threads; i++)
+  for (int i = 0; i < num_threads; i++) {
     std::copy(shells[i].begin(), shells[i].end(),
               std::back_inserter(new_points));
-  return Jarvis(new_points);
+  }
+  return new_points.empty() ? new_points : Jarvis(new_points);
 }
