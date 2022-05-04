@@ -29,7 +29,6 @@ TEST(Multiplicate, Check_Result_On_3x3) {
 }
 
 TEST(Multiplicate, Check_Result_On_5x5) {
-  double sum = 0;
   std::vector<std::vector<double>> A = {{1, 2, 3, 4, 5},
                                         {6, 7, 8, 9, 10},
                                         {11, 12, 13, 14, 15},
