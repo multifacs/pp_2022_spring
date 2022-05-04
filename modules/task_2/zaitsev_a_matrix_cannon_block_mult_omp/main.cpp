@@ -13,11 +13,11 @@ TEST(Test, test_1) {
   size_t block_size = size / 4;
   size_t block_count = size / block_size;
   double num1 = 1.076, num2 = 2.067;
-  //double start, end, time, time2;
+  // double start, end, time, time2;
   matrix1 = get_Matrix(num1, size);
   matrix2 = get_Matrix(num2, size);
   std::vector<std::vector<double>> matrix1_copy2 = matrix1;
-  /*start = omp_get_wtime()*/;
+  /*start = omp_get_wtime();*/
   std::vector<std::vector<double>> matrix3 =
       cannon_mult_alg_Seq(matrix1, matrix2, block_size, block_count, size);
   /*end = omp_get_wtime();
