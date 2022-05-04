@@ -1,4 +1,4 @@
-// Copyright 2022 Utyugov Denis
+// Copyrights 2022 Utyugov Denis
 #include <gtest/gtest.h>
 
 #include <vector>
