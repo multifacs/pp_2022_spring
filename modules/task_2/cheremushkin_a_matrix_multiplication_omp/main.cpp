@@ -39,9 +39,9 @@ TEST(Matrix_Multiplication_OMP, parallel_multiplication_returns_same_result) {
     MatrixComplex matrix1(4);
     MatrixComplex matrix2(4);
     MatrixComplex result1;
-    double start_time;
+    /*double start_time;
     double end_time;
-    double search_time;
+    double search_time;*/
     // start_time = omp_get_wtime();
     result1 = matrix1.Multiply(matrix1, matrix2);
     // end_time = omp_get_wtime();
