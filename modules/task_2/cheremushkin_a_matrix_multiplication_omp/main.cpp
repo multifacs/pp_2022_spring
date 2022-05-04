@@ -52,7 +52,7 @@ TEST(Matrix_Multiplication_OMP, parallel_multiplication_returns_same_result) {
     // search_time = end_time - start_time;
     /*std::cout << "Line time: " << search_time * 4 << std::endl;
     std::cout << "Parallel time: " << search_time << std::endl;*/
-    ASSERT_TRUE(result1 == result1);
+    ASSERT_TRUE(result1 == result2);
 }
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
