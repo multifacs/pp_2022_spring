@@ -2,17 +2,16 @@
 #ifndef MODULES_TASK_2_LAZAREV_A_STRASSEN_STRASSEN_H_
 #define MODULES_TASK_2_LAZAREV_A_STRASSEN_STRASSEN_H_
 
-#include <array>
 #include <string>
 #include <vector>
 
-using vec = std::vector<double>;
-using matrix = std::vector<vec>;
+const int threshold = 128;
 
-matrix generateMatrix(int n);
+int** initializeMatrix(int n);
+void setToRandom(int** A, int n);
 
-void matrixMultiplication(const matrix& A, const matrix& B, matrix* C);
-void Strassen(int n, const matrix& A, const matrix& B, matrix* C);
-void print(const std::string& title, const matrix& A);
+int** strassenMultiply(int** A, int** B, int n);
+int** strassenSeq(int** A, int** B, int n);
+int** multiply(int** A, int** B, int n);
 
 #endif  // MODULES_TASK_2_LAZAREV_A_STRASSEN_STRASSEN_H_

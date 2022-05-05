@@ -1,100 +1,113 @@
 // Copyright 2022 Lazarev Aleksey
 #include <gtest/gtest.h>
+#include <omp.h>
 
 #include "./strassen.h"
 
 TEST(STRASSEN_OMP, TEST_1) {
   int n = 2;
 
-  matrix A = generateMatrix(n);
-  matrix B = generateMatrix(n);
+  int** A = initializeMatrix(n);
+  int** B = initializeMatrix(n);
 
-  print("A", A);
-  print("B", B);
+  setToRandom(A, n);
+  setToRandom(B, n);
 
-  matrix C = std::vector<vec>(n, vec(n, 0));
-  ASSERT_NO_THROW(Strassen(n, A, B, &C));
+  int **C1, **C2;
 
-  print("C", C);
-
-  matrix C_ref = std::vector<vec>(n, vec(n, 0));
-  matrixMultiplication(A, B, &C_ref);
+  C1 = multiply(A, B, n);
+  C2 = strassenMultiply(A, B, n);
 
   for (int i = 0; i < n; i++) {
-    ASSERT_TRUE(C[i] == C_ref[i]);
+    ASSERT_EQ(C1[i][0], C2[i][0]);
   }
 }
 
 TEST(STRASSEN_OMP, TEST_2) {
   int n = 4;
 
-  matrix A = generateMatrix(n);
-  matrix B = generateMatrix(n);
+  int** A = initializeMatrix(n);
+  int** B = initializeMatrix(n);
 
-  matrix C = std::vector<vec>(n, vec(n, 0));
-  ASSERT_NO_THROW(Strassen(n, A, B, &C));
+  setToRandom(A, n);
+  setToRandom(B, n);
 
-  matrix C_ref = std::vector<vec>(n, vec(n, 0));
-  matrixMultiplication(A, B, &C_ref);
+  int **C1, **C2;
 
-  print("C", C);
-  print("C_ref", C_ref);
+  C1 = multiply(A, B, n);
+  C2 = strassenMultiply(A, B, n);
 
   for (int i = 0; i < n; i++) {
-    ASSERT_TRUE(C[i] == C_ref[i]);
+    ASSERT_EQ(C1[i][0], C2[i][0]);
   }
 }
 
 TEST(STRASSEN_OMP, TEST_3) {
-  int n = 4;
+  int n = 8;
 
-  matrix A = generateMatrix(n);
-  matrix B = generateMatrix(n);
+  int** A = initializeMatrix(n);
+  int** B = initializeMatrix(n);
 
-  matrix C = std::vector<vec>(n, vec(n, 0));
-  ASSERT_NO_THROW(Strassen(n, A, B, &C));
+  setToRandom(A, n);
+  setToRandom(B, n);
 
-  matrix C_ref = std::vector<vec>(n, vec(n, 0));
-  matrixMultiplication(A, B, &C_ref);
+  int **C1, **C2;
+
+  C1 = multiply(A, B, n);
+  C2 = strassenMultiply(A, B, n);
 
   for (int i = 0; i < n; i++) {
-    ASSERT_TRUE(C[i] == C_ref[i]);
+    ASSERT_EQ(C1[i][0], C2[i][0]);
   }
 }
 
 TEST(STRASSEN_OMP, TEST_4) {
-  int n = 8;
+  int n = 16;
 
-  matrix A = generateMatrix(n);
-  matrix B = generateMatrix(n);
+  int** A = initializeMatrix(n);
+  int** B = initializeMatrix(n);
 
-  matrix C = std::vector<vec>(n, vec(n, 0));
-  ASSERT_NO_THROW(Strassen(n, A, B, &C));
+  setToRandom(A, n);
+  setToRandom(B, n);
 
-  matrix C_ref = std::vector<vec>(n, vec(n, 0));
-  matrixMultiplication(A, B, &C_ref);
+  int **C1, **C2;
+
+  C1 = multiply(A, B, n);
+  C2 = strassenMultiply(A, B, n);
 
   for (int i = 0; i < n; i++) {
-    ASSERT_TRUE(C[i] == C_ref[i]);
+    ASSERT_EQ(C1[i][0], C2[i][0]);
   }
 }
 
 TEST(STRASSEN_OMP, TEST_5) {
-  int n = 16;
+  int n = 256;
 
-  matrix A = generateMatrix(n);
-  matrix B = generateMatrix(n);
+  int** A = initializeMatrix(n);
+  int** B = initializeMatrix(n);
 
-  matrix C = std::vector<vec>(n, vec(n, 0));
-  ASSERT_NO_THROW(Strassen(n, A, B, &C));
+  setToRandom(A, n);
+  setToRandom(B, n);
+
+  int** C;
+
+  double time1 = omp_get_wtime();
+  C = multiply(A, B, n);
+  double time2 = omp_get_wtime();
+  double native = time2 - time1;
+  std::cout << "native: " << native << std::endl;
+
+  time1 = omp_get_wtime();
+  C = strassenSeq(A, B, n);
+  time2 = omp_get_wtime();
+  double seq_time = time2 - time1;
+  std::cout << "strassen seq: " << seq_time << std::endl;
+
+  time1 = omp_get_wtime();
+  C = strassenMultiply(A, B, n);
+  time2 = omp_get_wtime();
+  double parallel_time = time2 - time1;
+  std::cout << "strassen par: " << parallel_time << std::endl;
+
+  std::cout << "times: " << seq_time / parallel_time << std::endl;
 }
-
-// TEST(STRASSEN_OMP, TEST_6) {
-//  int n = 256;
-//
-//  matrix A = generateMatrix(n);
-//  matrix B = generateMatrix(n);
-//
-//  matrix C = std::vector<vec>(n, vec(n, 0));
-//  ASSERT_NO_THROW(matrixMultiplication(A, B, &C));
-//}
