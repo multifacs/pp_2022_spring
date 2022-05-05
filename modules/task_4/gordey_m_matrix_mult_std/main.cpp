@@ -39,7 +39,7 @@ TEST(SPARSE_MATRIX_MULT_SEQ, MULT_2) {
     SparseM B(arr1, count, count);
     delete[] arr;
     delete[] arr1;
-    double start_seq = omp_get_wtime();
+    // double start_seq = omp_get_wtime();
     SparseM C = A * B;
     // double end_seq = omp_get_wtime();
     // double seq_time = end_seq - start_seq;
