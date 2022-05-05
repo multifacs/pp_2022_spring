@@ -73,9 +73,39 @@ void get_p7(double* a12, double* a22, double* res1, double* b21, double* b22,
 
 bool is_exp_of_2(int n) { return (n & (n - 1)) == 0; }
 
+int clp2(int x) {
+  x--;
+  for (int p = 1; p < 32; p <<= 1) x |= (x >> p);
+  return ++x;
+}
+
+void expand(double* a, double* b, double* c, int size) 
+{ 
+    int newSize = clp2(size);
+    double* newA = new double[newSize * newSize];
+    double* newB = new double[newSize * newSize];
+
+    for (size_t i = 0; i < newSize; i++) {
+      for (size_t j = 0; j < newSize; j++) {
+        if (i<size&&j<size) {
+          newA[i * newSize + j] = a[i * size + j];
+          newB[i * newSize + j] = b[i * size + j];
+        } else {
+          newA[i * newSize + j] = 0;
+        }
+      }
+    }
+
+    a = newA;
+    b = newB;
+    c = new double[newSize];
+    delete[] newA;
+    delete[] newB;
+}
+
 void strassen(double* a, double* b, double* c, int size) {
   if (!is_exp_of_2(size)) {
-    throw std::invalid_argument("no power 2");
+    expand(a, b, c, size);
   }
 
   if (size <= 64) {

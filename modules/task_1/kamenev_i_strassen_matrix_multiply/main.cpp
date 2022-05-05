@@ -5,7 +5,7 @@
 #include <stdexcept>
 #include <vector>
 
-#include "strassen_matrix_multiply.h"
+#include "./strassen_matrix_multiply.h"
 
 TEST(Kamenev_Strassen_Seq, MatrixSize8Test) {
   int size = 8;
@@ -71,17 +71,19 @@ TEST(Kamenev_Strassen_Seq, MatrixSize64Test) {
 }
 
 TEST(Kamenev_Strassen_Seq, InvalidSizeTest) {
-  int size = 5;
+  int size = 57;
   std::vector<double> a(size * size);
   std::vector<double> b(size * size);
   std::vector<double> strassen_res(size * size);
+  std::vector<double> naive_res(size * size);
 
   for (size_t i = 0; i < size * size; i++) {
     a[i] = i + 1;
     b[i] = size * size - i;
   }
-  ASSERT_THROW(strassen(a.data(), b.data(), strassen_res.data(), size),
-               std::invalid_argument);
+  strassen(a.data(), b.data(), strassen_res.data(), size);
+  naive_mult(a.data(), b.data(), naive_res.data(), size);
+  ASSERT_EQ(naive_res, strassen_res);
 }
 
 int main(int argc, char** argv) {
