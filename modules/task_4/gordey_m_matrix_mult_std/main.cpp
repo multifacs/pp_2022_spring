@@ -8,6 +8,7 @@ TEST(SPARSE_MATRIX_MULT_SEQ, CREATE_MATRIX) {
     double* arr = create_random_matrix(4);
     SparseM A(arr, 2, 2);
     SparseM B(arr, 2, 2);
+    delete[] arr;
     ASSERT_EQ(1, 1);
 }
 
