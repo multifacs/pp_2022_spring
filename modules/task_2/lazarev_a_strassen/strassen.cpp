@@ -134,10 +134,15 @@ matrix strassenMultiply(matrix* A, matrix* B, int n, bool parallel) {
     P7 = strassenMultiply(&S9, &S10, k);
   }
 
-  matrix C11 = subtract(&add(&add(&P5, &P4, k), &P6, k), &P2, k);
+  matrix S11 = add(&P5, &P4, k);
+  matrix S12 = add(&S11, &P6, k);
+  matrix S13 = add(&P5, &P1, k);
+  matrix S14 = subtract(&S13, &P3, k);
+
+  matrix C11 = subtract(&S12, &P2, k);
   matrix C12 = add(&P1, &P2, k);
   matrix C21 = add(&P3, &P4, k);
-  matrix C22 = subtract(&subtract(&add(&P5, &P1, k), &P3, k), &P7, k);
+  matrix C22 = subtract(&S14, &P7, k);
 
   for (int i = 0; i < k; i++)
     for (int j = 0; j < k; j++) {
