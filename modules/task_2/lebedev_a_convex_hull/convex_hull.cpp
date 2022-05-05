@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <numeric>
 
-#define MIN_STEP 100
+#define MIN_STEP 1000
 
 
 bool cw(const cv::Point2d& p1, const cv::Point2d& p2, const cv::Point2d& p3) {
@@ -59,15 +59,15 @@ size_t get_effective_num_threads(size_t size) {
 }
 
 
-void lab2::convex_hull(const cv::Mat& input, std::vector<cv::Point2d>* output, bool use_seq) {
+void lab2::convex_hull(const cv::Mat& input, std::vector<cv::Point2d>* output, Version v) {
     std::vector<cv::Point2d> non_zeros;
     cv::findNonZero(input, non_zeros);
-    lab2::convex_hull(&non_zeros, output, use_seq);
+    lab2::convex_hull(&non_zeros, output, v);
 }
 
-void lab2::convex_hull(std::vector<cv::Point2d>* input, std::vector<cv::Point2d>* output, bool use_seq) {
-    size_t jobs = get_effective_num_threads(input->size());
-    if (jobs > 1 && !use_seq) {
+void lab2::convex_hull(std::vector<cv::Point2d>* input, std::vector<cv::Point2d>* output, Version v) {
+    size_t jobs = (v == Version::PARALLEL) ? get_effective_num_threads(input->size()) : 1;
+    if (v != SEQUENTIAL) {
         size_t step = input->size() / jobs;
         std::vector<cv::Point2d> last(input->end() - input->size() % jobs, input->end());
         std::vector<std::vector<cv::Point2d>> hulls(jobs);

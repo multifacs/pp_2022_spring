@@ -8,9 +8,9 @@
 
 
 template<class T>
-double get_time(T input, std::vector<cv::Point2d>* output, bool use_seq = false) {
+double get_time(T input, std::vector<cv::Point2d>* output, lab2::Version v) {
     double t1 = omp_get_wtime();
-    lab2::convex_hull(input, output, use_seq);
+    lab2::convex_hull(input, output, v);
     double t2 = omp_get_wtime();
     return t2 - t1;
 }
@@ -32,9 +32,10 @@ class ConvexHullTEST : public ::testing::Test {
     std::vector<cv::Point2d> conv;
     std::string test_name;
 
-    void check_time() {
-        double t_seq = get_time(test_image, &conv, true);
-        double t_parallel = get_time(test_image, &conv, false);
+    // check v against Version::PARALLEL
+    void check_time(lab2::Version v) {
+        double t_seq = get_time(test_image, &conv, v);
+        double t_parallel = get_time(test_image, &conv, lab2::Version::PARALLEL);
         std::cout << "Speed up " << t_seq / t_parallel << std::endl;
     }
 
@@ -92,9 +93,14 @@ void fill_points_random_uniform(std::vector<cv::Point2d>* input, size_t num_poin
 }
 
 
-TEST_F(ConvexHullTEST, Test_uniform_points) {
+TEST_F(ConvexHullTEST, Test_parallel_vs_sequential) {
     fill_image_random_uniform(&test_image, { 10, 1070, 10, 1070 }, 1000000);
-    check_time();
+    check_time(lab2::Version::SEQUENTIAL);
+}
+
+TEST_F(ConvexHullTEST, Test_parallel_vs_parallel_one_thread) {
+    fill_image_random_uniform(&test_image, { 10, 1070, 10, 1070 }, 1000000);
+    check_time(lab2::Version::PARALLEL_ONE_THREAD);
 }
 
 TEST_F(ConvexHullTEST, Test_several_ranges) {
@@ -103,10 +109,10 @@ TEST_F(ConvexHullTEST, Test_several_ranges) {
     fill_image_random_uniform(&test_image, { 400, 600, 300, 700 }, 60000);
     fill_image_random_uniform(&test_image, { 50, 400, 500, 1000 }, 200000);
     fill_image_random_uniform(&test_image, { 500, 1000, 500, 1000 }, 200000);
-    check_time();
+    check_time(lab2::Version::PARALLEL_ONE_THREAD);
 }
 
-TEST_F(ConvexHullTEST, Test_polygon) {
+TEST_F(ConvexHullTEST, Test_small_polygon) {
     std::vector<cv::Point2d> vertexes{ {100, 200}, {100, 300}, {200, 500}, {300, 500},
                                        {400, 300}, {400, 200}, {300, 100}, {200, 100} };
     for (const auto& v : vertexes) {
@@ -114,16 +120,6 @@ TEST_F(ConvexHullTEST, Test_polygon) {
     }
     lab2::convex_hull(test_image, &conv);
     ASSERT_EQ(vertexes, conv);
-}
-
-TEST_F(ConvexHullTEST, Test_line) {
-    std::vector<cv::Point2d> vertexes{ {100, 300}, {200, 300}, {300, 300}, {400, 300} };
-    for (const auto& v : vertexes) {
-        test_image.at<uint8_t>(v) = 255;
-    }
-    lab2::convex_hull(test_image, &conv);
-    std::vector<cv::Point2d> expected = { vertexes.front(), vertexes.back() };
-    ASSERT_EQ(expected, conv);
 }
 
 TEST_F(ConvexHullTEST, Test_empty) {
@@ -137,8 +133,8 @@ TEST(TEST_POINTS_ONLY, Test_time) {
     fill_points_random_uniform(&input, 1000000, {0, 2000000, 0, 2000000});
     std::vector<cv::Point2d> input_ref(input);
     std::vector<cv::Point2d> output, output_ref;
-    double t_seq = get_time(&input, &output, true);
-    double t_parallel = get_time(&input_ref, &output_ref, false);
+    double t_seq = get_time(&input, &output, lab2::Version::PARALLEL_ONE_THREAD);
+    double t_parallel = get_time(&input_ref, &output_ref, lab2::Version::PARALLEL);
     std::cout << "Speed up: " << t_seq / t_parallel << std::endl;
     ASSERT_EQ(output, output_ref);
 }
