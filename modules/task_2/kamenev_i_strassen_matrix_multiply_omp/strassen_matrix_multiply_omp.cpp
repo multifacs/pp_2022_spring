@@ -1,6 +1,6 @@
 // Copyright 2022 Kamenev Ilya
 
-#include "strassen_matrix_multiply_omp.h";
+#include "strassen_matrix_multiply_omp.h"
 #include <math.h>
 #include <stdexcept>
 #include <string>

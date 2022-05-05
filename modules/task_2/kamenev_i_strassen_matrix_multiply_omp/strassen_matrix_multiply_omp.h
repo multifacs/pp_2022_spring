@@ -1,6 +1,6 @@
 // Copyright 2022 Kamenev Ilya
-#ifndef MODULES_TASK_2_KAMENEV_I_STRASSEN_MATRIX_MULTIPLY_STRASSEN_MATRIX_MULTIPLY_H_
-#define MODULES_TASK_2_KAMENEV_I_STRASSEN_MATRIX_MULTIPLY_STRASSEN_MATRIX_MULTIPLY_H_
+#ifndef MODULES_TASK_2_KAMENEV_I_STRASSEN_MATRIX_MULTIPLY_OMP_STRASSEN_MATRIX_MULTIPLY_OMP_H_
+#define MODULES_TASK_2_KAMENEV_I_STRASSEN_MATRIX_MULTIPLY_OMP_STRASSEN_MATRIX_MULTIPLY_OMP_H_
 
 void strassen_omp(double* a, double* b, double* c, int size);
 void naive_mult(double* a, double* b, double* c, int size);
@@ -20,4 +20,4 @@ void get_p6(double* a21, double* a11, double* res1, double* b11, double* b12,
 void get_p7(double* a12, double* a22, double* res1, double* b21, double* b22,
             double* res2, double* slice7, int size);
 
-#endif  // MODULES_TASK_2_KAMENEV_I_STRASSEN_MATRIX_MULTIPLY_STRASSEN_MATRIX_MULTIPLY_H_
+#endif  // MODULES_TASK_2_KAMENEV_I_STRASSEN_MATRIX_MULTIPLY_OMP_STRASSEN_MATRIX_MULTIPLY_OMP_H_
