@@ -26,7 +26,6 @@ TEST(Gaussian_Filter_OMP, Test_Random_Matrix_Size_25x25) {
 
     tbb::tick_count start_seq = tbb::tick_count::now();
     std::vector <double> sq = gauss_filter_sequence(matrix, cols, rows);
-    double end_seq = omp_get_wtime();
     double seq_time = (tbb::tick_count::now() - start_seq).seconds();
 
     tbb::tick_count start_tbb = tbb::tick_count::now();
@@ -44,11 +43,8 @@ TEST(Gaussian_Filter_OMP, Test_Random_Matrix_Size_100x100) {
     int cols = 100;
     std::vector<double> matrix = createRandomMatrix(rows, cols);
 
-    std::vector<double> matrix = createRandomMatrix(rows, cols);
-
     tbb::tick_count start_seq = tbb::tick_count::now();
     std::vector <double> sq = gauss_filter_sequence(matrix, cols, rows);
-    double end_seq = omp_get_wtime();
     double seq_time = (tbb::tick_count::now() - start_seq).seconds();
 
     tbb::tick_count start_tbb = tbb::tick_count::now();
@@ -66,11 +62,8 @@ TEST(Gaussian_Filter_OMP, Test_Random_Matrix_Size_250x250) {
     int cols = 250;
     std::vector<double> matrix = createRandomMatrix(rows, cols);
 
-    std::vector<double> matrix = createRandomMatrix(rows, cols);
-
     tbb::tick_count start_seq = tbb::tick_count::now();
     std::vector <double> sq = gauss_filter_sequence(matrix, cols, rows);
-    double end_seq = omp_get_wtime();
     double seq_time = (tbb::tick_count::now() - start_seq).seconds();
 
     tbb::tick_count start_tbb = tbb::tick_count::now();
@@ -88,11 +81,8 @@ TEST(Gaussian_Filter_OMP, Test_Random_Matrix_Size_500x500) {
     int cols = 500;
     std::vector<double> matrix = createRandomMatrix(rows, cols);
 
-    std::vector<double> matrix = createRandomMatrix(rows, cols);
-
     tbb::tick_count start_seq = tbb::tick_count::now();
     std::vector <double> sq = gauss_filter_sequence(matrix, cols, rows);
-    double end_seq = omp_get_wtime();
     double seq_time = (tbb::tick_count::now() - start_seq).seconds();
 
     tbb::tick_count start_tbb = tbb::tick_count::now();
@@ -110,11 +100,8 @@ TEST(Gaussian_Filter_OMP, Test_Random_Matrix_Size_1000x1000) {
     int cols = 1000;
     std::vector<double> matrix = createRandomMatrix(rows, cols);
 
-    std::vector<double> matrix = createRandomMatrix(rows, cols);
-
     tbb::tick_count start_seq = tbb::tick_count::now();
     std::vector <double> sq = gauss_filter_sequence(matrix, cols, rows);
-    double end_seq = omp_get_wtime();
     double seq_time = (tbb::tick_count::now() - start_seq).seconds();
 
     tbb::tick_count start_tbb = tbb::tick_count::now();
@@ -132,11 +119,8 @@ TEST(Gaussian_Filter_OMP, Test_Random_Matrix_Size_5000x5000) {
     int cols = 1000;
     std::vector<double> matrix = createRandomMatrix(rows, cols);
 
-    std::vector<double> matrix = createRandomMatrix(rows, cols);
-
     tbb::tick_count start_seq = tbb::tick_count::now();
     std::vector <double> sq = gauss_filter_sequence(matrix, cols, rows);
-    double end_seq = omp_get_wtime();
     double seq_time = (tbb::tick_count::now() - start_seq).seconds();
 
     tbb::tick_count start_tbb = tbb::tick_count::now();
