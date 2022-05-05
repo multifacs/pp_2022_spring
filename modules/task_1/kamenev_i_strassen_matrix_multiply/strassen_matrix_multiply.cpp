@@ -74,7 +74,6 @@ void get_p7(double* a12, double* a22, double* res1, double* b21, double* b22,
 bool is_exp_of_2(int n) { return (n & (n - 1)) == 0; }
 
 void strassen(double* a, double* b, double* c, int size) {
-
   if (!is_exp_of_2(size)) {
     throw std::invalid_argument("no power 2");
   }
