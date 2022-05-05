@@ -6,7 +6,7 @@
 #include <vector>
 #include "../../../modules/task_3/butescu_v_gauss_vert_tbb/vert_gauss.h"
 
-TEST(Gaussian_Filter_OMP, Zero_Rows_Cols) {
+TEST(Gaussian_Filter_TBB, Zero_Rows_Cols) {
     int rows = 0;
     int cols = 0;
     std::vector<double> matrix(rows * cols);
@@ -14,7 +14,7 @@ TEST(Gaussian_Filter_OMP, Zero_Rows_Cols) {
     ASSERT_ANY_THROW(matrix = gauss_filter_parralel_tbb(matrix, rows, cols));
 }
 
-TEST(Gaussian_Filter_OMP, Zero_Matrix) {
+TEST(Gaussian_Filter_TBB, Zero_Matrix) {
     int rows = 3;
     int cols = 3;
     std::vector<double> matrix(0);
@@ -22,7 +22,7 @@ TEST(Gaussian_Filter_OMP, Zero_Matrix) {
     ASSERT_ANY_THROW(matrix = gauss_filter_parralel_tbb(matrix, rows, cols));
 }
 
-TEST(Gaussian_Filter_OMP, Test_Random_Matrix_Size_25x25) {
+TEST(Gaussian_Filter_TBB, Test_Random_Matrix_Size_25x25) {
     int rows = 25;
     int cols = 25;
     std::vector<double> matrix = createRandomMatrix(rows, cols);
@@ -41,7 +41,7 @@ TEST(Gaussian_Filter_OMP, Test_Random_Matrix_Size_25x25) {
     ASSERT_EQ(sq, pp);
 }
 
-TEST(Gaussian_Filter_OMP, Test_Random_Matrix_Size_100x100) {
+TEST(Gaussian_Filter_TBB, Test_Random_Matrix_Size_100x100) {
     int rows = 100;
     int cols = 100;
     std::vector<double> matrix = createRandomMatrix(rows, cols);
@@ -60,7 +60,7 @@ TEST(Gaussian_Filter_OMP, Test_Random_Matrix_Size_100x100) {
     ASSERT_EQ(sq, pp);
 }
 
-TEST(Gaussian_Filter_OMP, Test_Random_Matrix_Size_250x250) {
+TEST(Gaussian_Filter_TBB, Test_Random_Matrix_Size_250x250) {
     int rows = 250;
     int cols = 250;
     std::vector<double> matrix = createRandomMatrix(rows, cols);
@@ -79,7 +79,7 @@ TEST(Gaussian_Filter_OMP, Test_Random_Matrix_Size_250x250) {
     ASSERT_EQ(sq, pp);
 }
 
-TEST(Gaussian_Filter_OMP, Test_Random_Matrix_Size_500x500) {
+TEST(Gaussian_Filter_TBB, Test_Random_Matrix_Size_500x500) {
     int rows = 500;
     int cols = 500;
     std::vector<double> matrix = createRandomMatrix(rows, cols);
@@ -98,7 +98,7 @@ TEST(Gaussian_Filter_OMP, Test_Random_Matrix_Size_500x500) {
     ASSERT_EQ(sq, pp);
 }
 
-TEST(Gaussian_Filter_OMP, Test_Random_Matrix_Size_1000x1000) {
+TEST(Gaussian_Filter_TBB, Test_Random_Matrix_Size_1000x1000) {
     int rows = 1000;
     int cols = 1000;
     std::vector<double> matrix = createRandomMatrix(rows, cols);
@@ -117,7 +117,7 @@ TEST(Gaussian_Filter_OMP, Test_Random_Matrix_Size_1000x1000) {
     ASSERT_EQ(sq, pp);
 }
 
-TEST(Gaussian_Filter_OMP, Test_Random_Matrix_Size_5000x5000) {
+TEST(Gaussian_Filter_TBB, Test_Random_Matrix_Size_5000x5000) {
     int rows = 1000;
     int cols = 1000;
     std::vector<double> matrix = createRandomMatrix(rows, cols);

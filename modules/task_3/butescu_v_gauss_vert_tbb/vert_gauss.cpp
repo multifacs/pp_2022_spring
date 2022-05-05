@@ -71,7 +71,7 @@ std::vector<double> gauss_filter_parralel_tbb(const std::vector<double>& matrix,
         throw - 1;
     }
     const int size = 3;
-    const double sigma = 2.0;
+    const double sigma = 1.0;
     const int radius = 1;
     double norm = 0;
 
@@ -90,11 +90,11 @@ std::vector<double> gauss_filter_parralel_tbb(const std::vector<double>& matrix,
     for (int i = 0; i < size * size; i++)
         kernel[i] /= norm;
 
-    for (int x = 0; x != rows; x++) {
+    for (int x = 0; x < rows; x++) {
         tbb::parallel_for(
-            tbb::blocked_range<int>(0, rows, 1),
+            tbb::blocked_range<int>(0, cols, 1),
             [&](const tbb::blocked_range<int>& range) {
-                for (int y = range.begin(); y < range.end(); y++) {
+                for (int y = range.begin(); y != range.end(); y++) {
                     double res = 0;
                     for (int i = -radius; i <= radius; i++) {
                         for (int j = -radius; j <= radius; j++) {
