@@ -109,25 +109,25 @@ int** strassenMultiply(int** A, int** B, int n) {
       C[k + i][k + j] = C22[i][j];
     }
 
-  delete[] A11;
-  delete[] A12;
-  delete[] A21;
-  delete[] A22;
-  delete[] B11;
-  delete[] B12;
-  delete[] B21;
-  delete[] B22;
-  delete[] P1;
-  delete[] P2;
-  delete[] P3;
-  delete[] P4;
-  delete[] P5;
-  delete[] P6;
-  delete[] P7;
-  delete[] C11;
-  delete[] C12;
-  delete[] C21;
-  delete[] C22;
+  cleanup(A11, k);
+  cleanup(A12, k);
+  cleanup(A21, k);
+  cleanup(A22, k);
+  cleanup(B11, k);
+  cleanup(B12, k);
+  cleanup(B21, k);
+  cleanup(B22, k);
+  cleanup(P1, k);
+  cleanup(P2, k);
+  cleanup(P3, k);
+  cleanup(P4, k);
+  cleanup(P5, k);
+  cleanup(P6, k);
+  cleanup(P7, k);
+  cleanup(C11, k);
+  cleanup(C12, k);
+  cleanup(C21, k);
+  cleanup(C22, k);
 
   return C;
 }
