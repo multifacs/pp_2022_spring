@@ -6,92 +6,94 @@
 TEST(STRASSEN_SEQ, TEST_1) {
   int n = 2;
 
-  matrix A = generateMatrix(n);
-  matrix B = generateMatrix(n);
+  matrix A(n, vector(n, 0));
+  matrix B(n, vector(n, 0));
 
-  print("A", A);
-  print("B", B);
+  setToRandom(&A, n);
+  setToRandom(&B, n);
 
-  matrix C = std::vector<vec>(n, vec(n, 0));
-  ASSERT_NO_THROW(Strassen(n, A, B, &C));
+  matrix C1, C2;
 
-  print("C", C);
-
-  matrix C_ref = std::vector<vec>(n, vec(n, 0));
-  matrixMultiplication(A, B, &C_ref);
+  C1 = multiply(&A, &B, n);
+  C2 = strassenMultiply(&A, &B, n);
 
   for (int i = 0; i < n; i++) {
-    ASSERT_TRUE(C[i] == C_ref[i]);
+    ASSERT_EQ(C1[i], C2[i]);
   }
 }
 
 TEST(STRASSEN_SEQ, TEST_2) {
   int n = 4;
 
-  matrix A = generateMatrix(n);
-  matrix B = generateMatrix(n);
+  matrix A(n, vector(n, 0));
+  matrix B(n, vector(n, 0));
 
-  matrix C = std::vector<vec>(n, vec(n, 0));
-  ASSERT_NO_THROW(Strassen(n, A, B, &C));
+  setToRandom(&A, n);
+  setToRandom(&B, n);
 
-  matrix C_ref = std::vector<vec>(n, vec(n, 0));
-  matrixMultiplication(A, B, &C_ref);
+  matrix C1, C2;
+
+  C1 = multiply(&A, &B, n);
+  C2 = strassenMultiply(&A, &B, n);
 
   for (int i = 0; i < n; i++) {
-    ASSERT_TRUE(C[i] == C_ref[i]);
+    ASSERT_EQ(C1[i], C2[i]);
   }
 }
 
 TEST(STRASSEN_SEQ, TEST_3) {
-  int n = 4;
+  int n = 8;
 
-  matrix A = generateMatrix(n);
-  matrix B = generateMatrix(n);
+  matrix A(n, vector(n, 0));
+  matrix B(n, vector(n, 0));
 
-  matrix C = std::vector<vec>(n, vec(n, 0));
-  ASSERT_NO_THROW(Strassen(n, A, B, &C));
+  setToRandom(&A, n);
+  setToRandom(&B, n);
 
-  matrix C_ref = std::vector<vec>(n, vec(n, 0));
-  matrixMultiplication(A, B, &C_ref);
+  matrix C1, C2;
+
+  C1 = multiply(&A, &B, n);
+  C2 = strassenMultiply(&A, &B, n);
 
   for (int i = 0; i < n; i++) {
-    ASSERT_TRUE(C[i] == C_ref[i]);
+    ASSERT_EQ(C1[i], C2[i]);
   }
 }
 
 TEST(STRASSEN_SEQ, TEST_4) {
-  int n = 8;
+  int n = 16;
 
-  matrix A = generateMatrix(n);
-  matrix B = generateMatrix(n);
+  matrix A(n, vector(n, 0));
+  matrix B(n, vector(n, 0));
 
-  matrix C = std::vector<vec>(n, vec(n, 0));
-  ASSERT_NO_THROW(Strassen(n, A, B, &C));
+  setToRandom(&A, n);
+  setToRandom(&B, n);
 
-  matrix C_ref = std::vector<vec>(n, vec(n, 0));
-  matrixMultiplication(A, B, &C_ref);
+  matrix C1, C2;
+
+  C1 = multiply(&A, &B, n);
+  C2 = strassenMultiply(&A, &B, n);
 
   for (int i = 0; i < n; i++) {
-    ASSERT_TRUE(C[i] == C_ref[i]);
+    ASSERT_EQ(C1[i], C2[i]);
   }
 }
 
 TEST(STRASSEN_SEQ, TEST_5) {
-  int n = 16;
+  int n = 20;
 
-  matrix A = generateMatrix(n);
-  matrix B = generateMatrix(n);
+  matrix A(n, vector(n, 0));
+  matrix B(n, vector(n, 0));
 
-  matrix C = std::vector<vec>(n, vec(n, 0));
-  ASSERT_NO_THROW(Strassen(n, A, B, &C));
+  setToRandom(&A, n);
+  setToRandom(&B, n);
+
+  matrix C1, C2;
+
+  C1 = multiply(&A, &B, n);
+  C2 = strassenMultiply(&A, &B, n);
+
+  for (int i = 0; i < n; i++) {
+    ASSERT_EQ(C1[i], C2[i]);
+  }
 }
-
-// TEST(STRASSEN_SEQ, TEST_6) {
-//  int n = 256;
-//
-//  matrix A = generateMatrix(n);
-//  matrix B = generateMatrix(n);
-//
-//  matrix C = std::vector<vec>(n, vec(n, 0));
-//  ASSERT_NO_THROW(matrixMultiplication(A, B, &C));
-//}

@@ -4,15 +4,15 @@
 
 #include <string>
 #include <vector>
-#include <array>
 
-using vec = std::vector<double>;
-using matrix = std::vector<vec>;
+const int threshold = 128;
 
-matrix generateMatrix(int n);
+using vector = std::vector<int>;
+using matrix = std::vector<std::vector<int>>;
 
-void matrixMultiplication(const matrix& A, const matrix& B, matrix* C);
-void Strassen(int n, const matrix& A, const matrix& B, matrix* C);
-void print(const std::string& title, const matrix& A);
+void setToRandom(matrix* A, int n);
+
+matrix strassenMultiply(matrix* A, matrix* B, int n);
+matrix multiply(matrix* A, matrix* B, int n);
 
 #endif  // MODULES_TASK_1_LAZAREV_A_STRASSEN_STRASSEN_H_
