@@ -69,15 +69,24 @@ matrix strassenMultiply(matrix* A, matrix* B, int n) {
       B22[i][j] = (*B)[k + i][k + j];
     }
 
-  matrix P1 = strassenMultiply(&A11, &subtract(&B12, &B22, k), k);
-  matrix P2 = strassenMultiply(&add(&A11, &A12, k), &B22, k);
-  matrix P3 = strassenMultiply(&add(&A21, &A22, k), &B11, k);
-  matrix P4 = strassenMultiply(&A22, &subtract(&B21, &B11, k), k);
-  matrix P5 = strassenMultiply(&add(&A11, &A22, k), &add(&B11, &B22, k), k);
-  matrix P6 =
-      strassenMultiply(&subtract(&A12, &A22, k), &add(&B21, &B22, k), k);
-  matrix P7 =
-      strassenMultiply(&subtract(&A11, &A21, k), &add(&B11, &B12, k), k);
+  matrix S1 = subtract(&B12, &B22, k);
+  matrix S2 = add(&A11, &A12, k);
+  matrix S3 = add(&A21, &A22, k);
+  matrix S4 = subtract(&B21, &B11, k);
+  matrix S5 = add(&A11, &A22, k);
+  matrix S6 = add(&B11, &B22, k);
+  matrix S7 = subtract(&A12, &A22, k);
+  matrix S8 = add(&B21, &B22, k);
+  matrix S9 = subtract(&A11, &A21, k);
+  matrix S10 = add(&B11, &B12, k);
+
+  matrix P1 = strassenMultiply(&A11, &S1, k);
+  matrix P2 = strassenMultiply(&S2, &B22, k);
+  matrix P3 = strassenMultiply(&S3, &B11, k);
+  matrix P4 = strassenMultiply(&A22, &S4, k);
+  matrix P5 = strassenMultiply(&S5, &S6, k);
+  matrix P6 = strassenMultiply(&S7, &S8, k);
+  matrix P7 = strassenMultiply(&S9, &S10, k);
 
   matrix C11 = subtract(&add(&add(&P5, &P4, k), &P6, k), &P2, k);
   matrix C12 = add(&P1, &P2, k);

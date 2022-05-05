@@ -75,31 +75,63 @@ matrix strassenMultiply(matrix* A, matrix* B, int n, bool parallel) {
 #pragma omp parallel sections
     {
 #pragma omp section
-      P1 = strassenMultiply(&A11, &subtract(&B12, &B22, k), k, parallel);
+      {
+        matrix S1 = subtract(&B12, &B22, k);
+        P1 = strassenMultiply(&A11, &S1, k, parallel);
+      }
 #pragma omp section
-      P2 = strassenMultiply(&add(&A11, &A12, k), &B22, k, parallel);
+      {
+        matrix S2 = add(&A11, &A12, k);
+        P2 = strassenMultiply(&S2, &B22, k, parallel);
+      }
 #pragma omp section
-      P3 = strassenMultiply(&add(&A21, &A22, k), &B11, k, parallel);
+      {
+        matrix S3 = add(&A21, &A22, k);
+        P3 = strassenMultiply(&S3, &B11, k, parallel);
+      }
 #pragma omp section
-      P4 = strassenMultiply(&A22, &subtract(&B21, &B11, k), k, parallel);
+      {
+        matrix S4 = subtract(&B21, &B11, k);
+        P4 = strassenMultiply(&A22, &S4, k, parallel);
+      }
 #pragma omp section
-      P5 = strassenMultiply(&add(&A11, &A22, k), &add(&B11, &B22, k), k,
-                            parallel);
+      {
+        matrix S5 = add(&A11, &A22, k);
+        matrix S6 = add(&B11, &B22, k);
+        P5 = strassenMultiply(&S5, &S6, k, parallel);
+      }
 #pragma omp section
-      P6 = strassenMultiply(&subtract(&A12, &A22, k), &add(&B21, &B22, k), k,
-                            parallel);
+      {
+        matrix S7 = subtract(&A12, &A22, k);
+        matrix S8 = add(&B21, &B22, k);
+        P6 = strassenMultiply(&S7, &S8, k, parallel);
+      }
 #pragma omp section
-      P7 = strassenMultiply(&subtract(&A11, &A21, k), &add(&B11, &B12, k), k,
-                            parallel);
+      {
+        matrix S9 = subtract(&A11, &A21, k);
+        matrix S10 = add(&B11, &B12, k);
+        P7 = strassenMultiply(&S9, &S10, k, parallel);
+      }
     }
   } else {
-    P1 = strassenMultiply(&A11, &subtract(&B12, &B22, k), k);
-    P2 = strassenMultiply(&add(&A11, &A12, k), &B22, k);
-    P3 = strassenMultiply(&add(&A21, &A22, k), &B11, k);
-    P4 = strassenMultiply(&A22, &subtract(&B21, &B11, k), k);
-    P5 = strassenMultiply(&add(&A11, &A22, k), &add(&B11, &B22, k), k);
-    P6 = strassenMultiply(&subtract(&A12, &A22, k), &add(&B21, &B22, k), k);
-    P7 = strassenMultiply(&subtract(&A11, &A21, k), &add(&B11, &B12, k), k);
+    matrix S1 = subtract(&B12, &B22, k);
+    matrix S2 = add(&A11, &A12, k);
+    matrix S3 = add(&A21, &A22, k);
+    matrix S4 = subtract(&B21, &B11, k);
+    matrix S5 = add(&A11, &A22, k);
+    matrix S6 = add(&B11, &B22, k);
+    matrix S7 = subtract(&A12, &A22, k);
+    matrix S8 = add(&B21, &B22, k);
+    matrix S9 = subtract(&A11, &A21, k);
+    matrix S10 = add(&B11, &B12, k);
+
+    P1 = strassenMultiply(&A11, &S1, k);
+    P2 = strassenMultiply(&S2, &B22, k);
+    P3 = strassenMultiply(&S3, &B11, k);
+    P4 = strassenMultiply(&A22, &S4, k);
+    P5 = strassenMultiply(&S5, &S6, k);
+    P6 = strassenMultiply(&S7, &S8, k);
+    P7 = strassenMultiply(&S9, &S10, k);
   }
 
   matrix C11 = subtract(&add(&add(&P5, &P4, k), &P6, k), &P2, k);
