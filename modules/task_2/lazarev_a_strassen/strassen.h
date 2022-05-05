@@ -14,4 +14,6 @@ int** strassenMultiply(int** A, int** B, int n);
 int** strassenSeq(int** A, int** B, int n);
 int** multiply(int** A, int** B, int n);
 
+void cleanup(int** A, int n);
+
 #endif  // MODULES_TASK_2_LAZAREV_A_STRASSEN_STRASSEN_H_

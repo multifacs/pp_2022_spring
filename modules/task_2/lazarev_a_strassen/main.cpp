@@ -13,7 +13,7 @@ TEST(STRASSEN_OMP, TEST_1) {
   setToRandom(A, n);
   setToRandom(B, n);
 
-  int **C1, **C2;
+  int **C1 = nullptr, **C2 = nullptr;
 
   C1 = multiply(A, B, n);
   C2 = strassenMultiply(A, B, n);
@@ -21,6 +21,11 @@ TEST(STRASSEN_OMP, TEST_1) {
   for (int i = 0; i < n; i++) {
     ASSERT_EQ(C1[i][0], C2[i][0]);
   }
+
+  cleanup(A, n);
+  cleanup(B, n);
+  cleanup(C1, n);
+  cleanup(C2, n);
 }
 
 TEST(STRASSEN_OMP, TEST_2) {
@@ -32,7 +37,7 @@ TEST(STRASSEN_OMP, TEST_2) {
   setToRandom(A, n);
   setToRandom(B, n);
 
-  int **C1, **C2;
+  int **C1 = nullptr, **C2 = nullptr;
 
   C1 = multiply(A, B, n);
   C2 = strassenMultiply(A, B, n);
@@ -40,6 +45,11 @@ TEST(STRASSEN_OMP, TEST_2) {
   for (int i = 0; i < n; i++) {
     ASSERT_EQ(C1[i][0], C2[i][0]);
   }
+
+  cleanup(A, n);
+  cleanup(B, n);
+  cleanup(C1, n);
+  cleanup(C2, n);
 }
 
 TEST(STRASSEN_OMP, TEST_3) {
@@ -51,7 +61,7 @@ TEST(STRASSEN_OMP, TEST_3) {
   setToRandom(A, n);
   setToRandom(B, n);
 
-  int **C1, **C2;
+  int **C1 = nullptr, **C2 = nullptr;
 
   C1 = multiply(A, B, n);
   C2 = strassenMultiply(A, B, n);
@@ -59,6 +69,11 @@ TEST(STRASSEN_OMP, TEST_3) {
   for (int i = 0; i < n; i++) {
     ASSERT_EQ(C1[i][0], C2[i][0]);
   }
+
+  cleanup(A, n);
+  cleanup(B, n);
+  cleanup(C1, n);
+  cleanup(C2, n);
 }
 
 TEST(STRASSEN_OMP, TEST_4) {
@@ -70,7 +85,7 @@ TEST(STRASSEN_OMP, TEST_4) {
   setToRandom(A, n);
   setToRandom(B, n);
 
-  int **C1, **C2;
+  int **C1 = nullptr, **C2 = nullptr;
 
   C1 = multiply(A, B, n);
   C2 = strassenMultiply(A, B, n);
@@ -78,6 +93,11 @@ TEST(STRASSEN_OMP, TEST_4) {
   for (int i = 0; i < n; i++) {
     ASSERT_EQ(C1[i][0], C2[i][0]);
   }
+
+  cleanup(A, n);
+  cleanup(B, n);
+  cleanup(C1, n);
+  cleanup(C2, n);
 }
 
 TEST(STRASSEN_OMP, TEST_5) {
@@ -89,7 +109,7 @@ TEST(STRASSEN_OMP, TEST_5) {
   setToRandom(A, n);
   setToRandom(B, n);
 
-  int** C;
+  int** C = nullptr;
 
   double time1 = omp_get_wtime();
   C = multiply(A, B, n);
@@ -110,4 +130,8 @@ TEST(STRASSEN_OMP, TEST_5) {
   std::cout << "strassen par: " << parallel_time << std::endl;
 
   std::cout << "times: " << seq_time / parallel_time << std::endl;
+
+  cleanup(A, n);
+  cleanup(B, n);
+  cleanup(C, n);
 }

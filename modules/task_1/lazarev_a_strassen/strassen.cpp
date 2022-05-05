@@ -36,6 +36,13 @@ int** multiply(int** A, int** B, int n) {
   return C;
 }
 
+void cleanup(int** A, int n) {
+  for (int i = 0; i < n; i++) {
+    delete[] A[i];
+  }
+  delete[] A;
+}
+
 int** add(int** M1, int** M2, int n) {
   int** temp = initializeMatrix(n);
   for (int i = 0; i < n; i++)
