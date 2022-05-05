@@ -43,11 +43,11 @@ TEST(Multiplication_parallel, 3x3_4) {
   ASSERT_TRUE(CompareMatrixCRS(matrix_C, C_tbb));
 }
 
-TEST(Multiplication_parallel, 50x50_30) {
+TEST(Multiplication_parallel, 15x15_25) {
   tbb::tick_count t1, t2, t1_, t2_;
 
-  MatrixCRS matrix_A = GenerateRandomMatrixCRS(50, 50, 30);
-  MatrixCRS matrix_B = GenerateRandomMatrixCRS(50, 50, 30);
+  MatrixCRS matrix_A = GenerateRandomMatrixCRS(15, 15, 25);
+  MatrixCRS matrix_B = GenerateRandomMatrixCRS(15, 15, 25);
 
   MatrixCRS matrix_C;
   t1 = tbb::tick_count::now();
@@ -64,11 +64,11 @@ TEST(Multiplication_parallel, 50x50_30) {
   ASSERT_TRUE(CompareMatrixCRS(matrix_C, C_tbb));
 }
 
-TEST(Multiplication_parallel, 200x200_350) {
+TEST(Multiplication_parallel, 20x20_50) {
   tbb::tick_count t1, t2, t1_, t2_;
 
-  MatrixCRS matrix_A = GenerateRandomMatrixCRS(200, 200, 350);
-  MatrixCRS matrix_B = GenerateRandomMatrixCRS(200, 200, 350);
+  MatrixCRS matrix_A = GenerateRandomMatrixCRS(20, 20, 50);
+  MatrixCRS matrix_B = GenerateRandomMatrixCRS(20, 20, 50);
 
   MatrixCRS matrix_C;
   t1 = tbb::tick_count::now();
@@ -85,11 +85,11 @@ TEST(Multiplication_parallel, 200x200_350) {
   ASSERT_TRUE(CompareMatrixCRS(matrix_C, C_tbb));
 }
 
-TEST(Multiplication_parallel, 250x250_400) {
+TEST(Multiplication_parallel, 25x25_65) {
   tbb::tick_count t1, t2, t1_, t2_;
 
-  MatrixCRS matrix_A = GenerateRandomMatrixCRS(250, 250, 400);
-  MatrixCRS matrix_B = GenerateRandomMatrixCRS(250, 250, 400);
+  MatrixCRS matrix_A = GenerateRandomMatrixCRS(25, 25, 65);
+  MatrixCRS matrix_B = GenerateRandomMatrixCRS(25, 25, 65);
 
   MatrixCRS matrix_C;
   t1 = tbb::tick_count::now();
@@ -106,11 +106,11 @@ TEST(Multiplication_parallel, 250x250_400) {
   ASSERT_TRUE(CompareMatrixCRS(matrix_C, C_tbb));
 }
 
-TEST(Multiplication_parallel, 300x300_2000) {
+TEST(Multiplication_parallel, 35x35_75) {
   tbb::tick_count t1, t2, t1_, t2_;
 
-  MatrixCRS matrix_A = GenerateRandomMatrixCRS(300, 300, 2000);
-  MatrixCRS matrix_B = GenerateRandomMatrixCRS(300, 300, 2000);
+  MatrixCRS matrix_A = GenerateRandomMatrixCRS(35, 35, 75);
+  MatrixCRS matrix_B = GenerateRandomMatrixCRS(35, 35, 75);
 
   MatrixCRS matrix_C;
   t1 = tbb::tick_count::now();
