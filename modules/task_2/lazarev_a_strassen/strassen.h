@@ -5,15 +5,14 @@
 #include <string>
 #include <vector>
 
-const int threshold = 128;
+const int threshold = 256;
 
-int** initializeMatrix(int n);
-void setToRandom(int** A, int n);
+using vector = std::vector<int>;
+using matrix = std::vector<std::vector<int>>;
 
-int** strassenMultiply(int** A, int** B, int n);
-int** strassenSeq(int** A, int** B, int n);
-int** multiply(int** A, int** B, int n);
+void setToRandom(matrix* A, int n);
 
-void cleanup(int** A, int n);
+matrix strassenMultiply(matrix* A, matrix* B, int n, bool parallel = true);
+matrix multiply(matrix* A, matrix* B, int n);
 
 #endif  // MODULES_TASK_2_LAZAREV_A_STRASSEN_STRASSEN_H_

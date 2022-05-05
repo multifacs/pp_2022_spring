@@ -7,131 +7,126 @@
 TEST(STRASSEN_OMP, TEST_1) {
   int n = 2;
 
-  int** A = initializeMatrix(n);
-  int** B = initializeMatrix(n);
+  matrix A(n, vector(n, 0));
+  matrix B(n, vector(n, 0));
 
-  setToRandom(A, n);
-  setToRandom(B, n);
+  setToRandom(&A, n);
+  setToRandom(&B, n);
 
-  int **C1 = nullptr, **C2 = nullptr;
+  matrix C1, C2;
 
-  C1 = multiply(A, B, n);
-  C2 = strassenMultiply(A, B, n);
+  C1 = multiply(&A, &B, n);
+  C2 = strassenMultiply(&A, &B, n);
 
   for (int i = 0; i < n; i++) {
-    ASSERT_EQ(C1[i][0], C2[i][0]);
+    ASSERT_EQ(C1[i], C2[i]);
   }
-
-  cleanup(A, n);
-  cleanup(B, n);
-  cleanup(C1, n);
-  cleanup(C2, n);
 }
 
 TEST(STRASSEN_OMP, TEST_2) {
   int n = 4;
 
-  int** A = initializeMatrix(n);
-  int** B = initializeMatrix(n);
+  matrix A(n, vector(n, 0));
+  matrix B(n, vector(n, 0));
 
-  setToRandom(A, n);
-  setToRandom(B, n);
+  setToRandom(&A, n);
+  setToRandom(&B, n);
 
-  int **C1 = nullptr, **C2 = nullptr;
+  matrix C1, C2;
 
-  C1 = multiply(A, B, n);
-  C2 = strassenMultiply(A, B, n);
+  C1 = multiply(&A, &B, n);
+  C2 = strassenMultiply(&A, &B, n);
 
   for (int i = 0; i < n; i++) {
-    ASSERT_EQ(C1[i][0], C2[i][0]);
+    ASSERT_EQ(C1[i], C2[i]);
   }
-
-  cleanup(A, n);
-  cleanup(B, n);
-  cleanup(C1, n);
-  cleanup(C2, n);
 }
 
 TEST(STRASSEN_OMP, TEST_3) {
   int n = 8;
 
-  int** A = initializeMatrix(n);
-  int** B = initializeMatrix(n);
+  matrix A(n, vector(n, 0));
+  matrix B(n, vector(n, 0));
 
-  setToRandom(A, n);
-  setToRandom(B, n);
+  setToRandom(&A, n);
+  setToRandom(&B, n);
 
-  int **C1 = nullptr, **C2 = nullptr;
+  matrix C1, C2;
 
-  C1 = multiply(A, B, n);
-  C2 = strassenMultiply(A, B, n);
+  C1 = multiply(&A, &B, n);
+  C2 = strassenMultiply(&A, &B, n);
 
   for (int i = 0; i < n; i++) {
-    ASSERT_EQ(C1[i][0], C2[i][0]);
+    ASSERT_EQ(C1[i], C2[i]);
   }
-
-  cleanup(A, n);
-  cleanup(B, n);
-  cleanup(C1, n);
-  cleanup(C2, n);
 }
 
 TEST(STRASSEN_OMP, TEST_4) {
   int n = 16;
 
-  int** A = initializeMatrix(n);
-  int** B = initializeMatrix(n);
+  matrix A(n, vector(n, 0));
+  matrix B(n, vector(n, 0));
 
-  setToRandom(A, n);
-  setToRandom(B, n);
+  setToRandom(&A, n);
+  setToRandom(&B, n);
 
-  int **C1 = nullptr, **C2 = nullptr;
+  matrix C1, C2;
 
-  C1 = multiply(A, B, n);
-  C2 = strassenMultiply(A, B, n);
+  C1 = multiply(&A, &B, n);
+  C2 = strassenMultiply(&A, &B, n);
 
   for (int i = 0; i < n; i++) {
-    ASSERT_EQ(C1[i][0], C2[i][0]);
+    ASSERT_EQ(C1[i], C2[i]);
   }
-
-  cleanup(A, n);
-  cleanup(B, n);
-  cleanup(C1, n);
-  cleanup(C2, n);
 }
 
 TEST(STRASSEN_OMP, TEST_5) {
-  int n = 256;
+  int n = 20;
 
-  int** A = initializeMatrix(n);
-  int** B = initializeMatrix(n);
+  matrix A(n, vector(n, 0));
+  matrix B(n, vector(n, 0));
 
-  setToRandom(A, n);
-  setToRandom(B, n);
+  setToRandom(&A, n);
+  setToRandom(&B, n);
 
-  int** C = nullptr;
+  matrix C1, C2;
+
+  C1 = multiply(&A, &B, n);
+  C2 = strassenMultiply(&A, &B, n);
+
+  for (int i = 0; i < n; i++) {
+    ASSERT_EQ(C1[i], C2[i]);
+  }
+}
+
+TEST(STRASSEN_OMP, TEST_6) {
+  int n = 512;
+
+  matrix A(n, vector(n, 0));
+  matrix B(n, vector(n, 0));
+
+  setToRandom(&A, n);
+  setToRandom(&B, n);
+
+  matrix C;
 
   double time1 = omp_get_wtime();
-  C = multiply(A, B, n);
+  C = multiply(&A, &B, n);
   double time2 = omp_get_wtime();
   double native = time2 - time1;
   std::cout << "native: " << native << std::endl;
 
   time1 = omp_get_wtime();
-  C = strassenSeq(A, B, n);
+  C = strassenMultiply(&A, &B, n, false);
   time2 = omp_get_wtime();
   double seq_time = time2 - time1;
   std::cout << "strassen seq: " << seq_time << std::endl;
 
   time1 = omp_get_wtime();
-  C = strassenMultiply(A, B, n);
+  C = strassenMultiply(&A, &B, n);
   time2 = omp_get_wtime();
   double parallel_time = time2 - time1;
   std::cout << "strassen par: " << parallel_time << std::endl;
 
   std::cout << "times: " << seq_time / parallel_time << std::endl;
-
-  cleanup(A, n);
-  cleanup(B, n);
-  cleanup(C, n);
 }
