@@ -3,7 +3,7 @@
 #include <chrono>  // NOLINT [build/c++11]
 #include <iostream>
 
-#include <tbb/tbb.h>
+#include "tbb/tbb.h"
 #include "gtest/gtest.h"
 
 #include "../../../modules/task_3/danshin_g_integral_rectangle/integral_rectangle.hpp"
@@ -24,7 +24,7 @@ TEST(IntegralRectangle, Function1) {
     auto start_time = tbb::tick_count::now();
     auto result = Integrate(dim, step, lower, upper, func);
     auto end_time = tbb::tick_count::now();
-    auto duration = (end_time - start_time).seconds() * 1000000;
+    auto duration = static_cast<size_t>((end_time - start_time).seconds() * 1000000);
     std::cout << "Sequence time: " << seq_duration << " us" << std::endl;
     std::cout << "Parallel time: " << duration << " us" << std::endl;
     std::cout << "Efficiency:    "
@@ -34,6 +34,7 @@ TEST(IntegralRectangle, Function1) {
     delete lower;
     delete upper;
     ASSERT_DOUBLE_EQ(result, 0.45);
+    ASSERT_NEAR(result, seq_result, 0.000001);
 }
 
 TEST(IntegralRectangle, Function2Step1) {
@@ -52,7 +53,7 @@ TEST(IntegralRectangle, Function2Step1) {
     auto start_time = tbb::tick_count::now();
     auto result = Integrate(dim, step, lower, upper, func);
     auto end_time = tbb::tick_count::now();
-    auto duration = (end_time - start_time).seconds() * 1000000;
+    auto duration = static_cast<size_t>((end_time - start_time).seconds() * 1000000);
     std::cout << "Sequence time: " << seq_duration << " us" << std::endl;
     std::cout << "Parallel time: " << duration << " us" << std::endl;
     std::cout << "Efficiency:    "
@@ -62,6 +63,7 @@ TEST(IntegralRectangle, Function2Step1) {
     delete[] lower;
     delete[] upper;
     ASSERT_DOUBLE_EQ(result, 0.2025);
+    ASSERT_NEAR(result, seq_result, 0.000001);
 }
 
 TEST(IntegralRectangle, Function2Step2) {
@@ -80,7 +82,7 @@ TEST(IntegralRectangle, Function2Step2) {
     auto start_time = tbb::tick_count::now();
     auto result = Integrate(dim, step, lower, upper, func);
     auto end_time = tbb::tick_count::now();
-    auto duration = (end_time - start_time).seconds() * 1000000;
+    auto duration = static_cast<size_t>((end_time - start_time).seconds() * 1000000);
     std::cout << "Sequence time: " << seq_duration << " us" << std::endl;
     std::cout << "Parallel time: " << duration << " us" << std::endl;
     std::cout << "Efficiency:    "
@@ -90,6 +92,7 @@ TEST(IntegralRectangle, Function2Step2) {
     delete[] lower;
     delete[] upper;
     ASSERT_NEAR(result, 0.2495, 0.0001);
+    ASSERT_NEAR(result, seq_result, 0.000001);
 }
 
 TEST(IntegralRectangle, Function3Step1) {
@@ -108,7 +111,7 @@ TEST(IntegralRectangle, Function3Step1) {
     auto start_time = tbb::tick_count::now();
     auto result = Integrate(dim, step, lower, upper, func);
     auto end_time = tbb::tick_count::now();
-    auto duration = (end_time - start_time).seconds() * 1000000;
+    auto duration = static_cast<size_t>((end_time - start_time).seconds() * 1000000);
     std::cout << "Sequence time: " << seq_duration << " us" << std::endl;
     std::cout << "Parallel time: " << duration << " us" << std::endl;
     std::cout << "Efficiency:    "
@@ -118,6 +121,7 @@ TEST(IntegralRectangle, Function3Step1) {
     delete[] lower;
     delete[] upper;
     ASSERT_NEAR(result, 3.249, 0.001);
+    ASSERT_NEAR(result, seq_result, 0.000001);
 }
 
 TEST(IntegralRectangle, Function3Step2) {
@@ -136,7 +140,7 @@ TEST(IntegralRectangle, Function3Step2) {
     auto start_time = tbb::tick_count::now();
     auto result = Integrate(dim, step, lower, upper, func);
     auto end_time = tbb::tick_count::now();
-    auto duration = (end_time - start_time).seconds() * 1000000;
+    auto duration = static_cast<size_t>((end_time - start_time).seconds() * 1000000);
     std::cout << "Sequence time: " << seq_duration << " us" << std::endl;
     std::cout << "Parallel time: " << duration << " us" << std::endl;
     std::cout << "Efficiency:    "
@@ -146,6 +150,7 @@ TEST(IntegralRectangle, Function3Step2) {
     delete[] lower;
     delete[] upper;
     ASSERT_NEAR(result, 3.4691, 0.0001);
+    ASSERT_NEAR(result, seq_result, 0.000001);
 }
 
 int main(int argc, char **argv) {

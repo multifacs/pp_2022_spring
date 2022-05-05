@@ -22,6 +22,7 @@ double Integrate(size_t dim, double* step, double* lower, double* upper, Functio
         }
         temp += func(curr_point);
       }
+      delete[] curr_point;
       return temp;
     }, std::plus<double>());
   for (size_t k = 0; k < dim; ++k) {
