@@ -1,4 +1,7 @@
 ﻿  // Copyright 2022 Butescu Vladimir
+
+#include <tbb/tick_count.h>
+#include <tbb/parallel_for.h>
 #include <gtest/gtest.h>
 #include <vector>
 #include "../../../modules/task_3/butescu_v_gauss_vert_tbb/vert_gauss.h"
