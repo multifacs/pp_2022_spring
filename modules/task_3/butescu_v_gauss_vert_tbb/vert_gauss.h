@@ -2,11 +2,12 @@
 #ifndef MODULES_TASK_3_BUTESCU_V_GAUSS_VERT_TBB_VERT_GAUSS_H_
 #define MODULES_TASK_3_BUTESCU_V_GAUSS_VERT_TBB_VERT_GAUSS_H_
 
+#include <tbb/tick_count.h>
+#include <tbb/parallel_for.h>
 #include <vector>
 #include <random>
 #include <ctime>
-#include <tbb/tick_count.h>
-#include <tbb/parallel_for.h>
+
 
 
 int clamp(int value, int max, int min);

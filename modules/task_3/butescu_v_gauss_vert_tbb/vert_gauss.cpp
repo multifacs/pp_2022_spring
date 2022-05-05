@@ -111,4 +111,4 @@ std::vector<double> gauss_filter_parralel_tbb(const std::vector<double>& matrix,
     }
 
     return result;
-};
+}
