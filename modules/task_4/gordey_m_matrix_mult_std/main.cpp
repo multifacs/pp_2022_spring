@@ -76,7 +76,7 @@ TEST(SPARSE_MATRIX_MULT_SEQ, MULT_3) {
     ASSERT_EQ(D, C);
 }
 TEST(SPARSE_MATRIX_MULT_SEQ, MULT_4) {
-    int count = 320;
+    int count = 140;
     double* arr = create_random_matrix(count*count);
     double* arr1 = create_random_matrix(count*count);
     SparseM A(arr, count, count);
