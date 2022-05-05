@@ -4,9 +4,10 @@
 
 #include <iostream>
 #include <random>
-#include <string>
 #include <utility>
+#include <cmath>
 #include <vector>
+#include <algorithm>
 
 #include "../../../3rdparty/unapproved/unapproved.h"
 
