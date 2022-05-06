@@ -1,6 +1,6 @@
 // Copyright 2022 Lebedev Alexey
 #include <gtest/gtest.h>
-#include <tbb/tick_count.h>
+#include <chrono>
 #include <random>
 #include <iostream>
 #include "./convex_hull.h"
@@ -8,11 +8,13 @@
 
 
 template<class T>
-double get_time(T input, std::vector<cv::Point2d>* output, lab3::Version v) {
-    auto t1 = tbb::tick_count::now();
-    lab3::convex_hull(input, output, v);
-    auto t2 = tbb::tick_count::now();
-    return (t2 - t1).seconds();
+double get_time(T input, std::vector<cv::Point2d>* output, lab4::Version v) {
+    typedef std::chrono::high_resolution_clock Time;
+    typedef std::chrono::nanoseconds ns;
+    auto start = Time::now();
+    lab4::convex_hull(input, output, v);
+    auto end = Time::now();
+    return static_cast<double>(std::chrono::duration_cast<ns>(end - start).count()) * 0.000001;
 }
 
 
@@ -33,9 +35,9 @@ class ConvexHullTEST : public ::testing::Test {
     std::string test_name;
 
     // check v against Version::PARALLEL
-    void check_time(lab3::Version v) {
+    void check_time(lab4::Version v) {
         double t_seq = get_time(test_image, &conv, v);
-        double t_parallel = get_time(test_image, &conv, lab3::Version::PARALLEL);
+        double t_parallel = get_time(test_image, &conv, lab4::Version::PARALLEL);
         std::cout << "Speed up " << t_seq / t_parallel << std::endl;
     }
 
@@ -95,12 +97,12 @@ void fill_points_random_uniform(std::vector<cv::Point2d>* input, size_t num_poin
 
 TEST_F(ConvexHullTEST, Test_parallel_vs_sequential) {
     fill_image_random_uniform(&test_image, { 10, 1070, 10, 1070 }, 1000000);
-    check_time(lab3::Version::SEQUENTIAL);
+    check_time(lab4::Version::SEQUENTIAL);
 }
 
 TEST_F(ConvexHullTEST, Test_parallel_vs_parallel_one_thread) {
     fill_image_random_uniform(&test_image, { 10, 1070, 10, 1070 }, 1000000);
-    check_time(lab3::Version::PARALLEL_ONE_THREAD);
+    check_time(lab4::Version::PARALLEL_ONE_THREAD);
 }
 
 TEST_F(ConvexHullTEST, Test_several_ranges) {
@@ -109,7 +111,7 @@ TEST_F(ConvexHullTEST, Test_several_ranges) {
     fill_image_random_uniform(&test_image, { 400, 600, 300, 700 }, 60000);
     fill_image_random_uniform(&test_image, { 50, 400, 500, 1000 }, 200000);
     fill_image_random_uniform(&test_image, { 500, 1000, 500, 1000 }, 200000);
-    check_time(lab3::Version::PARALLEL_ONE_THREAD);
+    check_time(lab4::Version::PARALLEL_ONE_THREAD);
 }
 
 TEST_F(ConvexHullTEST, Test_small_polygon) {
@@ -118,12 +120,12 @@ TEST_F(ConvexHullTEST, Test_small_polygon) {
     for (const auto& v : vertexes) {
         test_image.at<uint8_t>(v) = 255;
     }
-    lab3::convex_hull(test_image, &conv);
+    lab4::convex_hull(test_image, &conv);
     ASSERT_EQ(vertexes, conv);
 }
 
 TEST_F(ConvexHullTEST, Test_empty) {
-    lab3::convex_hull(test_image, &conv);
+    lab4::convex_hull(test_image, &conv);
     ASSERT_TRUE(conv.empty());
 }
 
@@ -133,8 +135,8 @@ TEST(TEST_POINTS_ONLY, Test_time) {
     fill_points_random_uniform(&input, 1000000, {0, 2000000, 0, 2000000});
     std::vector<cv::Point2d> input_ref(input);
     std::vector<cv::Point2d> output, output_ref;
-    double t_seq = get_time(&input, &output, lab3::Version::PARALLEL_ONE_THREAD);
-    double t_parallel = get_time(&input_ref, &output_ref, lab3::Version::PARALLEL);
+    double t_seq = get_time(&input, &output, lab4::Version::PARALLEL_ONE_THREAD);
+    double t_parallel = get_time(&input_ref, &output_ref, lab4::Version::PARALLEL);
     std::cout << "Speed up: " << t_seq / t_parallel << std::endl;
     ASSERT_EQ(output, output_ref);
 }
