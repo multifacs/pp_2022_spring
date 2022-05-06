@@ -63,8 +63,7 @@ std::vector<int> GaussFilterSeq(std::vector<int> matrix,
 
       if (result[i] > 255) {
         result[i] = 255;
-      }
-      else if (result[i] < 0) {
+      } else if (result[i] < 0) {
         result[i] = 0;
       }
     }
@@ -112,8 +111,7 @@ std::vector<int> GaussFilterParallel(std::vector<int> matrix,
           result[i] = static_cast<int>(sum);
           if (result[i] > 255) {
             result[i] = 255;
-          }
-          else if (result[i] < 0) {
+          } else if (result[i] < 0) {
             result[i] = 0;
           }
         }
