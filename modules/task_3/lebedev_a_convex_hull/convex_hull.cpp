@@ -80,7 +80,7 @@ void lab3::convex_hull(std::vector<cv::Point2d>* input, std::vector<cv::Point2d>
         }
         size_t size = std::accumulate(hulls.begin(), hulls.end(), 0,
             [](const size_t& _size, const std::vector<cv::Point2d>& v) {
-                return _size + v.size()]\
+                return _size + v.size();
             });
         std::vector<cv::Point2d> concat;
         concat.resize(size + last.size());
