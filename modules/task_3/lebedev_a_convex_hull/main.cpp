@@ -1,6 +1,6 @@
 // Copyright 2022 Lebedev Alexey
 #include <gtest/gtest.h>
-#include <omp.h>
+#include <tbb/tick_count.h.>
 #include <random>
 #include <iostream>
 #include "./convex_hull.h"
@@ -9,10 +9,10 @@
 
 template<class T>
 double get_time(T input, std::vector<cv::Point2d>* output, lab3::Version v) {
-    double t1 = omp_get_wtime();
+    auto t1 = tbb::tick_count::now();
     lab3::convex_hull(input, output, v);
-    double t2 = omp_get_wtime();
-    return t2 - t1;
+    auto t2 = tbb::tick_count::now();
+    return (t2 - t1).seconds();
 }
 
 

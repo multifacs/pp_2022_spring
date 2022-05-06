@@ -55,8 +55,7 @@ void convex_hull_impl(points_iterator begin, points_iterator end, std::vector<cv
 
 size_t get_effective_num_threads(size_t size) {
     uint8_t add = size / MIN_STEP == 0 ? 1 : 0;
-    return 1;
-    //return std::min(static_cast<int>(size / MIN_STEP + add), omp_get_max_threads());
+    return std::min<int>(static_cast<int>(size / MIN_STEP + add), tbb::task_scheduler_init::default_num_threads());
 }
 
 
@@ -67,17 +66,21 @@ void lab3::convex_hull(const cv::Mat& input, std::vector<cv::Point2d>* output, V
 }
 
 void lab3::convex_hull(std::vector<cv::Point2d>* input, std::vector<cv::Point2d>* output, Version v) {
-    size_t jobs = (v == Version::PARALLEL) ? get_effective_num_threads(input->size()) : 1;
     if (v != SEQUENTIAL) {
+        size_t jobs = (v == Version::PARALLEL) ? get_effective_num_threads(input->size()) : 1;
+        tbb::task_scheduler_init init(jobs);
         size_t step = input->size() / jobs;
         std::vector<cv::Point2d> last(input->end() - input->size() % jobs, input->end());
         std::vector<std::vector<cv::Point2d>> hulls(jobs);
+        tbb::parallel_for(tbb::blocked_range<size_t>(0, jobs, 1), [&input, &step, &hulls](tbb::blocked_range<size_t> r) {
+            convex_hull_impl(input->begin() + r.begin() * step, input->begin() + r.end() * step, &hulls[r.begin()]);
+            });
         for (size_t i = 0; i < jobs; i++) {
             convex_hull_impl(input->begin() + i * step, input->begin() + (i + 1) * step, &hulls[i]);
         }
         size_t size = std::accumulate(hulls.begin(), hulls.end(), 0,
             [](const size_t& _size, const std::vector<cv::Point2d>& v) {
-                return _size + v.size();
+                return _size + v.size()]\
             });
         std::vector<cv::Point2d> concat;
         concat.resize(size + last.size());
