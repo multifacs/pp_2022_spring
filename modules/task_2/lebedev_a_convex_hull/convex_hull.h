@@ -15,8 +15,10 @@ namespace cv = lab2::image_utils;
 
 namespace lab2 {
     enum Version {PARALLEL, SEQUENTIAL, PARALLEL_ONE_THREAD};
-    void convex_hull(const cv::Mat& input, std::vector<cv::Point2d>* output, Version v = Version::PARALLEL_ONE_THREAD);
-    void convex_hull(std::vector<cv::Point2d>* input, std::vector<cv::Point2d>* output, Version v = Version::PARALLEL_ONE_THREAD);
+    void convex_hull(const cv::Mat& input, std::vector<cv::Point2d>* output,
+        Version v = Version::PARALLEL_ONE_THREAD);
+    void convex_hull(std::vector<cv::Point2d>* input, std::vector<cv::Point2d>* output,
+        Version v = Version::PARALLEL_ONE_THREAD);
 };  // namespace lab2
 
 

@@ -72,7 +72,8 @@ void lab3::convex_hull(std::vector<cv::Point2d>* input, std::vector<cv::Point2d>
         size_t step = input->size() / jobs;
         std::vector<cv::Point2d> last(input->end() - input->size() % jobs, input->end());
         std::vector<std::vector<cv::Point2d>> hulls(jobs);
-        tbb::parallel_for(tbb::blocked_range<size_t>(0, jobs, 1), [&input, &step, &hulls](tbb::blocked_range<size_t> r) {
+        tbb::parallel_for(tbb::blocked_range<size_t>(0, jobs, 1),
+                          [&input, &step, &hulls](tbb::blocked_range<size_t> r) {
             convex_hull_impl(input->begin() + r.begin() * step, input->begin() + r.end() * step, &hulls[r.begin()]);
             });
         for (size_t i = 0; i < jobs; i++) {

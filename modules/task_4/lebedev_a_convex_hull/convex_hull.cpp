@@ -1,7 +1,7 @@
 // Copyright 2022 Lebedev Alexey
 #include "../../../modules/task_4/lebedev_a_convex_hull/convex_hull.h"
 #include <iostream>
-#include <thread>
+#include <thread> // NOLINT [build/c++11]
 #include <algorithm>
 #include <numeric>
 

@@ -1,6 +1,6 @@
 // Copyright 2022 Lebedev Alexey
 #include <gtest/gtest.h>
-#include <chrono>
+#include <chrono> // NOLINT [build/c++11]
 #include <random>
 #include <iostream>
 #include "./convex_hull.h"
