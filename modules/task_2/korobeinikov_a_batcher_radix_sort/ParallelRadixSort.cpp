@@ -29,10 +29,11 @@ std::vector<double>getRandomVector(int size, double lower_bound,
 std::vector<double> CountingSort(std::vector<double> vec, size_t num_byte) {
     size_t cnt[256] = { 0 };
     std::vector<double> res(vec.size());
+    uint64_t n = vec.size();
 
     unsigned char* byteArray = reinterpret_cast<unsigned char*>(vec.data());
 
-    for (int i = 0; i < vec.size(); ++i) {
+    for (int i = 0; i < n; ++i) {
         ++cnt[byteArray[8 * i + num_byte]];
     }
 
@@ -44,7 +45,7 @@ std::vector<double> CountingSort(std::vector<double> vec, size_t num_byte) {
         a += b;
     }
 
-    for (int i = 0; i < vec.size(); ++i) {
+    for (int i = 0; i < n; ++i) {
         size_t dst = cnt[byteArray[8 * i + num_byte]]++;
         res[dst] = vec[i];
     }
@@ -54,7 +55,8 @@ std::vector<double> CountingSort(std::vector<double> vec, size_t num_byte) {
 
 void RadixSort(int left, int right, std::vector<double>* vec) {
     std::vector<double> tmp(right - left + 1);
-    for (int i = 0; i < tmp.size(); ++i) {
+    uint64_t n = tmp.size();
+    for (int i = 0; i < n; ++i) {
         tmp[i] = vec->at(left + i);
     }
     for (int i = 0; i < 8; ++i) {
@@ -66,9 +68,9 @@ void RadixSort(int left, int right, std::vector<double>* vec) {
     }
     std::vector<double> tmp2(tmp.size());
     for (int i = 0; i < count_negative; ++i) {
-        tmp2[i] = tmp[tmp.size() - i - 1];
+        tmp2[i] = tmp[n - i - 1];
     }
-    for (int i = count_negative; i < tmp.size(); ++i) {
+    for (int i = count_negative; i < n; ++i) {
         tmp2[i] = tmp[i - count_negative];
     }
     for (int i = left; i <= right; ++i) {
