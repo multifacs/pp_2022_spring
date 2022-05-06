@@ -7,6 +7,7 @@
 std::vector<double> CountingSort(std::vector<double> vec, size_t num_byte) {
     size_t cnt[256] = { 0 };
     std::vector<double> res(vec.size());
+    int n = vec.size();
 
     unsigned char* byteArray = reinterpret_cast<unsigned char*>(vec.data());
 
@@ -22,7 +23,7 @@ std::vector<double> CountingSort(std::vector<double> vec, size_t num_byte) {
         a += b;
     }
 
-    for (int i = 0; i < vec.size(); ++i) {
+    for (int i = 0; i < n; ++i) {
         size_t dst = cnt[byteArray[8 * i + num_byte]]++;
         res[dst] = vec[i];
     }
@@ -32,6 +33,7 @@ std::vector<double> CountingSort(std::vector<double> vec, size_t num_byte) {
 
 std::vector<double> RadixSort(std::vector<double> vec) {
     std::vector<double> tmp = vec;
+    int n = tmp.size();
     for (int i = 0; i < 8; ++i) {
         tmp = CountingSort(tmp, i);
     }
@@ -41,9 +43,9 @@ std::vector<double> RadixSort(std::vector<double> vec) {
     }
     std::vector<double> tmp1(vec.size());
     for (int i = 0; i < count_negative; ++i) {
-        tmp1[i] = tmp[tmp.size() - i - 1];
+        tmp1[i] = tmp[n - i - 1];
     }
-    for (int i = count_negative; i < tmp.size(); ++i) {
+    for (int i = count_negative; i < n; ++i) {
         tmp1[i] = tmp[i - count_negative];
     }
     return tmp1;
