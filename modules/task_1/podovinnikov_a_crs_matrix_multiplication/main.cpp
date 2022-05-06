@@ -33,7 +33,7 @@ TEST(matrix_CSR_complex, operator_equal) {
   ASSERT_EQ(b.getPointers(), a.getPointers());
 }
 
-TEST(matrix_CSR_complex, matrix_constructor_and_createDenseMatrix) {
+TEST(matrix_CSR_complex, matrix_constructor_and__createDenseMatrix) {
   int size = 5;
   std::vector<std::complex<double>> a = {
       {1, 0}, {-1, 0}, {0, 0}, {-3, 0}, {0, 0}, {-2, 0}, {5, 0},
@@ -45,7 +45,7 @@ TEST(matrix_CSR_complex, matrix_constructor_and_createDenseMatrix) {
   ASSERT_EQ(a, b.getDenseMatrix());
 }
 
-TEST(matrix_CSR__complex, transposition_and_getDenseMatrix) {
+TEST(matrix_CSR_complex, transposition_and_getDenseMatrix) {
   int size = 4;
   std::vector<std::complex<double>> a = {
       {0, 0}, {3, 0}, {0, 0}, {7, 0}, {0, 0}, {0, 0}, {8, 0},  {0, 0},
