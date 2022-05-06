@@ -11,7 +11,7 @@ std::vector<double> CountingSort(std::vector<double> vec, size_t num_byte) {
 
     unsigned char* byteArray = reinterpret_cast<unsigned char*>(vec.data());
 
-    for (int i = 0; i < vec.size(); ++i) {
+    for (int i = 0; i < n; ++i) {
         ++cnt[byteArray[8 * i + num_byte]];
     }
 
