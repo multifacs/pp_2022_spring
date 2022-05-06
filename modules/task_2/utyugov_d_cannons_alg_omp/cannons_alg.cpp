@@ -1,6 +1,8 @@
 // Copyright 2022 Utyugov Denis
 #include "../../../modules/task_2/utyugov_d_cannons_alg_omp/cannons_alg.h"
+
 #include <omp.h>
+
 #include <iostream>
 #include <random>
 #include <string>
@@ -82,7 +84,7 @@ std::vector<std::vector<double>> CannonsAlg(std::vector<std::vector<double>> A,
   {
     int place_i = omp_get_thread_num() / q;
     int place_j = omp_get_thread_num() % q;
-    int Ai, Aj, Bi, Bj = 0;
+    int Ai = 0, Aj = 0, Bi = 0, Bj = 0;
 
     std::vector<std::vector<double>> Aij(BlSize), Bij(BlSize),
         Cij(BlSize, std::vector<double>(BlSize, 0));
