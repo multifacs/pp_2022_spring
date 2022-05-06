@@ -1,9 +1,11 @@
 // Copyright 2022 Kamenev Ilya
 
-#include "./strassen_matrix_multiply_omp.h"
 #include <math.h>
+
 #include <stdexcept>
 #include <string>
+
+#include "../../modules/task_2/kamenev_i_strassen_matrix_multiply_omp/strassen_matrix_multiply_omp.h"
 
 void naive_mult(double* a, double* b, double* c, int size) {
   for (int i = 0; i < size; i++) {
