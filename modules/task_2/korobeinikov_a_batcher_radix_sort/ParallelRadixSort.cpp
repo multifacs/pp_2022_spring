@@ -29,7 +29,7 @@ std::vector<double>getRandomVector(int size, double lower_bound,
 std::vector<double> CountingSort(std::vector<double> vec, size_t num_byte) {
     size_t cnt[256] = { 0 };
     std::vector<double> res(vec.size());
-    uint64_t n = vec.size();
+    int n = vec.size();
 
     unsigned char* byteArray = reinterpret_cast<unsigned char*>(vec.data());
 
@@ -55,7 +55,7 @@ std::vector<double> CountingSort(std::vector<double> vec, size_t num_byte) {
 
 void RadixSort(int left, int right, std::vector<double>* vec) {
     std::vector<double> tmp(right - left + 1);
-    uint64_t n = tmp.size();
+    int n = tmp.size();
     for (int i = 0; i < n; ++i) {
         tmp[i] = vec->at(left + i);
     }
