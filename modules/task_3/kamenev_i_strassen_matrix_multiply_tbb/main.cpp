@@ -1,7 +1,6 @@
 // Copyright 2022 Kamenev Ilya
 #include <gtest/gtest.h>
 #include "./strassen_matrix_multiply_tbb.h"
-#include <chrono>
 
 TEST(Kamenev_Strassen_Par, MatrixSize8Test) {
   int size = 8;
@@ -47,13 +46,7 @@ TEST(Kamenev_Strassen_Par, MatrixSize256Test) {
     a[i] = i + 1;
     b[i] = size * size - i;
   }
-
-  auto begin = std::chrono::steady_clock::now();
   strassen_tbb(a.data(), b.data(), strassen_par_res.data(), size);
-  auto end = std::chrono::steady_clock::now();
-  auto elapsed_ms =
-      std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
-  std::cout << elapsed_ms.count() << std::endl;
   naive_mult(a.data(), b.data(), naive_res.data(), size);
 
   ASSERT_EQ(naive_res, strassen_par_res);
@@ -69,12 +62,7 @@ TEST(Kamenev_Strassen_Par, MatrixSize1024Test) {
     a[i] = i + 1;
     b[i] = size * size - i;
   }
-  auto begin = std::chrono::steady_clock::now();
   strassen_tbb(a.data(), b.data(), strassen_par_res.data(), size);
-  auto end = std::chrono::steady_clock::now();
-  auto elapsed_ms =
-      std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
-  std::cout << elapsed_ms.count() << std::endl;
   naive_mult(a.data(), b.data(), naive_res.data(), size);
 
   ASSERT_EQ(naive_res, strassen_par_res);
