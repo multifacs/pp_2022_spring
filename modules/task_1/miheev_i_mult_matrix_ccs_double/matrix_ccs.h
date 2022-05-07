@@ -5,7 +5,6 @@
 
 #include <random>
 #include <vector>
-#include <ctime>
 #include <iostream>
 
 class SprMatCCS {
@@ -42,7 +41,7 @@ class SprMatCCS {
   SprMatCCS transMat();
 
   SprMatCCS& operator=(const SprMatCCS& mat);
-  SprMatCCS operator*(SprMatCCS B);
+  SprMatCCS operator*(SprMatCCS mat);
   bool operator==(SprMatCCS mat);
   bool operator!=(const SprMatCCS& mat) { return !(*this == mat); }
 

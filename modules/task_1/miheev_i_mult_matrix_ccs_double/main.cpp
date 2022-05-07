@@ -55,13 +55,65 @@ TEST(SprMatCCS_Test, Sparse_matrix_transposition) {
   EXPECT_TRUE(mat == arr);
 }
 
-TEST(SprMatCCS_Test, Sparse_matrix_multiplication_onlyreal) {
+TEST(SprMatCCS_Test, Sparse_matrix_multiplication_int) {
+  int cap = 3;
+  int dim = 3;
+
+  std::vector<double> val {100, -15, 2};
+  std::vector<int> rows {2, 1, 3};
+  std::vector<int> ptr {1, 2, 3, 4};
+
+  SprMatCCS A(dim, cap, val, rows, ptr);
+
+  val = {3, 6, -23};
+  rows = {3, 2, 1};
+  ptr = {1, 2, 3, 4};
+
+  SprMatCCS B(dim, cap, val, rows, ptr);
+
+  SprMatCCS C = A * B;
+
+  std::vector<double> res_val {6, -90, -2300};
+  std::vector<int> rows_res {3, 1, 2};
+  std::vector<int> ptr_res {1, 2, 3, 4};
+  SprMatCCS Res(dim, res_val.size(), res_val, rows_res, ptr_res);
+
+  EXPECT_TRUE(C == Res);
+}
+
+TEST(SprMatCCS_Test, Sparse_matrix_multiplication_double1) {
+  int cap = 4;
+  int dim = 4;
+
+  std::vector<double> val {-10.5, 22.1, 2.4, -3.2};
+  std::vector<int> rows {1, 3, 1, 3};
+  std::vector<int> ptr {1, 2, 3, 4, 5};
+
+  SprMatCCS A(dim, cap, val, rows, ptr);
+
+  val = {2.4, 6, -39, 108};
+  rows = {1, 2, 3, 1};
+  ptr = {1, 2, 4, 4, 5};
+
+  SprMatCCS B(dim, cap, val, rows, ptr);
+
+  SprMatCCS C = A * B;
+
+  std::vector<double> res_val {-25.2, -93.6, 132.6, -1134};
+  std::vector<int> rows_res {1, 1, 3, 1};
+  std::vector<int> ptr_res {1, 2, 4, 4, 5};
+  SprMatCCS Res(dim, res_val.size(), res_val, rows_res, ptr_res);
+
+  EXPECT_TRUE(C == Res);
+}
+
+TEST(SprMatCCS_Test, Sparse_matrix_multiplication_double2) {
   int cap = 5;
   int dim = 3;
 
-  std::vector<double> val{-12, 3, 21.4, 8, -4.5};
-  std::vector<int> rows{1, 3, 2, 3, 1};
-  std::vector<int> ptr{ 1, 3, 5, 6};
+  std::vector<double> val {-12, 3, 21.4, 8, -4.5};
+  std::vector<int> rows {1, 3, 2, 3, 1};
+  std::vector<int> ptr { 1, 3, 5, 6};
 
   SprMatCCS A(dim, cap, val, rows, ptr);
 
@@ -73,28 +125,26 @@ TEST(SprMatCCS_Test, Sparse_matrix_multiplication_onlyreal) {
 
   SprMatCCS C = A * B;
 
-  std::vector<double> res_val;
-  res_val = {-28.8, 7.2, 175.5, 128.4, 48, -1494, 324};
-
-  std::vector<int> rows_res = {1, 3, 1, 2, 3, 1, 3};
-  std::vector<int> ptr_res = {1, 3, 6, 8};
+  std::vector<double> res_val {-28.8, 7.2, 175.5, 128.4, 48, -1494, 324};
+  std::vector<int> rows_res {1, 3, 1, 2, 3, 1, 3};
+  std::vector<int> ptr_res {1, 3, 6, 8};
   SprMatCCS Res(dim, res_val.size(), res_val, rows_res, ptr_res);
 
   EXPECT_TRUE(C == Res);
 }
 
 TEST(SprMatCCS_Test, Sparse_matrix_multiplication_1) {
-  int cap = 10;
+  int dim = 10;
   int spr = 1;
   SprMatCCS mat1;
-  mat1.randMat(cap, spr);
+  mat1.randMat(dim, spr);
   SprMatCCS mat2;
-  mat2.randMat(cap, spr);
+  mat2.randMat(dim, spr);
 
   EXPECT_NO_THROW(mat1 * mat2);
 }
 
-TEST(SprMatCCS_Test, Sparse_matrix_multiplication_complex_meduim) {
+TEST(SprMatCCS_Test, Sparse_matrix_multiplication_2) {
   int dim = 100;
   int spr = 1;
   SprMatCCS mat1;
@@ -105,7 +155,7 @@ TEST(SprMatCCS_Test, Sparse_matrix_multiplication_complex_meduim) {
   EXPECT_NO_THROW(mat1 * mat2);
 }
 
-// TEST(SprMatCCS_Test, Sparse_matrix_multiplication_complex_large) {
+// TEST(SprMatCCS_Test, Sparse_matrix_multiplication_3) {
 //  clock_t start, end;
 //  int dim = 2000;
 //  int spr = 1;
@@ -115,7 +165,7 @@ TEST(SprMatCCS_Test, Sparse_matrix_multiplication_complex_meduim) {
 //  SprMatCCS mat2;
 //  mat2.randMat(dim, spr);
 //  end = clock();
-//  std::cout << "Spended time -> " << (end - start + .0) / CLOCKS_PER_SEC
+//  std::cout << "Time required -> " << (end - start + .0) / CLOCKS_PER_SEC
 //            << " <-" << std::endl;
 //  EXPECT_NO_THROW(mat1 * mat2);
 // }

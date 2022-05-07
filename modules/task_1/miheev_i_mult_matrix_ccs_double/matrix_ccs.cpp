@@ -2,13 +2,7 @@
 
 #include "../../../modules/task_1/miheev_i_mult_matrix_ccs_double/matrix_ccs.h"
 
-bool isZero(const double num) {
-  if (std::abs(num) < 0.00000001) {
-    return true;
-  }
-  return false;
-}
-
+bool isZero(const double num) { return (std::abs(num) < 0.00000001); }
 bool is_equal(double x, double y) { return std::fabs(x - y) < 0.00000001; }
 
 SprMatCCS::~SprMatCCS() {
@@ -164,17 +158,17 @@ bool SprMatCCS::operator==(SprMatCCS mat) {
   return true;
 }
 
-// void SprMatCCS::shwVal() {
-//  for (int i = 0; i < val.size(); i++) {
-//    std::cout << val[i] << " ";
-//  }
-//  std::cout << "\n";
-//  for (int i = 0; i < rows.size(); i++) {
-//    std::cout << rows[i] << " ";
-//  }
-//  std::cout << "\n";
-//  for (int i = 0; i < ptr.size(); i++) {
-//    std::cout << ptr[i] << " ";
-//  }
-//  std::cout << "\n";
-// }
+  //  void SprMatCCS::shwVal() {
+  //  for (int i = 0; i < val.size(); i++) {
+  //    std::cout << val[i] << " ";
+  //  }
+  //  std::cout << "\n";
+  //  for (int i = 0; i < rows.size(); i++) {
+  //   std::cout << rows[i] << " ";
+  //  }
+  //  std::cout << "\n";
+  //  for (int i = 0; i < ptr.size(); i++) {
+  //    std::cout << ptr[i] << " ";
+  //  }
+  //  std::cout << "\n";
+  //  }
