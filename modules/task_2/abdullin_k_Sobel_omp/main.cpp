@@ -36,6 +36,14 @@ TEST(Sobel, Parallel_filter_9x9_5) {
   a.clear(); seq_result.clear(); par_result.clear();
 }
 
+TEST(Sobel, Parallel_filter_7x9_4) {
+  std::vector<int> a = InitRandMatrix(7, 9);
+  std::vector<int> seq_result = SequentialSobelFilter(a, 7, 9);
+  std::vector<int> par_result = ParallelSobelFilter(a, 7, 9, 4);
+  EXPECT_EQ(seq_result, par_result);
+  a.clear(); seq_result.clear(); par_result.clear();
+}
+
 int main(int argc, char** argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
