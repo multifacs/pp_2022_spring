@@ -41,7 +41,7 @@ TEST(STDGaussian, GaussFilterParallel) {
 }
 
 TEST(STDGaussian, GaussFilterParallel2) {
-  int row = 120, column = 120;
+  int row = 100, column = 100;
   std::vector<int> matrix = CreateMatrix(row, column);
   std::vector<int> kernel = CreateKernel(5);
   ASSERT_NO_THROW(GaussFilterParallel(matrix, kernel, row, column));
