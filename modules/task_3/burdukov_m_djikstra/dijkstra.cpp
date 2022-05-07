@@ -18,9 +18,7 @@ std::vector<int> dijkstra(const int start,
   int curr_v = start;
   std::vector<int> updated(size, 0);
   int timer = 1;
-  int cnt = 0;
   while (true) {
-    int min = INF, pos = -1;
     tbb::enumerable_thread_specific<std::pair<int, int>> res{INF, -1};
     tbb::parallel_for(
         tbb::blocked_range<int>(0, size),
@@ -45,7 +43,6 @@ std::vector<int> dijkstra(const int start,
         });
     curr_v = tmp.second;
     timer++;
-    cnt++;
     if (curr_v == -1) break;
   }
   return dist;
