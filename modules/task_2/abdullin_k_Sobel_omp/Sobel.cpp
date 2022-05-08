@@ -1,7 +1,6 @@
 // Copyright 2022 Abdullin Konstantin
 #include <omp.h>
 #include <random>
-#include <ctime>
 #include <vector>
 #include <algorithm>
 
@@ -13,8 +12,8 @@ int radius = 1, size = 3;
 std::vector<int> InitRandMatrix(int height, int width) {
   if (height <= 0 || width <= 0)
     throw "Size of matrix error!";
-  std::mt19937 gen;
-  gen.seed(static_cast<int>(time(0)));
+  std::random_device dev;
+  std::mt19937 gen(dev());
   std::vector<int> result(height * width);
   for (int i = 0; i < height * width; i++)
     result[i] = gen() % 256;
