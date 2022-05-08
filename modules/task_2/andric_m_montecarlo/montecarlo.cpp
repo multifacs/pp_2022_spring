@@ -1,10 +1,12 @@
 // Copyright 2022 Andric Maria
 
 #include <iostream>
+
 #include "../../../modules/task_2/andric_m_montecarlo/montecarlo.h"
 
-double MonteCarloSeq(double(*func)(const std::vector<double>&),
-	const std::vector<double>& left, const std::vector<double>& right,
+double MonteCarloSeq(double(*func)(const std::vector < double > &),
+	const std::vector < double > & left,
+	const std::vector < double > & right,
 	uint64_t steps, int seed) {
 	// CHECK DIMENSIONS
 	if (left.size() != right.size())
@@ -18,13 +20,13 @@ double MonteCarloSeq(double(*func)(const std::vector<double>&),
 	// Random
 	std::mt19937 gen;
 	gen.seed(seed);
-	std::vector<std::uniform_real_distribution<double>> realdistr(dimension);
+	std::vector < std::uniform_real_distribution < double >> realdistr(dimension);
 	for (size_t i = 0; i < dimension; i++)
-		realdistr[i] = std::uniform_real_distribution<double>(left[i],
+		realdistr[i] = std::uniform_real_distribution < double >(left[i],
 			right[i]);
 
 	// Main cycle
-	std::vector<double> pnt(dimension);
+	std::vector < double > pnt(dimension);
 	for (uint64_t i = 0; i < steps; ++i) {
 		for (size_t k = 0; k < dimension; ++k) {
 			pnt[k] = realdistr[k](gen);
@@ -41,8 +43,9 @@ double MonteCarloSeq(double(*func)(const std::vector<double>&),
 	return res;
 }
 
-double MonteCarloOmp(double(*func)(const std::vector<double>&),
-	const std::vector<double>& left, const std::vector<double>& right,
+double MonteCarloOmp(double(*func)(const std::vector < double > &),
+	const std::vector < double > & left,
+	const std::vector < double > & right,
 	uint64_t steps, int threadnum, int seed) {
 	if (left.size() != right.size())
 		throw "Different sizes of left and right borders";
@@ -55,20 +58,19 @@ double MonteCarloOmp(double(*func)(const std::vector<double>&),
 	// Random
 	std::mt19937 gen;
 	gen.seed(seed);
-	std::vector<std::uniform_real_distribution<double>> realdistr(dimension);
+	std::vector < std::uniform_real_distribution < double >> realdistr(dimension);
 	for (size_t i = 0; i < dimension; i++)
-		realdistr[i] = std::uniform_real_distribution<double>(left[i],
+		realdistr[i] = std::uniform_real_distribution < double >(left[i],
 			right[i]);
 	// Main cycle
-	std::vector<double> pnt(dimension);
-#pragma omp parallel firstprivate(pnt) num_threads(threadnum) reduction(+ : res)
-	 {
-		for (uint64_t i = 0; i < steps; ++i) {
-			for (size_t k = 0; k < dimension; ++k) {
-				pnt[k] = realdistr[k](gen);
-			}
-			res += func(pnt);
+	std::vector < double > pnt(dimension);
+#pragma omp parallel firstprivate(pnt) num_threads(threadnum) reduction(+: res) {
+	for (uint64_t i = 0; i < steps; ++i) {
+		for (size_t k = 0; k < dimension; ++k) {
+			pnt[k] = realdistr[k](gen);
 		}
+		res += func(pnt);
+	}
 	}
 
 	// Area
