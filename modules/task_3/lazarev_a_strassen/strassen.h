@@ -2,9 +2,6 @@
 #ifndef MODULES_TASK_3_LAZAREV_A_STRASSEN_STRASSEN_H_
 #define MODULES_TASK_3_LAZAREV_A_STRASSEN_STRASSEN_H_
 
-#include <tbb/blocked_range.h>
-#include <tbb/parallel_reduce.h>
-#include <tbb/task_scheduler_init.h>
 #include <tbb/tbb.h>
 
 #include <string>
