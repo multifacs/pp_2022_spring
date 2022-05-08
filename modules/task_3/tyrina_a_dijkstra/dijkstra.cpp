@@ -66,8 +66,6 @@ VectorInt dijkstra_parallel(const Graph& graph, int src, int V) {
 
   dist[src] = 0;
 
-  bool flag = true;
-
   struct vertex {
     int min;
     int min_index;
