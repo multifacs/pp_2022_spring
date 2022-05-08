@@ -18,8 +18,8 @@ TEST(search_shortest_path_algorithm, 500_size_graph_80) {
   ASSERT_NO_THROW(start_algorithm(0, 500, 80));
 }
 
-TEST(search_shortest_path_algorithm, 1000_size_graph_100) {
-  ASSERT_NO_THROW(start_algorithm(0, 1000, 100));
+TEST(search_shortest_path_algorithm, 500_size_graph_100) {
+  ASSERT_NO_THROW(start_algorithm(0, 500, 100));
 }
 
 int main(int argc, char **argv) {
