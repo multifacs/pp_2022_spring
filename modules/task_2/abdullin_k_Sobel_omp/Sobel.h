@@ -19,6 +19,6 @@ int CalculatePixelValue(std::vector<int> source,
 std::vector<int> SequentialSobelFilter(std::vector<int> source,
   int height, int width);
 std::vector<int> ParallelSobelFilter(std::vector<int> source,
-  int height, int width, int num_threads);
+  int height, int width, std::size_t num_threads);
 
 #endif  // MODULES_TASK_2_ABDULLIN_K_SOBEL_OMP_SOBEL_H_

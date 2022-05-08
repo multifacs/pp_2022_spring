@@ -3,6 +3,7 @@
 #include <random>
 #include <ctime>
 #include <vector>
+#include <algorithm>
 
 #include "../../../modules/task_2/abdullin_k_Sobel_omp/Sobel.h"
 
@@ -51,15 +52,15 @@ std::vector<int> SequentialSobelFilter(std::vector<int> source,
 }
 
 std::vector<int> ParallelSobelFilter(std::vector<int> source,
-  int height, int width, int num_threads) {
+  int height, int width, std::size_t num_threads) {
   omp_set_num_threads(num_threads);
-  std::vector<int> result(height*width);
-  int part_size = (height * width) / num_threads;
-  int shift = (height * width) % num_threads;
+  std::vector<int> result(height * width);
+  std::size_t part_size = source.size() / num_threads;
+  std::size_t shift = source.size() % num_threads;
   std::vector<int> part;
 #pragma omp parallel shared(source, shift) private(part)
   {
-    int thread_id = omp_get_thread_num();
+    std::size_t thread_id = omp_get_thread_num();
     if (thread_id == 0) {
       part.resize(part_size + shift);
       std::copy(source.begin(), source.begin() + part_size + shift,
@@ -67,28 +68,28 @@ std::vector<int> ParallelSobelFilter(std::vector<int> source,
     } else {
       part.resize(part_size);
     }
-    for (int i = 1; i < num_threads; i++) {
+    for (std::size_t i = 1; i < num_threads; i++) {
       if (thread_id == i) {
         std::copy(source.begin() + part_size * i + shift, source.end() -
           part_size * (num_threads - i - 1), part.begin());
       }
     }
-    for (size_t i = 0; i < part.size(); i++) {
+    for (std::size_t i = 0; i < part.size(); i++) {
       int x, y;
       if (thread_id > 0) {
-        x = (thread_id * part_size + shift + i) % width;
-        y = (thread_id * part_size + shift + i) / width;
+        x = static_cast<int>(thread_id * part_size + shift + i) % width;
+        y = static_cast<int>(thread_id * part_size + shift + i) / width;
       } else {
-        x = i % width; y = i / width;
+        x = static_cast<int>(i) % width; y = static_cast<int>(i) / width;
       }
       part[i] = CalculatePixelValue(source, height, width, x, y);
     }
     if (thread_id == 0) {
-      for (size_t i = 0; i < part.size(); i++) {
+      for (std::size_t i = 0; i < part.size(); i++) {
         result[i] = part[i];
       }
     } else {
-      for (size_t i = 0; i < part.size(); i++) {
+      for (std::size_t i = 0; i < part.size(); i++) {
         result[part_size * thread_id + shift + i] = part[i];
       }
     }
