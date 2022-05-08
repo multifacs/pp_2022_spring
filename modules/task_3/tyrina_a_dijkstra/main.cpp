@@ -4,7 +4,7 @@
 
 #include "./dijkstra.h"
 
- TEST(DIJKSTRA_TBB, TEST_1) {
+TEST(DIJKSTRA_TBB, TEST_1) {
   int V = 9;
   Graph graph = {{0, 4, 0, 0, 0, 0, 0, 8, 0},  {4, 0, 8, 0, 0, 0, 0, 11, 0},
                  {0, 8, 0, 7, 0, 4, 0, 0, 2},  {0, 0, 7, 0, 9, 14, 0, 0, 0},
@@ -20,7 +20,7 @@
   }
 }
 
- TEST(DIJKSTRA_TBB, TEST_2) {
+TEST(DIJKSTRA_TBB, TEST_2) {
   int V = 4;
   Graph graph = getRandomGraph(V);
   Graph result_sequential = sequentialDijkstra(graph, V);
@@ -31,7 +31,7 @@
   }
 }
 
- TEST(DIJKSTRA_TBB, TEST_3) {
+TEST(DIJKSTRA_TBB, TEST_3) {
   int V = 6;
   Graph graph = getRandomGraph(V);
   Graph result_sequential = sequentialDijkstra(graph, V);
@@ -42,7 +42,7 @@
   }
 }
 
- TEST(DIJKSTRA_TBB, TEST_4) {
+TEST(DIJKSTRA_TBB, TEST_4) {
   int V = 8;
   Graph graph = getRandomGraph(V);
   Graph result_sequential = sequentialDijkstra(graph, V);
