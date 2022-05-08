@@ -30,7 +30,7 @@ if ( USE_OMP )
         add_custom_target(
                 "${ProjectId}_cppcheck" ALL
                 COMMAND ${CPPCHECK}
-                --enable=warning,performance,portability,information
+                --enable=warning,performance,portability,information,missingInclude
                 --language=c++
                 --std=c++11
                 --error-exitcode=1

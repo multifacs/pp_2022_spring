@@ -3,6 +3,7 @@
 #include <random>
 #include <vector>
 #include <algorithm>
+#include <iostream>
 
 #include "../../../modules/task_2/abdullin_k_Sobel_omp/Sobel.h"
 
