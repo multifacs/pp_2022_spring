@@ -70,7 +70,7 @@ std::vector<int> ParallelSobelFilter(std::vector<int> source,
           part_size * (num_threads - i - 1), part.begin());
       }
     }
-    for (int i = 0; i < part.size(); i++) {
+    for (long unsigned int i = 0; i < part.size(); i++) {
       int x, y;
       if (thread_id > 0) {
         x = (thread_id * part_size + shift + i) % width;
@@ -81,11 +81,11 @@ std::vector<int> ParallelSobelFilter(std::vector<int> source,
       part[i] = CalculatePixelValue(source, height, width, x, y);
     }
     if (thread_id == 0) {
-      for (int i = 0; i < part.size(); i++) {
+      for (long unsigned int i = 0; i < part.size(); i++) {
         result[i] = part[i];
       }
     } else {
-      for (int i = 0; i < part.size(); i++) {
+      for (long unsigned int i = 0; i < part.size(); i++) {
         result[part_size * thread_id + shift + i] = part[i];
       }
     }
