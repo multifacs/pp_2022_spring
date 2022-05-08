@@ -26,7 +26,7 @@ int Index(int x, int y, int width) {
   return result;
 }
 
-int CalculatePixelValue(std::vector<int>& source,
+int CalculatePixelValue(const std::vector<int>& source,
   int height, int width, int x, int y) {
   int pixel = 0;
   for (int i = -radius; i <= radius; i++)
@@ -39,8 +39,8 @@ int CalculatePixelValue(std::vector<int>& source,
   return clamp(pixel, 255, 0);
 }
 
-std::vector<int> SequentialSobelFilter(std::vector<int>& source,
-  int height, int width) {
+std::vector<int> SequentialSobelFilter(const std::vector<int>&
+  source, int height, int width) {
   std::vector<int> result(height * width);
 
   for (int y = 0; y < height; y++)
@@ -51,8 +51,8 @@ std::vector<int> SequentialSobelFilter(std::vector<int>& source,
   return result;
 }
 
-std::vector<int> ParallelSobelFilter(std::vector<int>& source,
-  int height, int width, std::size_t num_threads) {
+std::vector<int> ParallelSobelFilter(const std::vector<int>&
+  source, int height, int width, std::size_t num_threads) {
   omp_set_num_threads(num_threads);
   std::vector<int> result(height * width);
   std::size_t part_size = source.size() / num_threads;

@@ -14,11 +14,11 @@ T clamp(T value, T max, T min) {
   return value;
 }
 int Index(int x, int y, int height);
-int CalculatePixelValue(std::vector<int>& source,
+int CalculatePixelValue(const std::vector<int>& source,
   int height, int width, int x, int y);
-std::vector<int> SequentialSobelFilter(std::vector<int>& source,
-  int height, int width);
-std::vector<int> ParallelSobelFilter(std::vector<int>& source,
-  int height, int width, std::size_t num_threads);
+std::vector<int> SequentialSobelFilter(const std::vector<int>&
+  source, int height, int width);
+std::vector<int> ParallelSobelFilter(const std::vector<int>&
+  source, int height, int width, std::size_t num_threads);
 
 #endif  // MODULES_TASK_2_ABDULLIN_K_SOBEL_OMP_SOBEL_H_
