@@ -50,8 +50,7 @@ std::vector<int> SequentialSobelFilter(std::vector<int> source,
 std::vector<int> ParallelSobelFilter(std::vector<int> source,
   int height, int width, int num_threads) {
   omp_set_num_threads(num_threads);
-  std::vector<std::pair <int, std::vector<int>>> pre_result;
-  std::vector<int> result;
+  std::vector<int> result(height*width);
   int part_size = (height * width) / num_threads;
   int shift = (height * width) % num_threads;
   std::vector<int> part;
@@ -81,16 +80,16 @@ std::vector<int> ParallelSobelFilter(std::vector<int> source,
       }
       part[i] = CalculatePixelValue(source, height, width, x, y);
     }
-    pre_result.push_back({thread_id, part});
-  }
-  for (int i = 0; i < num_threads; i++) {
-    for (int j = 0; j < num_threads; j++) {
-      if (i == pre_result[j].first) {
-        result.insert(result.end(), pre_result[j].second.begin(),
-          pre_result[j].second.end());
-        break;
+    if (thread_id == 0) {
+      for (int i = 0; i < part.size(); i++) {
+        result[i] = part[i];
+      }
+    } else {
+      for (int i = 0; i < part.size(); i++) {
+        result[part_size * thread_id + shift + i] = part[i];
       }
     }
+    part.clear();
   }
   return result;
 }

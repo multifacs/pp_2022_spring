@@ -28,18 +28,18 @@ TEST(Sobel, Parallel_filter_11x4_3) {
   a.clear(); seq_result.clear(); par_result.clear();
 }
 
-TEST(Sobel, Parallel_filter_9x9_5) {
-  std::vector<int> a = InitRandMatrix(9, 9);
-  std::vector<int> seq_result = SequentialSobelFilter(a, 9, 9);
-  std::vector<int> par_result = ParallelSobelFilter(a, 9, 9, 5);
+TEST(Sobel, Parallel_filter_4x5_5) {
+  std::vector<int> a = InitRandMatrix(4, 5);
+  std::vector<int> seq_result = SequentialSobelFilter(a, 4, 5);
+  std::vector<int> par_result = ParallelSobelFilter(a, 4, 5, 5);
   EXPECT_EQ(seq_result, par_result);
   a.clear(); seq_result.clear(); par_result.clear();
 }
 
-TEST(Sobel, Parallel_filter_7x9_4) {
-  std::vector<int> a = InitRandMatrix(7, 9);
-  std::vector<int> seq_result = SequentialSobelFilter(a, 7, 9);
-  std::vector<int> par_result = ParallelSobelFilter(a, 7, 9, 4);
+TEST(Sobel, Parallel_filter_6x3_4) {
+  std::vector<int> a = InitRandMatrix(6, 3);
+  std::vector<int> seq_result = SequentialSobelFilter(a, 6, 3);
+  std::vector<int> par_result = ParallelSobelFilter(a, 6, 3, 4);
   EXPECT_EQ(seq_result, par_result);
   a.clear(); seq_result.clear(); par_result.clear();
 }
