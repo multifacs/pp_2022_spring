@@ -62,7 +62,7 @@ double MonteCarloOmp(double(*func)(const std::vector<double>&),
 	// Main cycle
 	std::vector<double> pnt(dimension);
 #pragma omp parallel firstprivate(pnt) num_threads(threadnum) reduction(+ : res)
-	{
+	 {
 		for (uint64_t i = 0; i < steps; ++i) {
 			for (size_t k = 0; k < dimension; ++k) {
 				pnt[k] = realdistr[k](gen);
