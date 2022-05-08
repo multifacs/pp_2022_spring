@@ -97,13 +97,13 @@ matrix strassenMultiply(matrix* A, matrix* B, int n, bool parallel) {
       matrix S6 = add(&B11, &B22, k);
       P5 = strassenMultiply(&S5, &S6, k, parallel);
     });
-    
+
     group.run([&A12, &A22, k, &B21, &B22, parallel, &P6]() {
       matrix S7 = subtract(&A12, &A22, k);
       matrix S8 = add(&B21, &B22, k);
       P6 = strassenMultiply(&S7, &S8, k, parallel);
     });
-    
+
     group.run([&A11, &A21, k, &B11, &B12, parallel, &P7]() {
       matrix S9 = subtract(&A11, &A21, k);
       matrix S10 = add(&B11, &B12, k);

@@ -100,7 +100,7 @@ TEST(STRASSEN_TBB, TEST_5) {
 }
 
 TEST(STRASSEN_TBB, TEST_6) {
-  int n = 512;
+  int n = 20;
 
   matrix A(n, vector(n, 0));
   matrix B(n, vector(n, 0));
