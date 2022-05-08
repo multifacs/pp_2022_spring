@@ -1,6 +1,7 @@
 // Copyright 2022 Lazarev Aleksey
 #include <gtest/gtest.h>
-#include <omp.h>
+
+#include <chrono>
 
 #include "./strassen.h"
 
@@ -110,23 +111,32 @@ TEST(STRASSEN_STD, TEST_6) {
 
   matrix C;
 
-  double time1 = omp_get_wtime();
+  // Get starting timepoint
+  auto time1 = std::chrono::high_resolution_clock::now();
   C = multiply(&A, &B, n);
-  double time2 = omp_get_wtime();
-  double native = time2 - time1;
+  // Get ending timepoint
+  auto time2 = std::chrono::high_resolution_clock::now();
+  auto native =
+      std::chrono::duration_cast<std::chrono::microseconds>(time2 - time1)
+          .count();
   std::cout << "native: " << native << std::endl;
 
-  time1 = omp_get_wtime();
+  time1 = std::chrono::high_resolution_clock::now();
   C = strassenMultiply(&A, &B, n, false);
-  time2 = omp_get_wtime();
-  double seq_time = time2 - time1;
+  time2 = std::chrono::high_resolution_clock::now();
+  auto seq_time =
+      std::chrono::duration_cast<std::chrono::microseconds>(time2 - time1)
+          .count();
   std::cout << "strassen seq: " << seq_time << std::endl;
 
-  time1 = omp_get_wtime();
+  time1 = std::chrono::high_resolution_clock::now();
   C = strassenMultiply(&A, &B, n);
-  time2 = omp_get_wtime();
-  double parallel_time = time2 - time1;
+  time2 = std::chrono::high_resolution_clock::now();
+  auto parallel_time =
+      std::chrono::duration_cast<std::chrono::microseconds>(time2 - time1)
+          .count();
   std::cout << "strassen par: " << parallel_time << std::endl;
 
-  std::cout << "times: " << seq_time / parallel_time << std::endl;
+  std::cout << "times: " << seq_time / static_cast<double>(parallel_time)
+            << std::endl;
 }
