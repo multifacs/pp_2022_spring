@@ -1,5 +1,6 @@
 // Copyright 2022 Abdullin Konstantin
 #include <gtest/gtest.h>
+#include <vector>
 #include "./Sobel.h"
 
 TEST(Sobel, Parallel_filter_3_threads) {

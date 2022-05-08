@@ -1,5 +1,9 @@
 // Copyright 2022 Abdullin Konstantin
 #include <omp.h>
+#include <random>
+#include <ctime>
+#include <vector>
+
 #include "../../../modules/task_2/abdullin_k_Sobel_omp/Sobel.h"
 
 int Kernel[9] = {-1, 0, 1, -2, 0, 2, -1, 0, 1};

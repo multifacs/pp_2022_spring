@@ -3,8 +3,6 @@
 #define MODULES_TASK_2_ABDULLIN_K_SOBEL_OMP_SOBEL_H_
 
 #include <vector>
-#include <random>
-#include <ctime>
 
 std::vector<int> InitRandMatrix(int height, int width);
 template <class T>
