@@ -1,6 +1,7 @@
 // Copyright 2022 Zharkov Andrey
-#ifndef MODULES_TASK_3_ZHARKOV_A_CRS_MATRIX_MULT_TBB_MATRIX_MULT_H_
-#define MODULES_TASK_3_ZHARKOV_A_CRS_MATRIX_MULT_TBB_MATRIX_MULT_H_
+#ifndef MODULES_TASK_3_ZHARKOV_A_MULT_CRS_ZHARKOV_A_MULT_CRS_H_
+#define MODULES_TASK_3_ZHARKOV_A_MULT_CRS_ZHARKOV_A_MULT_CRS_H_
+
 #include <complex>
 #include <vector>
 
@@ -34,4 +35,4 @@ Matrix matrixMult(const Matrix &first, const Matrix &second);
 
 void print(const MatrixCRS &in);
 
-#endif  // MODULES_TASK_3_ZHARKOV_A_CRS_MATRIX_MULT_TBB_MATRIX_MULT_H_
+#endif  // MODULES_TASK_3_ZHARKOV_A_MULT_CRS_ZHARKOV_A_MULT_CRS_H_
