@@ -184,7 +184,6 @@ while (parts_count > 1) {
         parts_count = parts_count / 2 + parts_count % 2;
     }
 }
-*vec = arr[0];
 }
 void hoar_sort_with_batch_merge(std::vector<float>* vec) {
     int middle = vec->size() / 2;
