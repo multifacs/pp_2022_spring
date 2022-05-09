@@ -10,6 +10,7 @@ TEST(Sequential, Test_5) {
     std::sort(cp.begin(), cp.end());
     hoar_sort_with_batch_merge(arr);
     ASSERT_TRUE((*arr) == cp);
+    delete arr;
 }
 
 TEST(Sequential, Test_10) {
@@ -19,6 +20,7 @@ TEST(Sequential, Test_10) {
     std::sort(cp.begin(), cp.end());
     hoar_sort_with_batch_merge(arr);
     ASSERT_TRUE((*arr) == cp);
+    delete arr;
 }
 
 TEST(Sequential, Test_20) {
@@ -28,6 +30,7 @@ TEST(Sequential, Test_20) {
     std::sort(cp.begin(), cp.end());
     hoar_sort_with_batch_merge(arr);
     ASSERT_TRUE((*arr) == cp);
+    delete arr;
 }
 
 TEST(Sequential, Test_50) {
@@ -37,6 +40,7 @@ TEST(Sequential, Test_50) {
     std::sort(cp.begin(), cp.end());
     hoar_sort_with_batch_merge(arr);
     ASSERT_TRUE((*arr) == cp);
+    delete arr;
 }
 
 TEST(Sequential, Test_100) {
@@ -46,6 +50,7 @@ TEST(Sequential, Test_100) {
     std::sort(cp.begin(), cp.end());
     hoar_sort_with_batch_merge(arr);
     ASSERT_TRUE((*arr) == cp);
+    delete arr;
 }
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
