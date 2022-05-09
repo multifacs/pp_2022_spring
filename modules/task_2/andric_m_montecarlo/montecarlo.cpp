@@ -79,3 +79,4 @@ double MonteCarloOmp(double(*func)(const std::vector<double>&),
     res = S * res / (steps * threadnum);
     return res;
 }
+
