@@ -7,10 +7,10 @@
 
 struct Matrix {
   int rows, cols;
+
   std::vector<std::complex<int>> val;
-  Matrix(int rows, int cols) : rows(rows), cols(cols) {
-    val = std::vector<std::complex<int>>(cols * rows);
-  }
+
+  Matrix(int _rows, int _cols) : rows(_rows), cols(_cols), val(cols * rows) { }
   ~Matrix() = default;
 };
 
