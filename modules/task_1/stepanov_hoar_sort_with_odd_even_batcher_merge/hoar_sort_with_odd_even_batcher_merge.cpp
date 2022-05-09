@@ -153,6 +153,8 @@ std::vector<float>* part2, std::vector<float>* vec) {
     std::vector<float>* even_part = even_batcher(part1, part2, vec);
     std::vector<float>* odd_part = odd_batcher(part1, part2, vec);
     odd_even_batcher_merge(even_part, odd_part, vec);
+    delete even_part;
+    delete odd_part;
 }
 
 void hoar_sort_with_batch_merge(std::vector<float>* vec) {
