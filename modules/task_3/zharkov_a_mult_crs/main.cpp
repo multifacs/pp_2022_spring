@@ -107,7 +107,6 @@ TEST(CRS_Matrix_Mult, D) {
 }
 
 TEST(CRS_Matrix_Mult, mult_random_matrix) {
-
   Matrix f = generateRandomMat(150, 150);
   Matrix s = generateRandomMat(150, 150);
 
