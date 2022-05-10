@@ -5,7 +5,6 @@
 #include <vector>
 
 using std::vector;
-using std::list;
 
 void randomVector(vector<int>* data, size_t size, size_t rad);
 size_t rad(size_t value);

@@ -9,6 +9,9 @@
 #include "../../../pp_2022_spring/modules/task_4/ustiuzhanin_n_radix_sort_simple_merge/radix_sort.h"
 #include "../../../3rdparty/unapproved/unapproved.h"
 
+using std::vector;
+using std::list;
+
 void randomVector(vector<int>* data, size_t size, size_t rad) {
     if (!size)
         return;
