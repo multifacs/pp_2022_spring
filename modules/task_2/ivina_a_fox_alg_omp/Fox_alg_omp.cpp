@@ -12,7 +12,7 @@ Matrix FillMatrixRandom(const Matrix &m) {
   std::random_device rd;
   std::mt19937 gen(rd());
   std::uniform_real_distribution<> dis(0.0, 1000.0);
-  Matrix matrix {m};
+  Matrix matrix{m};
   if (matrix.size() > 0) {
     for (size_t i = 0; i < matrix.size(); i++) {
       for (size_t j = 0; j < matrix[0].size(); j++) {
@@ -145,8 +145,7 @@ Matrix Fox(const Matrix &a, const Matrix &b, const size_t thread_num) {
     }
   }
 
-  for (size_t stage = 0; stage < MatrixSize; stage++)  //пробегаем все итерации
-  {
+  for (size_t stage = 0; stage < MatrixSize; stage++) {
     bool processed = false;
 #pragma omp parallel num_threads(thread_num) \
     shared(c, newA, newB, temp, a, processed, stage)
@@ -164,7 +163,6 @@ Matrix Fox(const Matrix &a, const Matrix &b, const size_t thread_num) {
         processed = true;
       }
       while (!processed) {
-        ;
       }
     }
   }
