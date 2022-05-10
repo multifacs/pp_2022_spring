@@ -16,14 +16,15 @@ class OddEvenMerge {
     std::vector<int> complete_to_end(const std::vector<int>& vec1,
                 const std::vector<int>& vec2, int count_vec1, int count_vec2) {
         std::vector<int> result;
-
-        if (count_vec1 < vec1.size()) {
-            for (int i = count_vec1; i < vec1.size(); i += 2) {
+        int vec1_size = vec1.size();
+        if (count_vec1 < vec1_size) {
+            for (int i = count_vec1; i < vec1_size; i += 2) {
                 result.push_back(vec1[i]);
             }
         }
-        if (count_vec2 < vec2.size()) {
-            for (int i = count_vec2; i < vec2.size(); i += 2) {
+        int vec2_size = vec2.size();
+        if (count_vec2 < vec2_size) {
+            for (int i = count_vec2; i < vec2_size; i += 2) {
                 result.push_back(vec2[i]);
             }
         }
@@ -36,7 +37,9 @@ class OddEvenMerge {
         std::vector<int> even_part;
         int count_vec1 = 0;
         int count_vec2 = 0;
-        while (count_vec1 < vec1.size() && count_vec2 < vec2.size()) {
+        int vec1_size = vec1.size();
+        int vec2_size = vec2.size();
+        while (count_vec1 < vec1_size && count_vec2 < vec2_size) {
             if (vec1[count_vec1] < vec2[count_vec2]) {
                 even_part.push_back(vec1[count_vec1]);
                 count_vec1 += 2;
@@ -58,7 +61,9 @@ class OddEvenMerge {
         std::vector<int> odd_part;
         int count_vec1 = 1;
         int count_vec2 = 1;
-        while (count_vec1 < vec1.size() && count_vec2 < vec2.size()) {
+        int vec1_size = vec1.size();
+        int vec2_size = vec2.size();
+        while (count_vec1 < vec1_size && count_vec2 < vec2_size) {
             if (vec1[count_vec1] < vec2[count_vec2]) {
                 odd_part.push_back(vec1[count_vec1]);
                 count_vec1 += 2;
@@ -86,7 +91,9 @@ class OddEvenMerge {
         }
         int count_vec1 = 1;
         int count_vec2 = 0;
-        while (count_vec1 < even_vec.size() && count_vec2 < odd_vec.size()) {
+        int even_vec_size = even_vec.size();
+        int odd_vec_size = odd_vec.size();
+        while (count_vec1 < even_vec_size && count_vec2 < odd_vec_size) {
             if (even_vec[count_vec1] < odd_vec[count_vec2]) {
                 result.push_back(even_vec[count_vec1]);
                 result.push_back(odd_vec[count_vec2]);

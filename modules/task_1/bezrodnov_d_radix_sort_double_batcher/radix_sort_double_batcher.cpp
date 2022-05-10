@@ -5,16 +5,17 @@
 std::vector<std::vector<int>> get_vector_part(const std::vector<int>& vec,
                                                 unsigned int part) {
         std::vector<std::vector<int>> result(part);
-
-        for (int i = 0; i < result.size(); i++) {
-            for (int j = 0; j < vec.size() / part; j++) {
-                result[i].push_back(vec[i * (vec.size() / part) + j]);
+        int result_size = result.size();
+        int vec_size = vec.size();
+        for (int i = 0; i < result_size; i++) {
+            for (int j = 0; j < vec_size / part; j++) {
+                result[i].push_back(vec[i * (vec_size / part) + j]);
             }
         }
 
-        if (part * (vec.size() / part) < vec.size()) {
-            for (int i = part * (vec.size() / part); i < vec.size(); i++) {
-                result[result.size() - 1].push_back(vec[i]);
+        if (part * (vec_size / part) < vec_size) {
+            for (int i = part * (vec_size / part); i < vec_size; i++) {
+                result[result_size - 1].push_back(vec[i]);
             }
         }
         return result;
@@ -22,7 +23,8 @@ std::vector<std::vector<int>> get_vector_part(const std::vector<int>& vec,
 
 std::vector<int> to_int(const std::vector<double>& vec, unsigned int count) {
     std::vector<int> result(vec.size());
-    for (int i = 0; i < vec.size(); i++) {
+    int vec_size = vec.size();
+    for (int i = 0; i < vec_size; i++) {
         result[i] = static_cast<int>(vec[i] * pow(10, count));
     }
     return result;
@@ -30,7 +32,8 @@ std::vector<int> to_int(const std::vector<double>& vec, unsigned int count) {
 
 std::vector<double> to_double(const std::vector<int>& vec, unsigned int count) {
     std::vector<double> result(vec.size());
-    for (int i = 0; i < vec.size(); i++) {
+    int vec_size = vec.size();
+    for (int i = 0; i < vec_size; i++) {
         result[i] = static_cast<double>(vec[i]) / pow(10.0, count);
     }
     return result;
@@ -39,8 +42,8 @@ std::vector<double> to_double(const std::vector<int>& vec, unsigned int count) {
 std::vector<int> counting_sort(const std::vector<int>& vec, int div) {
     std::vector<int> result(vec.size());
     std::vector<int> count(10, 0);
-
-    for (int i = 0; i < vec.size(); i++) {
+    int vec_size = vec.size();
+    for (int i = 0; i < vec_size; i++) {
         int index = (vec[i] / div) % 10;
         count[index]++;
     }
@@ -48,7 +51,7 @@ std::vector<int> counting_sort(const std::vector<int>& vec, int div) {
     for (int i = 1; i < 10; i++)
         count[i] += count[i - 1];
 
-    for (int i = vec.size() - 1; i >= 0; i--) {
+    for (int i = vec_size - 1; i >= 0; i--) {
         result[count[(vec[i] / div) % 10] - 1] = vec[i];
         count[(vec[i] / div) % 10]--;
     }
@@ -85,7 +88,8 @@ std::vector<double> radix_sort(const std::vector<double>& vec,
 }
 
 bool check_sort(const std::vector<double>& vec) {
-    for (int i = 0; i < vec.size() - 1; i++) {
+    int vec_size = vec.size();
+    for (int i = 0; i < vec_size - 1; i++) {
         if (vec[i] > vec[i + 1])
             return false;
     }
@@ -98,7 +102,8 @@ std::vector<double> get_random_double_vector(unsigned int elements) {
     std::mt19937 engine{ std::random_device().operator ()() };
     auto generator = std::bind(distribution, engine);
     std::generate_n(result.begin(), elements, generator);
-    for (int i = 0; i < result.size(); i++) {
+    int result_size = result.size();
+    for (int i = 0; i < result_size; i++) {
         result[i] -= remainder(result[i], 0.001);
     }
     return result;
