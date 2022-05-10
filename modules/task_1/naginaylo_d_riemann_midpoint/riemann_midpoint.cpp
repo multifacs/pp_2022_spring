@@ -1,6 +1,9 @@
 // Copyright 2022 Naginaylo Dmitriy
 #include "../../../modules/task_1/naginaylo_d_riemann_midpoint/riemann_midpoint.h"
 
+// Helper funcs
+///////////////////////////////////////////////////////////////////////////////
+
 vector_double find_deltas(const int dim, const int subdiv,
                           const vector_pair& limits) {
   vector_double delta(dim);
@@ -10,6 +13,8 @@ vector_double find_deltas(const int dim, const int subdiv,
   return delta;
 }
 
+///////////////////////////////////////////////////////////////////////////////
+
 int find_iter_num(const int dim, const int subdiv) {
   int iter_num = 1;
   for (int i = 0; i < dim; i++) {
@@ -17,6 +22,8 @@ int find_iter_num(const int dim, const int subdiv) {
   }
   return iter_num;
 }
+
+///////////////////////////////////////////////////////////////////////////////
 
 vector_double find_midpoint(const int dim, const int subdiv,
                             const vector_pair& limits,
@@ -28,6 +35,8 @@ vector_double find_midpoint(const int dim, const int subdiv,
 
   return point;
 }
+
+///////////////////////////////////////////////////////////////////////////////
 
 double main_loop(const int dim, const int subdiv, const vector_pair& limits,
                  const function& func, const int iter_num,
@@ -41,6 +50,8 @@ double main_loop(const int dim, const int subdiv, const vector_pair& limits,
   return result;
 }
 
+///////////////////////////////////////////////////////////////////////////////
+
 double find_area(const int dim, const vector_double& delta,
                  const double result) {
   double final_result = result;
@@ -49,6 +60,11 @@ double find_area(const int dim, const vector_double& delta,
   }
   return final_result;
 }
+
+///////////////////////////////////////////////////////////////////////////////
+
+// Main func
+///////////////////////////////////////////////////////////////////////////////
 
 double riemannMidpoint(const int dim, const int subdiv,
                        const vector_pair& limits, const function& func) {
