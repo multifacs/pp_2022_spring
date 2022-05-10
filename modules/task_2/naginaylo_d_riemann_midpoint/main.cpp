@@ -28,7 +28,7 @@ void time_test(const int dim, const int subdiv, const vector_pair& limits,
   std::cout << "Speed-up        | " << speed << " times\n";
 }
 
-TEST(RIEMANN_MIDPOINT_SEQ, TEST_FUNC_1) {
+TEST(RIEMANN_MIDPOINT_OMP, TEST_FUNC_1) {
   const int dim = 1;
   const int subdiv = 10;
   const vector_pair limits = {{0, 4}};
@@ -46,7 +46,7 @@ TEST(RIEMANN_MIDPOINT_SEQ, TEST_FUNC_1) {
   ASSERT_NEAR(parallel_result, reference, error);
 }
 
-TEST(RIEMANN_MIDPOINT_SEQ, TEST_FUNC_2) {
+TEST(RIEMANN_MIDPOINT_OMP, TEST_FUNC_2) {
   const int dim = 2;
   const int subdiv = 10;
   const vector_pair limits = {{1, 2}, {-5, 8}};
@@ -65,7 +65,7 @@ TEST(RIEMANN_MIDPOINT_SEQ, TEST_FUNC_2) {
   ASSERT_NEAR(parallel_result, reference, error);
 }
 
-TEST(RIEMANN_MIDPOINT_SEQ, TEST_FUNC_3) {
+TEST(RIEMANN_MIDPOINT_OMP, TEST_FUNC_3) {
   const int dim = 2;
   const int subdiv = 10;
   const vector_pair limits = {{1, 2}, {-5, 8}};
@@ -84,7 +84,7 @@ TEST(RIEMANN_MIDPOINT_SEQ, TEST_FUNC_3) {
   ASSERT_NEAR(parallel_result, reference, error);
 }
 
-TEST(RIEMANN_MIDPOINT_SEQ, TEST_FUNC_4) {
+TEST(RIEMANN_MIDPOINT_OMP, TEST_FUNC_4) {
   const int dim = 3;
   const int subdiv = 5;
   const vector_pair limits = {{1, 2}, {-5, 8}, {10, 14}};
@@ -104,7 +104,7 @@ TEST(RIEMANN_MIDPOINT_SEQ, TEST_FUNC_4) {
   ASSERT_NEAR(parallel_result, reference, error);
 }
 
-TEST(RIEMANN_MIDPOINT_SEQ, TEST_FUNC_5) {
+TEST(RIEMANN_MIDPOINT_OMP, TEST_FUNC_5) {
   const int dim = 3;
   const int subdiv = 5;
   const vector_pair limits = {{4, 6}, {-2, 7}, {-1, 11}};
