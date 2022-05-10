@@ -3,7 +3,7 @@
 #include "../../../modules/task_2/bezrodnov_d_radix_sort_double_batcher/radix_sort_double_batcher.h"
 
 std::vector<std::vector<int>> get_vector_part_omp(const std::vector<int>& vec,
-                                                unsigned int part) {
+                                                int part) {
     std::vector<std::vector<int>> result(part);
     int result_size = result.size();
     int vec_size = vec.size();

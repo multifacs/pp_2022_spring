@@ -5,7 +5,7 @@
 #include "../../../modules/task_3/bezrodnov_d_radix_sort_double_batcher/radix_sort_double_batcher.h"
 
 std::vector<std::vector<int>> get_vector_part_tbb(const std::vector<int>& vec,
-                                                unsigned int part) {
+                                                int part) {
     std::vector<std::vector<int>> result(part);
     int vec_size = vec.size();
     tbb::parallel_for(tbb::blocked_range<int>(0, result.size()),
