@@ -62,7 +62,7 @@ TEST(STD_RADIX_SORT, TEST_WRONG_DATA) {
 
     randomVector(&data, size, countRad);
     data.push_back(-1);
-    ASSERT_ANY_THROW(radixSortSTD(&data););
+    ASSERT_ANY_THROW(radixSortSTD(&data));
 }
 
 int main(int argc, char** argv) {
