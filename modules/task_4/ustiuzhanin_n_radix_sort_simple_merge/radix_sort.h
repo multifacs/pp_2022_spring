@@ -2,13 +2,7 @@
 #ifndef MODULES_TASK_4_USTIUZHANIN_N_RADIX_SORT_SIMPLE_MERGE_RADIX_SORT_H_
 #define MODULES_TASK_4_USTIUZHANIN_N_RADIX_SORT_SIMPLE_MERGE_RADIX_SORT_H_
 
-#include <thread>
-#include <future>
 #include <vector>
-#include <list>
-#include <random>
-#include <ctime>
-#include <algorithm>
 
 using std::vector;
 using std::list;

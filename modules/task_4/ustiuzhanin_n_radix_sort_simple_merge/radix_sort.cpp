@@ -1,5 +1,10 @@
 // Copyright 2022 Ustiuzhanin Nikita
 
+#include <vector>
+#include <list>
+#include <random>
+#include <ctime>
+#include <algorithm>
 #include <string>
 #include "../../../pp_2022_spring/modules/task_4/ustiuzhanin_n_radix_sort_simple_merge/radix_sort.h"
 #include "../../../3rdparty/unapproved/unapproved.h"
