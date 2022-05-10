@@ -52,7 +52,7 @@ TEST(STD_RADIX_SORT, TEST_EMPTY) {
     size_t countRad = 4;
 
     randomVector(&data, size, countRad);
-    ASSERT_NO_THROW(radixSortSTD(&data););
+    ASSERT_NO_THROW(radixSortSTD(&data));
 }
 
 TEST(STD_RADIX_SORT, TEST_WRONG_DATA) {
