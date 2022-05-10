@@ -5,8 +5,8 @@
 
 std::vector<std::vector<double>> get_random_matrix(size_t size, double val) {
     std::vector<std::vector<double>> res(size, std::vector<double>(size));
-    for (int i = 0; i < size; i++) {
-        for (int j = 0; j < size; j++) {
+    for (size_t i = 0; i < size; i++) {
+        for (size_t j = 0; j < size; j++) {
             res[i][j] = i * j + val;
         }
     }
