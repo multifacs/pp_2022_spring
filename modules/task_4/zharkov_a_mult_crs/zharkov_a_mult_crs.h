@@ -1,6 +1,6 @@
 // Copyright 2022 Zharkov Andrey
-#ifndef MODULES_TASK_4_ZHARKOV_A_SPARSE_MATRIX_MULTIPLICATION_SPARSE_MATRIX_MULTIPLICATION_H_
-#define MODULES_TASK_4_ZHARKOV_A_SPARSE_MATRIX_MULTIPLICATION_SPARSE_MATRIX_MULTIPLICATION_H_
+#ifndef MODULES_TASK_4_ZHARKOV_A_MULT_CRS_ZHARKOV_A_MULT_CRS_H_
+#define MODULES_TASK_4_ZHARKOV_A_MULT_CRS_ZHARKOV_A_MULT_CRS_H_
 
 #include <cmath>
 #include <complex>
@@ -52,4 +52,4 @@ std::vector<std::vector<cpx>> naiveMultiplication(
     const std::vector<std::vector<cpx>>& matrix1,
     const std::vector<std::vector<cpx>>& matrix2);
 
-#endif  // MODULES_TASK_4_ZHARKOV_A_SPARSE_MATRIX_MULTIPLICATION_SPARSE_MATRIX_MULTIPLICATION_H_
+#endif  // MODULES_TASK_4_ZHARKOV_A_MULT_CRS_ZHARKOV_A_MULT_CRS_H_
