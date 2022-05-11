@@ -1,7 +1,6 @@
 // Copyright 2022 Zharkov Andrey
 #include <gtest/gtest.h>
 
-#include <chrono>
 #include <vector>
 
 #include "./zharkov_a_mult_crs.h"
