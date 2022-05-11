@@ -76,7 +76,7 @@ TEST(Sparce_Matrix_Multiplication, Test_Naive_and_CRS_Multiplication) {
   EXPECT_EQ(multCRS, multNaive);
 }
 
- TEST(Sparce_Matrix_Multiplication, Test_Big_Matrix) {
+TEST(Sparce_Matrix_Multiplication, Test_Big_Matrix) {
   CRS_Matrix rand1 = getRandomCRSMatrix(100, 100, 0.1);
   CRS_Matrix rand2 = getRandomCRSMatrix(100, 100, 0.1);
   CRS_Matrix trans = rand2.transpose();
@@ -93,4 +93,4 @@ TEST(Sparce_Matrix_Multiplication, Test_Naive_and_CRS_Multiplication) {
   double seqTime = static_cast<double>(End - Start) / CLOCKS_PER_SEC;
   std::cout << "Seq = " << seqTime << std::endl;
   std::cout << "Boost = " << seqTime / parallTime << std::endl;
- }
+}
