@@ -157,7 +157,7 @@ void batch_merge(std::vector<float>* part1,
 }
 
 void hoar_sort_with_batch_merge_std(std::vector<float>* vec) {
-    const int nthreads = std::thread::hardware_concurrency();
+    const size_t nthreads = std::thread::hardware_concurrency();
     std::vector<std::vector<float>> arr(nthreads);
     std::vector<std::thread> threads(nthreads);
     const size_t part = (vec->size() / nthreads) + 1;
@@ -169,7 +169,7 @@ void hoar_sort_with_batch_merge_std(std::vector<float>* vec) {
         }, i);
     }
     for (size_t i = 0; i < nthreads; i++) threads[i].join();
-    int parts_count = nthreads;
+    size_t parts_count = nthreads;
     while (parts_count > 1) {
         for (int i = 0; i < (parts_count / 2); i++) {
             threads[i] =
