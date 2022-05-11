@@ -146,7 +146,6 @@ Matrix Fox(const Matrix &a, const Matrix &b, const size_t thread_num) {
   }
 
   for (size_t stage = 0; stage < MatrixSize; stage++) {
-    bool processed = false;
 #pragma omp parallel num_threads(thread_num) shared(c, newA, newB, temp, a, processed, stage)
     {
       int tid = omp_get_thread_num();
@@ -158,10 +157,6 @@ Matrix Fox(const Matrix &a, const Matrix &b, const size_t thread_num) {
         for (const auto task : tasks) {
           process_B(task, newB, temp);
         }
-
-        processed = true;
-      }
-      while (!processed) {
       }
     }
   }
