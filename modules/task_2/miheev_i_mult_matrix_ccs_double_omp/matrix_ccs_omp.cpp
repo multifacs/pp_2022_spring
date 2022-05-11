@@ -202,7 +202,6 @@ SprMatCCS SprMatCCS::ParallelMult(SprMatCCS mat) {
     val_res.insert(val_res.end(), val_shared[i].begin(), val_shared[i].end());
     row_res.insert(row_res.end(), rows_shared[i].begin(), rows_shared[i].end());
   }
-
   int sum = 1;
   for (int i = 0; i < trans.dim; i++) {
     sum += ptr_counter[i];
