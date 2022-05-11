@@ -3,10 +3,10 @@
 #include <gtest/gtest.h>
 #include <omp.h>
 #include <time.h>
+
 #include <vector>
 
 #include "../../../modules/task_2/miheev_i_mult_matrix_ccs_double_omp/matrix_ccs_omp.h"
-
 
 TEST(SprMatCCS_Test, Sparse_matrix_multiplication_int) {
   int cap = 3;
@@ -144,91 +144,89 @@ TEST(SprMatCCS_Test, Sparse_matrix_multiplication_perf500) {
   EXPECT_TRUE(C_seq == C_omp);
 }
 
-  // TEST(SprMatCCS_Test, Sparse_matrix_multiplication_perf1000) {
-  // double start, end;
-  // double seq_time, omp_time;
-  // int dim = 1000;
-  // int spr = 1;
+TEST(SprMatCCS_Test, Sparse_matrix_multiplication_perf1000) {
+  double start, end;
+  double seq_time, omp_time;
+  int dim = 1000;
+  int spr = 1;
 
-  // SprMatCCS A;
-  // A.randMat(dim, spr);
-  // SprMatCCS B;
-  // B.randMat(dim, spr);
+  SprMatCCS A;
+  A.randMat(dim, spr);
+  SprMatCCS B;
+  B.randMat(dim, spr);
 
-  // start = omp_get_wtime();
-  // SprMatCCS C_seq = A * B;
-  // end = omp_get_wtime();
-  // std::cout << "SEQ time: " << end - start << " sec"
-  //          << std::endl;
-  // seq_time = end - start;
+  start = omp_get_wtime();
+  SprMatCCS C_seq = A * B;
+  end = omp_get_wtime();
+  std::cout << "SEQ time: " << end - start << " sec" << std::endl;
+  seq_time = end - start;
 
-  // start = omp_get_wtime();
-  // SprMatCCS C_omp = A.ParallelMult(B);
-  // end = omp_get_wtime();
-  // std::cout << "OMP time: " << end - start << " sec"
-  //          << std::endl;
-  // omp_time = end - start;
+  start = omp_get_wtime();
+  SprMatCCS C_omp = A.ParallelMult(B);
+  end = omp_get_wtime();
+  std::cout << "OMP time: " << end - start << " sec" << std::endl;
+  omp_time = end - start;
 
-  // std::cout << "Performance improvement is "
-  // << seq_time / omp_time << std::endl;
+  std::cout << "Performance improvement is " << seq_time / omp_time
+            << std::endl;
 
-  // EXPECT_TRUE(C_seq == C_omp);
-  // }
+  EXPECT_TRUE(C_seq == C_omp);
+}
 
-  // TEST(SprMatCCS_Test, Sparse_matrix_multiplication_perf2000) {
-  // double start, end;
-  // double seq_time, omp_time;
-  // int dim = 2000;
-  // int spr = 1;
+TEST(SprMatCCS_Test, Sparse_matrix_multiplication_perf2000) {
+  double start, end;
+  double seq_time, omp_time;
+  int dim = 2000;
+  int spr = 1;
 
-  // SprMatCCS A;
-  // A.randMat(dim, spr);
-  // SprMatCCS B;
-  // B.randMat(dim, spr);
+  SprMatCCS A;
+  A.randMat(dim, spr);
+  SprMatCCS B;
+  B.randMat(dim, spr);
 
-  // start = omp_get_wtime();
-  // SprMatCCS C_seq = A * B;
-  // end = omp_get_wtime();
-  // std::cout << "SEQ time: " << end - start << " sec" << std::endl;
-  // seq_time = end - start;
+  start = omp_get_wtime();
+  SprMatCCS C_seq = A * B;
+  end = omp_get_wtime();
+  std::cout << "SEQ time: " << end - start << " sec" << std::endl;
+  seq_time = end - start;
 
-  // start = omp_get_wtime();
-  // SprMatCCS C_omp = A.ParallelMult(B);
-  // end = omp_get_wtime();
-  // std::cout << "OMP time: " << end - start << " sec" << std::endl;
-  // omp_time = end - start;
+  start = omp_get_wtime();
+  SprMatCCS C_omp = A.ParallelMult(B);
+  end = omp_get_wtime();
+  std::cout << "OMP time: " << end - start << " sec" << std::endl;
+  omp_time = end - start;
 
-  //  std::cout << "Performance improvement is " << seq_time / omp_time
-  //            << std::endl;
+  std::cout << "Performance improvement is " << seq_time / omp_time
+            << std::endl;
 
-  // EXPECT_TRUE(C_seq == C_omp);
-  // }
+  EXPECT_TRUE(C_seq == C_omp);
+}
 
-  // TEST(SprMatCCS_Test, Sparse_matrix_multiplication_perf5000) {
-  // double start, end;
-  // double seq_time, omp_time;
-  // int dim = 5000;
-  // int spr = 1;
+TEST(SprMatCCS_Test, Sparse_matrix_multiplication_perf5000) {
+  double start, end;
+  double seq_time, omp_time;
+  int dim = 5000;
+  int spr = 1;
 
-  // SprMatCCS A;
-  // A.randMat(dim, spr);
-  // SprMatCCS B;
-  // B.randMat(dim, spr);
+  SprMatCCS A;
+  A.randMat(dim, spr);
+  SprMatCCS B;
+  B.randMat(dim, spr);
 
-  // start = omp_get_wtime();
-  // SprMatCCS C_seq = A * B;
-  // end = omp_get_wtime();
-  // std::cout << "SEQ time: " << end - start << " sec" << std::endl;
-  // seq_time = end - start;
+  start = omp_get_wtime();
+  SprMatCCS C_seq = A * B;
+  end = omp_get_wtime();
+  std::cout << "SEQ time: " << end - start << " sec" << std::endl;
+  seq_time = end - start;
 
-  // start = omp_get_wtime();
-  // SprMatCCS C_omp = A.ParallelMult(B);
-  // end = omp_get_wtime();
-  // std::cout << "OMP time: " << end - start << " sec" << std::endl;
-  // omp_time = end - start;
+  start = omp_get_wtime();
+  SprMatCCS C_omp = A.ParallelMult(B);
+  end = omp_get_wtime();
+  std::cout << "OMP time: " << end - start << " sec" << std::endl;
+  omp_time = end - start;
 
-  // std::cout << "Performance improvement is " << seq_time / omp_time
-  //          << std::endl;
+  std::cout << "Performance improvement is " << seq_time / omp_time
+            << std::endl;
 
-  // EXPECT_TRUE(C_seq == C_omp);
-  // }
+  EXPECT_TRUE(C_seq == C_omp);
+}

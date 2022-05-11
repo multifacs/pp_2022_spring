@@ -3,17 +3,17 @@
 #ifndef MODULES_TASK_2_MIHEEV_I_MULT_MATRIX_CCS_DOUBLE_OMP_MATRIX_CCS_OMP_H_
 #define MODULES_TASK_2_MIHEEV_I_MULT_MATRIX_CCS_DOUBLE_OMP_MATRIX_CCS_OMP_H_
 
+#include <iostream>
 #include <random>
 #include <vector>
-#include <iostream>
 
 class SprMatCCS {
  private:
-  int dim;  // number of matrix dimension
-  int cap;  // number of elements other than zero
+  int dim;                  // number of matrix dimension
+  int cap;                  // number of elements other than zero
   std::vector<double> val;  // vector that contains values of elements
-  std::vector<int> rows;  // vector that contains position in a column
-  std::vector<int> ptr;  // vector of pointers of positions
+  std::vector<int> rows;    // vector that contains position in a column
+  std::vector<int> ptr;     // vector of pointers of positions
 
  public:
   SprMatCCS(int _dim = 0, int _cap = 0,
@@ -21,12 +21,12 @@ class SprMatCCS {
             const std::vector<int>& _rows = std::vector<int>(),
             const std::vector<int>& _ptr = std::vector<int>())
       : dim(_dim), cap(_cap), val(_val), rows(_rows), ptr(_ptr) {}
-  SprMatCCS(const SprMatCCS& mat):
-    dim(mat.dim),
-    cap(mat.cap),
-    val(mat.val),
-    rows(mat.rows),
-    ptr(mat.ptr) {}
+  SprMatCCS(const SprMatCCS& mat)
+      : dim(mat.dim),
+        cap(mat.cap),
+        val(mat.val),
+        rows(mat.rows),
+        ptr(mat.ptr) {}
   ~SprMatCCS();
 
   int getSize() { return this->cap; }
@@ -47,7 +47,7 @@ class SprMatCCS {
 
   SprMatCCS ParallelMult(SprMatCCS mat);
 
-  // void shwVal();
+  void shwVal();
 };
 
 #endif  // MODULES_TASK_2_MIHEEV_I_MULT_MATRIX_CCS_DOUBLE_OMP_MATRIX_CCS_OMP_H_

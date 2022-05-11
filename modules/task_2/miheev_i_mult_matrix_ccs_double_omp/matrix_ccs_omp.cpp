@@ -1,7 +1,8 @@
 // Copyright 2022 Miheev Ivan
 
-#include <omp.h>
 #include "../../../modules/task_2/miheev_i_mult_matrix_ccs_double_omp/matrix_ccs_omp.h"
+
+#include <omp.h>
 
 bool isZero(const double num) { return std::abs(num) < 0.00000001; }
 bool isEqual(double x, double y) { return std::fabs(x - y) < 0.00000001; }
@@ -40,11 +41,11 @@ SprMatCCS& SprMatCCS::randMat(int _dim, int spr) {
       } while (b);
     }
 
-      for (int k = 0; k < spr - 1; k++) {
-        if (this->rows[i * spr + k] > this->rows[i * spr + k + 1]) {
-          int tmp = this->rows[i * spr + k];
-          this->rows[i * spr + k] = this->rows[i * spr + k + 1];
-          this->rows[i * spr + k + 1] = tmp;
+    for (int k = 0; k < spr - 1; k++) {
+      if (this->rows[i * spr + k] > this->rows[i * spr + k + 1]) {
+        int tmp = this->rows[i * spr + k];
+        this->rows[i * spr + k] = this->rows[i * spr + k + 1];
+        this->rows[i * spr + k + 1] = tmp;
       }
     }
   }
@@ -82,7 +83,6 @@ SprMatCCS SprMatCCS::transMat() {
   for (int i = 0; i < this->cap; i++) {
     res.ptr[this->rows[i] - 1]++;
   }
-
   int tmp, sum = 1;
   for (int i = 0; i < this->dim + 1; i++) {
     tmp = res.ptr[i];
@@ -167,10 +167,8 @@ SprMatCCS SprMatCCS::ParallelMult(SprMatCCS mat) {
 #pragma omp parallel num_threads(num_threads)
   {
     int ind = omp_get_thread_num();
-    std::vector<double> val_private;
-    std::vector<int> rows_private;
 
-      #pragma omp for
+#pragma omp for
     for (int i = 0; i < trans.dim; i++) {
       std::vector<int> ip(trans.dim, 0);
       int cnt = 0;
@@ -187,20 +185,18 @@ SprMatCCS SprMatCCS::ParallelMult(SprMatCCS mat) {
           }
         }
         if (!isZero(sum)) {
-          val_private.push_back(sum);
-          rows_private.push_back(j + 1);
+          val_shared[ind].push_back(sum);
+          rows_shared[ind].push_back(j + 1);
           cnt++;
         }
       }
       ptr_counter[i] += cnt;
     }
-    val_shared[ind] = val_private;
-    rows_shared[ind] = rows_private;
   }
 
   std::vector<double> val_res;
   std::vector<int> row_res;
-  std::vector<int> ptr_res = {1};
+  std::vector<int> ptr_res{1};
 
   for (int i = 0; i < num_threads; i++) {
     val_res.insert(val_res.end(), val_shared[i].begin(), val_shared[i].end());
@@ -217,17 +213,17 @@ SprMatCCS SprMatCCS::ParallelMult(SprMatCCS mat) {
   return res;
 }
 
-// void SprMatCCS::shwVal() {
-//  for (int i = 0; i < val.size(); i++) {
-//    std::cout << val[i] << " ";
-//  }
-//  std::cout << "\n";
-//  for (int i = 0; i < rows.size(); i++) {
-//    std::cout << rows[i] << " ";
-//  }
-//  std::cout << "\n";
-//  for (int i = 0; i < ptr.size(); i++) {
-//    std::cout << ptr[i] << " ";
-//  }
-//  std::cout << "\n";
-// }
+void SprMatCCS::shwVal() {
+  for (int i = 0; i < this->cap; i++) {
+    std::cout << val[i] << " ";
+  }
+  std::cout << "\n";
+  for (int i = 0; i < this->cap; i++) {
+    std::cout << rows[i] << " ";
+  }
+  std::cout << "\n";
+  for (int i = 0; i < static_cast<int>(ptr.size()); i++) {
+    std::cout << ptr[i] << " ";
+  }
+  std::cout << "\n";
+}
