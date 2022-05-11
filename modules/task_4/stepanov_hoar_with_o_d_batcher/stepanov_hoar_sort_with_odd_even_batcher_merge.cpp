@@ -171,7 +171,7 @@ void hoar_sort_with_batch_merge_std(std::vector<float>* vec) {
     for (size_t i = 0; i < nthreads; i++) threads[i].join();
     size_t parts_count = nthreads;
     while (parts_count > 1) {
-        for (int i = 0; i < (parts_count / 2); i++) {
+        for (size_t i = 0; i < (parts_count / 2); i++) {
             threads[i] =
             std::thread(batch_merge, &arr[i],
             &arr[parts_count - 1 - i], &arr[i]);
