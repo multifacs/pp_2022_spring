@@ -94,21 +94,21 @@ void fill_points_random_uniform(std::vector<cv::Point2d>* input, size_t num_poin
 
 
 TEST_F(ConvexHullTEST, Test_parallel_vs_sequential) {
-    fill_image_random_uniform(&test_image, { 10, 1070, 10, 1070 }, 1000000);
+    fill_image_random_uniform(&test_image, { 10, 1070, 10, 1070 }, 1000);
     check_time(lab2::Version::SEQUENTIAL);
 }
 
 TEST_F(ConvexHullTEST, Test_parallel_vs_parallel_one_thread) {
-    fill_image_random_uniform(&test_image, { 10, 1070, 10, 1070 }, 1000000);
+    fill_image_random_uniform(&test_image, { 10, 1070, 10, 1070 }, 1000);
     check_time(lab2::Version::PARALLEL_ONE_THREAD);
 }
 
 TEST_F(ConvexHullTEST, Test_several_ranges) {
-    fill_image_random_uniform(&test_image, { 100, 300, 100, 300 }, 30000);
-    fill_image_random_uniform(&test_image, { 400, 600, 100, 300 }, 30000);
-    fill_image_random_uniform(&test_image, { 400, 600, 300, 700 }, 60000);
-    fill_image_random_uniform(&test_image, { 50, 400, 500, 1000 }, 200000);
-    fill_image_random_uniform(&test_image, { 500, 1000, 500, 1000 }, 200000);
+    fill_image_random_uniform(&test_image, { 100, 300, 100, 300 }, 300);
+    fill_image_random_uniform(&test_image, { 400, 600, 100, 300 }, 300);
+    fill_image_random_uniform(&test_image, { 400, 600, 300, 700 }, 600);
+    fill_image_random_uniform(&test_image, { 50, 400, 500, 1000 }, 200);
+    fill_image_random_uniform(&test_image, { 500, 1000, 500, 1000 }, 200);
     check_time(lab2::Version::PARALLEL_ONE_THREAD);
 }
 
@@ -130,7 +130,7 @@ TEST_F(ConvexHullTEST, Test_empty) {
 
 TEST(TEST_POINTS_ONLY, Test_time) {
     std::vector<cv::Point2d> input;
-    fill_points_random_uniform(&input, 1000000, {0, 2000000, 0, 2000000});
+    fill_points_random_uniform(&input, 1000, {0, 2000, 0, 2000});
     std::vector<cv::Point2d> input_ref(input);
     std::vector<cv::Point2d> output, output_ref;
     double t_seq = get_time(&input, &output, lab2::Version::PARALLEL_ONE_THREAD);
