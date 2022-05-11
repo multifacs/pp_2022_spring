@@ -37,7 +37,7 @@ TEST(Sequential, Test_50) {
     const int col = 50;
     std::vector<float>* arr = create_random_vector(col);
     std::vector<float> cp(*arr);
-    double start_seq = omp_get_wtime();
+    // double start_seq = omp_get_wtime();
     hoar_sort_with_batch_merge(&cp);
     // double end_seq = omp_get_wtime();
     // double start_par = omp_get_wtime();
