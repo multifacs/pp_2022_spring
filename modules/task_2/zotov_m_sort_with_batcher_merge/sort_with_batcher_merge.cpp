@@ -123,7 +123,7 @@ void compare(std::vector<int>* data, int size, int offset) {
     for (int i = offset; i < size + offset; i++) {
         if ((*data)[i] > (*data)[i + 1]) std::swap((*data)[i], (*data)[i + 1]);
     }
- }
+}
 
 void parallelRadixSort(std::vector<int>* data, int size, int ThreadNum) {
     int local_size = size / ThreadNum;
@@ -166,9 +166,7 @@ void parallelRadixSort(std::vector<int>* data, int size, int ThreadNum) {
                 oddMerge(data, sendCount[ThreadRank - 1], displ[ThreadRank - 1],
                     sendCount[ThreadRank], displ[ThreadRank]);
             }
-            
             #pragma omp barrier
-            
             if (ThreadRank % 2 == 0 && ThreadRank + 1 < ThreadNum) {
                 compare(data, sendCount[ThreadRank], displ[ThreadRank]);
             } else if (ThreadRank % 2 == 1) {
