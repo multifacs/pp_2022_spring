@@ -4,14 +4,6 @@
 #define MODULES_TASK_3_BEZRODNOV_D_RADIX_SORT_DOUBLE_BATCHER_RADIX_SORT_DOUBLE_BATCHER_H_
 
 #include<vector>
-#include<algorithm>
-#include <random>
-#include <iterator>
-#include <functional>
-#include <ctime>
-#include <cmath>
-
-#include "tbb/tbb.h"
 
 class OddEvenMerge {
     std::vector<int> complete_to_end(const std::vector<int>& vec1,

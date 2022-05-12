@@ -1,8 +1,9 @@
 // Copyright 2022 Bezrodnov Dmitry
 
-#include <iostream>
-
 #include "../../../modules/task_3/bezrodnov_d_radix_sort_double_batcher/radix_sort_double_batcher.h"
+#include <random>
+#include <cmath>
+#include "tbb/tbb.h"
 
 std::vector<std::vector<int>> get_vector_part_tbb(const std::vector<int>& vec,
                                                 int part) {
@@ -109,12 +110,10 @@ bool check_sort(const std::vector<double>& vec) {
 
 std::vector<double> get_random_double_vector(unsigned int elements) {
     std::vector<double> result(elements);
-    std::uniform_real_distribution<double> distribution(10.0, 120.0);
-    std::mt19937 engine{ std::random_device().operator ()() };
-    auto generator = std::bind(distribution, engine);
-    std::generate_n(result.begin(), elements, generator);
-    int result_size = result.size();
-    for (int i = 0; i < result_size; i++) {
+    std::uniform_real_distribution<double> unif(10.0, 120.0);
+    std::default_random_engine random_engine;
+    for (size_t i = 0; i < elements; i++) {
+        result[i] = unif(random_engine);
         result[i] -= remainder(result[i], 0.001);
     }
     return result;
