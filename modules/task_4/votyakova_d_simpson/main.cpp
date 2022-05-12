@@ -3,9 +3,10 @@
 
 #include <cmath>
 
+#include "../../../3rdparty/unapproved/unapproved.h"
 #include "./simpson.h"
 
-TEST(SIMPSON_METHOD_SEQ, TEST_FUNCTION_1) {
+TEST(SIMPSON_METHOD_STD, TEST_FUNCTION_1) {
   const std::function<double(std::vector<double>)> f =
       [](std::vector<double> vec) {
         double x = vec[0];
@@ -14,16 +15,16 @@ TEST(SIMPSON_METHOD_SEQ, TEST_FUNCTION_1) {
       };
 
   std::vector<std::pair<double, double>> limits({{4, 10}, {1, 2}});
-  std::vector<int> n({2, 2});
+  std::vector<int> n({5, 5});
 
-  double result = getSeqSimpson(f, limits, n);
+  double result = getSTDSimpson(f, limits, n);
   double ref = 293.99;
 
-  double error = 200;
+  double error = 100;
   ASSERT_NEAR(result, ref, error);
 }
 
-TEST(SIMPSON_METHOD_SEQ, TEST_FUNCTION_2) {
+TEST(SIMPSON_METHOD_STD, TEST_FUNCTION_2) {
   const std::function<double(std::vector<double>)> f =
       [](std::vector<double> vec) {
         double x = vec[0];
@@ -35,14 +36,14 @@ TEST(SIMPSON_METHOD_SEQ, TEST_FUNCTION_2) {
   std::vector<std::pair<double, double>> limits({{4, 10}, {1, 2}, {2, 5}});
   std::vector<int> n({2, 2, 2});
 
-  double result = getSeqSimpson(f, limits, n);
+  double result = getSTDSimpson(f, limits, n);
   double ref = 203.74;
 
-  double error = 200;
+  double error = 100;
   ASSERT_NEAR(result, ref, error);
 }
 
-TEST(SIMPSON_METHOD_SEQ, TEST_FUNCTION_3) {
+TEST(SIMPSON_METHOD_STD, TEST_FUNCTION_3) {
   const std::function<double(std::vector<double>)> f =
       [](std::vector<double> vec) {
         double x = vec[0];
@@ -54,33 +55,33 @@ TEST(SIMPSON_METHOD_SEQ, TEST_FUNCTION_3) {
   std::vector<std::pair<double, double>> limits({{4, 10}, {1, 2}, {4, 5}});
   std::vector<int> n({2, 2, 2});
 
-  double result = getSeqSimpson(f, limits, n);
+  double result = getSTDSimpson(f, limits, n);
   double ref = 283.50;
 
-  double error = 200;
+  double error = 100;
   ASSERT_NEAR(result, ref, error);
 }
 
-TEST(SIMPSON_METHOD_SEQ, TEST_FUNCTION_4) {
+TEST(SIMPSON_METHOD_STD, TEST_FUNCTION_4) {
   const std::function<double(std::vector<double>)> f =
       [](std::vector<double> vec) {
         double x = vec[0];
         double y = vec[1];
         double z = vec[2];
-        return exp(x) - sqrt(10) * 5 * sin(y) + cos(-2 * z * z);
+        return x - sqrt(10) * 5 * y + z;
       };
 
   std::vector<std::pair<double, double>> limits({{4, 10}, {1, 2}, {0, 5}});
-  std::vector<int> n({2, 2, 2});
+  std::vector<int> n({3, 2, 2});
 
-  double result = getSeqSimpson(f, limits, n);
-  double ref = 111816.753;
+  double result = getSTDSimpson(f, limits, n);
+  double ref = -426.512;
 
-  double error = 200;
+  double error = 100;
   ASSERT_NEAR(result, ref, error);
 }
 
-TEST(SIMPSON_METHOD_SEQ, TEST_FUNCTION_5) {
+TEST(SIMPSON_METHOD_STD, TEST_FUNCTION_5) {
   const std::function<double(std::vector<double>)> f =
       [](std::vector<double> vec) {
         double x = vec[0];
@@ -94,9 +95,18 @@ TEST(SIMPSON_METHOD_SEQ, TEST_FUNCTION_5) {
       {{4, 10}, {1, 2}, {1, 5}, {6, 10}});
   std::vector<int> n({2, 2, 1, 1});
 
-  double result = getSeqSimpson(f, limits, n);
-  double ref = -5832.64;
+  auto seq_1 = clock();
+  getSeqSimpson(f, limits, n);
+  auto seq_2 = clock();
 
-  double error = 200;
-  ASSERT_NEAR(result, ref, error);
+  auto par_1 = clock();
+  getSTDSimpson(f, limits, n);
+  auto par_2 = clock();
+
+  auto speed = (static_cast<float>(seq_2 - seq_1) / CLOCKS_PER_SEC) /
+               (static_cast<float>(par_2 - par_1) / CLOCKS_PER_SEC);
+
+  std::cout << static_cast<float>(seq_2 - seq_1) / CLOCKS_PER_SEC << std::endl;
+  std::cout << static_cast<float>(par_2 - par_1) / CLOCKS_PER_SEC << std::endl;
+  std::cout << speed << std::endl;
 }

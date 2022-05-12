@@ -3,10 +3,9 @@
 
 #include <cmath>
 
-double getSeqSimpson(
-    const std::function<double(std::vector<double>)>& f,
-    const std::vector<std::pair<double, double>>& limits,
-    const std::vector<int>& n) {
+double getSeqSimpson(const std::function<double(std::vector<double>)>& f,
+                     const std::vector<std::pair<double, double>>& limits,
+                     const std::vector<int>& n) {
   int dim = n.size();
   std::vector<double> h(dim);
   int64_t counter = 1;

@@ -93,7 +93,7 @@ TEST(SIMPSON_METHOD_TBB, TEST_FUNCTION_5) {
 
   std::vector<std::pair<double, double>> limits(
       {{4, 10}, {1, 2}, {1, 5}, {6, 10}});
-  std::vector<int> n({2, 2, 2, 2});
+  std::vector<int> n({2, 2, 1, 1});
 
   double t1 = omp_get_wtime();
   double seq_result = getSeqSimpson(f, limits, n);
