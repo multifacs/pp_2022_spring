@@ -99,11 +99,11 @@ bool check_sort(const std::vector<double>& vec) {
     return true;
 }
 
-std::vector<double> get_random_double_vector(int elements) {
+std::vector<double> get_random_double_vector(unsigned int elements) {
     std::vector<double> result(elements);
     std::uniform_real_distribution<double> unif(10.0, 120.0);
     std::default_random_engine random_engine;
-    for (int i = 0; i < elements; i++) {
+    for (unsigned int i = 0; i < elements; i++) {
         result[i] = unif(random_engine);
         result[i] -= remainder(result[i], 0.001);
     }
