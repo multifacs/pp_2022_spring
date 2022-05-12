@@ -9,6 +9,7 @@
 #include <iterator>
 #include <functional>
 #include <ctime>
+#include<cmath>
 
 class OddEvenMerge {
     std::vector<int> complete_to_end(const std::vector<int>& vec1,

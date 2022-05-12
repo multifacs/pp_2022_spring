@@ -9,6 +9,7 @@
 #include <iterator>
 #include <functional>
 #include <ctime>
+#include <cmath>
 
 #include "tbb/tbb.h"
 

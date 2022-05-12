@@ -104,8 +104,7 @@ bool check_sort(const std::vector<double>& vec) {
 std::vector<double> get_random_double_vector(unsigned int elements) {
     std::vector<double> result(elements);
     std::uniform_real_distribution<double> distribution(0.0, 12.0);
-    std::mt19937 engine();
-    engine.seed(1912);
+    std::mt19937 engine{ std::random_device().operator ()() };
     auto generator = std::bind(distribution, engine);
     std::generate_n(result.begin(), elements, generator);
     int result_size = result.size();
