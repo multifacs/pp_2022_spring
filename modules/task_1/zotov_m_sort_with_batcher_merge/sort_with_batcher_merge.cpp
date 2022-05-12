@@ -19,23 +19,25 @@ std::vector<int> getRandomVector(int size) {
     return tmp;
 }
 
-int getMaxPower(const int max ) {
+int getMaxDigit(const int max ) {
     int tmp = 0;
-    for (int i = 1; i < 10; i++) {
+    int i = 0;
+    for (i = 1; i < 10; i++) {
         tmp = max / static_cast<int>(pow(10, i));
         if (tmp == 0) {
             std::cout << i << std::endl;
-            return i;
+            break;
         }
     }
+    return i;
 }
 
 void radixSort(std::vector<int>* main_data) {
     std::vector<int> sorted_data[19];
     int size = main_data->size();
     int koef = 0;
-    int max_power = getMaxPower(MAX);
-    while (koef < max_power) {
+    int max_digit = getMaxDigit(MAX);
+    while (koef < max_digit) {
         for (int i = 0; i < size; i++) {
             int digit = (*main_data)[i] / static_cast<int>(pow(10, koef));
             digit = digit % 10;
@@ -44,7 +46,7 @@ void radixSort(std::vector<int>* main_data) {
 
         int iter = 0;
         for (int i = 0; i < 19; i++) {
-            for (int j = 0; j < sorted_data[i].size(); j++) {
+            for (int j = 0; j < static_cast<int>(sorted_data[i].size()); j++) {
                 (*main_data)[iter ] = sorted_data[i][j];
                 iter++;
             }
