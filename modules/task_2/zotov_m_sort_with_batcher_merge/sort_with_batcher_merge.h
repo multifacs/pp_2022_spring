@@ -4,7 +4,6 @@
 
 #include <vector>
 #include <string>
-#include <omp.h>
 
 int getMaxDigit(const int data);
 std::vector<int> getRandomVector(int size);

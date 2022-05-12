@@ -1,4 +1,5 @@
 // Copyright 2022 Zotov Maxim
+#include <omp.h>
 #include <vector>
 #include <string>
 #include <random>
@@ -62,13 +63,11 @@ int getNumberOfIterations(int tN) {
 }
 
 void splitData(std::vector<int>* data, std::vector<int>* first, int f, int f_displ, int s, int s_displ) {
-
     while (f < f_displ && s < s_displ) {
         if ((*data)[f] < (*data)[s]) {
             first->push_back((*data)[f]);
             f += 2;
-        }
-        else {
+        } else {
             first->push_back((*data)[s]);
             s += 2;
         }
@@ -78,8 +77,7 @@ void splitData(std::vector<int>* data, std::vector<int>* first, int f, int f_dis
         for (int j = s; j < s_displ; j += 2) {
             first->push_back((*data)[j]);
         }
-    }
-    else if (s >= s_displ) {
+    } else if (s >= s_displ) {
         for (int j = f; j < f_displ; j += 2) {
             first->push_back((*data)[j]);
         }
@@ -134,7 +132,6 @@ void parallelRadixSort(std::vector<int>* data, int size, int ThreadNum) {
     std::vector<int> displ;
     int iterator;
     int ThreadRank;
-    
     int sum = 0;
     for (int i = 0; i < ThreadNum; i++) {
         sendCount[i] = local_size;
@@ -147,7 +144,6 @@ void parallelRadixSort(std::vector<int>* data, int size, int ThreadNum) {
     }
 
     iterator = getNumberOfIterations(ThreadNum);
-
     omp_set_num_threads(ThreadNum);
 
     #pragma omp parallel private(ThreadRank)
@@ -166,8 +162,7 @@ void parallelRadixSort(std::vector<int>* data, int size, int ThreadNum) {
             if (ThreadRank % 2 == 0 && ThreadRank + 1 < ThreadNum) {
                 evenMerge(data, sendCount[ThreadRank], displ[ThreadRank],
                     sendCount[ThreadRank + 1], displ[ThreadRank + 1]);
-            }
-            else if (ThreadRank % 2 == 1) {
+            } else if (ThreadRank % 2 == 1) {
                 oddMerge(data, sendCount[ThreadRank - 1], displ[ThreadRank - 1],
                     sendCount[ThreadRank], displ[ThreadRank]);
             }
@@ -176,8 +171,7 @@ void parallelRadixSort(std::vector<int>* data, int size, int ThreadNum) {
             
             if (ThreadRank % 2 == 0 && ThreadRank + 1 < ThreadNum) {
                 compare(data, sendCount[ThreadRank], displ[ThreadRank]);
-            }
-            else if (ThreadRank % 2 == 1) {
+            } else if (ThreadRank % 2 == 1) {
                 compare(data, sendCount[ThreadRank] - 1 , displ[ThreadRank]);
             }
 
@@ -192,12 +186,10 @@ void parallelRadixSort(std::vector<int>* data, int size, int ThreadNum) {
                     sendCount[(ThreadNum - 1) / 2] = sendCount[ThreadNum - 1];
                     displ[(ThreadNum - 1) / 2] = displ[ThreadNum - 1];
                     ThreadNum = ThreadNum / 2 + 1;
-                }
-                else {
+                } else {
                     ThreadNum /= 2;
                 }
             }
         }
     }
-
 }
