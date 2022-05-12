@@ -4,7 +4,7 @@
 #include "./gauss_horizontal.h"
 
 TEST(GAUSS_HORIZONTAL_OMP, TEST_1) {
-  const int width = 100, height = 100;
+  const int width = 10, height = 10;
   img image = getRandomImage(width, height);
 
   img new_image = getGauss(image, width, height);
@@ -16,7 +16,7 @@ TEST(GAUSS_HORIZONTAL_OMP, TEST_1) {
 }
 
 TEST(GAUSS_HORIZONTAL_OMP, TEST_2) {
-  const int width = 200, height = 100;
+  const int width = 12, height = 12;
   img image = getRandomImage(width, height);
 
   img new_image = getGauss(image, width, height);
@@ -28,7 +28,7 @@ TEST(GAUSS_HORIZONTAL_OMP, TEST_2) {
 }
 
 TEST(GAUSS_HORIZONTAL_OMP, TEST_3) {
-  const int width = 100, height = 200;
+  const int width = 14, height = 14;
   img image = getRandomImage(width, height);
 
   img new_image = getGauss(image, width, height);
@@ -40,7 +40,7 @@ TEST(GAUSS_HORIZONTAL_OMP, TEST_3) {
 }
 
 TEST(GAUSS_HORIZONTAL_OMP, TEST_4) {
-  const int width = 123, height = 234;
+  const int width = 11, height = 11;
   img image = getRandomImage(width, height);
 
   img new_image = getGauss(image, width, height);
@@ -52,14 +52,14 @@ TEST(GAUSS_HORIZONTAL_OMP, TEST_4) {
 }
 
 TEST(GAUSS_HORIZONTAL_OMP, TEST_SEQ_TIME) {
-  const int width = 500, height = 200;
+  const int width = 10, height = 10;
   img image = getRandomImage(width, height);
 
   img new_image = getGauss(image, width, height);
 }
 
 TEST(GAUSS_HORIZONTAL_OMP, TEST_OMP_TIME) {
-  const int width = 500, height = 200;
+  const int width = 10, height = 10;
   img image = getRandomImage(width, height);
 
   img new_image_omp = getGaussOMP(image, width, height);
