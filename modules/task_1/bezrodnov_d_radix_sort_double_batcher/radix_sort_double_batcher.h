@@ -1,15 +1,8 @@
 // Copyright 2022 Bezrodnov Dmitry
-
 #ifndef MODULES_TASK_1_BEZRODNOV_D_RADIX_SORT_DOUBLE_BATCHER_RADIX_SORT_DOUBLE_BATCHER_H_
 #define MODULES_TASK_1_BEZRODNOV_D_RADIX_SORT_DOUBLE_BATCHER_RADIX_SORT_DOUBLE_BATCHER_H_
 
 #include<vector>
-#include<algorithm>
-#include <random>
-#include <iterator>
-#include <functional>
-#include <ctime>
-#include <cmath>
 
 class OddEvenMerge {
     std::vector<int> complete_to_end(const std::vector<int>& vec1,
