@@ -22,7 +22,7 @@ std::vector<std::vector<int>> get_vector_part_tbb(const std::vector<int>& vec,
 
     int result_size = result.size();
     if (part * (vec_size / part) < vec_size) {
-        for (size_t i = part * (vec_size / part); i < vec_size; i++) {
+        for (int i = part * (vec_size / part); i < vec_size; i++) {
             result[result_size - 1].push_back(vec[i]);
         }
     }
@@ -75,7 +75,7 @@ std::vector<int> counting_sort_tbb(const std::vector<int>& vec, int div) {
 std::vector<double> radix_sort_tbb(const std::vector<double>& vec,
                                     unsigned int count) {
     std::vector<int> vec_int = to_int_tbb(vec, count);
-    unsigned int num_thread = 4;
+    int num_thread = 4;
     std::vector<std::vector<int>> vector_part
                         = get_vector_part_tbb(vec_int, num_thread);
 
@@ -93,7 +93,7 @@ std::vector<double> radix_sort_tbb(const std::vector<double>& vec,
     OddEvenMerge merge;
     std::vector<int> part_all
                     = merge.odd_even_merge(vector_part[0], vector_part[1]);
-    for (size_t i = 2; i < num_thread; i++) {
+    for (int i = 2; i < num_thread; i++) {
         part_all = merge.odd_even_merge(part_all, vector_part[i]);
     }
     std::vector<double> current_result = to_double_tbb(part_all, count);
@@ -109,11 +109,11 @@ bool check_sort(const std::vector<double>& vec) {
     return true;
 }
 
-std::vector<double> get_random_double_vector(unsigned int elements) {
+std::vector<double> get_random_double_vector(int elements) {
     std::vector<double> result(elements);
     std::uniform_real_distribution<double> unif(10.0, 120.0);
     std::default_random_engine random_engine;
-    for (size_t i = 0; i < elements; i++) {
+    for (int i = 0; i < elements; i++) {
         result[i] = unif(random_engine);
         result[i] -= remainder(result[i], 0.001);
     }
