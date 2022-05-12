@@ -3,6 +3,7 @@
 #include "../../../modules/task_2/bezrodnov_d_radix_sort_double_batcher/radix_sort_double_batcher.h"
 #include <random>
 #include<cmath>
+#include<algorithm>
 
 std::vector<std::vector<int>> get_vector_part_omp(const std::vector<int>& vec,
                                                 int part) {

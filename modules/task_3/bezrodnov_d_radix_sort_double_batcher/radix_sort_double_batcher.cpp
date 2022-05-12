@@ -3,6 +3,7 @@
 #include "../../../modules/task_3/bezrodnov_d_radix_sort_double_batcher/radix_sort_double_batcher.h"
 #include <random>
 #include <cmath>
+#include<algorithm>
 #include "tbb/tbb.h"
 
 std::vector<std::vector<int>> get_vector_part_tbb(const std::vector<int>& vec,
