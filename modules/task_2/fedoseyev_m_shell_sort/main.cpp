@@ -33,12 +33,12 @@ TEST(SHELL_SORT_OMP, TEST_3) {
 }
 
 TEST(SHELL_SORT_OMP, TEST_4) {
-	int size = 15;
-	int* a = generate_vector(size);
-	shell_sort(a, size);
-	shell_sort(a, size, false);
-	ASSERT_EQ(check_list(a, size), 0);
-	delete[] a;
+  int size = 15;
+  int* a = generate_vector(size);
+  shell_sort(a, size);
+  shell_sort(a, size, false);
+  ASSERT_EQ(check_list(a, size), 0);
+  delete[] a;
 }
 
 const int big_size = 10;
