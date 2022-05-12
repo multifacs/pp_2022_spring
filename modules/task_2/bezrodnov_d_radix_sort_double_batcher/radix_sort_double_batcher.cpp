@@ -10,10 +10,12 @@ std::vector<std::vector<int>> get_vector_part_omp(const std::vector<int>& vec,
     std::vector<std::vector<int>> result(part);
     int result_size = result.size();
     int vec_size = vec.size();
-#pragma omp parallel for
-    for (int i = 0; i < result_size i++) {
-        for (int j = 0; j < vec_size / part; j++) {
-            result[i].push_back(vec[i * (vec_size / part) + j]);
+    #pragma omp parallel for
+    {
+        for (int i = 0; i < result_size i++) {
+            for (int j = 0; j < vec_size / part; j++) {
+                result[i].push_back(vec[i * (vec_size / part) + j]);
+            }
         }
     }
 
@@ -29,9 +31,11 @@ std::vector<int> to_int_omp(const std::vector<double>& vec,
                                 unsigned int count) {
     std::vector<int> result(vec.size());
     int vec_size = vec.size();
-#pragma omp parallel for
-    for (int i = 0; i < vec_size; i++) {
-        result[i] = static_cast<int>(vec[i] * pow(10, count));
+    #pragma omp parallel for
+    {
+        for (int i = 0; i < vec_size; i++) {
+            result[i] = static_cast<int>(vec[i] * pow(10, count));
+        }
     }
     return result;
 }
@@ -40,9 +44,11 @@ std::vector<double> to_double_omp(const std::vector<int>& vec,
                                     unsigned int count) {
     std::vector<double> result(vec.size());
     int vec_size = vec.size();
-#pragma omp parallel for
-    for (int i = 0; i < vec_size; i++) {
-        result[i] = static_cast<double>(vec[i]) / pow(10.0, count);
+    #pragma omp parallel for
+    {
+        for (int i = 0; i < vec_size; i++) {
+            result[i] = static_cast<double>(vec[i]) / pow(10.0, count);
+        }
     }
     return result;
 }
@@ -51,19 +57,23 @@ std::vector<int> counting_sort_omp(const std::vector<int>& vec, int div) {
     std::vector<int> result(vec.size());
     std::vector<int> count(10, 0);
     int vec_size = vec.size();
-#pragma omp parallel for
-    for (int i = 0; i < vec_size; i++) {
-        int index = (vec[i] / div) % 10;
-        count[index]++;
+    #pragma omp parallel for
+    {
+        for (int i = 0; i < vec_size; i++) {
+            int index = (vec[i] / div) % 10;
+            count[index]++;
+        }
     }
 
     for (int i = 1; i < 10; i++)
         count[i] += count[i - 1];
 
-#pragma omp parallel for
-    for (int i = vec_size - 1; i >= 0; i--) {
-        result[count[(vec[i] / div) % 10] - 1] = vec[i];
-        count[(vec[i] / div) % 10]--;
+    #pragma omp parallel for
+    {
+        for (int i = vec_size - 1; i >= 0; i--) {
+            result[count[(vec[i] / div) % 10] - 1] = vec[i];
+            count[(vec[i] / div) % 10]--;
+        }
     }
     return result;
 }
@@ -71,16 +81,18 @@ std::vector<int> counting_sort_omp(const std::vector<int>& vec, int div) {
 std::vector<double> radix_sort_omp(const std::vector<double>& vec,
                                     unsigned int count) {
     std::vector<int> vec_int = to_int_omp(vec, count);
-    unsigned int num_thread = 4;
+    int num_thread = 4;
     std::vector<std::vector<int>> vector_part
                         = get_vector_part_omp(vec_int, num_thread);
 
-#pragma omp parallel for
-    for (int i = 0; i < num_thread; i++) {
-        int m = *max_element(vector_part[i].begin(), vector_part[i].end());
+    #pragma omp parallel for
+    {
+        for (int i = 0; i < num_thread; i++) {
+            int m = *max_element(vector_part[i].begin(), vector_part[i].end());
 
-        for (int div = 1; m / div > 0; div *= 10) {
-            vector_part[i] = counting_sort_omp(vector_part[i], div);
+            for (int div = 1; m / div > 0; div *= 10) {
+                vector_part[i] = counting_sort_omp(vector_part[i], div);
+            }
         }
     }
 
