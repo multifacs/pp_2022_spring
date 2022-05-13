@@ -80,12 +80,13 @@ std::vector<std::vector<double> > cannon_mult_omp(
      std::vector<double>(s, 0.0));
     int thr = static_cast<int>(n * n);
     omp_set_num_threads(thr);
-#pragma omp parallel firstprivate(bs, n, s) shared(A, B, C)
+#pragma omp parallel firstprivate(bs, n, s, thr) shared(A, B, C)
     {
 #pragma omp for schedule(static)
-        for (size_t q = 0; q < n * n; q++) {
+        for (int t = 0; t < thr; t++) {
             std::vector< std::vector<double> > C_ij(bs,
                 std::vector<double>(bs, 0.0));
+            size_t q = static_cast<size_t>(t);
             size_t pos_i = q / n;
             size_t pos_j = q % n;
             std::pair<size_t, size_t> A_pos;
