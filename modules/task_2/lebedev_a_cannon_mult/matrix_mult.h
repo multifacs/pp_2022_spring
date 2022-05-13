@@ -16,8 +16,8 @@ std::vector<std::vector<double> > cannon_mult_seq(
     size_t num_of_blocks, size_t block_size, size_t size);
 
 std::vector<std::vector<double> > cannon_mult_omp(
-    const std::vector<std::vector<double> > &matr_a,
-    const std::vector<std::vector<double> > &matr_b,
-    size_t num_of_blocks, size_t block_size, size_t size);
+    const std::vector<std::vector<double> > &A,
+    const std::vector<std::vector<double> > &B,
+    size_t n, size_t bs, size_t s);
 
 #endif  // MODULES_TASK_2_LEBEDEV_A_CANNON_MULT_MATRIX_MULT_H_

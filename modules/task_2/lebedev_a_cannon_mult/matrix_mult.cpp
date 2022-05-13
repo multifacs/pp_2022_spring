@@ -78,40 +78,43 @@ std::vector<std::vector<double> > cannon_mult_omp(
     size_t n, size_t bs, size_t s) {
     std::vector< std::vector<double> > C(s,
      std::vector<double>(s, 0.0));
-
-#pragma omp parallel num_threads(n * n) firstprivate(bs, n, s) shared(A, B, C)
+    int thr = static_cast<int>(n * n);
+    omp_set_num_threads(thr);
+#pragma omp parallel firstprivate(bs, n, s) shared(A, B, C)
     {
-        std::vector< std::vector<double> > C_ij(bs,
-            std::vector<double>(bs, 0.0));
-        size_t q = omp_get_thread_num();
-        size_t pos_i = q / n;
-        size_t pos_j = q % n;
-        std::pair<size_t, size_t> A_pos;
-        A_pos.first = pos_i;
-        A_pos.second = (pos_j + pos_i) % n;
-        std::pair<size_t, size_t> B_pos;
-        B_pos.first = (pos_j + pos_i) % n;
-        B_pos.second = pos_j;
-        for (size_t p = 0; p < n; p++) {
-            for (size_t i = 0; i < bs; i++) {
-                for (size_t j = 0; j < bs; j++) {
-                    for (size_t k = 0; k < bs; k++) {
-                        size_t a_i = A_pos.first * bs;
-                        size_t a_j = A_pos.second * bs;
-                        size_t b_i = B_pos.first * bs;
-                        size_t b_j = B_pos.second * bs;
-                        C_ij[i][j] +=
-                        A[a_i + i][a_j + k] * B[b_i + k][b_j + j];
+#pragma omp for schedule(static)
+        for (size_t q = 0; q < n * n; q++) {
+            std::vector< std::vector<double> > C_ij(bs,
+                std::vector<double>(bs, 0.0));
+            size_t pos_i = q / n;
+            size_t pos_j = q % n;
+            std::pair<size_t, size_t> A_pos;
+            A_pos.first = pos_i;
+            A_pos.second = (pos_j + pos_i) % n;
+            std::pair<size_t, size_t> B_pos;
+            B_pos.first = (pos_j + pos_i) % n;
+            B_pos.second = pos_j;
+            for (size_t p = 0; p < n; p++) {
+                for (size_t i = 0; i < bs; i++) {
+                    for (size_t j = 0; j < bs; j++) {
+                        for (size_t k = 0; k < bs; k++) {
+                            size_t a_i = A_pos.first * bs;
+                            size_t a_j = A_pos.second * bs;
+                            size_t b_i = B_pos.first * bs;
+                            size_t b_j = B_pos.second * bs;
+                            C_ij[i][j] +=
+                            A[a_i + i][a_j + k] * B[b_i + k][b_j + j];
+                        }
                     }
                 }
+                A_pos.second = (A_pos.second + 1) % n;
+                B_pos.first = (B_pos.first + 1) % n;
             }
-            A_pos.second = (A_pos.second + 1) % n;
-            B_pos.first = (B_pos.first + 1) % n;
-        }
-        for (size_t i = 0; i < bs; i++) {
-            for (size_t j = 0; j < bs; j++) {
-                C[pos_i * bs + i][pos_j * bs + j] =
-                C_ij[i][j];
+            for (size_t i = 0; i < bs; i++) {
+                for (size_t j = 0; j < bs; j++) {
+                    C[pos_i * bs + i][pos_j * bs + j] =
+                    C_ij[i][j];
+                }
             }
         }
     }

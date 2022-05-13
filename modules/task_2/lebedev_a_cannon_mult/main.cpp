@@ -4,7 +4,7 @@
 #include <vector>
 #include "./matrix_mult.h"
 
-TEST(Cannon_test_seq, size_4) {
+TEST(Cannon_test_omp, size_4) {
     std::vector<std::vector<double> > A, B, C1, C2;
     size_t size = 4;
     size_t num_of_blocks = 2;
@@ -21,7 +21,7 @@ TEST(Cannon_test_seq, size_4) {
         }
 }
 
-TEST(Cannon_test_seq, size_16) {
+TEST(Cannon_test_omp, size_16) {
     std::vector<std::vector<double> > A, B, C1, C2;
     size_t size = 16;
     size_t num_of_blocks = 2;
@@ -38,7 +38,7 @@ TEST(Cannon_test_seq, size_16) {
         }
 }
 
-TEST(Cannon_test_seq, size_20) {
+TEST(Cannon_test_omp, size_20) {
     std::vector<std::vector<double> > A, B, C1, C2;
     size_t size = 20;
     size_t num_of_blocks = 2;
@@ -55,7 +55,7 @@ TEST(Cannon_test_seq, size_20) {
         }
 }
 
-TEST(Cannon_test_seq, size_36) {
+TEST(Cannon_test_omp, size_36) {
     std::vector<std::vector<double> > A, B, C1, C2;
     size_t size = 36;
     size_t num_of_blocks = 3;
@@ -72,7 +72,7 @@ TEST(Cannon_test_seq, size_36) {
         }
 }
 
-TEST(Cannon_test_seq, size_32) {
+TEST(Cannon_test_omp, size_32) {
     std::vector<std::vector<double> > A, B, C1, C2;
     size_t size = 32;
     size_t num_of_blocks = 2;
