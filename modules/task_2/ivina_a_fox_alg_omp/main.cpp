@@ -9,9 +9,9 @@ constexpr int NumThreads = 4;
 TEST(MatrixMultPar, RandNumCorrectSize) {
   const int size = 3;
   std::vector<std::vector<double>> MatrixA(size, std::vector<double>(size, 0));
-  FillMatrixRandom(MatrixA);
+  MatrixA = FillMatrixRandom(MatrixA);
   std::vector<std::vector<double>> MatrixB(size, std::vector<double>(size, 0));
-  FillMatrixRandom(MatrixB);
+  MatrixB = FillMatrixRandom(MatrixB);
 
   ASSERT_NO_THROW(Fox(MatrixA, MatrixB, NumThreads));
 }
@@ -20,11 +20,11 @@ TEST(MatrixMultPar, RandNumWrongSize) {
   const int row1 = 3;
   const int col1 = 5;
   std::vector<std::vector<double>> MatrixA(row1, std::vector<double>(col1, 0));
-  FillMatrixRandom(MatrixA);
+  MatrixA = FillMatrixRandom(MatrixA);
   const int row2 = 1;
   const int col2 = 4;
   std::vector<std::vector<double>> MatrixB(row2, std::vector<double>(col2, 0));
-  FillMatrixRandom(MatrixB);
+  MatrixB = FillMatrixRandom(MatrixB);
 
   ASSERT_ANY_THROW(Fox(MatrixA, MatrixB, NumThreads));
 }
@@ -59,9 +59,9 @@ TEST(MatrixMultPar, ConstNumFox) {
 TEST(MatrixMultPar, RandNumCompareToBlock) {
   const int n = 3;
   std::vector<std::vector<double>> MatrixA(n, std::vector<double>(n, 0));
-  FillMatrixRandom(MatrixA);
+  MatrixA = FillMatrixRandom(MatrixA);
   std::vector<std::vector<double>> MatrixB(n, std::vector<double>(n, 0));
-  FillMatrixRandom(MatrixB);
+  MatrixB = FillMatrixRandom(MatrixB);
   std::vector<std::vector<double>> MatrixC =
       BlockMatrixMultiplication(MatrixA, MatrixB);
   std::vector<std::vector<double>> MatrixD = Fox(MatrixA, MatrixB, NumThreads);
@@ -76,9 +76,9 @@ TEST(MatrixMultPar, RandNumCompareToBlock) {
 TEST(MatrixMultPar, RandNumCompareToDence) {
   const int n = 3;
   std::vector<std::vector<double>> MatrixA(n, std::vector<double>(n, 0));
-  FillMatrixRandom(MatrixA);
+  MatrixA = FillMatrixRandom(MatrixA);
   std::vector<std::vector<double>> MatrixB(n, std::vector<double>(n, 0));
-  FillMatrixRandom(MatrixB);
+  MatrixB = FillMatrixRandom(MatrixB);
   std::vector<std::vector<double>> MatrixC =
       DenseMatrixMultiplication(MatrixA, MatrixB);
   std::vector<std::vector<double>> MatrixD = Fox(MatrixA, MatrixB, NumThreads);
