@@ -1,7 +1,7 @@
 // Copyright 2022 Gleb "belgad" Danshin
-#include "integral_rectangle.hpp"
+#include <thread>  // NOLINT [build/c++11]
 
-#include <thread>
+#include "../../../modules/task_4/danshin_g_integral_rectangle/integral_rectangle.hpp"
 
 double Integrate(size_t dim, double* step, double* lower, double* upper,
                  Function func, size_t thread_num) {
@@ -11,11 +11,12 @@ double Integrate(size_t dim, double* step, double* lower, double* upper,
   for (size_t k = 0; k < dim; ++k) {
     total *= size[k] = static_cast<int>((upper[k] - lower[k]) / step[k]);
   }
-  if (total <= thread_num) {
+  if (static_cast<size_t>(total) <= thread_num) {
     return IntegrateSequence(dim, step, lower, upper, func);
   }
   std::thread* threads = new std::thread[thread_num];
   double* threads_result = new double[thread_num];
+  std::fill(threads_result, threads_result + thread_num, 0);
   int* edges = new int[thread_num + 1];
   for (size_t i = 0; i < thread_num; ++i) {
     edges[i] = i * total / thread_num;
@@ -51,9 +52,11 @@ void IntegrateThread(size_t dim, double* step, double* lower, int* size,
     }
     *result += func(curr_point);
   }
+  delete[] curr_point;
 }
 
-double IntegrateSequence(size_t dim, double* step, double* lower, double* upper, Function func) {
+double IntegrateSequence(size_t dim, double* step, double* lower, double* upper,
+                         Function func) {
   double result = 0;
   int total = 1;
   auto size = new int[dim];

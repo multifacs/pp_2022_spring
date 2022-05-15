@@ -3,12 +3,13 @@
 #define MODULES_TASK_4_DANSHIN_G_INTEGRAL_RECTANGLE_INTEGRAL_RECTANGLE_HPP_
 
 #include <functional>
-#include <thread>
+#include <thread>  // NOLINT [build/c++11]
 
 using Function = std::function<double(double*)>;
 
 double Integrate(size_t dim, double* step, double* lower, double* upper,
-                 Function func, size_t thread_num = std::thread::hardware_concurrency());
+                 Function func,
+                 size_t thread_num = std::thread::hardware_concurrency());
 void IntegrateThread(size_t dim, double* step, double* lower, int* size,
                      Function func, int start, int end, double* result);
 

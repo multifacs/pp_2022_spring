@@ -20,7 +20,7 @@ TEST(IntegralRectangle, Function1) {
   auto seq_start_time = system_clock::now();
   auto seq_result = IntegrateSequence(dim, step, lower, upper, func);
   auto seq_end_time = system_clock::now();
-  auto seq_duration = 
+  auto seq_duration =
     duration_cast<microseconds>(seq_end_time - seq_start_time).count();
   auto start_time = system_clock::now();
   auto result = Integrate(dim, step, lower, upper, func);
@@ -47,7 +47,7 @@ TEST(IntegralRectangle, Function2Step1) {
   auto seq_start_time = system_clock::now();
   auto seq_result = IntegrateSequence(dim, step, lower, upper, func);
   auto seq_end_time = system_clock::now();
-  auto seq_duration = 
+  auto seq_duration =
     duration_cast<microseconds>(seq_end_time - seq_start_time).count();
   auto start_time = system_clock::now();
   auto result = Integrate(dim, step, lower, upper, func);
@@ -74,7 +74,7 @@ TEST(IntegralRectangle, Function2Step2) {
   auto seq_start_time = system_clock::now();
   auto seq_result = IntegrateSequence(dim, step, lower, upper, func);
   auto seq_end_time = system_clock::now();
-  auto seq_duration = 
+  auto seq_duration =
     duration_cast<microseconds>(seq_end_time - seq_start_time).count();
   auto start_time = system_clock::now();
   auto result = Integrate(dim, step, lower, upper, func);
@@ -103,7 +103,7 @@ TEST(IntegralRectangle, Function3Step1) {
   auto seq_start_time = system_clock::now();
   auto seq_result = IntegrateSequence(dim, step, lower, upper, func);
   auto seq_end_time = system_clock::now();
-  auto seq_duration = 
+  auto seq_duration =
     duration_cast<microseconds>(seq_end_time - seq_start_time).count();
   auto start_time = system_clock::now();
   auto result = Integrate(dim, step, lower, upper, func);
@@ -132,7 +132,7 @@ TEST(IntegralRectangle, Function3Step2) {
   auto seq_start_time = system_clock::now();
   auto seq_result = IntegrateSequence(dim, step, lower, upper, func);
   auto seq_end_time = system_clock::now();
-  auto seq_duration = 
+  auto seq_duration =
     duration_cast<microseconds>(seq_end_time - seq_start_time).count();
   auto start_time = system_clock::now();
   auto result = Integrate(dim, step, lower, upper, func);
