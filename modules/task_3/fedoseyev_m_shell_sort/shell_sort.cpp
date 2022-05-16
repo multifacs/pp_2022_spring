@@ -27,16 +27,11 @@ void insertion_sort(int a[], int n, int stride) {
 }
 
 void shell_sort(int a[], int n, bool parallel) {
-  int i, m;
-
-  const int THREADS = 8;
-
-  tbb::task_scheduler_init init(THREADS);
   tbb::task_group task_group;
 
   if (parallel) {
-    for (m = n / 2; m > 0; m /= 2) {
-      task_group.run([&a, n, m, i]() {
+    for (int m = n / 2; m > 0; m /= 2) {
+      task_group.run([&a, n, m]() {
         for (int i = 0; i < m; i++) {
           insertion_sort(&(a[i]), n - i, m);
         }
@@ -44,8 +39,8 @@ void shell_sort(int a[], int n, bool parallel) {
     }
     task_group.wait();
   } else {
-    for (m = n / 2; m > 0; m /= 2) {
-      for (i = 0; i < m; i++) insertion_sort(&(a[i]), n - i, m);
+    for (int m = n / 2; m > 0; m /= 2) {
+      for (int i = 0; i < m; i++) insertion_sort(&(a[i]), n - i, m);
     }
   }
 }
