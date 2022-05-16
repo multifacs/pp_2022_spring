@@ -20,7 +20,7 @@ INT_VEC getRandomVec(int n) {
 
 void radixSort(INT_VEC* vec) {
   int n = static_cast<int>((*vec).size());
-  int i, digitPlace = 1;
+  int i = 0, digitPlace = 1;
   INT_VEC result(n);
 
   int largestNum = *std::max_element((*vec).begin(), (*vec).end());
