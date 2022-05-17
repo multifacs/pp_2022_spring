@@ -90,13 +90,11 @@ void radixSortSimpleMerge(INT_VEC* vec, int parts, bool parallel, bool parallel_
   if (parallel) {
     tbb::task_group group;
     for (int i = 0; i < parts; i++) {
-
       group.run([&vecs, i]() {
         radixSort(&(vecs[i]));
         });
     }
     group.wait();
-
   } else {
     for (auto&& elem : vecs) {
       radixSort(&elem, false);
