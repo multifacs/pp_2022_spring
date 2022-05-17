@@ -1,11 +1,11 @@
 // Copyright 2022 Sorokina Ekaterina
 
-#include "../../../modules/task_3/sorokina_e_radix_int_simple_merge/radix_int_simple_merge.h"
-
-#include "../../../3rdparty/unapproved/unapproved.h"
+#include "../../../modules/task_4/sorokina_e_radix_int_simple_merge/radix_int_simple_merge.h"
 
 #include <iostream>
 #include <random>
+
+#include "../../../3rdparty/unapproved/unapproved.h"
 
 INT_VEC getRandomVec(int n) {
   std::random_device dev;
