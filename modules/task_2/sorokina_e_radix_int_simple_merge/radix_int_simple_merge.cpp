@@ -92,8 +92,7 @@ void radixSortSimpleMerge(INT_VEC* vec, int parts, bool parallel, bool parallel_
     for (int i = 0; i < parts; i++) {
       radixSort(&(vecs[i]));
     }
-  }
-  else {
+  } else {
     for (auto&& elem : vecs) {
       radixSort(&elem, false);
     }
@@ -115,8 +114,7 @@ void radixSortSimpleMerge(INT_VEC* vec, int parts, bool parallel, bool parallel_
       vecs = vecs_merge;
     }
     (*vec) = vecs[0];
-  }
-  else {
+  } else {
     (*vec) = vecs[0];
     for (auto iter = vecs.begin() + 1; iter != vecs.end(); ++iter) {
       (*vec) = mergeVecs((*vec), *iter);
