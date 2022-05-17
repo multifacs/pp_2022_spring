@@ -90,18 +90,14 @@ void radixSortSimpleMerge(INT_VEC* vec, int parts, bool parallel, bool parallel_
   if (parallel) {
     std::vector<std::thread> threads;
     for (int i = 0; i < parts; i++) {
-
       threads.push_back(std::thread([&vecs, i]() {
         radixSort(&(vecs[i]));
         }));
     }
-    
     for (auto&& thread : threads) {
       thread.join();
     }
-
-  }
-  else {
+  } else {
     for (auto&& elem : vecs) {
       radixSort(&elem, false);
     }
@@ -114,7 +110,6 @@ void radixSortSimpleMerge(INT_VEC* vec, int parts, bool parallel, bool parallel_
       vecs_merge.resize(static_cast<int>(vecs.size()) / 2);
       std::vector<std::thread> threads;
       for (int i = 0; i < static_cast<int>(vecs.size()) / 2 * 2; i += 2) {
-
         threads.push_back(std::thread([&vecs_merge, &vecs, i]() {
           vecs_merge[i / 2] = mergeVecs(vecs[i], vecs[i + 1]);
           }));
@@ -129,8 +124,7 @@ void radixSortSimpleMerge(INT_VEC* vec, int parts, bool parallel, bool parallel_
       vecs = vecs_merge;
     }
     (*vec) = vecs[0];
-  }
-  else {
+  } else {
     (*vec) = vecs[0];
     for (auto iter = vecs.begin() + 1; iter != vecs.end(); ++iter) {
       (*vec) = mergeVecs((*vec), *iter);
