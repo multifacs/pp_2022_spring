@@ -1,7 +1,7 @@
 get_filename_component(ProjectId ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 
-if ( USE_STD )
-    set(ProjectId "${ProjectId}_std")
+if ( USE_TBB )
+    set(ProjectId "${ProjectId}_tbb")
     project( ${ProjectId} )
     message( STATUS "-- " ${ProjectId} )
 
@@ -13,8 +13,12 @@ if ( USE_STD )
     add_executable( ${ProjectId} ${ALL_SOURCE_FILES} )
 
     target_link_libraries(${ProjectId} ${PACK_LIB})
+    if( WIN32 )
+        target_link_libraries(${ProjectId} ${TBB_IMPORTED_TARGETS})
+    else( WIN32 )
+        target_link_libraries(${ProjectId} ${TBB_LIBRARIES})
+    endif( WIN32 )
     target_link_libraries(${ProjectId} gtest gtest_main)
-    target_link_libraries (${ProjectId} Threads::Threads)
 
     enable_testing()
     add_test(NAME ${ProjectId} COMMAND ${ProjectId})
@@ -53,6 +57,6 @@ if ( USE_STD )
             ${ProjectId}
             ${ARGS_FOR_CHECK_COUNT_TESTS}
     )
-else( USE_STD )
+else( USE_TBB )
     message( STATUS "-- ${ProjectId} - NOT BUILD!"  )
-endif( USE_STD )
+endif( USE_TBB )
