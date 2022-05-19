@@ -1,6 +1,6 @@
 // Copyright 2022 Lazarev Aleksey
 
-#include "../../../modules/task_4/lazarev_a_strassen/strassen.h"
+#include "../../../modules/task_3/lazarev_a_strassen/strassen.h"
 
 #include <random>
 
@@ -70,50 +70,47 @@ matrix strassenMultiply(matrix* A, matrix* B, int n, bool parallel) {
   matrix P1, P2, P3, P4, P5, P6, P7;
 
   if (parallel) {
-    std::thread thread_P1([&B12, &B22, &A11, k, parallel, &P1]() {
+    tbb::task_group group;
+
+    group.run([&B12, &B22, k, &A11, parallel, &P1]() {
       matrix S1 = subtract(&B12, &B22, k);
       P1 = strassenMultiply(&A11, &S1, k, parallel);
     });
-    std::thread thread_P2([&A11, &A12, &B22, k, parallel, &P2]() {
+
+    group.run([&A11, &A12, k, &B22, parallel, &P2]() {
       matrix S2 = add(&A11, &A12, k);
       P2 = strassenMultiply(&S2, &B22, k, parallel);
     });
 
-    std::thread thread_P3([&A21, &A22, &B11, k, parallel, &P3]() {
+    group.run([&A21, &A22, k, &B11, parallel, &P3]() {
       matrix S3 = add(&A21, &A22, k);
       P3 = strassenMultiply(&S3, &B11, k, parallel);
     });
 
-    std::thread thread_P4([&B21, &B11, &A22, k, parallel, &P4]() {
+    group.run([&B21, &B11, k, &A22, parallel, &P4]() {
       matrix S4 = subtract(&B21, &B11, k);
       P4 = strassenMultiply(&A22, &S4, k, parallel);
     });
 
-    std::thread thread_P5([&A11, &A22, &B11, &B22, k, parallel, &P5]() {
+    group.run([&A11, &A22, k, &B11, &B22, parallel, &P5]() {
       matrix S5 = add(&A11, &A22, k);
       matrix S6 = add(&B11, &B22, k);
       P5 = strassenMultiply(&S5, &S6, k, parallel);
     });
 
-    std::thread thread_P6([&A12, &A22, &B21, &B22, k, parallel, &P6]() {
+    group.run([&A12, &A22, k, &B21, &B22, parallel, &P6]() {
       matrix S7 = subtract(&A12, &A22, k);
       matrix S8 = add(&B21, &B22, k);
       P6 = strassenMultiply(&S7, &S8, k, parallel);
     });
 
-    std::thread thread_P7([&A11, &A21, &B11, &B12, k, parallel, &P7]() {
+    group.run([&A11, &A21, k, &B11, &B12, parallel, &P7]() {
       matrix S9 = subtract(&A11, &A21, k);
       matrix S10 = add(&B11, &B12, k);
       P7 = strassenMultiply(&S9, &S10, k, parallel);
     });
 
-    thread_P1.join();
-    thread_P2.join();
-    thread_P3.join();
-    thread_P4.join();
-    thread_P5.join();
-    thread_P6.join();
-    thread_P7.join();
+    group.wait();
 
   } else {
     matrix S1 = subtract(&B12, &B22, k);
