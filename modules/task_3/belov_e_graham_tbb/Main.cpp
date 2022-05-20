@@ -34,6 +34,13 @@ TEST(Graham_Alg, Graham_Tbb) {
   ASSERT_EQ(hull, hull);
 }
 
+TEST(Graham_Alg, Graham_Array) {
+  std::vector<Point> Q = Array;
+  std::vector<Point> hull = TbbGraham(Q);
+  std::vector<Point> hull1 = Graham(Q.begin(), Q.end());
+  ASSERT_EQ(hull, hull1);
+}
+
 int main(int argc, char** argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
