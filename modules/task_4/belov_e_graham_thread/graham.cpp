@@ -6,8 +6,8 @@
 #include <random>
 #include <utility>
 #include <vector>
-#include <thread>
-#include <mutex>
+#include <thread> // NOLINT
+#include <mutex> // NOLINT
 
 bool rotate(const Point& A, const Point& B, const Point& C) {
   return (B.x - A.x) * (C.y - B.y) - (B.y - A.y) * (C.x - B.x) >= 0;
