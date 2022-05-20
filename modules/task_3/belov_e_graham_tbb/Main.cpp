@@ -6,7 +6,7 @@
 
 #include "../../../modules/task_3/belov_e_graham_tbb/graham.h"
 
-std::vector<Point> Array = RandPoint(100000);
+std::vector<Point> Array = RandPoint(10000);
 
 TEST(Graham_Alg, Graham_Seq_Test) {
   std::vector<Point> Q = RandPoint(100);
