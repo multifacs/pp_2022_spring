@@ -55,9 +55,9 @@ TEST(DISABLED_Parallel_Operations, acceleration_test) {
     std::vector<int> res = getParallelOperations(matrix, matrix_size, matrix_size);
     auto finish_getParallelOperations = tbb::tick_count::now();
 
-    auto getSequentialOperations_running_time = 
+    auto getSequentialOperations_running_time =
         (finish_getSequentialOperations - start_getSequentialOperations).seconds();
-    auto getParallelOperations_running_time = 
+    auto getParallelOperations_running_time =
         (finish_getParallelOperations - start_getParallelOperations).seconds();
     auto acceleration = getSequentialOperations_running_time / getParallelOperations_running_time;
 

@@ -48,7 +48,7 @@ std::vector<int> getParallelOperations(const std::vector<int>& matrix,
     tbb::parallel_for(tbb::blocked_range<std::size_t>(0, column_count * row_count),
         [&](const tbb::blocked_range<std::size_t>& r) {
             for (std::size_t i = r.begin(); i < r.end(); i++) {
-                if (matrix[i] > local_max_y[tbb::task_arena::current_thread_index()] ) {
+                if (matrix[i] > local_max_y[tbb::task_arena::current_thread_index()]) {
                     local_max_y[tbb::task_arena::current_thread_index()] = matrix[i];
                 }
                 if (matrix[i] < local_min_y[tbb::task_arena::current_thread_index()]) {
