@@ -24,7 +24,7 @@ std::vector<int> VectorRandomizer(int size) {
 
 // Сортировка Шелла
 std::vector<int> Shell(const std::vector<int>& arr, int n) {
-    std::vector<int> A(n);
+    std::vector<int> A = arr;
     for (int step = n / 2; step > 0; step /= 2) {
         for (int i = step; i < n; i++) {
             for (int j = i - step; j >= 0 && A[j] > A[j + step]; j -= step) {
@@ -63,7 +63,7 @@ std::vector<int> MergerEvenOdd(const std::vector<int>& arr1, const std::vector<i
         }
     }
     if (i2 >= arr2_size) {
-        while(i1 < arr1_size) {
+        while (i1 < arr1_size) {
             array_result[i] = arr1[i1];
             i++;
             i1 += 2;
