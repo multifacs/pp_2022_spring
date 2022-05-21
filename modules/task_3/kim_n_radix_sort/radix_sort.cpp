@@ -1,27 +1,24 @@
 // Copyright 2022 Kim Nikita
-#include <vector>
-#include <random>
-#include <omp.h>
-#include <deque>
-#include <tbb/task.h>
-#include <tbb/task_group.h>
-#include <tbb/task_scheduler_init.h>
+
 #include "../../../modules/task_3/kim_n_radix_sort/radix_sort.h"
-#include "radix_sort.h"
+#include <omp.h>
+#include <tbb/task.h>
+#include <tbb/task_scheduler_init.h>
+#include <vector>
+#include <deque>
+#include <random>
 
 
-tbb::task* RootTask::execute()
-{
+tbb::task* RootTask::execute() {
   return NULL;
 }
 
-tbb::task* RadixTask::execute()
-{
+tbb::task* RadixTask::execute() {
   for (int i = 0; i < size; i++) {
-    res.push_back(start[i]);
+    res->push_back(start[i]);
   }
   for (int place = 1; max_value / place > 0; place *= 10) {
-    res = countSort(res, size, place);
+    *res = countSort(*res, size, place);
   }
 
   return NULL;
@@ -47,26 +44,25 @@ int getMax(std::vector<int> input_vec, int size) {
   return max;
 }
 
-void getMergedVector(const std::vector<int>& a, const std::vector<int>& b, std::vector<int>& res) {
+void getMergedVector(const std::vector<int>& a, const std::vector<int>& b, std::vector<int>* res) {
   int a_size = a.size();
   int b_size = b.size();
 
   int i = 0, j = 0;
   while (i < a_size && j < b_size) {
     if (a[i] <= b[j]) {
-      res.push_back(a[i]);
+      res->push_back(a[i]);
       i++;
-    }
-    else {
-      res.push_back(b[j]);
+    } else {
+      res->push_back(b[j]);
       j++;
     }
   }
 
   for (; i < a_size; i++)
-    res.push_back(a[i]);
+    res->push_back(a[i]);
   for (; j < b_size; j++)
-    res.push_back(b[j]);
+    res->push_back(b[j]);
 }
 
 std::vector<int> countSort(const std::vector<int>& input_vec, int size, int place) {
@@ -121,17 +117,17 @@ std::vector<int> radixSortParallel(const std::vector<int>& input_vec, int size) 
   root.set_ref_count(proc + 1);
 
   for (; i < proc-1; i++) {
-    RadixTask& task = *new(root.allocate_child()) RadixTask(&input_vec[i * chunk], chunk,  res[i], max_value);
+    RadixTask& task = *new(root.allocate_child()) RadixTask(&input_vec[i * chunk], chunk, &res[i], max_value);
     tbb::task::spawn(task);
   }
-  RadixTask& task = *new(root.allocate_child()) RadixTask(&input_vec[i * chunk], size - i * chunk, res[i], max_value);
+  RadixTask& task = *new(root.allocate_child()) RadixTask(&input_vec[i * chunk], size - i * chunk, &res[i], max_value);
   tbb::task::spawn(task);
 
   root.wait_for_all();
 
   for (int i = 0; i < proc - 1; i++) {
     res.push_back(std::vector<int>());
-    getMergedVector(res[0], res[1], res.back());
+    getMergedVector(res[0], res[1], &res.back());
     res.pop_front();
     res.pop_front();
   }

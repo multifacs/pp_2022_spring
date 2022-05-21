@@ -76,16 +76,16 @@ TEST(TBB, Vector_Mega_Large_Size) {
   double t1_res, t2_res;
   std::vector<int> input_vec = getRandomVector(size);
 
-  t1 = tbb::tick_count::now();
+  // t1 = tbb::tick_count::now();
   std::vector<int> exp_res = radixSort(input_vec, size);
-  t1_res = (tbb::tick_count::now() - t1).seconds();
+  // t1_res = (tbb::tick_count::now() - t1).seconds();
 
-  t2 = tbb::tick_count::now();
+  // t2 = tbb::tick_count::now();
   std::vector<int> res = radixSortParallel(input_vec, size);
-  t2_res = (tbb::tick_count::now() - t2).seconds();
+  // t2_res = (tbb::tick_count::now() - t2).seconds();
 
-  //ASSERT_EQ(exp_res, res);
-  EXPECT_EQ(t1_res / t2_res, 0);
+  ASSERT_EQ(exp_res, res);
+  // EXPECT_EQ(t1_res / t2_res, 0);
 }
 
 int main(int argc, char **argv) {
