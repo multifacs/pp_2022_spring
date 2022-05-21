@@ -90,7 +90,7 @@ TEST(Integration_Monte_Carlo_OMP, dimension_is_1) {
   double seconds_omp = static_cast<double>(end_omp - start_omp) / CLOCKS_PER_SEC;
   printf("Parallel algorithm: %f seconds\n", seconds_omp);
   printf("boost RATE: %f \n", seconds_seq/seconds_omp);
-  ASSERT_NEAR(res_seq, res_omp, 0.1);
+  ASSERT_NEAR(res_seq, res_omp, 0.2);
 }
 
 TEST(Integration_Monte_Carlo_OMP, dimension_is_2) {
@@ -110,7 +110,7 @@ TEST(Integration_Monte_Carlo_OMP, dimension_is_2) {
   printf("Parallel algorithm: %f seconds\n", seconds_omp);
   printf("boost RATE: %f \n", seconds_seq / seconds_omp);
 
-  ASSERT_NEAR(res_seq, res_omp, 0.1);
+  ASSERT_NEAR(res_seq, res_omp, 0.2);
 }
 
 TEST(Integration_Monte_Carlo_OMP, mdimension_is_3_v1) {
