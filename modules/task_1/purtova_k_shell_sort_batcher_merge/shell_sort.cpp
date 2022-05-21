@@ -6,8 +6,6 @@
 #include <random>
 #include <ctime>
 
-// Генерация рандомного вектора
-
 std::vector<int> VectorRandomizer(int size) {
     std::vector<int> vec(size);
 
@@ -20,9 +18,6 @@ std::vector<int> VectorRandomizer(int size) {
     return vec;
 }
 
-// Сортировка Шелла с четно-нечетным слиянием Бэтчера.
-
-// Сортировка Шелла
 std::vector<int> Shell(const std::vector<int>& arr, int n) {
     std::vector<int> A = arr;
     for (int step = n / 2; step > 0; step /= 2) {
@@ -37,7 +32,6 @@ std::vector<int> Shell(const std::vector<int>& arr, int n) {
     return A;
 }
 
-// Слияние двух массивов через элемент
 std::vector<int> MergerEvenOdd(const std::vector<int>& arr1, const std::vector<int>& arr2, int i1, int i2, int size) {
     std::vector <int> array_result(size);
     int i = 0;
@@ -73,8 +67,6 @@ std::vector<int> MergerEvenOdd(const std::vector<int>& arr1, const std::vector<i
     return array_result;
 }
 
-// Слияние элементов под четными номерами
-// even - четные
 std::vector<int> BatcherEvenNumber(const std::vector<int>& arr1, const std::vector<int>& arr2) {
     int arr1_size = arr1.size();
     int arr2_size = arr2.size();
@@ -89,8 +81,6 @@ std::vector<int> BatcherEvenNumber(const std::vector<int>& arr1, const std::vect
     return array_result;
 }
 
-// Слияние элементов под нечетными номерами
-// odd - нечетные
 std::vector<int> BatcherOddNumber(const std::vector<int>& arr1, const std::vector<int>& arr2) {
     int arr1_size = arr1.size();
     int arr2_size = arr2.size();
@@ -131,8 +121,6 @@ std::vector<int> BatcherMerger(const std::vector<int>& arr1, const std::vector<i
     }
     return array_result;
 }
-
-// Четно-нечетное слияние Бэтчера
 
 std::vector<int> ShellWithBatcher(const std::vector<int>& A, int n) {
     int half = n / 2;
