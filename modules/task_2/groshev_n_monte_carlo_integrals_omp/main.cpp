@@ -35,7 +35,7 @@ TEST(Integration_Monte_Carlo_Seq, dimension_is_1) {
   clock_t end = clock();
   double seconds = static_cast<double>(end - start) / CLOCKS_PER_SEC;
   printf("Sequence algorithm: %f seconds\n", seconds);
-  ASSERT_NEAR(res, 9.0, 0.07);
+  ASSERT_NEAR(res, 9.0, 1);
 }
 
 TEST(Integration_Monte_Carlo_Seq, dimension_is_2) {
@@ -46,7 +46,7 @@ TEST(Integration_Monte_Carlo_Seq, dimension_is_2) {
   clock_t end = clock();
   double seconds = static_cast<double>(end - start) / CLOCKS_PER_SEC;
   printf("Sequence algorithm: %f seconds\n", seconds);
-  ASSERT_NEAR(res, 1.5, 0.07);
+  ASSERT_NEAR(res, 1.5, 1);
 }
 
 TEST(Integration_Monte_Carlo_Seq, mdimension_is_3_v1) {
@@ -57,7 +57,7 @@ TEST(Integration_Monte_Carlo_Seq, mdimension_is_3_v1) {
   clock_t end = clock();
   double seconds = static_cast<double>(end - start) / CLOCKS_PER_SEC;
   printf("Sequence algorithm: %f seconds\n", seconds);
-  ASSERT_NEAR(res, 9.375, 0.07);
+  ASSERT_NEAR(res, 9.375, 0.1);
 }
 
 TEST(Integration_Monte_Carlo_Seq, dimension_is_3_v2) {
@@ -68,7 +68,7 @@ TEST(Integration_Monte_Carlo_Seq, dimension_is_3_v2) {
   clock_t end = clock();
   double seconds = static_cast<double>(end - start) / CLOCKS_PER_SEC;
   printf("Sequence algorithm: %f seconds\n", seconds);
-  ASSERT_NEAR(res, 6.62486548705585, 0.07);
+  ASSERT_NEAR(res, 6.62486548705585, 0.1);
 }
 
 TEST(Integration_Monte_Carlo_OMP, n_is_0) {
