@@ -1,12 +1,10 @@
-//���������� ����� � �����-�������� �������� �������.
+//Copyright 2022 Purtova Ksenia
 
 #include <gtest/gtest.h>
 
 #include<iostream>
 
 #include "./shell_sort.h"
-
-using namespace std;
 
 TEST(test_Shell_Batch_sort_seq, test_on_10_elements) {
   std::vector<int> res = {9,8,7,6,5,4,3,2,1,0};
