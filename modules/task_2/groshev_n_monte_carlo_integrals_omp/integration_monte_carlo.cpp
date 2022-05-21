@@ -58,7 +58,7 @@ double getIntegralOMP(
     res += f(rand_vec);
   }
 
-  for (int i = 0; i < dimension; i++) 
+  for (int i = 0; i < dimension; i++)
       res *= (top[i] - low[i]);
   res /= n;
   return res;
