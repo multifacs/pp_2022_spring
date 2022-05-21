@@ -66,7 +66,7 @@ std::vector<int> MergerEvenOdd(const std::vector<int>& arr1, const std::vector<i
         while(i1 < arr1_size) {
             array_result[i] = arr1[i1];
             i++;
-            i1 += 2
+            i1 += 2;
         }
     }
 
