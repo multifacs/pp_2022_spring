@@ -19,7 +19,7 @@ class RadixTask : public tbb::task {
     const int* start;
     std::vector<int>* res;
     RadixTask(const int* start_, const int size_,  std::vector<int>* res_, int max_value_) :
-      start(start_), size(size_), res(res_), max_value(max_value_) {}
+      size(size_), max_value(max_value_), start(start_), res(res_) {}
     tbb::task* execute();
 };
 
