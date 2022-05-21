@@ -126,7 +126,7 @@ TEST(IntegralRectangle, Function3Step1) {
 
 TEST(IntegralRectangle, Function3Step2) {
     size_t dim = 3;
-    auto step = new double[3]{0.001, 0.001, 0.1};
+    auto step = new double[3]{0.01, 0.01, 0.1};
     auto lower = new double[3]{0.0, 0.0, 0.0};
     auto upper = new double[3]{2.0, 1.5, 1.0};
     auto func = [](double* point) -> double {
@@ -149,7 +149,7 @@ TEST(IntegralRectangle, Function3Step2) {
     delete[] step;
     delete[] lower;
     delete[] upper;
-    ASSERT_NEAR(result, 3.4691, 0.0001);
+    ASSERT_NEAR(result, 3.449, 0.0001);
     ASSERT_NEAR(result, seq_result, 0.000001);
 }
 
