@@ -4,7 +4,7 @@
 
 #include <vector> 
 
-void Shell(std::vector<int>& A, int n);
+std::vector<int> Shell(std::vector<int>& A, int n);
 std::vector <int> MergerEvenOdd(const std::vector<int>& arr1, const std::vector<int>& arr2, int i1, int i2);
 std::vector<int> BatcherEvenNumber(const std::vector<int>& arr1, const std::vector<int>& arr2);
 std::vector<int> BatcherOddNumber(const std::vector<int>& arr1, const std::vector<int>& arr2);
