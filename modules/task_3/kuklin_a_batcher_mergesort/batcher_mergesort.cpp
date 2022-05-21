@@ -74,7 +74,6 @@ void genDigitCounters(vector_d* source_vec, size_t elem_num) {
       }
     }
   }
-
 }
 
 void radixPass(vector_d* source_vec,
@@ -106,7 +105,6 @@ void floatRadixSort(vector_d* source_vec) {
   size_t elem_num = source_vec->size();
 
   genDigitCounters(source_vec, elem_num);
-
 }
 
 void evenSplitter(vector_d* res_vec, const vector_d& first_vec,
@@ -172,7 +170,7 @@ void oddSplitter(vector_d* res_vec, const vector_d& first_vec,
 
   if (first_size % 2 == 1 && second_size % 2 == 1) {
     (*res_vec)[first_size + second_size - 1] =
-        max(first_vec[first_size - 1], second_vec[second_size - 1]);
+        (std::max)(first_vec[first_size - 1], second_vec[second_size - 1]);
   }
 }
 
