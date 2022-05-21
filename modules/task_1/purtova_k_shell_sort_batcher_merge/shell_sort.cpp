@@ -43,7 +43,7 @@ std::vector<int> MergerEvenOdd(const std::vector<int>& arr1, const std::vector<i
     int i = 0;
     int arr1_size = arr1.size();
     int arr2_size = arr2.size();
-    while (i1 < arr1_size && (i2 < arr2_size)) {
+    while ((i1 < arr1_size) && (i2 < arr2_size)) {
         if (arr1[i1] <= arr2[i2]) {
             array_result[i] = arr1[i1];
             i++;
@@ -110,8 +110,7 @@ std::vector<int> BatcherMerger(const std::vector<int>& arr1, const std::vector<i
     std::vector<int> array_result(size_result);
     int i1 = 0, i2 = 0, i = 0;
 
-    while ((i1 != arr1_size) && (i2 != arr2_size))
-    {
+    while ((i1 != arr1_size) && (i2 != arr2_size)) {
         if (arr1[i1] <= arr2[i2]) {
             array_result[i] = arr1[i1];
             i1++;
