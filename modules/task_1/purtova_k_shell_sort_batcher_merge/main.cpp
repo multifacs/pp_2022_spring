@@ -1,9 +1,6 @@
 //  Copyright 2022 Purtova Ksenia
-
 #include <gtest/gtest.h>
-
 #include<iostream>
-
 #include "./shell_sort.h"
 
 TEST(test_Shell_Batch_sort_seq, test_on_10_elements) {
