@@ -18,7 +18,7 @@ TEST(CSR_seq, multiplication_100_100) {
     dtime = omp_get_wtime() - dtime;
     printf("Sequential time : %f s\n", dtime);
     dtime = omp_get_wtime();
-    std::vector<std::complex<int>> PAR = omp_multiply(A_, B_, false);
+    std::vector<std::complex<int>> PAR = omp_multiply(A_, B_);
     dtime = omp_get_wtime() - dtime;
     printf("Parallel time : %f s\n", dtime);
     dtime = omp_get_wtime();
@@ -37,7 +37,7 @@ TEST(CSR_seq, multiplication_250_300) {
     dtime = omp_get_wtime() - dtime;
     printf("Sequential time : %f s\n", dtime);
     dtime = omp_get_wtime();
-    std::vector<std::complex<int>> PAR = omp_multiply(A_, B_, false);
+    std::vector<std::complex<int>> PAR = omp_multiply(A_, B_);
     dtime = omp_get_wtime() - dtime;
     printf("Parallel time : %f s\n", dtime);
     dtime = omp_get_wtime();
@@ -56,7 +56,7 @@ TEST(CSR_seq, multiplication_1000_1000) {
     dtime = omp_get_wtime() - dtime;
     printf("Sequential time : %f s\n", dtime);
     dtime = omp_get_wtime();
-    std::vector<std::complex<int>> PAR = omp_multiply(A_, B_, false);
+    std::vector<std::complex<int>> PAR = omp_multiply(A_, B_);
     dtime = omp_get_wtime() - dtime;
     printf("Parallel time : %f s\n", dtime);
     dtime = omp_get_wtime();
@@ -75,7 +75,7 @@ TEST(CSR_seq, multiplication_250_160) {
     dtime = omp_get_wtime() - dtime;
     printf("Sequential time : %f s\n", dtime);
     dtime = omp_get_wtime();
-    std::vector<std::complex<int>> PAR = omp_multiply(A_, B_, false);
+    std::vector<std::complex<int>> PAR = omp_multiply(A_, B_);
     dtime = omp_get_wtime() - dtime;
     printf("Parallel time : %f s\n", dtime);
     dtime = omp_get_wtime();
@@ -94,7 +94,7 @@ TEST(CSR_seq, multiplication_20_10) {
     dtime = omp_get_wtime() - dtime;
     printf("Sequential time : %f s\n", dtime);
     dtime = omp_get_wtime();
-    std::vector<std::complex<int>> PAR = omp_multiply(A_, B_, false);
+    std::vector<std::complex<int>> PAR = omp_multiply(A_, B_);
     dtime = omp_get_wtime() - dtime;
     printf("Parallel time : %f s\n", dtime);
     dtime = omp_get_wtime();

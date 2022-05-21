@@ -23,7 +23,7 @@ CSR sparesify(const std::vector < std::complex < int >>  &M,
  int height, int width);
 CSR sparse_transpose(const CSR &input);
 std::vector < std::complex < int >> omp_multiply(const CSR & A,
-  const CSR & B, bool dynamic = false);
+  const CSR & B);
 std::vector < std::complex < int >>  randomSparseMatrix(int N, int M);
 
 #endif   // MODULES_TASK_2_ABUYASSEN_A_CSR_OMP_CSR_OMP_H_

@@ -116,20 +116,12 @@ std::vector < std::complex < int >> randomSparseMatrix(int N, int M) {
 }
 
 std::vector < std::complex < int >> omp_multiply(const CSR & A,
-  const CSR & B, const bool dynamic) {
+  const CSR & B) {
   if (A.cols != B.rows)
     throw "Size error";
   CSR B_t = sparse_transpose(B);
   std::vector < std::complex < int >> result(A.rows * B.cols, 0);
-  #pragma omp parallel
-  {
-    if (dynamic) {
-      omp_set_schedule(omp_sched_dynamic, 1);
-    } else {
-      int chunk_size = A.rows / omp_get_num_threads();
-      omp_set_schedule(omp_sched_static, chunk_size);
-    }
-    #pragma omp for schedule(runtime)
+  #pragma omp parallel for
     for (int i = 0; i < A.rows; i++) {
       for (int j = A.row_ptr[i]; j < A.row_ptr[i + 1]; j++) {
         int Ai = A.cols_index[j];
@@ -147,6 +139,5 @@ std::vector < std::complex < int >> omp_multiply(const CSR & A,
         }
       }
     }
-  }
   return result;
 }
