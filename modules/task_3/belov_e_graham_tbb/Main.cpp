@@ -20,14 +20,14 @@ TEST(Graham_Alg, Graham_1000_Test) {
   std::vector<Point> hull = TbbGraham(Q);
   std::vector<Point> hull1 = Graham(Q.begin(), Q.end());
   ASSERT_EQ(hull, hull1);
-}
+}/**/
 
 TEST(Graham_Alg, Graham_Test) {
   std::vector<Point> Q = Array;
   std::vector<Point> hull1 = Graham(Q.begin(), Q.end());
   ASSERT_EQ(hull1, hull1);
 }
-
+/**/
 TEST(Graham_Alg, Graham_Tbb) {
   std::vector<Point> Q = Array;
   std::vector<Point> hull = TbbGraham(Q);
