@@ -200,7 +200,7 @@ void floatRadixSortParallel(vector_d* source_vec) {
   size_t vecSize = source_vec->size() / threadNum;
   std::vector<vector_d> vec_segments(threadNum);
 
-  for (int i = 0; i < threadNum - 1; ++i) {
+  for (size_t i = 0; i < threadNum - 1; ++i) {
     vec_segments[i].resize(vecSize);
     std::copy(source_vec->begin() + i * vecSize,
               source_vec->begin() + (i + 1) * vecSize, vec_segments[i].begin());
