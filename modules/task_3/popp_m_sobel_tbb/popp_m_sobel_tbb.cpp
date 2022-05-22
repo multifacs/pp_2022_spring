@@ -2,6 +2,7 @@
 
 #include "../../../modules/task_3/popp_m_sobel_tbb/popp_m_sobel_tbb.h"
 
+#include <stdint.h>
 #include <tbb/tbb.h>
 
 #include <ctime>

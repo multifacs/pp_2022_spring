@@ -3,6 +3,8 @@
 #ifndef MODULES_TASK_3_POPP_M_SOBEL_TBB_POPP_M_SOBEL_TBB_H_
 #define MODULES_TASK_3_POPP_M_SOBEL_TBB_POPP_M_SOBEL_TBB_H_
 
+#include <stdint.h>
+
 #include <vector>
 
 template <class T>
