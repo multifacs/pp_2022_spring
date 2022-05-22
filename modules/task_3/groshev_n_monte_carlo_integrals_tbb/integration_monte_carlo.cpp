@@ -52,7 +52,8 @@ double getIntegralTBB(
       tbb::blocked_range<int>(0, n), 0.f,
       [&](const tbb::blocked_range<int> r, double res) -> double {
         for (int i = r.begin(); i != r.end(); ++i) {
-          for (int j = 0; j < dimension; j++) rand_vec[j] = rand_[j](gen);
+          for (int j = 0; j < dimension; j++)
+              rand_vec[j] = rand_[j](gen);
           res += f(rand_vec);
         }
         return res;
