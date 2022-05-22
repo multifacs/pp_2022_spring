@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <vector>
 #include <random>
+#include <thread> // NOLINT
 
 using vector_d = std::vector<double>;
 constexpr size_t bv = 256;
@@ -189,12 +190,43 @@ vector_d batcherMerge(const vector_d& first_vec, const vector_d& second_vec) {
 
   evenSplitter(&res_vec, first_vec, second_vec);
   oddSplitter(&res_vec, first_vec, second_vec);
-
   batcherComparator(&res_vec);
 
   return res_vec;
 }
 
 void floatRadixSortParallel(vector_d* source_vec) {
-  
+  auto threadNum = std::thread::hardware_concurrency();
+  size_t vecSize = source_vec->size() / threadNum;
+  std::vector<vector_d> vec_segments(threadNum);
+
+  for (int i = 0; i < threadNum - 1; ++i) {
+    vec_segments[i].resize(vecSize);
+    std::copy(source_vec->begin() + i * vecSize,
+              source_vec->begin() + (i + 1) * vecSize, vec_segments[i].begin());
+  }
+
+  size_t remainSize = source_vec->size() % threadNum + vecSize;
+  vec_segments[threadNum - 1].resize(remainSize);
+  std::copy(source_vec->end() - remainSize, source_vec->end(), vec_segments[threadNum - 1].begin());
+
+  std::vector<std::thread> thread_vec(threadNum);
+  for (size_t i = 0; i < threadNum; ++i) {
+    thread_vec[i] = std::thread{floatRadixSort, &vec_segments[i]};
+    thread_vec[i].join();
+  }
+
+  int totalNum = vec_segments.size();
+  int mergeCount = totalNum >> 1;
+
+  while (mergeCount) {
+    for (int i = 0; i < mergeCount; ++i) {
+      vec_segments[i] =
+          batcherMerge(vec_segments[i], vec_segments[totalNum - 1 - i]);
+    }
+    totalNum -= mergeCount;
+    mergeCount = totalNum >> 1;
+  }
+
+  *source_vec = vec_segments[0];
 }

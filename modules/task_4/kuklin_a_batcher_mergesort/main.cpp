@@ -1,25 +1,24 @@
 // Copyright 2022 Kuklin Andrey
 #include <gtest/gtest.h>
-#include <iostream>
 #include "./batcher_mergesort.h"
 
 TEST(kuklin_a_betcher_mergesort, genRandVec) {
   ASSERT_NO_THROW(getRandVec(10, -100., 100.));
 }
 
-TEST(kuklin_a_betcher_mergesort, can_sort_positive_nubm) {
+TEST(kuklin_a_betcher_mergesort, can_sort_positive_numb) {
   auto vec = getRandVec(10, 10., 30.);
 
   ASSERT_NO_THROW(floatRadixSort(&vec));
 }
 
-TEST(kuklin_a_betcher_mergesort, can_sort_negative_nubm) {
+TEST(kuklin_a_betcher_mergesort, can_sort_negative_numb) {
   auto vec = getRandVec(10, -30., -20.);
 
   ASSERT_NO_THROW(floatRadixSort(&vec));
 }
 
-TEST(kuklin_a_betcher_mergesort, can_sort_rand_nubm) {
+TEST(kuklin_a_betcher_mergesort, can_sort_rand_numb) {
   auto vec = getRandVec(10, -100., 100.);
 
   ASSERT_NO_THROW(floatRadixSort(&vec));
