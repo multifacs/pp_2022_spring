@@ -62,32 +62,29 @@ std::vector<Point> TbbGraham(std::vector<Point> tmp, std::size_t threads_num) {
   int step = tmp.size() / threads_num;
   auto begin = tmp.begin();
   auto end = tmp.end();
-  tbb::task_scheduler_init init(static_cast<int>(threads_num));
-  tbb::spin_mutex M;
-  tbb::task_group G;
+  tbb::spin_mutex mute;
+  tbb::task_group task;
 
   for (std::size_t i = 0; i < threads_num - 1; ++i) {
-    G.run([&res, &M, i, begin, step]() {
-      auto left = begin + step * i;
-      auto right = begin + step * (i + 1);
-      auto local = Graham(left, right);
+    task.run([&res, &mute, i, begin, step]() {
+      auto local = Graham(begin + step * i, begin + step * (i + 1));
       for (std::size_t j = 0; j < local.size(); ++j) {
         tbb::spin_mutex::scoped_lock lock;
-        lock.acquire(M);
+        lock.acquire(mute);
         res.push_back(local[j]);
         lock.release();
       }
     });
   }
-  G.run([&res, begin, end, step, threads_num, &M]() {
+  task.run([&res, begin, end, step, threads_num, &mute]() {
     auto local_scan = Graham(begin + step * (threads_num - 1), end);
     for (std::size_t j = 0; j < local_scan.size(); ++j) {
       tbb::spin_mutex::scoped_lock lock;
-      lock.acquire(M);
+      lock.acquire(mute);
       res.push_back(local_scan[j]);
       lock.release();
     }
   });
-  G.wait();
+  task.wait();
   return Graham(res.begin(), res.end());
 }
