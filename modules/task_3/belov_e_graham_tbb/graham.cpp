@@ -8,7 +8,7 @@
 #include <utility>
 #include <vector>
 
-bool cmp(Point A, Point B) { return A.x < B.x || A.x == B.x && A.y < B.y; }
+bool cmp(Point A, Point B) { return A.x < B.x || (A.x == B.x && A.y < B.y); }
 
 bool cw(Point A, Point B, Point C) {
   return A.x * (B.y - C.y) + B.x * (C.y - A.y) + C.x * (A.y - B.y) < 0;
