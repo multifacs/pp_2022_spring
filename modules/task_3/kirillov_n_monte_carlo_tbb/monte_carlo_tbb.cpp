@@ -9,7 +9,7 @@
 
 double SeqMonteCarloIntegration(
     const std::function<double(const std::vector<double>)>& integrand,
-    const std::vector<std::pair<double, double>> intervals, const size_t& N) {
+    const std::vector<std::pair<double, double>>& intervals, const size_t& N) {
   if (N <= 0) throw std::runtime_error("Number of points must be more than 0");
 
   size_t num_dims = intervals.size();
@@ -44,24 +44,18 @@ class Integration {
   const std::function<double(const std::vector<double>)>& integrand;
   const std::vector<std::pair<double, double>>& intervals;
   double sum;
-  std::uniform_real_distribution<double> dist;
-  std::mt19937 gen;
+  std::uniform_real_distribution<double> dist =
+      std::uniform_real_distribution<double>(0.0, 1.0);
+  std::random_device rd;
+  std::mt19937 gen = std::mt19937(rd());
 
  public:
   Integration(const std::function<double(const std::vector<double>)>& integ,
               const std::vector<std::pair<double, double>>& interv)
-      : integrand(integ), intervals(interv), sum(0.0) {
-    dist = std::uniform_real_distribution<double>(0.0, 1.0);
-    std::random_device rd;
-    gen = std::mt19937(rd());
-  }
+      : integrand(integ), intervals(interv), sum(0.0) {}
 
-  Integration(Integration i, tbb::split)
-      : integrand(i.integrand), intervals(i.intervals), sum(0.0) {
-    dist = std::uniform_real_distribution<double>(0.0, 1.0);
-    std::random_device rd;
-    gen = std::mt19937(rd());
-  }
+  Integration(Integration& i, tbb::split)
+      : integrand(i.integrand), intervals(i.intervals), sum(0.0) {}
 
   void operator()(const tbb::blocked_range<int>& r) {
     size_t num_dims = intervals.size();
@@ -81,7 +75,7 @@ class Integration {
 
 double ParallelMonteCarloIntegration(
     const std::function<double(const std::vector<double>)>& integrand,
-    const std::vector<std::pair<double, double>> intervals, const int& N) {
+    const std::vector<std::pair<double, double>>& intervals, const int& N) {
   if (N <= 0) throw std::runtime_error("Number of points must be more than 0");
 
   const size_t num_dims = intervals.size();

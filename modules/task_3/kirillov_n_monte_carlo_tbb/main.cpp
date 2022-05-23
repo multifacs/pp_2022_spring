@@ -1,9 +1,7 @@
 // Copyright 2022 Kirillov Nikita
 
 #include <gtest/gtest.h>
-#include <tbb/tbb.h>
 
-#include <cmath>
 #include <functional>
 #include <vector>
 
@@ -71,7 +69,6 @@ TEST(MonteCarloIntegration, tbb_two_dims_inverse_hyperboloid) {
 }
 
 int main(int argc, char** argv) {
-  tbb::task_scheduler_init init(tbb::task_scheduler_init::automatic);
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }
