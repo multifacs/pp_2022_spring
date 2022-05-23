@@ -153,7 +153,6 @@ std::vector<double> mergeBatcherPar(const std::vector<double>& vec, int middle) 
                 res[i * 2 + 1] = vec[middle + i];
             }
         });
-    
 
     if (middle * 2 - size_res >= 1)
         res[size_res - 1] = vec[middle - 1];
@@ -199,7 +198,7 @@ std::vector<double> hoarBatcherPar(const std::vector<double>& vec, int size) {
     tbb::parallel_for(tbb::blocked_range<int>(0, 2),
         [&](tbb::blocked_range<int> r) {
             for (int i = r.begin(); i < r.end(); ++i) {
-                if(i == 0)
+                if (i == 0)
                     hoarSort(&vec1, 0, vec1.size() - 1);
                 else
                     hoarSort(&vec2, 0, vec2.size() - 1);
