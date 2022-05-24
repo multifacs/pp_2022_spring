@@ -1,9 +1,8 @@
 // Copyright 2022 Shelepin Nikita
 #include <gtest/gtest.h>
+#include <omp.h>
 
 #include "./trapezoidal_rule.h"
-
-#include <omp.h>
 
 const double eps = 100;
 
@@ -119,4 +118,5 @@ TEST(TRAPEZOIDAL_RULE_OMP, TEST_DIM_3_FUNC_5) {
 
   par_result = getParallelTrapezoidal(n, limits, f);
   seq_result = getSeqTrapezoidal(n, limits, f);
+  ASSERT_NEAR(par_result, seq_result, eps);
 }
