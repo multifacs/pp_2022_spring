@@ -1,6 +1,6 @@
 // Copyright 2022 Medvedeva Karina
-#include "../../../3rdparty/unapproved/unapproved.h"
 #include "../../../modules/task_4/medvedeva_k_linear_histogram_stretching/linear_histogram_stretching.h"
+#include "../../../3rdparty/unapproved/unapproved.h"
 #include <random>
 
 std::vector<int> getRandomMatrix(std::vector<int>::size_type row_count, std::vector<int>::size_type column_count) {
@@ -64,9 +64,11 @@ std::vector<int> getParallelOperations(const std::vector<int>& matrix,
 
     for (std::size_t i = 0; i < thread_count; i++) {
         part_begin = part_end;
-        part_end = (((row_count * column_count) / thread_count) * (i + 1) + (i == thread_count - 1 ? (row_count * column_count) % thread_count : 0));
+        part_end = (((row_count * column_count) / thread_count) * (i + 1) +
+            (i == thread_count - 1 ? (row_count * column_count) % thread_count : 0));
 
-        threads[i] = std::thread(thread_function, std::vector<int>(matrix.begin() + part_begin, matrix.begin() + part_end),
+        threads[i] = std::thread(thread_function, std::vector<int>(matrix.begin() + part_begin,
+            matrix.begin() + part_end),
             &local_max_y[i], &local_min_y[i], part_begin, part_end);
     }
 
@@ -79,7 +81,6 @@ std::vector<int> getParallelOperations(const std::vector<int>& matrix,
             min_y = local_min_y[i];
         }
     }
-    
     for (std::size_t i = 0; i < row_count * column_count; i++) {
         res[i] = (matrix[i] - min_y) * (255 / (max_y - min_y));
     }
