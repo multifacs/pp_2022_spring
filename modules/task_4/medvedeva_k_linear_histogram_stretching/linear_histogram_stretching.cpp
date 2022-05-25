@@ -1,7 +1,7 @@
 // Copyright 2022 Medvedeva Karina
 #include "../../../modules/task_4/medvedeva_k_linear_histogram_stretching/linear_histogram_stretching.h"
-#include "../../../3rdparty/unapproved/unapproved.h"
 #include <random>
+#include "../../../3rdparty/unapproved/unapproved.h"
 
 std::vector<int> getRandomMatrix(std::vector<int>::size_type row_count, std::vector<int>::size_type column_count) {
     std::random_device dev;
