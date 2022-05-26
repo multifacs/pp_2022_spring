@@ -153,6 +153,7 @@ std::vector<Pixel> parallelGauss(const std::vector<Pixel>& img, int width,
   if (num_threads <= 0) {
     throw "ERROR: number of threads <= 0";
   }
+  tbb::task_scheduler_init init(num_threads);
   int grainsize1 = width / num_threads;
   int grainsize2 = height / num_threads;
   if (grainsize1 == 0) grainsize1 = 1;

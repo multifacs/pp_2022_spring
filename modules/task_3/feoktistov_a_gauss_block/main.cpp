@@ -80,7 +80,7 @@ TEST(GaussianFilterBlock, Test_Wrong_Thread_Count) {
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
-  tbb::task_scheduler_init init;
+  
   return RUN_ALL_TESTS();
 
   return 0;
