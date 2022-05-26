@@ -1,6 +1,5 @@
 // Copyright 2022 Remizova Antonina
 #include <gtest/gtest.h>
-#include <omp.h>
 #include "./hoar_batcher.h"
 
 TEST(SEQ_hoar_batcher, can_create_rand_vec_10) {
@@ -90,22 +89,23 @@ TEST(PAR_hoar_batcher, can_hoar_batcher_sort_vec_with_double_elem) {
     EXPECT_EQ(1, isSortCorrectly(res));
 }
 
-TEST(PAR_hoar_batcher, compare_seq_seq_sort_with_vec_size_10) {
-    int size = 10;
+TEST(PAR_hoar_batcher, compare_seq_seq_sort_with_vec_size_100) {
+    int size = 100;
     std::vector<double> v = getRandVector(size);
 
-    double start_time, seq_time, par_time;
-    start_time = omp_get_wtime();
+    clock_t t_start;
+
+    t_start = clock();
     std::vector<double> res_seq = hoarBatcherSeq(v, v.size());
-    seq_time = omp_get_wtime() - start_time;
+    auto seq_t = (clock() - t_start) / 1000.0;
 
-    start_time = omp_get_wtime();
+    t_start = clock();
     std::vector<double> res_par = hoarBatcherSeq(v, v.size());
-    par_time = omp_get_wtime() - start_time;
+    auto par_t = (clock() - t_start) / 1000.0;
 
-    std::cout << "res: " << par_time / seq_time;
-    std::cout << " par: " << par_time;
-    std::cout << " seq: " << seq_time;
+    std::cout << "res: " << par_t / seq_t;
+    std::cout << " par: " << par_t;
+    std::cout << " seq: " << seq_t;
 
     EXPECT_EQ(res_seq, res_par);
 }
@@ -114,18 +114,19 @@ TEST(PAR_hoar_batcher, compare_seq_par_sort_with_vec_size_1000) {
     int size = 10000;
     std::vector<double> v = getRandVector(size);
 
-    double start_time, seq_time, par_time;
-    start_time = omp_get_wtime();
+    clock_t t_start;
+
+    t_start = clock();
     std::vector<double> res_seq = hoarBatcherSeq(v, v.size());
-    seq_time = omp_get_wtime() - start_time;
+    auto seq_t = (clock() - t_start) / 1000.0;
 
-    start_time = omp_get_wtime();
+    t_start = clock();
     std::vector<double> res_par = hoarBatcherPar(v, v.size());
-    par_time = omp_get_wtime() - start_time;
+    auto par_t = (clock() - t_start) / 1000.0;
 
-    std::cout << "res: " << par_time / seq_time;
-    std::cout << " par: " << par_time;
-    std::cout << " seq: " << seq_time;
+    std::cout << "res: " << par_t / seq_t;
+    std::cout << " par: " << par_t;
+    std::cout << " seq: " << seq_t;
 
     EXPECT_EQ(res_seq, res_par);
 }
@@ -134,18 +135,19 @@ TEST(PAR_hoar_batcher, compare_seq_par_sort_with_vec_size_10000) {
     int size = 100000;
     std::vector<double> v = getRandVector(size);
 
-    double start_time, seq_time, par_time;
-    start_time = omp_get_wtime();
+    clock_t t_start;
+
+    t_start = clock();
     std::vector<double> res_seq = hoarBatcherSeq(v, v.size());
-    seq_time = omp_get_wtime() - start_time;
+    auto seq_t = (clock() - t_start) / 1000.0;
 
-    start_time = omp_get_wtime();
+    t_start = clock();
     std::vector<double> res_par = hoarBatcherPar(v, v.size());
-    par_time = omp_get_wtime() - start_time;
+    auto par_t = (clock() - t_start) / 1000.0;
 
-    std::cout << "res: " << par_time / seq_time;
-    std::cout << " par: " << par_time;
-    std::cout << " seq: " << seq_time;
+    std::cout << "res: " << par_t / seq_t;
+    std::cout << " par: " << par_t;
+    std::cout << " seq: " << seq_t;
 
     EXPECT_EQ(res_seq, res_par);
 }
@@ -154,18 +156,19 @@ TEST(PAR_hoar_batcher, compare_seq_par_sort_with_vec_size_1000000) {
     int size = 1000000;
     std::vector<double> v = getRandVector(size);
 
-    double start_time, seq_time, par_time;
-    start_time = omp_get_wtime();
+    clock_t t_start;
+
+    t_start = clock();
     std::vector<double> res_seq = hoarBatcherSeq(v, v.size());
-    seq_time = omp_get_wtime() - start_time;
+    auto seq_t = (clock() - t_start) / 1000.0;
 
-    start_time = omp_get_wtime();
+    t_start = clock();
     std::vector<double> res_par = hoarBatcherPar(v, v.size());
-    par_time = omp_get_wtime() - start_time;
+    auto par_t = (clock() - t_start) / 1000.0;
 
-    std::cout << "res: " << par_time / seq_time;
-    std::cout << " par: " << par_time;
-    std::cout << " seq: " << seq_time;
+    std::cout << "res: " << par_t / seq_t;
+    std::cout << " par: " << par_t;
+    std::cout << " seq: " << seq_t;
 
     EXPECT_EQ(res_seq, res_par);
 }

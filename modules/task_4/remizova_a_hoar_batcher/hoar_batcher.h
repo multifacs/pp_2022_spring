@@ -4,6 +4,7 @@
 
 #include <random>
 #include <vector>
+#include <ctime>
 
 std::vector<double> getRandVector(int size);
 bool isSortCorrectly(const std::vector <double>& vec);
