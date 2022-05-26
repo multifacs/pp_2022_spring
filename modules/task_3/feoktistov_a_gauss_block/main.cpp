@@ -25,12 +25,12 @@ TEST(GaussianFilterBlock, Test_Large_Image) {
   tbb::tick_count start ;
   tbb::tick_count finish ;
   std::vector<Pixel> img = generateImage(width, height, 2);
-  std::ofstream outfile("C:\\Feoandrew\\image.txt");
-  outfile << width << std::endl;
-  outfile << height << std::endl;
-  for each (Pixel p in img) {
-    outfile << p.getR() << " " << p.getG() << " " << p.getB() << " ";
-  }
+  //std::ofstream outfile("C:\\Feoandrew\\image.txt");
+  //outfile << width << std::endl;
+  //outfile << height << std::endl;
+  //for each (Pixel p in img) {
+   // outfile << p.getR() << " " << p.getG() << " " << p.getB() << " ";
+  //}
   std::vector<float> kernel = createGaussKernel(1, 1.2);
   start = start.now();
   std::vector<Pixel> rez = sequentialGauss(img, width, height, kernel);
@@ -41,12 +41,12 @@ TEST(GaussianFilterBlock, Test_Large_Image) {
   finish = finish.now();
   std::cout << "Time_Elapsed_Parallel: " << (finish - start).seconds()
             << std::endl;
-  std::ofstream outfile1("C:\\Feoandrew\\image2.txt");
-  outfile1 << width << std::endl;
-  outfile1 << height << std::endl;
-  for each (Pixel p in rezp) {
-    outfile1 << p.getR() << " " << p.getG() << " " << p.getB() << " ";
-  }
+ // std::ofstream outfile1("C:\\Feoandrew\\image2.txt");
+ // outfile1 << width << std::endl;
+ // outfile1 << height << std::endl;
+ // for each( Pixel p in rezp) {
+ //   outfile1 << p.getR() << " " << p.getG() << " " << p.getB() << " ";
+ // }
   ASSERT_EQ(rez, rezp);
 }
 TEST(GaussianFilterBlock, Test_Zero_Pixels) {
