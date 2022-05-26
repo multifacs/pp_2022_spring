@@ -1,7 +1,7 @@
 // Copyright 2022 Remizova Antonina
 #include <gtest/gtest.h>
 #include <omp.h>
-#include "../../../modules/task_4/remizova_a_hoar_batcher/hoar_batcher.h"
+#include "./hoar_batcher.h"
 
 TEST(SEQ_hoar_batcher, can_create_rand_vec_10) {
     int size = 10;

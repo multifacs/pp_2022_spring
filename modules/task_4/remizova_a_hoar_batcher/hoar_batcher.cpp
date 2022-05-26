@@ -142,56 +142,6 @@ std::vector<double> mergeBatcherSeq(const std::vector<double>& vec, int middle) 
     return res;
 }
 
-//  std::vector<double> mergeBatcherPar(const std::vector<double>& vec, int middle) {
-//    int size_res = vec.size();
-//    std::vector <double> res(size_res);
-//    int buf;
-//
-//    int thread_num = std::thread::hardware_concurrency();
-//    std::vector<std::thread> threads(thread_num);
-//    int begin, end;
-//
-//    int size = (size_res - middle) / thread_num;
-//    int rem = (size_res - middle) % thread_num;
-//    for (int i = 0; i < thread_num; i++) {
-//        begin = i * size;
-//        end = begin + size;
-//
-//        if (i == thread_num - 1) {
-//            end += rem;
-//        }
-//
-//        threads[i] = std::thread(
-//            [&](int begin, int end) {
-//                for (int j = begin; j < end; j++) {
-//                    res[j * 2] = vec[j];
-//                    res[j * 2 + 1] = vec[middle + j];
-//                }
-//            }, begin, end);
-//    }
-//
-//    for (int i = 0; i < thread_num; i++) {
-//        threads[i].join();
-//    }
-//
-//
-//    if (middle * 2 - size_res >= 1)
-//        res[size_res - 1] = vec[middle - 1];
-//
-//    if (middle * 2 - size_res == 2)
-//        res[size_res - 2] = vec[middle - 2];
-//
-//    for (int i = 1; i < size_res; i++) {
-//        if (res[i] < res[i - 1]) {
-//            buf = res[i - 1];
-//            res[i - 1] = res[i];
-//            res[i] = buf;
-//        }
-//    }
-//
-//    return res;
-//  }
-
 std::vector<double> hoarBatcherSeq(const std::vector<double>& vec, int size) {
     int k = size / 2;
     std::vector<double> vec1;

@@ -13,7 +13,6 @@ std::vector<double> evenBatcherSort(const std::vector<double>& vec1, const std::
 std::vector<double> oddBatcherSort(const std::vector<double>& vec1, const std::vector<double>& vec2);
 std::vector<double> oddEvenBatcherSort(const std::vector<double>& vec1, const std::vector<double>& vec2);
 std::vector<double> mergeBatcherSeq(const std::vector<double>& vec, int middle);
-//  std::vector<double> mergeBatcherPar(const std::vector<double>& vec, int middle);
 std::vector<double> hoarBatcherSeq(const std::vector<double>& vec, int size);
 std::vector<double> hoarBatcherPar(const std::vector<double>& vec, int size);
 
