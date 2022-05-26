@@ -1,11 +1,10 @@
 // Copyright 2022 Remizova Antonina
-
 #include "../../../modules/task_4/remizova_a_hoar_batcher/hoar_batcher.h"
 #include <iostream>
 #include <algorithm>
 #include <random>
 #include <vector>
-#include "../../../3rdparty/unapproved/unapproved.h"
+#include <future>
 
 std::vector<double> getRandVector(int size) {
     if (size < 0)
