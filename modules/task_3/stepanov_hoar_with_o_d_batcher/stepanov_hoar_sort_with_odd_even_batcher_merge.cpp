@@ -4,10 +4,10 @@
 #include <algorithm>
 #include <iostream>
 #include <list>
-#include "../../../modules/task_2/stepanov_hoar_with_o_d_batcher/stepanov_hoar_sort_with_odd_even_batcher_merge.h"
+#include "../../../modules/task_3/stepanov_hoar_with_o_d_batcher/stepanov_hoar_sort_with_odd_even_batcher_merge.h"
 
 std::vector<float>* create_random_vector(int size_n) {
-    std::vector<float>* res  = new std::vector<float>(size_n);
+    std::vector<float>* res = new std::vector<float>(size_n);
     std::random_device dev;
     std::mt19937 gen(dev());
     for (int i = 0; i < size_n; ++i) {
@@ -17,7 +17,7 @@ std::vector<float>* create_random_vector(int size_n) {
 }
 
 std::vector<float>* odd_batcher(std::vector<float>* part1,
-std::vector<float>* part2, std::vector<float>* vec) {
+    const std::vector<float>* part2, std::vector<float>* vec) {
     int size1 = part1->size();
     int i1 = 1;
     int size2 = part2->size();
@@ -52,7 +52,7 @@ std::vector<float>* part2, std::vector<float>* vec) {
 }
 
 std::vector<float>* even_batcher(std::vector<float>* part1,
-std::vector<float>* part2, std::vector<float>* vec) {
+    const std::vector<float>* part2, std::vector<float>* vec) {
     int size1 = part1->size();
     int i1 = 0;
     int size2 = part2->size();
@@ -86,8 +86,8 @@ std::vector<float>* part2, std::vector<float>* vec) {
     return mass_result;
 }
 void odd_even_batcher_merge(std::vector<float>* part1,
-std::vector<float>* part2,
-std::vector<float>* vec) {
+    const std::vector<float>* part2,
+    std::vector<float>* vec) {
     int size1 = part1->size();
     int i1 = 0;
     int size2 = part2->size();
@@ -149,7 +149,7 @@ void hoar_sort_for_parts(std::vector<float>* vec, int first, int last) {
         hoar_sort_for_parts(vec, first, j);
 }
 void batch_merge(std::vector<float>* part1,
-std::vector<float>* part2, std::vector<float>* vec) {
+ const std::vector<float>* part2, std::vector<float>* vec) {
     std::vector<float>* even_part = even_batcher(part1, part2, vec);
     std::vector<float>* odd_part = odd_batcher(part1, part2, vec);
     odd_even_batcher_merge(even_part, odd_part, vec);
@@ -157,39 +157,7 @@ std::vector<float>* part2, std::vector<float>* vec) {
     delete odd_part;
 }
 
-void hoar_sort_with_batch_merge_omp(std::vector<float>* vec) {
-    std::vector<std::vector<float>> arr;
-    int parts_count = 0;
-#pragma omp parallel
-{
-#pragma omp single
-    {
-        arr = std::vector<std::vector<float>>(omp_get_num_threads());
-    }
-    int part = (vec->size() / omp_get_num_threads())+1;
-    arr[omp_get_thread_num()] =
-    std::vector<float>(vec->begin() + omp_get_thread_num()*part,
-    vec->begin() + std::min((omp_get_thread_num() + 1)*part,
-    static_cast<int>(vec->size())));
-    hoar_sort_for_parts(&arr[omp_get_thread_num()],
-    0, arr[omp_get_thread_num()].size() - 1);
-#pragma omp single
-    {
-        parts_count = omp_get_num_threads();
-    }
-}
-while (parts_count > 1) {
-#pragma omp for
-    for (int i = 0; i <(parts_count / 2); i++) {
-        batch_merge(&arr[i], &arr[parts_count - 1 - i], &arr[i]);
-    }
-#pragma omp single
-    {
-        parts_count = parts_count / 2 + parts_count % 2;
-    }
-}
-*vec = arr[0];
-}
+
 void hoar_sort_with_batch_merge(std::vector<float>* vec) {
     int middle = vec->size() / 2;
     std::vector<float> p1(vec->begin(), vec->begin() + middle);
@@ -197,4 +165,32 @@ void hoar_sort_with_batch_merge(std::vector<float>* vec) {
     hoar_sort_for_parts(&p1, 0, p1.size() - 1);
     hoar_sort_for_parts(&p2, 0, p2.size() - 1);
     batch_merge(&p1, &p2, vec);
+}
+
+struct Functor {
+    std::vector<float>* arr;
+    std::vector<float> vals;
+    explicit Functor(std::vector<float>* _arr) :arr(_arr) {}
+    Functor(const Functor& f, tbb::split):arr(f.arr) {}
+    void operator()(const tbb::blocked_range<int> &r) {
+        int begin = r.begin();
+        int end = r.end();
+        for (int i = begin; i < end; i++) {
+            vals.push_back((*arr)[i]);
+        }
+        hoar_sort_for_parts(&vals, 0, vals.size()-1);
+    }
+    void join(const Functor& f) {
+        batch_merge(&vals, &(f.vals), &vals);
+    }
+};
+
+
+
+
+void hoar_sort_with_batch_merge_tbb(std::vector<float>* vec) {
+    Functor f(vec);
+    tbb::parallel_reduce(
+    tbb::blocked_range<int>(0, vec->size(), vec->size() / 4), f);
+    (*vec) = f.vals;
 }
