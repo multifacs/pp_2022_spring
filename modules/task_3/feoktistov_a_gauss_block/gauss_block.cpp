@@ -103,14 +103,14 @@ Pixel::~Pixel() {}
 
 
 GaussBlur::GaussBlur(const std::vector<Pixel>& image, int x, int y,
-  const std::vector<float>& kern, std::vector<Pixel>& result) {
+  const std::vector<float>& kern, std::vector<Pixel>* result) {
   img = &image;
   kernel = &kern;
-  rez = &result;
+  rez = result;
   height = y;
   width = x;
 }
-void  GaussBlur::operator()(const blocked_range2d<int, int>& r) const {
+void  GaussBlur::operator()(const tbb::blocked_range2d<int, int>& r) const {
   int colbegin = r.cols().begin();
   int colend = r.cols().end();
   int rowbegin = r.rows().begin();
@@ -161,7 +161,7 @@ std::vector<Pixel> parallelGauss(const std::vector<Pixel>& img, int width,
   std::vector<Pixel> result(PixelCount);
   tbb::parallel_for(tbb::blocked_range2d<int>(0, width, grainsize1 , 0,
                                               height, grainsize2),
-                    GaussBlur(img, width, height, kernel, result));
+                    GaussBlur(img, width, height, kernel, &result));
 
   return result;
 }

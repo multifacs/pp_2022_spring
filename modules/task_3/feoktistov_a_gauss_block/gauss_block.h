@@ -1,11 +1,10 @@
 // Copyright 2022 Feoktistov Andrei
 #ifndef MODULES_TASK_3_FEOKTISTOV_A_GAUSS_BLOCK_GAUSS_BLOCK_H_
 #define MODULES_TASK_3_FEOKTISTOV_A_GAUSS_BLOCK_GAUSS_BLOCK_H_
-
-#include <string>
 #include <tbb/tbb.h>
+#include <string>
 #include <vector>
-using namespace tbb;
+
 class Pixel {
  public:
   Pixel();
@@ -58,7 +57,7 @@ class GaussBlur {
 
  public:
   GaussBlur(const std::vector<Pixel>& image, int x, int y,
-    const std::vector<float>& kern, std::vector<Pixel>& result);
+    const std::vector<float>& kern, std::vector<Pixel>* result);
   void operator()(const tbb::blocked_range2d<int, int>& r) const;
 };
 

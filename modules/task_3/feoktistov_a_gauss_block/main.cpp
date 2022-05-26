@@ -1,8 +1,8 @@
 // Copyright 2018 Nesterov Alexander
 #include <gtest/gtest.h>
+#include <tbb/tbb.h>
 #include <vector>
 #include<random>
-#include <tbb/tbb.h>
 #include<fstream>
 #include "./gauss_block.h"
 
@@ -22,8 +22,8 @@ TEST(GaussianFilterBlock, Test_Random_Pixel) {
 TEST(GaussianFilterBlock, Test_Large_Image) {
   const int width = 300;
   const int height = 300;
-  tbb::tick_count start ;
-  tbb::tick_count finish ;
+  tbb::tick_count start;
+  tbb::tick_count finish;
   std::vector<Pixel> img = generateImage(width, height, 2);
   /*std::ofstream outfile("C:\\Feoandrew\\image.txt");
   //outfile << width << std::endl;
