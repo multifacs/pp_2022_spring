@@ -4,7 +4,6 @@
 #include <algorithm>
 #include <random>
 #include <vector>
-#include <future>
 
 std::vector<double> getRandVector(int size) {
     if (size < 0)
@@ -143,7 +142,7 @@ std::vector<double> mergeBatcherSeq(const std::vector<double>& vec, int middle) 
     return res;
 }
 
-//std::vector<double> mergeBatcherPar(const std::vector<double>& vec, int middle) {
+//  std::vector<double> mergeBatcherPar(const std::vector<double>& vec, int middle) {
 //    int size_res = vec.size();
 //    std::vector <double> res(size_res);
 //    int buf;
@@ -182,7 +181,6 @@ std::vector<double> mergeBatcherSeq(const std::vector<double>& vec, int middle) 
 //    if (middle * 2 - size_res == 2)
 //        res[size_res - 2] = vec[middle - 2];
 //
-//    
 //    for (int i = 1; i < size_res; i++) {
 //        if (res[i] < res[i - 1]) {
 //            buf = res[i - 1];
@@ -192,7 +190,7 @@ std::vector<double> mergeBatcherSeq(const std::vector<double>& vec, int middle) 
 //    }
 //
 //    return res;
-//}
+//  }
 
 std::vector<double> hoarBatcherSeq(const std::vector<double>& vec, int size) {
     int k = size / 2;
