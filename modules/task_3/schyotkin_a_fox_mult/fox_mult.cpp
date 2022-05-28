@@ -50,9 +50,17 @@ void foxMultiplication(std::vector<std::vector<double>>* C,
   int endA, endB;
 
   for (int a = 0; a < n; a += block_size) {
-    endA = min(a + block_size, n);
+    endA = n;
+    if (a + block_size < n) {
+      endA = a + block_size;
+    }
+
     for (int b = 0; b < n; b += block_size) {
-      endB = min(b + block_size, n);
+      endB = n;
+      if (b + block_size < n) {
+        endB = b + block_size;
+      }
+
       for (int i = 0; i < n; i++) {
         for (int j = a; j < endA; j++) {
           for (int k = b; k < endB; k++) {
